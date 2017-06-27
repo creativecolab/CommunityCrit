@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'fname', 'lname', 'email', 'password',
     ];
 
     /**
@@ -26,4 +26,17 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+	/**
+	 * The accessors to append to the model's array form.
+	 *
+	 * @var array
+	 */
+    protected $appends = [
+    	'name'
+    ];
+
+    protected function getNameAttribute() {
+    	return $this->fname . ' ' . $this->lname;
+    }
 }
