@@ -17,6 +17,8 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('text');
+            $table->unsignedInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('tasks');
             $table->timestamps();
         });
     }

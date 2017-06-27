@@ -9,5 +9,6 @@ class Task extends Model
     protected $fillable = [
     	'name',
 	    'text',
+	    'parent_id',
     ];
 }
