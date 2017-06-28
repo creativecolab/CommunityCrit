@@ -4,40 +4,37 @@ namespace App\Http\Controllers;
 
 use App\Task;
 use App\User;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
-	 *
 	 * @return \Illuminate\Http\Response
+	 * @throws AuthorizationException
 	 */
 	public function index()
 	{
-		// Service generic holistic by default
-		$view = 'tasks.generic.holistic';
+		$condition = \Auth::user()->condition;
 
-		switch(\Auth::user()->condition) {
-			case User::CONDITION_GENERIC_HOLISTIC:
-				$view = 'tasks.generic.holistic';
-				break;
-			case User::CONDITION_GENERIC_MICROTASK_OPEN:
-				$view = 'tasks.generic.microtaskOpen';
-				break;
-			case User::CONDITION_GENERIC_MICROTASK_CLOSED:
-				$view = 'tasks.generic.microtaskClosed';
-				break;
-			case User::CONDITION_PERSONAL_HOLISTIC:
-				$view = 'tasks.personal.holistic';
-				break;
-			case User::CONDITION_PERSONAL_MICROTASK_OPEN:
-				$view = 'tasks.personal.microtaskOpen';
-				break;
-			case User::CONDITION_PERSONAL_MICROTASK_CLOSED:
-				$view = 'tasks.personal.microtaskClosed';
-				break;
+		// Don't allow user through if they don't have a condition (means
+		if (!$condition) {
+			throw new AuthorizationException();
 		}
+
+		// Mapping of conditions to template names;
+		$views = [
+			User::CONDITION_GENERIC_HOLISTIC => 'tasks.generic.holistic',
+			User::CONDITION_GENERIC_MICROTASK_OPEN => 'tasks.generic.microtaskOpen',
+			User::CONDITION_GENERIC_MICROTASK_CLOSED => 'tasks.generic.microtaskClosed',
+			User::CONDITION_PERSONAL_HOLISTIC => 'tasks.personal.holistic',
+			User::CONDITION_PERSONAL_MICROTASK_OPEN => 'tasks.personal.microtaskOpen',
+			User::CONDITION_PERSONAL_MICROTASK_CLOSED => 'tasks.personal.microtaskClosed',
+		];
+
+		// Set template name based on condition
+		$view = $views[$condition];
 
 		return view($view, ['tasks' => Task::all()]);
 	}
