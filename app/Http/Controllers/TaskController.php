@@ -73,8 +73,10 @@ class TaskController extends Controller
 		$feedback->user_id = \Auth::id();
 		$feedback->task_id = $task->id;
 
+		$taskName = $task->name;
+
 		if ( $feedback->save() ) {
-			flash('Feedback submitted!')->success();
+			flash("Feedback submitted for ${taskName}!")->success();
 		} else {
 			flash('Unable to save your feedback. Please contact us.')->error();
 		}
