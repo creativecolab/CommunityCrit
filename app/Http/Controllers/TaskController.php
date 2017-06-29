@@ -19,7 +19,7 @@ class TaskController extends Controller
 		$condition = \Auth::user()->condition;
 
 		// Don't allow user through if they don't have a condition (means
-		if (!$condition) {
+		if ($condition === null) {
 			throw new AuthorizationException();
 		}
 
@@ -47,7 +47,10 @@ class TaskController extends Controller
 			case User::CONDITION_PERSONAL_MICROTASK_OPEN:
 			case User::CONDITION_PERSONAL_HOLISTIC:
 			default:
-				$data = ['tasks' => Task::all()];
+				// Get first root task
+				$rootTask = Task::root()->with('subtasks')->first();
+
+				$data = ['tasks' => $rootTask->subtasks];
 		}
 
 		return view($view, $data);
