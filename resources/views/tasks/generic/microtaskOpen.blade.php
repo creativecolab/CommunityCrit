@@ -8,7 +8,7 @@
             @endslot
 
             @slot('text')
-                {{ $task->text }}
+                {!! html_entity_decode($task->text) !!}
             @endslot
         @endcomponent
     @endforeach

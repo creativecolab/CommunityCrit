@@ -6,7 +6,7 @@
             <div class="col-xs-12">
                 <h2>{{ $task->name }}</h2>
 
-                <p>{{ $task->text }}</p>
+                <p>{!! html_entity_decode($task->text) !!}</p>
             </div>
         </div>
     @endforeach
