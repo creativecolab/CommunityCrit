@@ -74,4 +74,32 @@ class User extends Authenticatable
 	{
 		return $this->hasMany( 'App\Feedback' );
 	}
+
+	/**
+	 * Query for holistic-type condition users
+	 *
+	 * @return mixed
+	 */
+	public static function holistic()
+	{
+		return static::whereIn( 'condition', [
+			static::CONDITION_GENERIC_HOLISTIC,
+			static::CONDITION_PERSONAL_HOLISTIC
+		] );
+	}
+
+	/**
+	 * Query for microtask-type condition users
+	 *
+	 * @return mixed
+	 */
+	public static function microtask()
+	{
+		return static::whereIn( 'condition', [
+			static::CONDITION_GENERIC_MICROTASK_OPEN,
+			static::CONDITION_GENERIC_MICROTASK_CLOSED,
+			static::CONDITION_PERSONAL_MICROTASK_OPEN,
+			static::CONDITION_PERSONAL_MICROTASK_CLOSED,
+		] );
+	}
 }
