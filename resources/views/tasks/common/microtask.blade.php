@@ -18,13 +18,8 @@
             </div>
 
             <div class="panel-footer">
-                {!! Form::open() !!}
-                <div class="form-group">
-                    {!! Form::label('feedback', 'Share Your Thoughts:') !!}
-                    {!! Form::textarea('feedback', '', ['class' => 'form-control']) !!}
-                </div>
-                {!! Form::submit('Submit', ['class' => 'btn btn-default']) !!}
-                {!! Form::close() !!}
+                @component('tasks.common.feedbackForm', ['id' => $id])
+                @endcomponent
             </div>
         </div>
     </div>
