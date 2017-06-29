@@ -7,6 +7,14 @@
 
             <div class="panel-body">
                 {{ $text }}
+
+                @if( isset($subtasks) )
+                    @foreach ($subtasks as $subtask)
+                        <strong>{{ $subtask->name }}</strong>
+
+                        <p>{!! html_entity_decode($subtask->text) !!}</p>
+                    @endforeach
+                @endif
             </div>
 
             <div class="panel-footer">

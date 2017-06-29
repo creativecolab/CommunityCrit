@@ -2,7 +2,7 @@
 
 @section('content')
     @foreach($tasks as $task)
-        @component('tasks.common.microtask')
+        @component('tasks.common.microtask', ['subtasks' => $task->subtasks])
             @slot('title')
                 {{ $task->name }}
             @endslot
