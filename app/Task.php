@@ -13,6 +13,16 @@ class Task extends Model
 	];
 
 	/**
+	 * Get first root Task
+	 *
+	 * @return mixed
+	 */
+	public static function root()
+	{
+		return static::where('parent_id', '=', null);
+	}
+
+	/**
 	 * Returns whether or not the Task has a parent
 	 *
 	 * @return bool
@@ -30,6 +40,16 @@ class Task extends Model
 	public function hasChildren()
 	{
 		return $this->children->isNotEmpty();
+	}
+
+	/**
+	 * Returns whether or not the Task has subtasks
+	 *
+	 * @return bool
+	 */
+	public function hasSubtasks()
+	{
+		return $this->subtasks->isNotEmpty();
 	}
 
 	/**
