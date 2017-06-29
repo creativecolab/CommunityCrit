@@ -18,4 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('tasks', 'TaskController');
+Route::group( [ 'prefix' => 'tasks' ], function () {
+	Route::get( '/', 'TaskController@index' );
+	Route::post( '{task}/feedback', 'TaskController@storeFeedback' );
+} );

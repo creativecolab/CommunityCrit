@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Feedback;
+use App\Http\Requests\CreateFeedbackRequest;
 use App\Task;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -50,80 +52,35 @@ class TaskController extends Controller
 				// Get first root task
 				$rootTask = Task::root()->with('subtasks')->first();
 
-				$data = ['tasks' => $rootTask->subtasks];
+				$data = ['tasks' => $rootTask->subtasks, 'rootTask' => $rootTask];
 		}
 
 		return view($view, $data);
 	}
 
 	/**
-	 * Show the form for creating a new resource.
+	 * Save feedback item for task
 	 *
-	 * @return \Illuminate\Http\Response
+	 * @param CreateFeedbackRequest $request
+	 * @param Task $task
+	 *
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function create()
+	public function storeFeedback( CreateFeedbackRequest $request, Task $task )
 	{
-		//
-	}
+		$feedback          = new Feedback;
+		$feedback->comment = $request->get( 'comment' );
+		$feedback->user_id = \Auth::id();
+		$feedback->task_id = $task->id;
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function store( Request $request )
-	{
-		//
-	}
+		$taskName = $task->name;
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  \App\Task $task
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show( Task $task )
-	{
-		//
-	}
+		if ( $feedback->save() ) {
+			flash("Feedback submitted for ${taskName}!")->success();
+		} else {
+			flash('Unable to save your feedback. Please contact us.')->error();
+		}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\Task $task
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit( Task $task )
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \Illuminate\Http\Request $request
-	 * @param  \App\Task $task
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update( Request $request, Task $task )
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  \App\Task $task
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function destroy( Task $task )
-	{
-		//
+		return redirect()->back();
 	}
 }

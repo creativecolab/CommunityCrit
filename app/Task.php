@@ -81,4 +81,14 @@ class Task extends Model
 	{
 		return $this->children();
 	}
+
+	/**
+	 * Feedback for this task
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function feedback()
+	{
+		return $this->hasMany( 'App\Feedback' );
+	}
 }
