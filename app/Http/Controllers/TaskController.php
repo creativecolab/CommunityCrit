@@ -19,7 +19,7 @@ class TaskController extends Controller
 		$condition = \Auth::user()->condition;
 
 		// Don't allow user through if they don't have a condition (means
-		if (!$condition) {
+		if ($condition === null) {
 			throw new AuthorizationException();
 		}
 
