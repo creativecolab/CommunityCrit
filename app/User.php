@@ -64,4 +64,14 @@ class User extends Authenticatable
 	        'PERSONAL_MICROTASK_CLOSED' => static::CONDITION_PERSONAL_MICROTASK_CLOSED,
 	    ];
     }
+
+	/**
+	 * Feedback this user has generated
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function feedback()
+	{
+		return $this->hasMany( 'App\Feedback' );
+	}
 }
