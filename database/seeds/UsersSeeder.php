@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
@@ -11,6 +12,11 @@ class UsersSeeder extends Seeder
 	 */
 	public function run()
 	{
-		factory( App\User::class, 10 )->create();
+		$conditions = User::getConditions();
+
+		// Create users in each condition
+		foreach ( $conditions as $name => $conditionId ) {
+			factory( User::class, 2 )->create( [ 'condition' => $conditionId ] );
+		}
 	}
 }

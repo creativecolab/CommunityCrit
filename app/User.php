@@ -54,7 +54,7 @@ class User extends Authenticatable
 	 *
 	 * @return array
 	 */
-    public function getConditions() {
+    public static function getConditions() {
     	return [
     	    'GENERIC_HOLISTIC' => static::CONDITION_GENERIC_HOLISTIC,
 	        'GENERIC_MICROTASK_OPEN' => static::CONDITION_GENERIC_MICROTASK_OPEN,
