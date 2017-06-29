@@ -20,5 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::group( [ 'prefix' => 'tasks' ], function () {
 	Route::get( '/', 'TaskController@index' );
-	Route::post( '{id}/feedback', 'TaskController@storeFeedback' );
+	Route::post( '{task}/feedback', 'TaskController@storeFeedback' );
 } );
