@@ -74,9 +74,11 @@ class TaskController extends Controller
 		$feedback->task_id = $task->id;
 
 		if ( $feedback->save() ) {
-			return redirect()->back();
+			flash('Feedback submitted!')->success();
 		} else {
-			return redirect()->back()->withErrors( [ 'error' => 'Unable to save your feedback. Please contact us.' ] );
+			flash('Unable to save your feedback. Please contact us.')->error();
 		}
+
+		return redirect()->back();
 	}
 }
