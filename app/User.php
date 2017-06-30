@@ -112,4 +112,18 @@ class User extends Authenticatable
 			static::CONDITION_PERSONAL_MICROTASK_CLOSED,
 		] );
 	}
+
+	/**
+	 * Query for personalized condition users
+	 *
+	 * @return mixed
+	 */
+	public static function personalized()
+	{
+		return static::whereIn( 'condition', [
+			static::CONDITION_PERSONAL_HOLISTIC,
+			static::CONDITION_PERSONAL_MICROTASK_OPEN,
+			static::CONDITION_PERSONAL_MICROTASK_CLOSED,
+		]);
+	}
 }
