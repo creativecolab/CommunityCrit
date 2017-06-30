@@ -15,7 +15,7 @@ class FeedbackSeeder extends Seeder
 	public function run()
 	{
 		// HOLISTIC SEED
-		$rootTask = Task::root()->first();
+		$rootTask = Task::root();
 
 		// Get holistic users
 		$holisticUsers = User::holistic()->get();
