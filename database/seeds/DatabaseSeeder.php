@@ -14,5 +14,6 @@ class DatabaseSeeder extends Seeder
 		$this->call( UsersSeeder::class );
 		$this->call( TasksSeeder::class );
 		$this->call( FeedbackSeeder::class );
+		$this->call( RecommendationsSeeder::class );
 	}
 }
