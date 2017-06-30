@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Services\TaskRecommendations\RecommendationEngine;
 use App\Services\TaskRecommendations\RandomEngine;
+use App\Services\TaskRecommendations\RecommendationService;
 use Illuminate\Support\ServiceProvider;
 
 class TaskRecommendationsServiceProvider extends ServiceProvider
@@ -17,8 +18,14 @@ class TaskRecommendationsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(RecommendationEngine::class, function () {
-        	return new RandomEngine();
+    	$this->app->bind(
+    	    RecommendationEngine::class,
+	        RandomEngine::class
+	    );
+
+        $this->app->singleton(RecommendationService::class, function($app) {
+        	$engine = $app->make(RecommendationEngine::class);
+        	return new RecommendationService($engine);
         });
     }
 
@@ -29,6 +36,6 @@ class TaskRecommendationsServiceProvider extends ServiceProvider
 	 */
     public function provides()
     {
-    	return [RecommendationEngine::class];
+    	return [RecommendationEngine::class, RecommendationService::class];
     }
 }
