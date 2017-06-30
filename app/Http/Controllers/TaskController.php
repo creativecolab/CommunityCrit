@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Feedback;
-use App\Http\Requests\CreateFeedbackRequest;
+use App\Http\Requests\FeedbackRequest;
 use App\Task;
 use App\User;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -75,7 +75,7 @@ class TaskController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function storeFeedback( CreateFeedbackRequest $request, Task $task )
+	public function storeFeedback( FeedbackRequest $request, Task $task )
 	{
 		$feedback          = new Feedback;
 		$feedback->comment = $request->get( 'comment' );

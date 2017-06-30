@@ -172,6 +172,8 @@ return [
 	    Collective\Html\HtmlServiceProvider::class,
 	    Laracasts\Flash\FlashServiceProvider::class,
 	    Baum\Providers\BaumServiceProvider::class,
+	    Backpack\Base\BaseServiceProvider::class,
+	    Backpack\CRUD\CrudServiceProvider::class,
 
         /*
          * Application Service Providers...

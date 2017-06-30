@@ -2,11 +2,14 @@
 
 namespace App;
 
+use Backpack\CRUD\CrudTrait;
 use Baum\Node;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Node
 {
+	use CrudTrait;
+
 	protected $fillable = [
 		'name',
 		'text',
