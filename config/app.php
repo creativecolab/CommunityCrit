@@ -167,8 +167,6 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-	    Barryvdh\Debugbar\ServiceProvider::class,
-	    Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 	    Collective\Html\HtmlServiceProvider::class,
 	    Laracasts\Flash\FlashServiceProvider::class,
 	    Baum\Providers\BaumServiceProvider::class,
@@ -233,7 +231,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
