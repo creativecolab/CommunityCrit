@@ -13,5 +13,7 @@ npm-debug.log
 /public/js/
 /public/fonts/
 /public/mix-manifest.json
+/public/packages/
+/public/vendor/
 .phpstorm.meta.php
 _ide_helper.php
