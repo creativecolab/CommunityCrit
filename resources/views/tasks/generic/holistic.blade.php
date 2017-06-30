@@ -8,13 +8,13 @@
 
                 <p>{!! html_entity_decode($task->text) !!}</p>
 
-                @if($task->hasSubtasks())
-                    @foreach($task->subtasks as $subtask)
-                        <strong>{{ $subtask->name }}</strong>
 
-                        <p>{!! html_entity_decode($subtask->text) !!}</p>
-                    @endforeach
-                @endif
+                @foreach($task->getImmediateDescendants() as $subtask)
+                    <strong>{{ $subtask->name }}</strong>
+
+                    <p>{!! html_entity_decode($subtask->text) !!}</p>
+                @endforeach
+
             </div>
         </div>
     @endforeach

@@ -8,13 +8,13 @@
             <div class="panel-body">
                 {{ $text }}
 
-                @if( isset($subtasks) )
-                    @foreach ($subtasks as $subtask)
-                        <strong>{{ $subtask->name }}@if(isset($recommendations) && $recommendations->contains($subtask->id))
-                                <span class="label label-primary">Recommended for You</span>@endif</strong>
-                        <p>{!! html_entity_decode($subtask->text) !!}</p>
-                    @endforeach
-                @endif
+                {{--@if( isset($subtasks) )--}}
+                    {{--@foreach ($subtasks as $subtask)--}}
+                        {{--<strong>{{ $subtask->name }}@if(isset($recommendations) && $recommendations->contains($subtask->id))--}}
+                                {{--<span class="label label-primary">Recommended for You</span>@endif</strong>--}}
+                        {{--<p>{!! html_entity_decode($subtask->text) !!}</p>--}}
+                    {{--@endforeach--}}
+                {{--@endif--}}
             </div>
 
             <div class="panel-footer">

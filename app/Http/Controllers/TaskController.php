@@ -46,16 +46,22 @@ class TaskController extends Controller
 			case User::CONDITION_GENERIC_MICROTASK_CLOSED:
 				$data = ['task' => Task::find(1)]; // TODO: Change to assigned task later
 				break;
+			case User::CONDITION_PERSONAL_MICROTASK_OPEN:
+				$tasks = Task::allLeaves()->get();
+				$data = ['tasks' => $tasks];
+				break;
 			default:
 				// Get first root task
-				$rootTask = Task::root()->with('subtasks')->first();
+				$rootTask = Task::root();
 
-				$data = ['tasks' => $rootTask->subtasks, 'rootTask' => $rootTask];
+				// Return tasks and root task
+				$data = ['tasks' => $rootTask->getDescendants(), 'rootTask' => $rootTask];
+		}
 
-				if ($condition === User::CONDITION_PERSONAL_MICROTASK_OPEN ||
-				    $condition === User::CONDITION_PERSONAL_HOLISTIC) {
-					$data['recommendations'] = \Auth::user()->recommendedTasks->pluck('id');
-				}
+		// Embed recommendations if needed
+		if ($condition === User::CONDITION_PERSONAL_MICROTASK_OPEN ||
+		    $condition === User::CONDITION_PERSONAL_HOLISTIC) {
+			$data['recommendations'] = \Auth::user()->recommendedTasks->pluck('id');
 		}
 
 		return view($view, $data);
