@@ -13,8 +13,8 @@ class RecommendationsSeeder extends Seeder
 	 */
 	public function run()
 	{
-		// Get non-root tasks
-		$tasks = Task::whereNotNull( 'parent_id' )->get();
+		// Get all leaves
+		$tasks = Task::allLeaves()->get();
 
 		// Get users needing personalization
 		$users = User::personalized()->get();

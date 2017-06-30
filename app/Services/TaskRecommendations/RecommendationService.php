@@ -18,7 +18,7 @@ class RecommendationService
 	public function addRecommendations(User $user, $numItems = 3)
 	{
 		// Fetch task pool
-		$tasks = Task::whereNotNull('parent_id')->get();
+		$tasks = Task::allLeaves()->get();
 
 		// Fetch recommendations
 		$recommendations = $this->engine->recommend($user, $tasks, $numItems);
