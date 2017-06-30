@@ -99,6 +99,6 @@ class Task extends Model
 	 */
 	public function recommendedUsers()
 	{
-		return $this->belongsToMany('App\User', 'recommendations');
+		return $this->belongsToMany('App\User', 'recommendations')->withTimestamps();
 	}
 }

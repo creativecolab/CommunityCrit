@@ -82,7 +82,7 @@ class User extends Authenticatable
 	 */
 	public function recommendedTasks()
 	{
-		return $this->belongsToMany('App\Task', 'recommendations');
+		return $this->belongsToMany('App\Task', 'recommendations')->withTimestamps();
 	}
 
 	/**
