@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Services\TaskRecommendations;
 
-use app\Services\TaskRecommendations\Engine;
+use app\Services\TaskRecommendations\RecommendationEngine;
 use App\Task;
 use App\User;
 use Illuminate\Support\Collection;
@@ -11,7 +11,7 @@ use App\Services\TaskRecommendations\RandomEngine;
 
 class RandomEngineTest extends TestCase
 {
-	/* @var Engine */
+	/* @var RecommendationEngine */
 	private $engine;
 
 	public function setUp()
