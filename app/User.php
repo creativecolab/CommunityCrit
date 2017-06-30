@@ -52,17 +52,31 @@ class User extends Authenticatable
 	/**
 	 * Returns available conditions
 	 *
+	 * @param string $type
+	 *
 	 * @return array
 	 */
-    public static function getConditions() {
-    	return [
-    	    'GENERIC_HOLISTIC' => static::CONDITION_GENERIC_HOLISTIC,
-	        'GENERIC_MICROTASK_OPEN' => static::CONDITION_GENERIC_MICROTASK_OPEN,
-	        'GENERIC_MICROTASK_CLOSED' => static::CONDITION_GENERIC_MICROTASK_CLOSED,
-	        'PERSONAL_HOLISTIC' => static::CONDITION_PERSONAL_HOLISTIC,
-	        'PERSONAL_MICROTASK_OPEN' => static::CONDITION_PERSONAL_MICROTASK_OPEN,
-	        'PERSONAL_MICROTASK_CLOSED' => static::CONDITION_PERSONAL_MICROTASK_CLOSED,
+    public static function getConditions($type = '') {
+    	$personal = [
+		    'PERSONAL_HOLISTIC' => static::CONDITION_PERSONAL_HOLISTIC,
+		    'PERSONAL_MICROTASK_OPEN' => static::CONDITION_PERSONAL_MICROTASK_OPEN,
+		    'PERSONAL_MICROTASK_CLOSED' => static::CONDITION_PERSONAL_MICROTASK_CLOSED,
 	    ];
+
+    	$generic = [
+		    'GENERIC_HOLISTIC' => static::CONDITION_GENERIC_HOLISTIC,
+		    'GENERIC_MICROTASK_OPEN' => static::CONDITION_GENERIC_MICROTASK_OPEN,
+		    'GENERIC_MICROTASK_CLOSED' => static::CONDITION_GENERIC_MICROTASK_CLOSED,
+	    ];
+
+    	switch ($type) {
+		    case 'personal':
+		    	return $personal;
+		    case 'generic':
+		    	return $generic;
+		    default:
+		    	return $personal + $generic;
+	    }
     }
 
 	/**
