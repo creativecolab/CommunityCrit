@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Services\TaskRecommendations\RecommendationService;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -48,7 +50,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'fname' => 'required|string|max:255',
+            'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -63,9 +66,20 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'fname' => $data['fname'],
+            'lname' => $data['lname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+	        'condition' => rand(User::CONDITION_MIN, User::CONDITION_MAX), // TODO: Move condition to after survey
         ]);
     }
+
+	protected function registered( Request $request, $user )
+	{
+		// Check if user is in a personal condition
+		if ( in_array( $user->condition, array_values( User::getConditions( 'personal' ) ) ) ) {
+			$recService = resolve( RecommendationService::class );
+			$recService->addRecommendations( $user );
+		}
+	}
 }

@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fname', 'lname', 'email', 'password',
+        'fname', 'lname', 'email', 'password', 'condition',
     ];
 
     /**
@@ -52,17 +52,31 @@ class User extends Authenticatable
 	/**
 	 * Returns available conditions
 	 *
+	 * @param string $type
+	 *
 	 * @return array
 	 */
-    public static function getConditions() {
-    	return [
-    	    'GENERIC_HOLISTIC' => static::CONDITION_GENERIC_HOLISTIC,
-	        'GENERIC_MICROTASK_OPEN' => static::CONDITION_GENERIC_MICROTASK_OPEN,
-	        'GENERIC_MICROTASK_CLOSED' => static::CONDITION_GENERIC_MICROTASK_CLOSED,
-	        'PERSONAL_HOLISTIC' => static::CONDITION_PERSONAL_HOLISTIC,
-	        'PERSONAL_MICROTASK_OPEN' => static::CONDITION_PERSONAL_MICROTASK_OPEN,
-	        'PERSONAL_MICROTASK_CLOSED' => static::CONDITION_PERSONAL_MICROTASK_CLOSED,
+    public static function getConditions($type = '') {
+    	$personal = [
+		    'PERSONAL_HOLISTIC' => static::CONDITION_PERSONAL_HOLISTIC,
+		    'PERSONAL_MICROTASK_OPEN' => static::CONDITION_PERSONAL_MICROTASK_OPEN,
+		    'PERSONAL_MICROTASK_CLOSED' => static::CONDITION_PERSONAL_MICROTASK_CLOSED,
 	    ];
+
+    	$generic = [
+		    'GENERIC_HOLISTIC' => static::CONDITION_GENERIC_HOLISTIC,
+		    'GENERIC_MICROTASK_OPEN' => static::CONDITION_GENERIC_MICROTASK_OPEN,
+		    'GENERIC_MICROTASK_CLOSED' => static::CONDITION_GENERIC_MICROTASK_CLOSED,
+	    ];
+
+    	switch ($type) {
+		    case 'personal':
+		    	return $personal;
+		    case 'generic':
+		    	return $generic;
+		    default:
+		    	return $personal + $generic;
+	    }
     }
 
 	/**
@@ -73,6 +87,16 @@ class User extends Authenticatable
 	public function feedback()
 	{
 		return $this->hasMany( 'App\Feedback' );
+	}
+
+	/**
+	 * Get User's recommended tasks
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function recommendedTasks()
+	{
+		return $this->belongsToMany('App\Task', 'recommendations')->withTimestamps();
 	}
 
 	/**
@@ -101,5 +125,19 @@ class User extends Authenticatable
 			static::CONDITION_PERSONAL_MICROTASK_OPEN,
 			static::CONDITION_PERSONAL_MICROTASK_CLOSED,
 		] );
+	}
+
+	/**
+	 * Query for personalized condition users
+	 *
+	 * @return mixed
+	 */
+	public static function personalized()
+	{
+		return static::whereIn( 'condition', [
+			static::CONDITION_PERSONAL_HOLISTIC,
+			static::CONDITION_PERSONAL_MICROTASK_OPEN,
+			static::CONDITION_PERSONAL_MICROTASK_CLOSED,
+		]);
 	}
 }

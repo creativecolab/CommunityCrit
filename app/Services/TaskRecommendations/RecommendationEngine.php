@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Services\TaskRecommendations;
+namespace App\Services\TaskRecommendations;
 
 use App\User;
 
-interface Engine
+interface RecommendationEngine
 {
 	/**
 	 * Return a scored list of tasks based on user.

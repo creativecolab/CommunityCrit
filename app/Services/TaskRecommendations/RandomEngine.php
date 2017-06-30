@@ -6,7 +6,7 @@ use App\Task;
 use App\User;
 use Illuminate\Support\Collection;
 
-class RandomEngine implements Engine
+class RandomEngine implements RecommendationEngine
 {
 	/**
 	 * {@inheritdoc}

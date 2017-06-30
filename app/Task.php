@@ -91,4 +91,14 @@ class Task extends Model
 	{
 		return $this->hasMany( 'App\Feedback' );
 	}
+
+	/**
+	 * Users recommended to this task
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function recommendedUsers()
+	{
+		return $this->belongsToMany('App\User', 'recommendations')->withTimestamps();
+	}
 }
