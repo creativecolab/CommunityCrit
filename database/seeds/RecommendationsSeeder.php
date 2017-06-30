@@ -21,7 +21,7 @@ class RecommendationsSeeder extends Seeder
 
 		// Seed recommendations
 		foreach ( $users as $user ) {
-	    	$user->recommendedTasks()->attach($tasks->random());
+	    	$user->recommendedTasks()->attach($tasks->random(3));
 		}
 	}
 }
