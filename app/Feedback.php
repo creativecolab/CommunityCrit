@@ -2,10 +2,13 @@
 
 namespace App;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
+	use CrudTrait;
+
 	protected $fillable = [ 'comment', 'task_id', 'user_id' ];
 
 	/**

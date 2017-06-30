@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -16,7 +17,7 @@ class User extends Authenticatable
 	const CONDITION_MIN = 0;
 	const CONDITION_MAX = 5;
 
-    use Notifiable;
+    use Notifiable, CrudTrait;
 
     /**
      * The attributes that are mass assignable.
