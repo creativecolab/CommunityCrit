@@ -76,6 +76,16 @@ class User extends Authenticatable
 	}
 
 	/**
+	 * Get User's recommended tasks
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function recommendedTasks()
+	{
+		return $this->belongsToMany('App\Task', 'recommendations');
+	}
+
+	/**
 	 * Query for holistic-type condition users
 	 *
 	 * @return mixed
