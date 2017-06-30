@@ -40,8 +40,10 @@ class TaskController extends Controller
 
 		// Decide which data to fetch
 		switch($condition) {
-			case User::CONDITION_GENERIC_MICROTASK_CLOSED:
 			case User::CONDITION_PERSONAL_MICROTASK_CLOSED:
+				$data = ['task' => \Auth::user()->recommendedTasks->first()];
+				break;
+			case User::CONDITION_GENERIC_MICROTASK_CLOSED:
 				$data = ['task' => Task::find(1)]; // TODO: Change to assigned task later
 				break;
 			case User::CONDITION_GENERIC_HOLISTIC:

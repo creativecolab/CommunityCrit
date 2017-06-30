@@ -2,7 +2,7 @@
     <div class="col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                {{ $title }}
+                {{ $title }}@if(isset($recommended) && $recommended) <span class="label label-primary">Recommended for You</span>@endif
             </div>
 
             <div class="panel-body">
