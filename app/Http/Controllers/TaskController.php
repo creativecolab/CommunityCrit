@@ -70,7 +70,7 @@ class TaskController extends Controller
 	/**
 	 * Save feedback item for task
 	 *
-	 * @param CreateFeedbackRequest $request
+	 * @param FeedbackRequest $request
 	 * @param Task $task
 	 *
 	 * @return \Illuminate\Http\RedirectResponse

@@ -11,7 +11,7 @@
                 </div>
                 
                 <div class="panel-footer text-right">
-                    <a href="#" class="btn btn-primary">Get Started</a>
+                    <a href="{{ action('TaskController@index') }}" class="btn btn-primary">Get Started</a>
                 </div>
             </div>
         </div>
