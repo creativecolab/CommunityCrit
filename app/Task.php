@@ -14,6 +14,7 @@ class Task extends Node
 		'name',
 		'text',
 		'parent_id',
+		'source_id',
 	];
 
 	/**
@@ -54,5 +55,15 @@ class Task extends Node
 	public function recommendedUsers()
 	{
 		return $this->belongsToMany('App\User', 'recommendations')->withTimestamps();
+	}
+
+	/**
+	 * Source of the task information (if exists)
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+	 */
+	public function source()
+	{
+		return $this->belongsTo('App\Source');
 	}
 }

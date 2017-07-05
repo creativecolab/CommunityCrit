@@ -17,6 +17,8 @@ class CreateTasksTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('text');
+	        $table->unsignedInteger('source_id');
+	        $table->foreign('source_id')->references('id')->on('sources');
 
 	        // These columns are needed for Baum's Nested Set implementation to work.
 	        // Column names may be changed, but they *must* all exist and be modified
