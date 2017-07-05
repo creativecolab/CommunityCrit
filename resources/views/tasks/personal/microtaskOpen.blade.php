@@ -4,7 +4,7 @@
     {{--Could be made more efficient--}}
     @foreach($tasks as $task)
         @if($recommendations->contains($task->id))
-        @component('tasks.common.microtask', ['id' => $task->id, 'subtasks' => $task->getImmediateDescendants(), 'recommended' => $recommendations->contains($task->id), 'recommendations' => $recommendations])
+        @component('tasks.common.microtaskList', ['id' => $task->id, 'subtasks' => $task->getImmediateDescendants(), 'recommended' => $recommendations->contains($task->id), 'recommendations' => $recommendations])
             @slot('title')
                 {{ $task->name }}
             @endslot
@@ -17,7 +17,7 @@
     @endforeach
     @foreach($tasks as $task)
         @if(!($recommendations->contains($task->id)))
-            @component('tasks.common.microtask', ['id' => $task->id, 'subtasks' => $task->getImmediateDescendants(), 'recommended' => $recommendations->contains($task->id), 'recommendations' => $recommendations])
+            @component('tasks.common.microtaskList', ['id' => $task->id, 'subtasks' => $task->getImmediateDescendants(), 'recommended' => $recommendations->contains($task->id), 'recommendations' => $recommendations])
             @slot('title')
             {{ $task->name }}
             @endslot

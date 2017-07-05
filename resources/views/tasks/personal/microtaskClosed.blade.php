@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    @component('tasks.common.microtask', ['id' => $task->id, 'recommended' => true])
+    @component('tasks.common.microtaskList', ['id' => $task->id, 'recommended' => true])
         @slot('title')
             {{ $task->name }}
         @endslot
