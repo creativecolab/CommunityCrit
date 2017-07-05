@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Tasks |')
+
 @section('content')
     @foreach($tasks as $task)
         @component('tasks.common.microtask', ['id' => $task->id, 'subtasks' => $task->getImmediateDescendants()])

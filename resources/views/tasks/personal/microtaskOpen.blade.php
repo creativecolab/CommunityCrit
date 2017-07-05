@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Task |')
+
 @section('content')
     {{--Could be made more efficient--}}
     @foreach($tasks as $task)

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'Task |')
+
 @section('content')
     @component('tasks.common.microtask', ['id' => $task->id, 'recommended' => true])
         @slot('title')
