@@ -39,3 +39,10 @@ $factory->define( App\Feedback::class, function ( Faker\Generator $faker ) {
 		'user_id' => 1
 	];
 } );
+
+$factory->define( App\Source::class, function ( Faker\Generator $faker ) {
+	return [
+		'name' => ucwords($faker->word),
+		'description' => $faker->paragraph()
+	];
+});
