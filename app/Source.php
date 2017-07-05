@@ -13,4 +13,14 @@ class Source extends Model
         'name',
 	    'text',
     ];
+
+	/**
+	 * Tasks this source has
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+    public function tasks()
+    {
+    	return $this->hasMany('App\Source');
+    }
 }
