@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tasks |')
+@section('title', 'Tasks')
 
 @section('content')
     @component('tasks.common.microtask', ['id' => $task->id])
