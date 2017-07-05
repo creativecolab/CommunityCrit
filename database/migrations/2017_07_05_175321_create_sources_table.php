@@ -19,6 +19,11 @@ class CreateSourcesTable extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('tasks', function (Blueprint $table) {
+	        $table->unsignedInteger('source_id')->nullable()->after('text');
+	        $table->foreign('source_id')->references('id')->on('sources');
+        });
     }
 
     /**
@@ -28,6 +33,10 @@ class CreateSourcesTable extends Migration
      */
     public function down()
     {
+    	Schema::table('tasks', function (Blueprint $table) {
+    		$table->dropForeign( 'tasks_source_id_foreign' );
+    		$table->dropColumn([ 'source_id' ]);
+	    });
         Schema::dropIfExists('sources');
     }
 }
