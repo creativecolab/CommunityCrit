@@ -22,6 +22,7 @@
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}"><i class="fa fa-dashboard"></i> <span>{{ trans('backpack::base.dashboard') }}</span></a></li>
           <li><a href="{{ url('admin/feedback') }}"><i class="fa fa-comment"></i> <span>Feedback</span></a></li>
           <li><a href="{{ url('admin/tasks') }}"><i class="fa fa-tasks"></i> <span>Tasks</span></a></li>
+          <li><a href="{{ url('admin/sources') }}"><i class="fa fa-book"></i> <span>Sources</span></a></li>
           <li><a href="{{ url('admin/users') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
           <li><a href="{{ url(config('backpack.base.route_prefix', 'admin') . '/elfinder') }}"><i class="fa fa-files-o"></i> <span>File manager</span></a></li>
 
