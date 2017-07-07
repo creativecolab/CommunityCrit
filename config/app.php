@@ -172,6 +172,8 @@ return [
 	    Baum\Providers\BaumServiceProvider::class,
 	    Backpack\Base\BaseServiceProvider::class,
 	    Backpack\CRUD\CrudServiceProvider::class,
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
 
         /*
          * Application Service Providers...
