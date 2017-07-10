@@ -6,6 +6,8 @@ use App\Feedback;
 use App\Http\Requests\FeedbackRequest;
 use App\Task;
 use App\User;
+use App\Facet;
+use App\Source;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
@@ -92,4 +94,84 @@ class TaskController extends Controller
 
 		return redirect()->back();
 	}
+
+    /**
+     * Display single task view
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+	public function show( $id )
+    {
+        $task = Task::where('id',$id)->first();
+
+        if ($task == null) {
+            abort(404);
+        }
+
+        $view = 'proto.test';
+
+//        $tags = $task->tags()->where('task_id',$task->id)->pluck('parent_id');
+//        $parents = Task::whereIn('id',$tags)->get();
+
+        $facets = $task->facets()->get();
+
+		$title = $task->name;
+        $data = ['task' => $task, 'facets' => $facets, 'title' => $title];
+        return view($view, $data);
+    }
+
+    /**
+     * Display all facets
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function allFacets()
+    {
+        $view = 'tasks.facets.listAll';
+        $data['title'] = 'Facets';
+		$data['facets'] = Task::getFacets();
+        return view($view, $data);
+    }
+
+    public function singleFacet($slug)
+    {
+        $facet = Task::where('slug',$slug)->first();
+
+        if ($facet == null) {
+            abort(404);
+        }
+
+        $view = 'tasks.facets.singleFacet';
+
+        $data['title'] = $facet->name;
+        $data['tasks'] = $facet->quotes()->get();
+        $data['facet'] = $facet;
+        return view($view, $data);
+    }
+
+    public function allSources()
+    {
+        $view = 'tasks.sources.listAll';
+        $data['title'] = 'Sources';
+        $data['sources'] = Task::getSources();
+        return view($view, $data);
+    }
+
+    public function singleSource($slug)
+    {
+        $source = Task::where('slug',$slug)->first();
+
+        if ($source == null) {
+            abort(404);
+        }
+
+        $view = 'tasks.sources.singleSource';
+
+        $data['title'] = $source->name;
+        $data['source'] = $source;
+        $data['quotes'] = $source->sourceHasQuotes;
+//        $data['quotes'] = Task::get()->where('source_id',25);
+        return view($view, $data);
+    }
 }

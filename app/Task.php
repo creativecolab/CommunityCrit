@@ -3,19 +3,63 @@
 namespace App;
 
 use Backpack\CRUD\CrudTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Baum\Node;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Node
 {
+
+    const TYPE_FACET = 0;
+    const TYPE_QUOTE = 1;
+    const TYPE_SOURCE = 2;
+
 	use CrudTrait;
+	use Sluggable;
 
 	protected $fillable = [
 		'name',
 		'text',
+        'type',
 		'parent_id',
 		'source_id',
 	];
+
+    /**
+     * Get all facets
+     *
+     * @return mixed
+     */
+    public static function getFacets()
+    {
+        return static::get()->where( 'type',
+            static::TYPE_FACET );
+    }
+
+    /**
+     * Get all sources
+     *
+     * @return mixed
+     */
+    public static function getSources()
+    {
+        return static::get()->where( 'type',
+            static::TYPE_SOURCE );
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
 	/**
 	 * Returns whether or not the Task has subtasks
@@ -64,6 +108,33 @@ class Task extends Node
 	 */
 	public function source()
 	{
-		return $this->belongsTo('App\Source');
+		return $this->belongsTo('App\Task', 'source_id');
 	}
+
+    /**
+     * Quotes for this source
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sourceHasQuotes()
+    {
+        return $this->hasMany('App\Task', 'source_id');
+    }
+
+    /**
+     * Facets for this task
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function facets()
+    {
+        return $this->belongsToMany( 'App\Task', 'tags', 'quote_id', 'facet_id' );
+    }
+
+    public function quotes()
+    {
+        return $this->belongsToMany('App\Task', 'tags', 'facet_id', 'quote_id');
+    }
+
+
 }
