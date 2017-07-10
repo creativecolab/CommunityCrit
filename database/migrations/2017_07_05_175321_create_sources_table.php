@@ -15,15 +15,18 @@ class CreateSourcesTable extends Migration
     {
         Schema::create('sources', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('rank')->nullable();
             $table->string('name');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
+            $table->string('type')->nullable();
+            $table->text('link')->nullable();
             $table->timestamps();
         });
 
-        Schema::table('tasks', function (Blueprint $table) {
-	        $table->unsignedInteger('source_id')->nullable()->after('text');
-	        $table->foreign('source_id')->references('id')->on('sources');
-        });
+//        Schema::table('tasks', function (Blueprint $table) {
+//	        $table->unsignedInteger('source_id')->nullable()->after('text');
+//	        $table->foreign('source_id')->references('id')->on('sources');
+//        });
     }
 
     /**

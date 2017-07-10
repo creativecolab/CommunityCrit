@@ -16,7 +16,15 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->text('text');
+            $table->text('text')->nullable();
+            $table->text('quote')->nullable();
+            $table->tinyInteger('type')->default(1);
+//            $table->unsignedInteger('quote_id')->nullable();
+//            $table->foreign('quote_id')->references('id')->on('tasks');
+            $table->unsignedInteger('source_id')->nullable();
+            $table->foreign('source_id')->references('id')->on('tasks');
+//            $table->unsignedInteger('facet_id')->nullable();
+//            $table->foreign('facet_id')->references('id')->on('tasks');
 
 	        // These columns are needed for Baum's Nested Set implementation to work.
 	        // Column names may be changed, but they *must* all exist and be modified
