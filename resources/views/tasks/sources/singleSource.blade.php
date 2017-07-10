@@ -12,11 +12,8 @@
     </div>
 
     @foreach ($quotes as $quote)
-        <p>{{ $quote->quote }}</p>
-        <blockquote>
-            <p><strong>{{ $quote->name }}</strong> - {!! $quote->text !!}</p>
-            <footer><a href="">14th Street Promenade Master Plan</a></footer>
-        </blockquote>
+        <p id="1"><strong>{{ $quote->name }}</strong> {!! $quote->text !!} <a class="viewComments" href="{{ action('TaskController@quote', $quote->slug) }}"><span class="glyphicon glyphicon-comment" data-state="off" aria-hidden="true"></span><span class="commentCount">{{ $quote->feedback->count() }}</span></a>
+            @foreach ($quote->facets as $facet) <a class="label label-default" href="{{ action('TaskController@singleFacet', $facet->slug) }}">{{$facet->name}}</a> @endforeach
     @endforeach
 
 @endsection

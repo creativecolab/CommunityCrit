@@ -43,3 +43,7 @@ Route::group( [ 'prefix' => 'sources' ], function () {
     Route::get('/', 'TaskController@allSources' );
     Route::get('/{slug}', 'TaskController@singleSource' );
 } );
+
+Route::group( [ 'prefix' => 'quotes' ], function () {
+    Route::get('/{slug}', 'TaskController@quote' );
+} );

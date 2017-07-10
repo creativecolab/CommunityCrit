@@ -145,7 +145,7 @@ class TaskController extends Controller
         $view = 'tasks.facets.singleFacet';
 
         $data['title'] = $facet->name;
-        $data['tasks'] = $facet->quotes()->get();
+        $data['tasks'] = $facet->quotes;
         $data['facet'] = $facet;
         return view($view, $data);
     }
@@ -172,6 +172,21 @@ class TaskController extends Controller
         $data['source'] = $source;
         $data['quotes'] = $source->sourceHasQuotes;
 //        $data['quotes'] = Task::get()->where('source_id',25);
+        return view($view, $data);
+    }
+
+    public function quote($slug)
+    {
+        $quote = Task::where('slug',$slug)->first();
+
+        if ($quote == null) {
+            abort(404);
+        }
+
+        $view = 'tasks.quote';
+
+        $data['title'] = $quote->name;
+        $data['quote'] = $quote;
         return view($view, $data);
     }
 }
