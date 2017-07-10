@@ -18,7 +18,7 @@ class TagsSeeder extends Seeder
             foreach ($tasks as $task) {
                 DB::table('tags')->insert([
                     'quote_id' => $task->id,
-                    'facet_id' => Task::getFacets()->get()->random()->id,
+                    'facet_id' => Task::getFacets()->random()->id,
                 ]);
             }
         }
