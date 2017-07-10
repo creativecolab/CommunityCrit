@@ -15,5 +15,8 @@ class DatabaseSeeder extends Seeder
 		$this->call( TasksSeeder::class );
 		$this->call( FeedbackSeeder::class );
 		$this->call( RecommendationsSeeder::class );
+		$this->call( FacetsSeeder::class );
+        $this->call( SourcesSeeder::class );
+        $this->call( TagsSeeder::class );
 	}
 }
