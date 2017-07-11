@@ -19,4 +19,6 @@
     </blockquote>
     @endforeach
 
+    @component('tasks.commentsPage', [ 'task' => $facet ])
+    @endcomponent
 @endsection

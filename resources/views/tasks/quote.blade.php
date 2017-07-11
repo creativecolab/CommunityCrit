@@ -16,6 +16,6 @@
             @foreach($quote->facets as $facet) <a class="label label-default" href="{{ action('TaskController@singleFacet', $facet->slug) }}">{{$facet->name}}</a>@endforeach</footer>
     </blockquote>
 
-    @component('tasks.commentsPage')
+    @component('tasks.commentsPage', [ 'task' => $quote ])
     @endcomponent
 @endsection
