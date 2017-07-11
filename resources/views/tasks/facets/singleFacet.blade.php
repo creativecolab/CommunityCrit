@@ -14,8 +14,8 @@
     @foreach ($tasks as $task)
     <p>{{ $task->quote }}</p>
     <blockquote>
-        <p><strong>{{ $task->name }}</strong> - {!! $task->text !!}</p>
-        <footer><a href="">14th Street Promenade Master Plan</a></footer>
+        <p>{!! $task->text !!}</p>
+        <footer><a href="{{ action('TaskController@singleSource', $task->source->slug) }}">{{ $task->source->name }}</a></footer>
     </blockquote>
     @endforeach
 

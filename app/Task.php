@@ -13,6 +13,7 @@ class Task extends Node
     const TYPE_FACET = 0;
     const TYPE_QUOTE = 1;
     const TYPE_SOURCE = 2;
+	const TYPE_SOURCE_QUOTE = 3;
 
 	use CrudTrait;
 	use Sluggable;
@@ -45,6 +46,29 @@ class Task extends Node
     {
         return static::get()->where( 'type',
             static::TYPE_SOURCE );
+    }
+
+    /**
+     * Get all quotes
+     *
+     * @return mixed
+     */
+    public static function getQuotes()
+    {
+        return static::get()->where( 'type',
+            static::TYPE_QUOTE );
+    }
+
+    /**
+     * Get all source text
+     *
+     * @return mixed
+     */
+    public static function getSourceText()
+    {
+        return static::get()->where( 'type',
+            static::TYPE_QUOTE,
+            static::TYPE_SOURCE_QUOTE );
     }
 
     /**
