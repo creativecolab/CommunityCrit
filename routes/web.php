@@ -34,16 +34,16 @@ Route::group( [ 'prefix' => 'tasks' ], function () {
     Route::get( '/{id}', 'TaskController@show' );
 	Route::post( '{task}/feedback', 'TaskController@storeFeedback' );
 } );
-Route::group( [ 'prefix' => 'facets' ], function () {
+Route::group( [ 'prefix' => 'facets', 'middleware' => ['auth'] ], function () {
 	Route::get('/', 'TaskController@allFacets' );
     Route::get('/{slug}', 'TaskController@singleFacet' );
 } );
 
-Route::group( [ 'prefix' => 'sources' ], function () {
+Route::group( [ 'prefix' => 'sources', 'middleware' => ['auth'] ], function () {
     Route::get('/', 'TaskController@allSources' );
     Route::get('/{slug}', 'TaskController@singleSource' );
 } );
 
-Route::group( [ 'prefix' => 'quotes' ], function () {
+Route::group( [ 'prefix' => 'quotes', 'middleware' => ['auth'] ], function () {
     Route::get('/{id}', 'TaskController@quote' );
 } );
