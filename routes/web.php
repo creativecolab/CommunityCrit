@@ -45,5 +45,5 @@ Route::group( [ 'prefix' => 'sources' ], function () {
 } );
 
 Route::group( [ 'prefix' => 'quotes' ], function () {
-    Route::get('/{slug}', 'TaskController@quote' );
+    Route::get('/{id}', 'TaskController@quote' );
 } );
