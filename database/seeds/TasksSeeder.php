@@ -28,11 +28,12 @@ class TasksSeeder extends Seeder
 					'text' => '<p><h2>Urban Discovery and Play District</h2></p>Urban Discovery and Play District – the three northernmost blocks (between C Street and F Street) comprise the Urban Discovery and Play District. It is anchored by City College in the north and Urban Discovery Academy in the south. This zone encourages discovery and creativity, with opportunities to learn, relax and explore. It is characterized by seating for people to simply relax and enjoy views toward the Bay, and interactive elements representing historical information about the history of San Diego and the East Village. Landscape plantings allow exploration and discovery, and include native plants that have been used traditionally in Kumeyaay culture, reflecting that there is a long history to the region.',
 				],
 				[
-					'text'     => '<p><h2>Continuous Promenade Elements</h2></p>Uniting the three districts, are features that are continuous throughout the Promenade. These include the following:',
+					'text' => '<p><h2>Continuous Promenade Elements</h2></p>Uniting the three districts, are features that are continuous throughout the Promenade. These include the following:',
 				],
 				[
 					'text' => '<p><b>Planting</b> – Although district plant palettes differ, the 14th Street Promenade will feature additional canopy trees and low growing, low water-use, low maintenance, colorful understory plantings. The planting plan will dominate the corridor creating an inviting space for a variety of uses, yet allowing visual access to the Promenade for policing and easy access for maintenance. Plantings on the east side of the street will occur mostly in the furnishing zone, keeping the thru-way zone clear for pedestrian traffic. Plantings in the frontage zone are encouraged on both sides of the street.</p><ul><li><b>Street Trees</b> - proposed street trees will conform to all requirements in the Streetscape Manual. Additional trees are listed in the individual district plant palettes and will be used as accent to the dominant street tree. Canopy trees will comprise a majority of the Promenade planting, creating shade and a green oasis. Trees will be located in the furnishing zone and at specific locations as shown on the plans.<li><b>Parking Lot Screening</b> – plants located in the frontage zone will provide a green visual buffer at surface parking lots. Plants should be a combination of canopy trees and low growing shrubs in order to maintain sight lines.</li><li><b>Plantings in the Frontage Zone</b> – opportunities for plantings should be provided , where possible, between the building’s set back and/or entrance and the public right-of-way. These areas provide visual interest, integrate the architecture with the pedestrian zone, may be used for wayfinding, and may also be developed to manage storm water runoff.</li><li><b>Hanging Baskets and Planters</b> – accent plantings in hanging baskets or planters offer an opportunity to incorporate plants in existing right-of-ways where there is limited space for planting. Planters should be located in the frontage zone adjacent to building facades. Hanging baskets may be located on street lights poles in the furnishing zone. Planters in the furnishing zone will be evaluated on a case by case basis.<li><b>Green Walls</b> – green walls are a means of adding plants in areas with limited space and can be used to create a dramatic vertical design element.</li></ul>',
 				],
+				[
 				
 					'text' => '<b>Paving</b> – Concrete walkways and decomposed granite paths will comprise a common ground plane along the 14th Street Promenade. Concrete walkways will be located in the frontage and thru-way zone with the decomposed granite path located in the furnishing zone. Existing improved sidewalks will remain throughout the streetscape. The addition of the Promenade will protect in place these existing sidewalks, and the new trail and amenities, where applicable, will extend from the back of the existing curb into the public right-of-way. In areas where the sidewalk has not been improved, the sidewalk shall follow the guidelines in the Streetscape Manual for color and pattern and the new trail and amenities will become integral to the overall design of the pedestrian realm.',
 				],
@@ -69,8 +70,9 @@ class TasksSeeder extends Seeder
 				[
 					'text' => '<p><h2>A SUSTAINABLE GREEN STREET</h2></p><p>Consistent with its designation as a Green Street, the 14th Street Promenade is oriented toward pedestrian uses with traffic-calming measures and enhanced planting. The design will further the Centre City Green program, which emphasizes the following:</p><ul><li>Transform downtown streets into places for people and not just for cars</li><li>Create healthier outdoor spaces that are more pedestrian- and bike-friendly, add more greenery, accommodate transit, use less energy and water, improve air quality and reduce storm water pollution</li><li>Devote less of the street right-of-way to vehicles and instead widen sidewalks</li><li>Where possible, incorporate low-impact development (LID) features that include storm water management systems</li><li>Use local and regional materials with high recycled content and energy-efficient pedestrian lighting.</li></ul><p>In addition, the 14th Street Promenade will utilize bioswales and porous paving to capture storm water from the roadway, sidewalks and rooftops of adjacent buildings. The bioswales will be planted with plant material appropriate for this condition and will be a prominent attractive feature of the 14th Street Promenade. Opportunity also exists for including interpretive elements within the bioswales to help the pedestrians appreciate the importance of stormwater quality.</p>',
 				]
-			],
-			[
+			]
+		],
+		[
 			'name'     => 'East Village South Draft Focus Plan',
 			'children' => 
 			[
@@ -83,7 +85,7 @@ class TasksSeeder extends Seeder
 						],
 						[
 							'text' => '<p>In fall of 2015 a group of East Village residents, business, academic and community leaders and land owners discussed the need for a Focus Plan for the southeast quadrant as new development started rapidly taking shape throughout East Village. At this point in the community’s (and downtown’s) revitalization, several things became clear:</p>',
-						]
+						],
 						[
 							'text' => '<ul><li>Due to successful residential development throughout the late 1990’s and early 2000’s, 34,550(1) people now call downtown home. This population is projected to grow exponentially (more than 108% from 2012 – 2050)(2). Open space, parks and civic amenities have not kept pace with a growing population.</li>',
 						],
@@ -107,12 +109,12 @@ class TasksSeeder extends Seeder
 						],
 						[
 							'text' => '<p><b>1. Public Participation</b></p><p>We understand that any ambitious plan or vision must include a broad coalition of participation from both the public and private sectors. For example, the growth of the bio-tech and bio-pharmaceutical industries in San Diego is a direct result of then Mayor Pete Wilson’s leadership in using city land to incubate research-based businesses that emanated from UCSD(4). It took private business, venture capital, real estate development, public investment and leadership for this success to be realized.</p><p>For many reasons including demographic and social trends, concerns about creating sustainable communities, and generational preferences, the frontiers of the new economy are growing in the urban fabric of cities. A lot of investment has been already made in revitalizing downtown San Diego. We suggest that for downtown to achieve the jobs-housing balance originally envisioned, progress will <b>require all stakeholders at the table.</b></p><p>We hope that by providing this Focus Plan, we can add further fuel to the conversation.</p>',
-						]
+						],
 						[
 							'text' => '<p><b>2. Timing</b></p><p>In the workshops, as well as one-on-one meetings, people have voiced their concerns about whether something like an innovation district could be realized without a major San Diego university or tech-oriented business making a significant commitment to anchor the district. They are concerned, and rightly so, that without investment on the part of the city or a major institution the full potential of the neighborhood, and indeed the downtown area will never occur.</p><p>We believe that between development already occurring, especially in IDEA District, the number of business start-ups in downtown, and the demographic make-up of downtown residents, that with the right focus and commitment, an emerging jobs-cluster can be realized more quickly than anyone anticipates. To put it into perspective, with the right incentives and investment downtown’s population grew 97% since the year 2000.(5)</p><p>Last year, the Downtown San Diego Partnership commissioned UC San Diego Extension to conduct demographic and economic study of downtown San Diego. In the study’s conclusion it states that “Downtown San Diego is one of the few major cities in America, and California, where there is still the potential to further expand a dynamic and a uniquely inclusive innovation economy.” It specifically highlights the “Available, developable land downtown, particularly in the East Village…contiguous to a number of diverse neighborhoods with developable land, including Barrio Logan, Golden Hill and the Diamond District”(6) as one of four primary reasons downtown is ripe for this effort.</p><p>The study in its entirety can be found at: http://www.downtownsandiego.org/wp-content/uploads/2016/05/DSDP-Demographic-Study-2016.pdf</p>',
 						]
 					]
-				]
+				],
 				[
 					'text' => '<p><h2>OVERVIEW:</h2></p>',
 					'children' =>
@@ -127,7 +129,7 @@ class TasksSeeder extends Seeder
 							'text' => '<p><h3>C. Adoption Process</h3></p><i><p>The plan was created by a <b>diverse group of community activists working with the larger East Village community</b> through a series of well documented public workshops (see reports in appendix). Volunteer architects and planners refined the community input into this Focus Plan outline. This document is no more than a framework for implementing the community vision and will need to be vetted and completed by professional planners at Civic San Diego through a public process. Like the other downtown Focus Plans, the final document will then need to be approved and formally adopted by the City Council.</p></i>'
 						]
 					]
-				]
+				],
 				[
 					'text' => '<p><h2>VISION:</h2></p>',
 					'children' =>
@@ -193,7 +195,7 @@ class TasksSeeder extends Seeder
 							'text' => '<p>It was agreed that giant, monolithic buildings like a stadium are not conducive to this vision. These types of structures are at direct odds with the desire for connections, keeping the community “porous”, ensuring view corridors are intact and making the neighborhood livable and family-friendly.</p>'
 						]
 					]
-				]
+				],
 				[
 					'text' => '<p><h2>VISION:</h2></p>',
 					'children' =>
@@ -220,7 +222,7 @@ class TasksSeeder extends Seeder
 							'text' => '<p><h3>6. Preserve View Corridors</h3></p><p>The views down the city streets to the bay and bridge give East Village a strong character. Walking along 13th Street, 14th Street, and 15th Street in the afternoon with the buildings in shadow and the Coronado Bridge alive in the afternoon <b>light is one of the qualities most cherished in the community.</b> These view corridors must be protected and enhanced if possible. The Focus Plan retains the 13th Street and 14th Street views and opens up 15th Street to an enhanced view of the bridge.</p>'
 						]
 					]
-				]
+				],
 				[
 					'text' => '<p><h2>IMPLEMENTATION STRATEGIES:</h2></p>',
 					'children' =>
@@ -229,80 +231,85 @@ class TasksSeeder extends Seeder
 							'text' => '<p><h3>1. Define a Unique Neighborhood</h3></p>',
 							'children' =>
 							[
-								'text' => '<p><i>The following ideas are suggestions that came out of the community workshops and were refined by the professional architectural/planning team. The participants wanted to include a set of simple, but distinct, requirements that would help to establish a unique physical identity and character for the community. Obviously, for that to happen, the section below differs from some of the design, lighting and signage standards that apply to downtown as a whole.</i></p>'
-							],
-							[
-								'text' => '<p><b>Architecture:</b></p><p>Village of Towers: Except for office towers, developers and their architects are encouraged to create improbably slender towers in this neighborhood. It might be a fragment of a larger building or a complete high rise. Contemporary design is encouraged.</p><p>“Superblocks” or single full-block developments by a single architect and developer are discouraged. While the Downtown Community Plan also discourages superblock development, they have become the norm in much of East Village.</p>'
-							],
-							[
-								'text' => '<p><b>Materials:</b></p><p>No reflective glass permitted below the third story. 40% of street level glass must be low-iron and non-reflective.</p>'
-							],
-							[
-								'text' => '<p><b>Color:</b></p><p>All buildings must be colored at least 80% cream white (apart from view glass) above the 7th story. Over time, this simple regulation will give the neighborhood a distinct visual identity — even from afar.</p><p>Public infrastructure like light poles and transformers should have a wainscot of colored cream white to a height of 4 feet above grade and can easily be repainted. Transformers would preferably by located underground, but should be similarly be painted cream white if they are street level.</p>'
-							],
-							[
-								'text' => '<p><b>Landscape:</b></p><p>The following items should be unique to the neighborhood and selected by landscape professionals and approved by the public.</p><ul><li>Paving in plazas and pubic areas that is memorable and different from the rest of downtown</li><li>Unique trash cans and benches</li><li>A neighborhood “Signature Shrub” that is encouraged in every development</li></ul>'
-							],
-							[
-								'text' => '<p><b>Signage:</b></p><ul>li>Free-standing rooftop signs are permitted below 8 stories.</li><li>No signage or logos is allowed above 8 stories.</li><li>The curved portion of city curbs at intersections is allowed to be covered with ceramic tile advertising. Proceeds will be donated to the East Village Association.</li></ul>'
-							],
-							[
-								'text' => '<p><b>Lighting:</b></p><ul><li>Use lighting as a way to further distinguish and differentiate East Village South from other downtown neighborhoods. A professional lighting designer should be retained to create a plan to make East Village South subtly unique at night.</li><li>No neon stripes permitted.</li><li>No digital billboards or moving images permitted except behind first story storefront glass.</li></ul>'
+								[
+									'text' => '<p><i>The following ideas are suggestions that came out of the community workshops and were refined by the professional architectural/planning team. The participants wanted to include a set of simple, but distinct, requirements that would help to establish a unique physical identity and character for the community. Obviously, for that to happen, the section below differs from some of the design, lighting and signage standards that apply to downtown as a whole.</i></p>'
+								],
+								[
+									'text' => '<p><b>Architecture:</b></p><p>Village of Towers: Except for office towers, developers and their architects are encouraged to create improbably slender towers in this neighborhood. It might be a fragment of a larger building or a complete high rise. Contemporary design is encouraged.</p><p>“Superblocks” or single full-block developments by a single architect and developer are discouraged. While the Downtown Community Plan also discourages superblock development, they have become the norm in much of East Village.</p>'
+								],
+								[
+									'text' => '<p><b>Materials:</b></p><p>No reflective glass permitted below the third story. 40% of street level glass must be low-iron and non-reflective.</p>'
+								],
+								[
+									'text' => '<p><b>Color:</b></p><p>All buildings must be colored at least 80% cream white (apart from view glass) above the 7th story. Over time, this simple regulation will give the neighborhood a distinct visual identity — even from afar.</p><p>Public infrastructure like light poles and transformers should have a wainscot of colored cream white to a height of 4 feet above grade and can easily be repainted. Transformers would preferably by located underground, but should be similarly be painted cream white if they are street level.</p>'
+								],
+								[
+									'text' => '<p><b>Landscape:</b></p><p>The following items should be unique to the neighborhood and selected by landscape professionals and approved by the public.</p><ul><li>Paving in plazas and pubic areas that is memorable and different from the rest of downtown</li><li>Unique trash cans and benches</li><li>A neighborhood “Signature Shrub” that is encouraged in every development</li></ul>'
+								],
+								[
+									'text' => '<p><b>Signage:</b></p><ul>li>Free-standing rooftop signs are permitted below 8 stories.</li><li>No signage or logos is allowed above 8 stories.</li><li>The curved portion of city curbs at intersections is allowed to be covered with ceramic tile advertising. Proceeds will be donated to the East Village Association.</li></ul>'
+								],
+								[
+									'text' => '<p><b>Lighting:</b></p><ul><li>Use lighting as a way to further distinguish and differentiate East Village South from other downtown neighborhoods. A professional lighting designer should be retained to create a plan to make East Village South subtly unique at night.</li><li>No neon stripes permitted.</li><li>No digital billboards or moving images permitted except behind first story storefront glass.</li></ul>'
+								]
 							]
-						]
+						],
 						[
 							'text' => '<p><h3>2. Leverage the Academic Vibe</h3></p>',
 							'children' =>
 							[
-								'text' => '<p>The East Village is one of the largest educational clusters in our region — and the most academically diverse. Students can attend from elementary school through specialized post-graduate work.</p>'
-							],
-							[
-								'text' => '<p>At the <b>north end of East Village is San Diego High School Educational Complex,</b> located in a portion of Balboa Park for over 134 years. The school with an enrollment of 3,000 students is comprised of three schools; School of Business and Leadership, School of International Studies and School of Science and Technology.</p>'
-							],
-							[
-								'text' => '<p>To the south across Russ Boulevard is <b>San Diego City College, with an enrollment of over 18,000 students.</b> It is located on a campus that is continually expanding with new facilities and programs – over $500 million has been invested in the past five years. And with that expansion City College has physically become even more a part of East Village.</p>'
-							],
-							[
-								'text' => '<p>The <b>Urban Discovery Academy Charter School</b> opened in 2014. Located at 14th and F Streets has a focus on individual student support and project-based learning.</p>'
-							]
-							[
-								'text' => '<p>The <b>NewSchool of Architecture & Design is located at Park Boulevard and F Street.</b> NSAD has an enrollment of over 500 students in programs in Architecture, Construction Management, Interior Architecture, Product Design and Digital Media Arts. NewSchool’s architectural program, already one of the nation’s largest, will double its enrollment while adding new design-related programs.</p>'
-							],
-							[
-								'text' => '<p>Located at Park Boulevard and Island is the <b>Thomas Jefferson School of Law.</b> The school, with an enrollment of over 500 law students, moved to its new facility in East Village several years ago.</p>'
-							],
-							[
-								'text' => '<p>At 10th and J Streets is FIDM, the <b>Fashion Institute of Design and Merchandising.</b> FIDM offers programs in Fashion, Visual Arts, Interior Design and Entertainment.</p>'
-							],
-							[
-								'text' => '<p>At 10th and K Streets is the <b>San Diego Global Knowledge University</b>[SDGKU]. SDGKU offers undergraduate and graduate degrees in Global Management, International Management, Communication and Technology and a Doctor in Business Administration in Global Management.</p>'
-							],
-							[
-								'text' => '<p>An educational anchor at the <b>south end of East Village is The Central Library,</b> completed in 2013. A unique feature of the Central Library is the <b>E3 Civic High School</b> a public charter secondary school. The curriculum includes internships and offers two pre-professional programs; bio-medical health and digital media. Students graduate with both a high school diploma and a community college degree.</p>'
-							],
-							[
-								'text' => '<p><b>Academic Connectivity</b></p><p>These educational institutions are all located along an axis that connects them to each other, to Balboa Park, and the San Diego Bayfront – The John Nolen Parkway [Park Boulevard). This collection of educational institutions not only promotes collective support, but is reinforced by the surrounding context of innovative activity. Adding to this is the potential of a major university locating an institute focused on Innovation in East Village.</p>'
+								[
+									'text' => '<p>The East Village is one of the largest educational clusters in our region — and the most academically diverse. Students can attend from elementary school through specialized post-graduate work.</p>'
+								],
+								[
+									'text' => '<p>At the <b>north end of East Village is San Diego High School Educational Complex,</b> located in a portion of Balboa Park for over 134 years. The school with an enrollment of 3,000 students is comprised of three schools; School of Business and Leadership, School of International Studies and School of Science and Technology.</p>'
+								],
+								[
+									'text' => '<p>To the south across Russ Boulevard is <b>San Diego City College, with an enrollment of over 18,000 students.</b> It is located on a campus that is continually expanding with new facilities and programs – over $500 million has been invested in the past five years. And with that expansion City College has physically become even more a part of East Village.</p>'
+								],
+								[
+									'text' => '<p>The <b>Urban Discovery Academy Charter School</b> opened in 2014. Located at 14th and F Streets has a focus on individual student support and project-based learning.</p>'
+								],
+								[
+									'text' => '<p>The <b>NewSchool of Architecture & Design is located at Park Boulevard and F Street.</b> NSAD has an enrollment of over 500 students in programs in Architecture, Construction Management, Interior Architecture, Product Design and Digital Media Arts. NewSchool’s architectural program, already one of the nation’s largest, will double its enrollment while adding new design-related programs.</p>'
+								],
+								[
+									'text' => '<p>Located at Park Boulevard and Island is the <b>Thomas Jefferson School of Law.</b> The school, with an enrollment of over 500 law students, moved to its new facility in East Village several years ago.</p>'
+								],
+								[
+									'text' => '<p>At 10th and J Streets is FIDM, the <b>Fashion Institute of Design and Merchandising.</b> FIDM offers programs in Fashion, Visual Arts, Interior Design and Entertainment.</p>'
+								],
+								[
+									'text' => '<p>At 10th and K Streets is the <b>San Diego Global Knowledge University</b>[SDGKU]. SDGKU offers undergraduate and graduate degrees in Global Management, International Management, Communication and Technology and a Doctor in Business Administration in Global Management.</p>'
+								],
+								[
+									'text' => '<p>An educational anchor at the <b>south end of East Village is The Central Library,</b> completed in 2013. A unique feature of the Central Library is the <b>E3 Civic High School</b> a public charter secondary school. The curriculum includes internships and offers two pre-professional programs; bio-medical health and digital media. Students graduate with both a high school diploma and a community college degree.</p>'
+								],
+								[
+									'text' => '<p><b>Academic Connectivity</b></p><p>These educational institutions are all located along an axis that connects them to each other, to Balboa Park, and the San Diego Bayfront – The John Nolen Parkway [Park Boulevard). This collection of educational institutions not only promotes collective support, but is reinforced by the surrounding context of innovative activity. Adding to this is the potential of a major university locating an institute focused on Innovation in East Village.</p>'
+								]
 							]
 						],
 						[
-
 							'text' => '<p><h3>3. Encourage and Nurture Employment</h3></p>',
 							'children' =>
 							[
-								'text' => '<p>Consistent with the goals of the Community Plan and the input from the community workshops, East Village South is envisioned as an engine for job creation, both for downtown and the region. Towards that end, the Focus Plan encourages:</p>'
-							],
-							[
-								'text' => '<ul><li>A mix of uses including Academic facilities, creative and tech office space, retail at the pedestrian level, a variety of residential products with a wide range of affordability, and hospitality.</li></ul>'
-							],
-							[
-								'text' => '<ul><li>Large floor plates – appropriate for Academic and Tech office space – could also accommodate convention facilities.</li></ul>'
-							],
-							[
-								'text' => '<ul><li>A variety of public gathering spaces that encourage residents of the area, and surrounding neighborhoods, to “collide” with one another (hence spur cross-collaboration and creativity).</li></ul>'
-							]
-							[
+								[
+									'text' => '<p>Consistent with the goals of the Community Plan and the input from the community workshops, East Village South is envisioned as an engine for job creation, both for downtown and the region. Towards that end, the Focus Plan encourages:</p>'
+								],
+								[
+									'text' => '<ul><li>A mix of uses including Academic facilities, creative and tech office space, retail at the pedestrian level, a variety of residential products with a wide range of affordability, and hospitality.</li></ul>'
+								],
+								[
+									'text' => '<ul><li>Large floor plates – appropriate for Academic and Tech office space – could also accommodate convention facilities.</li></ul>'
+								],
+								[
+									'text' => '<ul><li>A variety of public gathering spaces that encourage residents of the area, and surrounding neighborhoods, to “collide” with one another (hence spur cross-collaboration and creativity).</li></ul>'
+								],
+								[
 
-								'text' => '<ul><li><b>Participation from the public sector in order to “jump start” the innovation cluster.</b> We cannot stress enough how important public-private partnerships are to realizing this initiative.</li></ul>'
+									'text' => '<ul><li><b>Participation from the public sector in order to “jump start” the innovation cluster.</b> We cannot stress enough how important public-private partnerships are to realizing this initiative.</li></ul>'
+								]
 							]
 						],
 						[
@@ -561,7 +568,7 @@ class TasksSeeder extends Seeder
 							'text' => '<p>East Village South needs to consider the following issues:</p>'
 						],
 						[
-							'text' => '<ol><li>Better connection between support services and housing opportunities. Integration improves the safety and well-being of the homeless community and all East Village residents.</li><li>Investments, supported by inclusionary housing policy, should encourage integrating homeless services and housing into the fabric of the community rather than isolating them.</li><li>Improving outreach to the homeless community with information on access to services and housing opportunities.</li>'
+							'text' => '<ol><li>Better connection between support services and housing opportunities. Integration improves the safety and well-being of the homeless community and all East Village residents.</li><li>Investments, supported by inclusionary housing policy, should encourage integrating homeless services and housing into the fabric of the community rather than isolating them.</li><li>Improving outreach to the homeless community with information on access to services and housing opportunities.</li></ol>'
 						]
 					]
 				]
