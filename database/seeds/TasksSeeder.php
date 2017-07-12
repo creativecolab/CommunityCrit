@@ -79,7 +79,7 @@ class TasksSeeder extends Seeder
 					'children' =>
 					[
 						[
-							'text' => 'With the adoption of the Downtown Community Plan in 2006 it was determined that each designated downtown neighborhood would create a finer-grain plan, in the form of a Focus Plan, to make certain future development would honor the Community Plan and enhance the unique personality of each district. For several reasons, including the economic downturn and the elimination of CCDC, the Focus Plans for the four East Village quadrants were not completed.</p>',
+							'text' => '<p>With the adoption of the Downtown Community Plan in 2006 it was determined that each designated downtown neighborhood would create a finer-grain plan, in the form of a Focus Plan, to make certain future development would honor the Community Plan and enhance the unique personality of each district. For several reasons, including the economic downturn and the elimination of CCDC, the Focus Plans for the four East Village quadrants were not completed.</p>',
 						],
 						[
 							'text' => '<p>In fall of 2015 a group of East Village residents, business, academic and community leaders and land owners discussed the need for a Focus Plan for the southeast quadrant as new development started rapidly taking shape throughout East Village. At this point in the community’s (and downtown’s) revitalization, several things became clear:</p>',
@@ -112,12 +112,121 @@ class TasksSeeder extends Seeder
 							'text' => '<p><b>2. Timing</b></p><p>In the workshops, as well as one-on-one meetings, people have voiced their concerns about whether something like an innovation district could be realized without a major San Diego university or tech-oriented business making a significant commitment to anchor the district. They are concerned, and rightly so, that without investment on the part of the city or a major institution the full potential of the neighborhood, and indeed the downtown area will never occur.</p><p>We believe that between development already occurring, especially in IDEA District, the number of business start-ups in downtown, and the demographic make-up of downtown residents, that with the right focus and commitment, an emerging jobs-cluster can be realized more quickly than anyone anticipates. To put it into perspective, with the right incentives and investment downtown’s population grew 97% since the year 2000.(5)</p><p>Last year, the Downtown San Diego Partnership commissioned UC San Diego Extension to conduct demographic and economic study of downtown San Diego. In the study’s conclusion it states that “Downtown San Diego is one of the few major cities in America, and California, where there is still the potential to further expand a dynamic and a uniquely inclusive innovation economy.” It specifically highlights the “Available, developable land downtown, particularly in the East Village…contiguous to a number of diverse neighborhoods with developable land, including Barrio Logan, Golden Hill and the Diamond District”(6) as one of four primary reasons downtown is ripe for this effort.</p><p>The study in its entirety can be found at: http://www.downtownsandiego.org/wp-content/uploads/2016/05/DSDP-Demographic-Study-2016.pdf</p>',
 						]
 					]
+				]
+				[
 					'text' => '<p><h2>OVERVIEW:</h2></p>',
 					'children' =>
 					[
 						[
-							'text' => '<p><h3>A. Focus Plan Goal</h3>'
+							'text' => '<p><h3>A. Focus Plan Goal</h3></p><i><p>This plan is a <b>neighborhood-centric overlay</b> that is intended to encourage a unique identity for the East Village South neighborhood.</p><p>It is intended as a <b>framework for discussion</b> on the continuing development of East village.</p><p>The implementation of this Focus Plan will enhance the general quality of life and give guidance on critical issues, such as connecting to adjacent communities and effectively using the bus yard/ tailgate parking lot sites.</p></i>'
+						],
+						[
+							'text' => '<p><h3>B. Consistency with Master Plan</h3></p><i><p>This Focus Plan is designed to be <b>compatible with and provide implementation guidance for the Downtown Community Plan.</b> The recommendations of the Focus Plan are consistent with the recently adopted Downtown Mobility Plan.</p></i>'
+						],
+						[
+							'text' => '<p><h3>C. Adoption Process</h3></p><i><p>The plan was created by a <b>diverse group of community activists working with the larger East Village community</b> through a series of well documented public workshops (see reports in appendix). Volunteer architects and planners refined the community input into this Focus Plan outline. This document is no more than a framework for implementing the community vision and will need to be vetted and completed by professional planners at Civic San Diego through a public process. Like the other downtown Focus Plans, the final document will then need to be approved and formally adopted by the City Council.</p></i>'
 						]
+					]
+				]
+				[
+					'text' => '<p><h2>VISION:</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>An exciting vision of the East Village South neighborhood emerged from two public <b><i>workshops involving more than 300 people.</i></b> Common themes:</p>'
+						],
+						[
+							'text' => '<p>Diversity</p><p>Connection</p><p>Honor history (both structures and social history)</p><p>Sustainable</p><p>Equitable</p><p>Open (as in open space)</p>'
+						],
+						[
+							'text' => '<p>Participants <b><i>widely agreed</i></b> that the following elements represent the vision for the plan:</p>'
+						],
+						[
+							'text' => '<ul><li>Make strong and vibrant connections to the Barrio and Sherman Heights. The 14th Street Promenade and freeway cover and street grid are “sacred cows” and must not be sacrificed.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Address jobs. Connect the people currently living in East Village and downtown with the type of jobs they seek – high-paying jobs in the innovation, design and technology sectors. For example, an innovation district anchored by an academic complex which “Connects business to academic institutions. And, connects people to jobs.”</li></ul>'
+						],
+						[
+							'text' => '<ul><li>The 14th Street Promenade Green Street is our “Main Street” and primary North/South connector. It should extend all the way to Chicano Park and thread northward through City College to Balboa Park.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Build on the unique East Village Academic Armature <u>already in place.</u></li></ul>'
+						],
+						[
+							'text' => '<ul><li>Create a memorable and major public open space or series of open spaces to anchor an “innovation district.” Pocket parks and/or green spaces must punctuate the neighborhood.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Create Freeway Cap Park and cover the freeway as per the Community Plan.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>The Focus Plan should be <u>authentic</u> and unique to East Village. “Embrace the urban lifestyle” and promote diversity.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Respect fine grain development and the urban street grid. “More Wonder Bread type development.” This includes breaking down the existing super blocks by replacing missing streets.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Create affordable housing and affordable small business places.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Make a strong urban statement at the “knuckle” where 14th turns in to Logan Avenue (This could be an obelisk or major art piece authored by Barrio artists.)</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Find a way to embrace the homeless issue. Don’t separate Father Joe. Or push the homeless into adjacent neighborhoods.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Reduce special event noise.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>More art throughout East Village.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Celebrate the historic African American heritage of the area.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Develop the area as a 24-hour neighborhood to include office, academic, commercial and residential uses.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Partner with the military for high-tech training or related vocational training.</li></ul>'
+						],
+						[
+							'text' => '<p>It was agreed that giant, monolithic buildings like a stadium are not conducive to this vision. These types of structures are at direct odds with the desire for connections, keeping the community “porous”, ensuring view corridors are intact and making the neighborhood livable and family-friendly.</p>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>VISION:</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>The core of this plan builds on the public input above and includes the <b><u>Six Guiding Principles:</u></b></p>'
+						],
+						[
+							'text' => '<p><h3>1. Define A Unique Neighborhood</h3></p><p>The goal is to make the neighborhood <b>memorable and engaging.</b> Distinct physical cues and design elements will give the community a unique identity and distinguish it from other downtown neighborhoods. These can be predictable, like paving patterns and building materials, or unexpected and idiosyncratic, like a neighborhood shrub or a mandated wainscot on utility infrastructure.</p><p>It is equally important to <b>capitalize on the existing distinctive attributes</b> of the area. East Village South has nine academic institutions with more anticipated in the near future. It is also home to many small start-up companies. This area, with its share of warehouse structures and developable blocks is recognized as ideal for attracting companies in the high-tech, design and development fields. To realize success it must be cultivated and supported by public action and planning directives. If entities are supported, a powerful and exciting dynamic could energize the entire downtown and region.</p><p>The goal is to make the neighborhood memorable and engaging. You need to know you are in East Village South without signage.</p>'
+						],
+						[
+							'text' => '<p><h3>2. Leverage The Academic Vibe</h3></p><p>One obvious and powerful idea is to build on and celebrate the Academic Vibe. Only East Village has <b>nine academic institutions with more coming.</b></p><p>East Village is one of the major educational clusters in the region. From elementary schools to high schools, college and post graduate work, all can be found in East Village. The focus and approach of many of the curriculums is on the Arts, Design and Innovation and they complement, and are complemented by, the same activities in the neighborhood.</p>'
+						],
+						[
+							'text' => '<p><h3>3. Encourage & Nurture Employment</h3></p><p>Downtowns thrive when there is a robust and synergetic mix of job-generating uses, combined with residential, retail, public spaces, cultural attractions, great streets, etc. As stated in the introduction, the missing piece in downtown San Diego is the jobs engine. With the recent upsurge in entrepreneurial activity downtown, including 110 start-ups(7), now is the time to intentionally nurture and grow the next great San Diego companies. It was determined East Village South is the ideal location because land is available - much of it publicly-owned - and the innovation ecosystem in Upper East Village is starting to gain traction.</p><p>But matching the type of jobs to the resident profile most attracted to urban living, will be the real key. Currently downtown San Diego residents are educated (51% have a Bachelor or an advanced degree); they are mostly employed in management, business, science and the arts (55%) and earn an average income of $73,756. And, contrary to popular wisdom only 17% are single.(8)</p><p>Building on the robust education spine in East Village, the workshop participants indicated a strong desire to add additional higher education facilities in East Village South, and pair these idea creators with clean, high-paying technology companies that want to be near them. The job generation potential of combining these complementary users has been dramatically proven on the Torrey Pines Mesa, and in cities including Boston, Seattle, and San Francisco.</p><p>Furthermore East Village is adjacent to some of San Diegos most economically and environmentally disadvantaged communities. The absence of major university campuses south of San Diego State University further limits opportunity. Encouraging and nurturing high paying clean jobs, as well as the academic trajectory in East Village, holds promise for creating more opportunity for these communities. Moreover, high paying jobs associated with internet / mobile software technology are not limited to those with four year degrees. Many of these jobs are available to persons who have mastered code and other internet/mobile technology skills, either through informal apprenticeships or through interaction with other skilled persons. The combination of academia and high tech employers will create opportunity and boost incomes in adjacent communities without aggravating environmental problems in those communities.</p>'
+						],
+						[
+							'text' => '<p><h3>4. Enhance Livability through Public Open Space</h3></p><p>As neighborhoods become denser, generous open space becomes more critical to livability. East Village South will soon be one of downtown’s <b>densest neighborhoods</b>, but has only one mid-sized park. The 14th Street Promenade Green Street with its widened sidewalk and enhanced landscaping will serve not only as the major north/ south connector but also greatly contribute to the public realm.</p><p>As the workshop participants noted, public spaces should adapt to “temporal” scale and uses. This means that they can be deliberately changed to meet the needs of the community; a food truck haven turns into pop-up work space turns into playground turns into public art exhibition.</p><p>This plan identifies opportunities for the new <b>major new open spaces</b> desperately needed in this neighborhood.</p>'
+						],
+						[
+							'text' => '<p><h3>5. Connect Neighborhoods</h3></p><p>Enhancing and creating connections to surrounding neighborhoods is <b>a top priority and the timing is right.</b></p><p>The <b>14th Street Promenade</b>, if extended, will play a central role in connecting Barrio Logan to City College through the East Village neighborhoods. It is highly desirable to continue the connection through San Diego High School and to Balboa Park. <b>Island and “J” Streets</b> promise to be compelling and walkable east/west connector streets, but are blocked from connecting to Sherman Heights by Interstate 5. The Downtown Community Plan identifies that location for a <b>freeway lid.</b> This cover is an opportunity to create additional park space as well as affordable housing.</p><p>As stated previously, large monolithic developments like a stadium <b>creates walls rather than connections</b> and are inconsistent with the principles of both the Focus Plan and the current Downtown Community Plan.</p>'
+						],
+						[
+							'text' => '<p><h3>6. Preserve View Corridors</h3></p><p>The views down the city streets to the bay and bridge give East Village a strong character. Walking along 13th Street, 14th Street, and 15th Street in the afternoon with the buildings in shadow and the Coronado Bridge alive in the afternoon <b>light is one of the qualities most cherished in the community.</b> These view corridors must be protected and enhanced if possible. The Focus Plan retains the 13th Street and 14th Street views and opens up 15th Street to an enhanced view of the bridge.</p>'
+						]
+					]
+				[
+					'text' => '<p><h2>IMPLEMENTATION STRATEGIES:</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => 
+				]
 			]
 		]
 	];
