@@ -22,7 +22,7 @@ class FeedbackSeeder extends Seeder
 
 		// Create feedback for holistic condition
 		foreach ( $holisticUsers as $user ) {
-			factory( Feedback::class )->create( [ 'user_id' => $user->id, 'task_id' => $rootTask->id ] );
+			factory( Feedback::class )->create( [ 'user_id' => $user->id, 'task_id' => $rootTask->id, 'type' => 'custom' ] );
 		}
 
 
@@ -35,7 +35,7 @@ class FeedbackSeeder extends Seeder
 
 		// Create 1 feedback item for each user
 		foreach ( $microtaskUsers as $user ) {
-			factory( Feedback::class )->create( [ 'user_id' => $user->id, 'task_id' => $tasks->random()->id ] );
+			factory( Feedback::class )->create( [ 'user_id' => $user->id, 'task_id' => $tasks->random()->id, 'type' => 'custom'  ] );
 		}
 	}
 }
