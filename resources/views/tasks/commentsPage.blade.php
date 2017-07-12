@@ -26,7 +26,8 @@
                 <button class="btn btn-default" value="custom" style="margin-left: 10px;" onclick="createShareForm(value)">(custom)</button>
             </div>
         </div>
-        <div class="row is-table-row" id="shareForms">
+        <div class="row is-table-row"{{-- id="shareForms"--}}>
+            <div class="col-sm-6" id="shareForms"></div>
             <!-- new forms go here -->
         </div>
     </div>
@@ -41,7 +42,16 @@
             <div class="col-sm-6 col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <p><span class="label label-success">pro</span>{{ $feedback->comment }}</p>
+                        <p><span class=
+                                 @if($feedback->type == 'pro')"label label-success"
+                                 @elseif($feedback->type == 'con')"label label-danger"
+                                 @elseif($feedback->type == 'suggestion')"label label-default label-purple"
+                                 @elseif($feedback->type == 'question')"label label-warning"
+                                 @elseif($feedback->type == 'story')"label label-primary"
+                                 @elseif($feedback->type == 'reference')"label label-info"
+                                 @elseif($feedback->type == 'custom')"label label-default"
+                                 @else "label"
+                                 @endif>{{$feedback->type}}</span> {!! $feedback->comment !!}</p>
                     </div> <!-- .panel-body -->
                     <div class="panel-footer">
                         {{$feedback->user->fname}} {{$feedback->user->lname}}, {{ $feedback->updated_at->format('m-d-y') }}

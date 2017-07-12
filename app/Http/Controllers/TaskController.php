@@ -79,10 +79,17 @@ class TaskController extends Controller
 	 */
 	public function storeFeedback( FeedbackRequest $request, Task $task )
 	{
+//        $type = $request->get( 'type' );
+        $input1 = $request->get( 'input1' );
+        $input2 = $request->get( 'input2' );
+        $input3 = $request->get( 'input3' );
+
 		$feedback          = new Feedback;
-		$feedback->comment = $request->get( 'comment' );
+//		$feedback->comment = $request->get( 'comment' );
 		$feedback->user_id = \Auth::id();
 		$feedback->task_id = $task->id;
+        $feedback->type = $request->get( 'type' );
+        $feedback->comment = $feedback->constructComment($feedback->type, $input1, $input2, $input3);
 
 		$taskName = $task->name;
 
@@ -175,9 +182,9 @@ class TaskController extends Controller
         return view($view, $data);
     }
 
-    public function quote($id)
+    public function quote($slug)
     {
-        $quote = Task::where('id',$id)->first();
+        $quote = Task::where('slug',$slug)->first();
 
         if ($quote == null) {
             abort(404);

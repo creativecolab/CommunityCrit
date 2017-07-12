@@ -76,7 +76,7 @@
         var input3label = data[5];
         var input3placeholder = data[6];
 
-        var html =	'<div class="col-sm-6">' +
+        var html =	'<div class="col-sm-6" id="shareForms">' +
                 '<div class="panel panel-primary">' +
                 '<div class="panel-heading">' +
                 '<div class="panel-title">' + title + '</div>' +
@@ -89,7 +89,9 @@
             html += '<label for="input1">' + input1label +'</label>';
         }
 
-        html += '<textarea class="form-control" name="comment" id="comment" placeholder="' + input1placeholder +' "></textarea>' +
+        html += '<textarea class="form-control" name="type" id="type" style="display:none;">' + shareType + '</textarea>';
+
+        html += '<textarea class="form-control" name="input1" id="input1" placeholder="' + input1placeholder +' "></textarea>' +
                 '</div>';
 
 //        html += '<textarea class="form-control" id="input1" placeholder="' + input1placeholder +' "></textarea>' +
@@ -103,7 +105,7 @@
             console.log("second input added");
             html += '<div class="form-group">' +
                     '<label for="input2">' + input2label +'</label>' +
-                    '<textarea class="form-control" id="input2" placeholder="' + input2placeholder + '"></textarea>' +
+                    '<textarea class="form-control" name="input2" id="input2" placeholder="' + input2placeholder + '"></textarea>' +
                     '</div>';
         }
 
@@ -126,7 +128,7 @@
                 '{!! Form::close() !!}' +
                 '</div> <!-- .panel-body --></div> <!-- .panel --></div> <!-- .col -->';
 
-        $("#shareForms").prepend(html);
+        $("#shareForms").replaceWith(html);
     }
 
     // $("input:share").click(function() {
