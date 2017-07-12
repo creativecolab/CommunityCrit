@@ -220,12 +220,350 @@ class TasksSeeder extends Seeder
 							'text' => '<p><h3>6. Preserve View Corridors</h3></p><p>The views down the city streets to the bay and bridge give East Village a strong character. Walking along 13th Street, 14th Street, and 15th Street in the afternoon with the buildings in shadow and the Coronado Bridge alive in the afternoon <b>light is one of the qualities most cherished in the community.</b> These view corridors must be protected and enhanced if possible. The Focus Plan retains the 13th Street and 14th Street views and opens up 15th Street to an enhanced view of the bridge.</p>'
 						]
 					]
+				]
 				[
 					'text' => '<p><h2>IMPLEMENTATION STRATEGIES:</h2></p>',
 					'children' =>
 					[
 						[
-							'text' => 
+							'text' => '<p><h3>1. Define a Unique Neighborhood</h3></p>',
+							'children' =>
+							[
+								'text' => '<p><i>The following ideas are suggestions that came out of the community workshops and were refined by the professional architectural/planning team. The participants wanted to include a set of simple, but distinct, requirements that would help to establish a unique physical identity and character for the community. Obviously, for that to happen, the section below differs from some of the design, lighting and signage standards that apply to downtown as a whole.</i></p>'
+							],
+							[
+								'text' => '<p><b>Architecture:</b></p><p>Village of Towers: Except for office towers, developers and their architects are encouraged to create improbably slender towers in this neighborhood. It might be a fragment of a larger building or a complete high rise. Contemporary design is encouraged.</p><p>“Superblocks” or single full-block developments by a single architect and developer are discouraged. While the Downtown Community Plan also discourages superblock development, they have become the norm in much of East Village.</p>'
+							],
+							[
+								'text' => '<p><b>Materials:</b></p><p>No reflective glass permitted below the third story. 40% of street level glass must be low-iron and non-reflective.</p>'
+							],
+							[
+								'text' => '<p><b>Color:</b></p><p>All buildings must be colored at least 80% cream white (apart from view glass) above the 7th story. Over time, this simple regulation will give the neighborhood a distinct visual identity — even from afar.</p><p>Public infrastructure like light poles and transformers should have a wainscot of colored cream white to a height of 4 feet above grade and can easily be repainted. Transformers would preferably by located underground, but should be similarly be painted cream white if they are street level.</p>'
+							],
+							[
+								'text' => '<p><b>Landscape:</b></p><p>The following items should be unique to the neighborhood and selected by landscape professionals and approved by the public.</p><ul><li>Paving in plazas and pubic areas that is memorable and different from the rest of downtown</li><li>Unique trash cans and benches</li><li>A neighborhood “Signature Shrub” that is encouraged in every development</li></ul>'
+							],
+							[
+								'text' => '<p><b>Signage:</b></p><ul>li>Free-standing rooftop signs are permitted below 8 stories.</li><li>No signage or logos is allowed above 8 stories.</li><li>The curved portion of city curbs at intersections is allowed to be covered with ceramic tile advertising. Proceeds will be donated to the East Village Association.</li></ul>'
+							],
+							[
+								'text' => '<p><b>Lighting:</b></p><ul><li>Use lighting as a way to further distinguish and differentiate East Village South from other downtown neighborhoods. A professional lighting designer should be retained to create a plan to make East Village South subtly unique at night.</li><li>No neon stripes permitted.</li><li>No digital billboards or moving images permitted except behind first story storefront glass.</li></ul>'
+							]
+						]
+						[
+							'text' => '<p><h3>2. Leverage the Academic Vibe</h3></p>',
+							'children' =>
+							[
+								'text' => '<p>The East Village is one of the largest educational clusters in our region — and the most academically diverse. Students can attend from elementary school through specialized post-graduate work.</p>'
+							],
+							[
+								'text' => '<p>At the <b>north end of East Village is San Diego High School Educational Complex,</b> located in a portion of Balboa Park for over 134 years. The school with an enrollment of 3,000 students is comprised of three schools; School of Business and Leadership, School of International Studies and School of Science and Technology.</p>'
+							],
+							[
+								'text' => '<p>To the south across Russ Boulevard is <b>San Diego City College, with an enrollment of over 18,000 students.</b> It is located on a campus that is continually expanding with new facilities and programs – over $500 million has been invested in the past five years. And with that expansion City College has physically become even more a part of East Village.</p>'
+							],
+							[
+								'text' => '<p>The <b>Urban Discovery Academy Charter School</b> opened in 2014. Located at 14th and F Streets has a focus on individual student support and project-based learning.</p>'
+							]
+							[
+								'text' => '<p>The <b>NewSchool of Architecture & Design is located at Park Boulevard and F Street.</b> NSAD has an enrollment of over 500 students in programs in Architecture, Construction Management, Interior Architecture, Product Design and Digital Media Arts. NewSchool’s architectural program, already one of the nation’s largest, will double its enrollment while adding new design-related programs.</p>'
+							],
+							[
+								'text' => '<p>Located at Park Boulevard and Island is the <b>Thomas Jefferson School of Law.</b> The school, with an enrollment of over 500 law students, moved to its new facility in East Village several years ago.</p>'
+							],
+							[
+								'text' => '<p>At 10th and J Streets is FIDM, the <b>Fashion Institute of Design and Merchandising.</b> FIDM offers programs in Fashion, Visual Arts, Interior Design and Entertainment.</p>'
+							],
+							[
+								'text' => '<p>At 10th and K Streets is the <b>San Diego Global Knowledge University</b>[SDGKU]. SDGKU offers undergraduate and graduate degrees in Global Management, International Management, Communication and Technology and a Doctor in Business Administration in Global Management.</p>'
+							],
+							[
+								'text' => '<p>An educational anchor at the <b>south end of East Village is The Central Library,</b> completed in 2013. A unique feature of the Central Library is the <b>E3 Civic High School</b> a public charter secondary school. The curriculum includes internships and offers two pre-professional programs; bio-medical health and digital media. Students graduate with both a high school diploma and a community college degree.</p>'
+							],
+							[
+								'text' => '<p><b>Academic Connectivity</b></p><p>These educational institutions are all located along an axis that connects them to each other, to Balboa Park, and the San Diego Bayfront – The John Nolen Parkway [Park Boulevard). This collection of educational institutions not only promotes collective support, but is reinforced by the surrounding context of innovative activity. Adding to this is the potential of a major university locating an institute focused on Innovation in East Village.</p>'
+							]
+						],
+						[
+
+							'text' => '<p><h3>3. Encourage and Nurture Employment</h3></p>',
+							'children' =>
+							[
+								'text' => '<p>Consistent with the goals of the Community Plan and the input from the community workshops, East Village South is envisioned as an engine for job creation, both for downtown and the region. Towards that end, the Focus Plan encourages:</p>'
+							],
+							[
+								'text' => '<ul><li>A mix of uses including Academic facilities, creative and tech office space, retail at the pedestrian level, a variety of residential products with a wide range of affordability, and hospitality.</li></ul>'
+							],
+							[
+								'text' => '<ul><li>Large floor plates – appropriate for Academic and Tech office space – could also accommodate convention facilities.</li></ul>'
+							],
+							[
+								'text' => '<ul><li>A variety of public gathering spaces that encourage residents of the area, and surrounding neighborhoods, to “collide” with one another (hence spur cross-collaboration and creativity).</li></ul>'
+							]
+							[
+
+								'text' => '<ul><li><b>Participation from the public sector in order to “jump start” the innovation cluster.</b> We cannot stress enough how important public-private partnerships are to realizing this initiative.</li></ul>'
+							]
+						],
+						[
+
+							'text' => '<p><h3>4. Enhance Livability through Public Open Space</h3></p>',
+							'children' =>
+							[
+								'text' => '<p>The downtown community as a whole is woefully short of public open space compared to other cities. East Village South has only the recently completed Fault Line Park. The 14th St. Promenade will help as an activity focus with enhanced landscaping, but <b>generous and compelling green spaces must be created if the neighborhood is to support its growth potential.</b></p>'
+							],
+							[
+								'text' => '<p>Several exciting opportunities should be implemented.</p>'
+							],
+							[
+								'text' => '<ul><li>As 14th Street turns to the south at Logan Avenue, there is a perfect opportunity to create a major connection point between Barrio Logan and the East Village neighborhood. For purposes of this Focus Plan it has been named this the <b>Nudillo</b> (Spanish for knuckle) to represent <b>the gateway between the two communities.</b> It is envisioned as a small traffic roundabout with a major art piece in the center in the spirit of Tijuana or Mexico City. While it will not likely have a significant amount of open space available like the freeway cover (described below), the roundabout can be enhanced to promote gathering and social interaction. It will become an important public space and celebrate camaraderie between the two communities.</li></ul>'
+							],
+							[
+								'text' => '<ul><li>The Island Avenue and J Street <b>freeway cover</b> will offer space for both residential development and public green space. Its location as a gateway connection between Sherman Heights and East Village South can provide a threshold moment with a neighborhood-scaled roundabout to slow traffic, punctuated by a major art piece in the spirit of the Nudillo to the south.</li></ul>'
+							],
+							[
+								'text' => '<ul><li>The wonderful <b>MLK linear park</b> now ends at the Ballpark. It should be extended along the Commercial Street right-of-way past the Transit Center and connect to the Nudillo. This will create a green walking path from the Barrio all the way to the north Embarcadero. <b>Great cities have great walking connections.</b></li></ul>'
+							],
+							[
+								'text' => '<ul><li>The greatest opportunities for sizable green spaces and green linkages through city blocks lie in the bus yard and tailgate parking lot sites. We also know real estate investment and livability is greatest near parks and open space. Details regarding these spaces are found in the “Land Use” section below.</b></li></ul>'
+							],
+							[
+								'text' => '<p>Consistent with the Master Plan, all new public gathering spaces should be protected from undue shading from high rises in the winter with sun envelope regulations.</p>'
+							]
+						],
+						[
+
+							'text' => '<p><h3>5. Connect Neighborhoods</h3></p>',
+							'children' =>
+							[
+								'text' => '<p>Preserving and enhancing the <b>six view corridors</b> is an easy and effective way to connect neighborhoods.</p>'
+							],
+							[
+								'text' => '<p>The <b>Sherman Heights freeway cover</b> is ideally located not just to create connections, but also to minimize construction costs. The travel lanes are low enough to allow the building of the cover without altering the ground plain. Citizen groups are now forming to explore funding methods to implement the cover. Public open space and traffic calming should be priorities while income-producing housing development could help fund the project.</p>'
+							],
+							[
+								'text' => '<p>The <b>14th Street Master Plan</b> establishes the vision for a north/south linear city park and pedestrian promenade in the heart of east Village, connecting City Collage to the north and Barrio Logan to the south. The plan is approved and is awaiting implementation. Details include:</p>'
+							],
+							[
+								'text' => '<ul><li>Expansion of the sidewalk on the east side of 14th Street from 14 feet to a maximum of 32 feet for the entire 11 blocks. The plan emphasizes walkability and pedestrian safety by providing amenities such improved sidewalks, new accessible “bulbouts” and cross walks.</li></ul>'
+							],
+							[
+								'text' => '<ul><li>A variety of seating and tree-shaded areas, public art, and new lighting will attract social gathering and enhance accessibility during all day parts.</li></ul>'
+							],
+							[
+								'text' => '<ul><li>A significant amount of landscaped bio-swales for the collection and treatment of storm water runoff from the street, sidewalks and rooftops. These can be both attractive and sustainable.</li></ul>'
+							],
+							[
+								'text' => '<ul><li>Branding and recognition of the three distinct districts of 14th Street as desired by the community.</li></ul>'
+							],
+							[
+								'text' => '<p>The 14th Street Promenade maintains and enhances the street grid, promotes flexibility of movement, preserves view corridors and retains the historic scale of the streets. A second design phase should now be considered to link to the Barrio Logan through the proposed Nudillo at 14th Street and Logan Avenue. A third phase would extend the connection to Balboa Park.</p>'
+							]
+						],
+						[
+
+							'text' => '<p><h3>6. Preserve View Corridors</h3></p>',
+							'children' =>
+							[
+								'text' => '<p>The Focus Plan retains the 13th and 14 the Street views while opening up 15th Street to an enhanced view of the Coronado Bridge.</p>'
+							],
+							[
+								'text' => '<p>Additional view corridors concern the new Central Library. This considerable public investment with its iconic dome has become a beacon of knowledge and symbol of San Diego’s “can do” spirit. It was designed in part to welcome citizens from the south. One of the best views is from I-5 north and the bridge off ramp and is preserved by the Focus Plan. A new view corridor is established to visually connect the Barrio Logan to the Central Library. The <b>last remaining blue water view corridor</b> from the Library Reading Room and upper terrace is also preserved.</p>'
+							]
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>LAND USE</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>Land uses are clearly articulated in the Master Plan. This overlay Focus Plan <b>does not propose rezoning or using eminent domain.</b></p>'
+						],
+						[
+							'text' => '<p>It does however, acknowledges a special land use opportunity in addressing the two largest underutilized parcels of land remaining in downtown. The tailgate parking lot and bus yard sites are uniquely positioned to:</p>'
+						],
+						[
+							'text' => '<ol><li>Provide significant public open space;</li><li>Address the lack of employment resources downtown;</li><li>Significantly enhance the tax base;</li><li>And, reduce pressure to add density to San Diego suburban neighborhoods.</li></ol>'
+						],
+						[
+							'text' => '<p>As much as <b>4 million gross square feet of tax-based development</b> can be added in this zone without blocking any ground level view corridors down 13th, 14th or 15th Streets to the bridge. Existing view corridors from and to the new Central Library are also carefully preserved in the massing envelope.</p>'
+						],
+						[
+							'text' => '<p>The area around this site is bustling with redevelopment activity. Over 3,000 new housing units with supporting retail are permitted or currently under construction.</p>'
+						],
+						[
+							'text' => '<p>This plan does not envision the bus yard/tailgate parking site as a “project” developed by a single entity. Instead the natural development fabric of East Village South will be preserved as continuous and seamless. A major open space, “Library Park,” will anchor this area and connect to 16th Street with additional green spaces. New buildings, restricted only by a development envelope, will radiate out from these public spaces over time and merge with the existing community. The green space can serve a multitude of impromptu public uses: pick-up sports games, lunchtime retreat, public gatherings, performance music and art, etc.</p>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>The Plan</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>Three options were presented back to the participants in the second workshop. After much discussion and hands-on debate, scheme “C” was selected. It is distinguished by a large public “green” that acts as a forecourt for the Central Library and <b>visually connects the future with our past</b> (Wonder Bread Historic Building with the Library Dome). It also proposes linking the main green with additional green “rooms” so that they connect to 15th Street and 16th Street. 15th Street is seen as green and people oriented, but kept open to maintain the view corridor. Large buildings are located closer to the freeway.</p>'
+						],
+						[
+							'text' => '<p>Despite the abundant open space, the plan allows for generous density, about 4 million gross sq. ft. with FARs approaching 6, while <b>carefully preserving all six view corridors.</b> It is anchored by Library Park, a public open space consisting of a series of linked “green rooms” connecting surrounding streets and the Central Library. The park allows the area to have an identifiable center but not visible edges. New development will define only the park edge and then merge seamlessly with similar projects across the streets.</p>'
+						],
+						[
+							'text' => '<ul><li>Five- to seven-story structures permitted within the view corridors (pending verification).</li></ul>'
+						],
+						[
+							'text' => '<ul><li>The zoning envelope will allow the towers to expand to very large floor plates if desired below the 7th floor. This creates an informal plinth at a midlevel height and helps these very large buildings to be more intimately scaled.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>There is no Focus Plan height limit in the tower zones. Zoning envelopes will define not only the tower opportunities, but also the Library Park edges.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>New construction will be required to design facades to a “build to line” to ensure the public space is properly shaped. The Master Plan already defines facade conditions at the streets.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>A three-dimensional zoning envelope will be created for each of the developable sites to ensure view corridor protection.</li></ul>'
+						],
+						[
+							'text' => '<p><b>Nine new building sites have been identified for new development.</b> The historic Wonder Bread Building is one of our finest warehouses and is not only preserved but celebrated. An open vista across Library Park visually links Wonder Bread with the library dome, acknowledging both our past and our future.</p>'
+						],
+						[
+							'text' => '<p>There are no restrictions on architectural style, although contemporary architecture with a San Diego orientation is encouraged.</p>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>Convention Center Expansion</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>Although the possibility of a convention center expansion was not proposed by workshop participants, the Downtown Community Plan does allow for that use on the Tailgate parking site. As long as the footprint is restricted to the comparable square footage of site covered by parcels E, F and G and view corridors and open space are preserved, this use is compatible with the overall Focus Plan vision. Meeting rooms, social gathering spaces and other resources could be synergistically shared with nearby academic institutions and downtown businesses.</p>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>PLAN IMPLEMENTATION</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>To ensure a lively variety and human-scaled urban fabric, architects and/or developers are restricted to one development in the bus yard/tailgate zone. Well meaning efforts to have a single developer work with multiple architects in an attempt to artificially create variety and avoid the “project” look have not been successful in the past. This plan advocates a more authentic and reliable implementation method.</p>'
+						],
+						[
+							'text' => '<p>To increase parking efficiency and minimize redundant access ramps, the below-grade parking in both phases is a single garage managed by an independent entity with entrances as shown on the plan. It is anticipated that the below grade garage will consist of two levels.</p>'
+						],
+						[
+							'text' => '<p><b>Phase One Implementation:</b></p><p>We suggest that an RFP be issued immediately to retain a single Master Developer for the tailgate parking lot site. The selected developer would be responsible for creating below-grade replacement parking for the Padres and creating adequate parking for the four developments parcels envisioned in this phase, possibly with public participation. The Padres replacement parking must adhere to the current lease agreement. The developer would implement the relevant portion of Library Park on the podium and develop one of the parcels if desired. The other three would be sold to other parties. Alternately the developer might build a convention center expansion and sell only parcel “A”.</p>'
+						],
+						[
+							'text' => '<p><b>Phase Two Implementation:</b></p><p>The timing of this subsequent phase depends on moving the bus yards. With over 3,000 housing units and supporting ground level retail under construction on nearby and adjacent sites, the market will shortly make moving the bus yards economically feasible. It has been estimated that seven years might be required to move them and clean the site. This may be good timing with regard to Phase One.</p><p>Similar to Phase One, a Master Developer would buy the entire site, select a particular parcel to develop, complete the below-grade parking and open space infrastructure as soon as possible, and sell off other parcels to different entities for development.</p><p>Unlike Phase One, this phase has a number of large tower sites. Because of the high rise foundation requirements, the master developer podium will only include the public areas. Each site will have a property line and developers will design and build accordingly while co ordinating their below grade parking levels to enable a functional common garage.</p><p>Although Phase One could (and should) begin tomorrow, the nine projects on bus yard/tailgate sites will likely take place over several decades. This is both realistic and desirable. The density envisioned will need time to absorb into the market. The sequential implementation by creative individual entities will contribute to the “authenticity” of the neighborhood just as the workshop participants imagined.</p>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>Economic Benefits</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>Economic benefits are significant if East Village South is allowed to develop in a market-supportable process, with significant synergistic benefits to the adjacent IDEA District and all of downtown. The region would also benefit from the significant new supply of housing, retail, professional office development, academic facilities and affordable housing. Expected economic impact over 10 - 15 years would include, but not be limited to:</p>'
+						],
+						[
+							'text' => '<ul><li>5,590 permanent jobs (excluding construction jobs which are not permanent) with income ranging from $363 million to $447 million per year. No multiplier impact assumed on the region, but with the right kinds of jobs (design, technology, software, robotics, blue economy, bio-tech, education, etc.) the multiplier effect on the region could be several times the number of localized jobs in this district.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Development Impact Fees Paid = $20.2 million (assumes 20% affordable units and does not include the transportation economic impact fees)</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Useable Parking Added = 6,182 spaces, some of which could be shared with downtown office needs or event needs</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Housing Units Added = 3,114 (could be condos or apartments)</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Retail Space Added = 300,000 Sq. Ft.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Office Space Added = 1,070,000 Sq. Ft.</li></ul>'
+						],
+						[
+							'text' => '<ul><li>Present Value of Property Taxes Paid over 30 years = $265 million</li></ul>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>HISTORIC PRESERVATION AND ADAPTIVE REUSE</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>East Village South is rich in historic structures. The Wonder Bread Building is one of our finest brick warehouses. The Broom Works Building is a colorful testament to the small scale industrial bones of the neighborhood. The Palms Hotel still proudly stands. The block of residences on 17th ave. between Market and Island Ave. is remarkably complete. The grand victorian house at 13th and Island Streets is one of the best preserved in all of downtown. And these are just a few.</p>'
+						],
+						[
+							'text' => '<p>Extensive historical resource surveys have identified a number of East Village South structures as potentially “significant”, and many of these have subsequently been designated as local historical resources by the City’s Historical Resources Board. Under city-wide Historical Resource regulations, all structures more than 45 years of age must be reviewed to determine if they merit local historical designation once a permit application is submitted for a property containing a structure of that age. As the future unfolds in East Village South, we encourage developers to honor our past and incorporate all or parts of significant older structures into their new developments. It is also true that creative adaptive reuse can retain elements of our historic community for future generations to enjoy and will distinguish our community from others in the City.</p>'
+						],
+						[
+							'text' => '<p>Creative adaptive re-use is encouraged to avoid completely clearing a site or block whenever possible. Good cities layer new development over the old. Bad cities just scrap the blocks clean.</p>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>NEIGHBORHOOD HISTORY</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>Beginning in the 1860’s with the establishment of the wharf at the foot of Fifth Avenue, the area we now call Lower East Village or East Village South has been a warehouse and manufacturing district. These uses expanded as additional wharfs were constructed and the railroad came to San Diego. Upper East Village became a residential area housing the workers that worked on the waterfront. It also provided housing for the city’s African American populations that were not allowed to live in other parts of the city.</p>'
+						],
+						[
+							'text' => '<p>The growth of East Village paralleled the growth of the automobile. The early 1900’s saw the establishment of some of the city’s first automobile dealerships in the block bounded by 15th and 16th, Broadway and E Streets. By the 1920’s San Diego’s “auto row” extended along Broadway from 12th [now Park Boulevard] to 16th Streets.</p>'
+						],
+						[
+							'text' => '<p>About this time the city shifted emphasis to Broadway from Fifth Street as the primary downtown street. East Village began a shift from residential to commercial uses.</p>'
+						],
+						[
+							'text' => '<p>World War II accelerated these land use changes as the need for industrial and manufacturing sites dramatically increased. By the early 1950’s East Village was primarily commercial and industrial. In the 1950’s the city began planning for freeways. A decision was made not to locate I-5 along the waterfront but to have it wrap around downtown and to define downtown’s boundaries. The freeway severed East Village’s connections to Balboa Park and the neighborhoods of Golden Hill, Sherman Heights and Barrio Logan. E, F, and G Streets became freeway access further isolating East Village.</p>'
+						],
+						[
+							'text' => '<p>In the 1960’s the City College Redevelopment Area was designated and City College was built to help catalyze redevelopment. This in turn has set the stage for what has started in East Village---the INNOVATION District. In the 1970’s the city began planning for the revitalization of downtown to counter the emptying out of downtown as people and business continued to relocate to the suburbs. The area immediately to the south of City College was designated as South City College. It was to be an area that supported City College and was in turn supported by City College.</p>'
+						],
+						[
+							'text' => '<p>The lower part of East Village was designated as the Bayside District and was to take advantage of its relationship to the Bay. The zoning which allowed everything and anything was modified to reduce pollution and minimize toxic waste. It also envisioned the relocation of the bus yards and the SDG&E facilities.</p>'
+						],
+						[
+							'text' => '<p>Some envisioned East Village as an Arts District and named it BLEV, the Barrio Logan East Village Arts District. This lead to changes in building and zoning codes to allow for artist live-work spaces; the entire area later became known as Centre City East.</p>'
+						],
+						[
+							'text' => '<p>All this was the beginning of what today East Village has become, an industry cluster focused on Innovation Design, Education and the Arts.</p>'
+						],
+						[
+							'text' => '<p>References/further information: Centre City Community Plan; East Village Combined Historical Survey, 2005; Downtown San Diego African American Heritage study, 2005</p>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>MOBILITY</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>This Focus Plan endorses the recent Mobility Plan.</p>'
+						]
+					]
+				]
+				[
+					'text' => '<p><h2>HOMELESS - SOLUTIONS NOT DISPLACEMENT</h2></p>',
+					'children' =>
+					[
+						[
+							'text' => '<p>While this Focus Plan presents no solutions to the problems of Homelessness in the East Village, it recognizes that whatever is done must be in collaboration with the various agencies and institutions addressing both short-term and long-term solutions.</p>'
+						],
+						[
+							'text' => '<p>As planning continues, homelessness must be considered as part of the process and not as an afterthought. Ignoring homelessness during the planning process simply pushes the problem to the next neighborhood. East Village has a significant investment in resources for the homeless and these are part of the fabric of the community. Any solution should focus first on how to better utilize them.</p>'
+						],
+						[
+							'text' => '<p>Advocacy is key. Creating the “sense of urgency” in our elected leaders will go a long way toward prioritizing solutions to homelessness in East Village. Discussions around a Focus Plan can play a key role in that advocacy effort.</p>'
+						],
+						[
+							'text' => '<p>East Village South needs to consider the following issues:</p>'
+						],
+						[
+							'text' => '<ol><li>Better connection between support services and housing opportunities. Integration improves the safety and well-being of the homeless community and all East Village residents.</li><li>Investments, supported by inclusionary housing policy, should encourage integrating homeless services and housing into the fabric of the community rather than isolating them.</li><li>Improving outreach to the homeless community with information on access to services and housing opportunities.</li>'
+						]
+					]
 				]
 			]
 		]
