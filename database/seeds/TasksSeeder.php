@@ -14,6 +14,7 @@ class TasksSeeder extends Seeder
     public $data = [
         [
             'name' => '14th Street Promenade Master Plan',
+            'type' => 2,
             'children' =>
                 [
                     [
@@ -75,6 +76,7 @@ class TasksSeeder extends Seeder
         ],
         [
             'name' => 'East Village South Draft Focus Plan',
+            'type' => 2,
             'children' =>
                 [
                     [

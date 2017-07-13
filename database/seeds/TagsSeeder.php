@@ -13,7 +13,7 @@ class TagsSeeder extends Seeder
     public function run()
     {
         //
-        $tasks = Task::root()->descendantsAndSelf()->get();
+        $tasks = Task::getQuotes();
         for ($x = 0; $x <= 1; $x++) {
             foreach ($tasks as $task) {
                 DB::table('tags')->insert([
