@@ -42,8 +42,7 @@
             <div class="col-sm-6 col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <p><span class=
-                                 @if($feedback->type == 'pro')"label label-success"
+                        <p><span class=@if($feedback->type == 'pro')"label label-success"
                                  @elseif($feedback->type == 'con')"label label-danger"
                                  @elseif($feedback->type == 'suggestion')"label label-default label-purple"
                                  @elseif($feedback->type == 'question')"label label-warning"

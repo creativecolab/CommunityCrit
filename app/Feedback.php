@@ -7,15 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
-
-    const TYPE_PRO = 1;
-    const TYPE_CON = 2;
-    const TYPE_SUGGEST = 3;
-    const TYPE_QUESTION = 4;
-    const TYPE_STORY = 5;
-    const TYPE_REF = 6;
-    const TYPE_CUSTOM = 7;
-
     const STR_PRO = "pro";
     const STR_CON = "con";
     const STR_SUGGEST = "suggestion";
@@ -31,14 +22,20 @@ class Feedback extends Model
     const LABEL_QUESTION = ["I have a question about ", "<br>I would like more information about "];
     const LABEL_STORY = ["I have a story about ", "<br>Once upon a time, "];
     const LABEL_REF = ["This makes me think of ", "<br>We could learn "];
+    const LABEL_SUGGEST = ["What if "];
+    const LABEL_CON = ["I am concerned about ", " because ", "<br>One way to address this would be "];
+    const LABEL_CUSTOM = [""];
     const LABELS = [Feedback::STR_PRO => Feedback::LABEL_PRO,
                     Feedback::STR_QUESTION => Feedback::LABEL_QUESTION,
                     Feedback::STR_STORY => Feedback::LABEL_STORY,
-                    Feedback::STR_REF => Feedback::LABEL_REF];
+                    Feedback::STR_REF => Feedback::LABEL_REF,
+                    Feedback::STR_SUGGEST => Feedback::LABEL_SUGGEST,
+                    Feedback::STR_CON => Feedback::LABEL_CON,
+                    Feedback::STR_CUSTOM => Feedback::LABEL_CUSTOM];
 
 	use CrudTrait;
 
-	protected $fillable = [ 'comment', 'task_id', 'user_id', 'type', 'input1' ];
+	protected $fillable = [ 'comment', 'task_id', 'user_id', 'type' ];
 
 	/**
 	 * Task for this comment
@@ -110,10 +107,12 @@ class Feedback extends Model
                 break;
             //3 inputs
             case Feedback::STR_CON:
+                $comment = Feedback::LABELS[$type][0] . $input1 . Feedback::LABELS[$type][1] . $input2 . Feedback::LABELS[$type][2] . $input3;
                 break;
             //1 input
             case Feedback::STR_CUSTOM:
             case Feedback::STR_SUGGEST:
+                $comment = Feedback::LABELS[$type][0] . $input1;
                 break;
             //error?
             default:
