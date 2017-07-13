@@ -25,6 +25,10 @@ Route::get( '/about', function () {
     return view( 'about' );
 } );
 
+Route::get('/presurvey', function () {
+    return view( 'survey/presurvey' );
+} );
+
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
 Route::get( 'proto/microtask', function () {
 	return view('proto.microtask');

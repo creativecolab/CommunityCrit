@@ -30,6 +30,16 @@
     //     </div> <!-- .panel-footer -->
     //   </div> <!-- .panel -->
     // </div> <!-- .col -->
+    function otherNeighbor() {
+//        var selectVal = $(this).val();
+        var selectVal = document.getElementById("neighborhood").value;
+        var $otherInput = $('#neighOtherFG');
+        if (selectVal == "(other)") {
+            $($otherInput).show();
+        } else {
+            $($otherInput).hide();
+        }
+    }
 
     function createShareForm(shareType) {
         var data;
