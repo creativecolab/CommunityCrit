@@ -120,7 +120,7 @@
             console.log("third input added");
             html += '<div class="form-group">' +
                     '<label for="input3">' + input3label + '</label>' +
-                    '<textarea class="form-control" id="input3" placeholder="' + input3placeholder + '"></textarea>' +
+                    '<textarea class="form-control" name="input3" id="input3" placeholder="' + input3placeholder + '"></textarea>' +
                     '</div>';
         }
 
