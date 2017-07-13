@@ -5,6 +5,7 @@ use Illuminate\Database\Seeder;
 
 class TasksSeeder extends Seeder
 {
+
     /**
      * Data to create
      *
@@ -12,7 +13,7 @@ class TasksSeeder extends Seeder
      */
     public $data = [
         [
-            'name'     => '14th Street Promenade Master Plan',
+            'name' => '14th Street Promenade Master Plan',
             'children' =>
                 [
                     [
@@ -73,7 +74,7 @@ class TasksSeeder extends Seeder
                 ]
         ],
         [
-            'name'     => 'East Village South Draft Focus Plan',
+            'name' => 'East Village South Draft Focus Plan',
             'children' =>
                 [
                     [
