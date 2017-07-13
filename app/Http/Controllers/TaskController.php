@@ -182,9 +182,9 @@ class TaskController extends Controller
         return view($view, $data);
     }
 
-    public function quote($slug)
+    public function quote($id)
     {
-        $quote = Task::where('slug',$slug)->first();
+        $quote = Task::where('id',$id)->first();
 
         if ($quote == null) {
             abort(404);
