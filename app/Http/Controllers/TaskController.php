@@ -6,7 +6,6 @@ use App\Feedback;
 use App\Http\Requests\FeedbackRequest;
 use App\Task;
 use App\User;
-use App\Facet;
 use App\Source;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
