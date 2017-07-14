@@ -29,6 +29,10 @@ Route::get('/presurvey', function () {
     return view( 'survey/presurvey' );
 } );
 
+Route::get('/devtest', function () {
+    return view( 'proto/test' );
+} );
+
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
 Route::get( 'proto/microtask', function () {
 	return view('proto.microtask');
@@ -50,4 +54,10 @@ Route::group( [ 'prefix' => 'sources', 'middleware' => ['auth'] ], function () {
 
 Route::group( [ 'prefix' => 'quotes', 'middleware' => ['auth'] ], function () {
     Route::get('/{id}', 'TaskController@quote' );
+} );
+
+Route::group( [ 'prefix' => 'survey', 'middleware' => ['auth'] ], function () {
+//    Route::match(array('GET','POST'), '/{page}', 'SurveyController@index' );
+    Route::get('/{page}', 'SurveyController@index' );
+    Route::post( '/{user}/response', 'SurveyController@storeResponse' );
 } );

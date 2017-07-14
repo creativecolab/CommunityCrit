@@ -10,7 +10,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Help Us Find the Right Info for You</div>
                     <div class="panel-body">
-                        <form role="form" action="detail.htm" class="form-horizontal">
+                        <form role="form" class="form-horizontal">
                             <div class="form-group">
                                 <label for="email" class="col-md-4 control-label">What interests you about the Park to Park project?</label>
 
