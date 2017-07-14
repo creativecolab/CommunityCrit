@@ -274,7 +274,7 @@ class TasksSeeder extends Seeder
                                                 'text' => '<p>The <b>Urban Discovery Academy Charter School</b> opened in 2014. Located at 14th and F Streets has a focus on individual student support and project-based learning.</p>'
                                             ],
                                             [
-                                                'text' => '<p>The <b>NewSchool of Architecture & Design is located at Park Boulevard and F Street.</b> NSAD has an enrollment of over 500 students in programs in Architecture, Construction Management, Interior Architecture, Product Design and Digital Media Arts. NewSchool’s architectural program, already one of the nation’s largest, will double its enrollment while adding new design-related programs.</p>'
+                                                'text' => '<p>The <b>New School of Architecture & Design is located at Park Boulevard and F Street.</b> NSAD has an enrollment of over 500 students in programs in Architecture, Construction Management, Interior Architecture, Product Design and Digital Media Arts. NewSchool’s architectural program, already one of the nation’s largest, will double its enrollment while adding new design-related programs.</p>'
                                             ],
                                             [
                                                 'text' => '<p>Located at Park Boulevard and Island is the <b>Thomas Jefferson School of Law.</b> The school, with an enrollment of over 500 law students, moved to its new facility in East Village several years ago.</p>'
@@ -283,7 +283,7 @@ class TasksSeeder extends Seeder
                                                 'text' => '<p>At 10th and J Streets is FIDM, the <b>Fashion Institute of Design and Merchandising.</b> FIDM offers programs in Fashion, Visual Arts, Interior Design and Entertainment.</p>'
                                             ],
                                             [
-                                                'text' => '<p>At 10th and K Streets is the <b>San Diego Global Knowledge University</b>[SDGKU]. SDGKU offers undergraduate and graduate degrees in Global Management, International Management, Communication and Technology and a Doctor in Business Administration in Global Management.</p>'
+                                                'text' => '<p>At 10th and K Streets is the <b>San Diego Global Knowledge University</b> [SDGKU]. SDGKU offers undergraduate and graduate degrees in Global Management, International Management, Communication and Technology and a Doctor in Business Administration in Global Management.</p>'
                                             ],
                                             [
                                                 'text' => '<p>An educational anchor at the <b>south end of East Village is The Central Library,</b> completed in 2013. A unique feature of the Central Library is the <b>E3 Civic High School</b> a public charter secondary school. The curriculum includes internships and offers two pre-professional programs; bio-medical health and digital media. Students graduate with both a high school diploma and a community college degree.</p>'
