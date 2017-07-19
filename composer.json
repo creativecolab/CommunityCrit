@@ -46,10 +46,8 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
+            "php artisan vendor:publish --provider=\"Backpack\\Base\\BaseServiceProvider\" --tag=\"public\" --tag=\"adminlte\"",
             "php artisan vendor:publish --provider=\"Backpack\\CRUD\\CrudServiceProvider\" --tag=\"public\"",
-            "php artisan vendor:publish --provider=\"Backpack\\CRUD\\CrudServiceProvider\" --tag=\"lang\"",
-            "php artisan vendor:publish --provider=\"Backpack\\CRUD\\CrudServiceProvider\" --tag=\"config\"",
-            "php artisan vendor:publish --provider=\"Backpack\\CRUD\\CrudServiceProvider\" --tag=\"elfinder\"",
             "php artisan optimize"
         ],
         "post-update-cmd": [
