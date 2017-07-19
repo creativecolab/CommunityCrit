@@ -19,7 +19,7 @@ class SourceCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Source');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/source');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/sources');
         $this->crud->setEntityNameStrings('source', 'sources');
 
         /*
