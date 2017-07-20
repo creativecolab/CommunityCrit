@@ -41,8 +41,8 @@
                         &nbsp;
                     @else
                         <li><a href="{{ url('/overview') }}">Overview</a></li>
-                        <li><a href="{{ action('TaskController@allFacets') }}">Facets</a></li>
-                        <li><a href="{{ action('TaskController@allSources') }}">Sources</a></li>
+                        {{--<li><a href="{{ action('TaskController@allFacets') }}">Topics</a></li>--}}
+                        {{--<li><a href="{{ action('TaskController@allSources') }}">Sources</a></li>--}}
                         {{--<li class="dropdown"><a href="sources.htm" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Sources<span class="caret"></span></a>--}}
                         {{--<ul role="menu" class="dropdown-menu">--}}
                         {{--<li><a href="source-detail.htm">14th Street Promenade Master Plan</a></li>--}}

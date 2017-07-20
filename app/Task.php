@@ -9,11 +9,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Node
 {
-
     const TYPE_FACET = 0;
     const TYPE_QUOTE = 1;
     const TYPE_SOURCE = 2;
 	const TYPE_SOURCE_QUOTE = 3;
+
+	const TYPE_PROJECT = 4;
+    const TYPE_QUESTION = 5;
+	const TYPE_END_QUESTION = 6;
+    const TYPE_BRANCH_QUESTION = 7;
+    const TYPE_EXPLANATION = 8;
 
 	use CrudTrait;
 	use Sluggable;
@@ -69,6 +74,12 @@ class Task extends Node
         return static::get()->where( 'type',
             static::TYPE_QUOTE,
             static::TYPE_SOURCE_QUOTE );
+    }
+
+    public static function getProjects()
+    {
+        return static::get()->where( 'type',
+            static::TYPE_PROJECT );
     }
 
     /**
@@ -150,15 +161,18 @@ class Task extends Node
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function facets()
+    public function topic()
     {
-        return $this->belongsToMany( 'App\Task', 'tags', 'quote_id', 'facet_id' );
+        return $this->belongsToMany( 'App\Topic' );
     }
 
-    public function quotes()
+    public function design_idea()
     {
-        return $this->belongsToMany('App\Task', 'tags', 'facet_id', 'quote_id');
+        return $this->belongsTo( 'App\Design_Idea' );
     }
 
-
+	public function options()
+	{
+		return $this->belongsToMany('App\Option');
+	}
 }

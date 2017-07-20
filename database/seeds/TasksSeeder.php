@@ -590,6 +590,11 @@ class TasksSeeder extends Seeder
      */
     public function run()
     {
-        Task::buildTree($this->data);
+//        Task::buildTree($this->data);
+
+        // Create users in each condition
+        for ( $x = 0; $x < 5; $x++ ) {
+            factory( Task::class, 1 )->create();
+        }
     }
 }
