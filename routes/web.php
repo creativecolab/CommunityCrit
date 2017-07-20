@@ -36,10 +36,12 @@ Route::get('/presurvey', function () {
 } );
 
 Route::group( [ 'prefix' => 'devtest' ], function() {
-    Route::get('/{id}', 'TaskController@testShow' );
+    Route::get('/submit/', function() { return view('proto/testsubmit');});
 //    Route::get('/', 'TaskController@testDashboard' );
+    Route::get('/{id}', 'TaskController@testShow' );
     Route::post( '/{task}/feedback', 'TaskController@testStoreResponse' );
     Route::post( '{task}/skip', 'TaskController@skipQuestion' );
+    Route::post('/submit/new', 'TaskController@newTask');
 } );
 
 Route::get( '/home', 'HomeController@index' )->name( 'home' );

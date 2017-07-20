@@ -71,6 +71,20 @@ class TaskController extends Controller
 		return view($view, $data);
 	}
 
+    public function newTask( Request $request )
+    {
+        $task = new Task;
+        $task->name = $request->get('name');
+        $task->text = $request->get('text');
+        if ( $task->save() ) {
+            flash("Question submitted!")->success();
+        } else {
+            flash('Unable to save your question. Please contact us.')->error();
+        }
+
+        return redirect()->back();
+    }
+
 	/**
 	 * Save feedback item for task
 	 *

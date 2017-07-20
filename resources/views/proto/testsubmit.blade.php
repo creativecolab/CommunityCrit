@@ -7,22 +7,14 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Help Us Find the Right Info for You {{$test}}</div>
+                    <div class="panel-heading">Submit a new task</div>
                     <div class="panel-body">
                         {{--<form role="form" class="form-horizontal">--}}
-                        {!! Form::open(['action' => ['TaskController@testStoreResponse', $task]]) !!}
+                        {!! Form::open(['action' => ['TaskController@newTask']]) !!}
                         <div class="form-group">
-                            <label class="col-md-4 control-label">{{ $text }}</label>
-                            <div class="col-md-8">
-                                @foreach($options as $option)
-                                    <div class="radio">
-                                        <label>
-                                            {!! Form::radio('option', $option->text) !!}
-                                            {{$option->text}}
-                                        </label>
-                                    </div>
-                                @endforeach
-                            </div>
+                            {{--{!! Form::textarea('name', '', ['class' => 'form-control', 'required' => 'true']) !!}--}}
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Enter question name (opt)">
+                            {!! Form::textarea('text', '', ['class' => 'form-control', 'required' => 'true', 'placeholder' => 'Enter question text']) !!}
                         </div>
 
                         <div class="form-group">
