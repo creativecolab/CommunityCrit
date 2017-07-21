@@ -12,6 +12,7 @@ use App\Topic;
 use App\Design_Idea;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class TaskController extends Controller
 {
@@ -201,6 +202,28 @@ class TaskController extends Controller
         return view($view, $data);
     }
 
+    public function uploadImage( Request $request )
+    {
+        $id = 0;
+        $path = public_path() . '/images/activities/' . $id . '/';
+        $img = $request->file('photo');
+        if(!\File::exists($path)) {
+            \File::makeDirectory($path, 0777, true);
+        }
+        Image::make($img)->resize(300, 300)->save($path . 'bar.jpg');
+        return redirect()->action('TaskController@allActivities');
+    }
+
+    public function imageTest($id)
+    {
+        $task = Task::find($id);
+
+        $view = 'tasks.questions.image';
+        $data = ['task' => $task, 'name' => $task->name, 'text' => $task->text];
+
+        return view($view, $data);
+    }
+
     /**
      * show question
      *
@@ -218,6 +241,7 @@ class TaskController extends Controller
         $view = 'tasks.questions.activity';
 
         $title = $task->name;
+
 
         $options = $task->options;
         $data = ['task' => $task, 'title' => $title, 'options' => $options];

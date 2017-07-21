@@ -50,10 +50,12 @@ Route::get( 'proto/microtask', function () {
 } );
 
 Route::group( [ 'prefix' => 'activities' ], function() {
+    Route::get( 'img/{id}', 'TaskController@imageTest');
     Route::get( '/', 'TaskController@allActivities' );
     Route::get( '/{id}', 'TaskController@show' );
     Route::post( '/{task}/response', 'TaskController@storeResponse' );
     Route::post( '/{id}/skip', 'TaskController@skipQuestion' );
+    Route::post( 'img/upload', 'TaskController@uploadImage');
 } );
 //Route::group( [ 'prefix' => 'tasks' ], function () {
 //	Route::get( '/', 'TaskController@index' );
