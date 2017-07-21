@@ -9,16 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Node
 {
-    const TYPE_FACET = 0;
-    const TYPE_QUOTE = 1;
-    const TYPE_SOURCE = 2;
-	const TYPE_SOURCE_QUOTE = 3;
-
-	const TYPE_PROJECT = 4;
-    const TYPE_QUESTION = 5;
-	const TYPE_END_QUESTION = 6;
-    const TYPE_BRANCH_QUESTION = 7;
-    const TYPE_EXPLANATION = 8;
+	const TYPE_TEXT = 1;
+    const TYPE_RADIO = 2;
 
 	use CrudTrait;
 	use Sluggable;
@@ -30,57 +22,6 @@ class Task extends Node
 		'parent_id',
 		'source_id',
 	];
-
-    /**
-     * Get all facets
-     *
-     * @return mixed
-     */
-    public static function getFacets()
-    {
-        return static::get()->where( 'type',
-            static::TYPE_FACET );
-    }
-
-    /**
-     * Get all sources
-     *
-     * @return mixed
-     */
-    public static function getSources()
-    {
-        return static::get()->where( 'type',
-            static::TYPE_SOURCE );
-    }
-
-    /**
-     * Get all quotes
-     *
-     * @return mixed
-     */
-    public static function getQuotes()
-    {
-        return static::get()->where( 'type',
-            static::TYPE_QUOTE );
-    }
-
-    /**
-     * Get all source text
-     *
-     * @return mixed
-     */
-    public static function getSourceText()
-    {
-        return static::get()->where( 'type',
-            static::TYPE_QUOTE,
-            static::TYPE_SOURCE_QUOTE );
-    }
-
-    public static function getProjects()
-    {
-        return static::get()->where( 'type',
-            static::TYPE_PROJECT );
-    }
 
     /**
      * Return the sluggable configuration array for this model.

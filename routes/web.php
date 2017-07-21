@@ -11,14 +11,14 @@
 |
 */
 
-//Route::get( '/', function () {
-//	return view( 'welcome' );
-//} );
-Route::get( '/', function() {
-    return redirect()->action(
-        'TaskController@testShow', ['id' => 0]
-    );
+Route::get( '/', function () {
+	return view( 'welcome' );
 } );
+//Route::get( '/', function() {
+//    return redirect()->action(
+//        'TaskController@testShow', ['id' => 0]
+//    );
+//} );
 
 Auth::routes();
 
@@ -35,18 +35,25 @@ Route::get('/presurvey', function () {
     return view( 'survey/presurvey' );
 } );
 
-Route::group( [ 'prefix' => 'devtest' ], function() {
-    Route::get('/submit/', function() { return view('proto/testsubmit');});
-//    Route::get('/', 'TaskController@testDashboard' );
-    Route::get('/{id}', 'TaskController@testShow' );
-    Route::post( '/{task}/feedback', 'TaskController@testStoreResponse' );
-    Route::post( '{task}/skip', 'TaskController@skipQuestion' );
-    Route::post('/submit/new', 'TaskController@newTask');
-} );
+//Route::group( [ 'prefix' => 'devtest' ], function() {
+//    Route::get('/submit/', function() { return view('proto/testsubmit');});
+////    Route::get('/', 'TaskController@testDashboard' );
+//    Route::get('/{id}', 'TaskController@testShow' );
+//    Route::post( '/{task}/feedback', 'TaskController@testStoreResponse' );
+//    Route::post( '{task}/skip', 'TaskController@skipQuestion' );
+//    Route::post('/submit/new', 'TaskController@newTask');
+//} );
 
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
 Route::get( 'proto/microtask', function () {
 	return view('proto.microtask');
+} );
+
+Route::group( [ 'prefix' => 'activities' ], function() {
+    Route::get( '/', 'TaskController@allActivities' );
+    Route::get( '/{id}', 'TaskController@show' );
+    Route::post( '/{task}/response', 'TaskController@storeResponse' );
+    Route::post( '/{id}/skip', 'TaskController@skipQuestion' );
 } );
 //Route::group( [ 'prefix' => 'tasks' ], function () {
 //	Route::get( '/', 'TaskController@index' );

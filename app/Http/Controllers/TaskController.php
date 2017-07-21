@@ -15,69 +15,14 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 * @return \Illuminate\Http\Response
-	 * @throws AuthorizationException
-	 */
-	public function index()
-	{
-		$condition = \Auth::user()->condition;
-
-		// Don't allow user through if they don't have a condition (means
-		if ($condition === null) {
-			throw new AuthorizationException();
-		}
-
-		// Mapping of conditions to template names;
-		$views = [
-			User::CONDITION_GENERIC_HOLISTIC => 'tasks.generic.holistic',
-			User::CONDITION_GENERIC_MICROTASK_OPEN => 'tasks.generic.microtaskOpen',
-			User::CONDITION_GENERIC_MICROTASK_CLOSED => 'tasks.generic.microtaskClosed',
-			User::CONDITION_PERSONAL_HOLISTIC => 'tasks.personal.holistic',
-			User::CONDITION_PERSONAL_MICROTASK_OPEN => 'tasks.personal.microtaskOpen',
-			User::CONDITION_PERSONAL_MICROTASK_CLOSED => 'tasks.personal.microtaskClosed',
-		];
-
-		// Set template name based on condition
-		$view = $views[$condition];
-
-		// Decide which data to fetch
-		switch($condition) {
-			case User::CONDITION_PERSONAL_MICROTASK_CLOSED:
-				$data = ['task' => \Auth::user()->recommendedTasks->first()];
-				break;
-			case User::CONDITION_GENERIC_MICROTASK_CLOSED:
-				$data = ['task' => Task::find(1)]; // TODO: Change to assigned task later
-				break;
-			case User::CONDITION_PERSONAL_MICROTASK_OPEN:
-				$tasks = Task::allLeaves()->get();
-				$data = ['tasks' => $tasks];
-				break;
-			default:
-				// Get first root task
-				$rootTask = Task::root();
-
-				// Return tasks and root task
-				$data = ['tasks' => $rootTask->getDescendants(), 'rootTask' => $rootTask];
-		}
-
-		// Embed recommendations if needed
-		if ($condition === User::CONDITION_PERSONAL_MICROTASK_OPEN ||
-		    $condition === User::CONDITION_PERSONAL_HOLISTIC) {
-			$data['recommendations'] = \Auth::user()->recommendedTasks->pluck('id');
-		}
-
-		return view($view, $data);
-	}
-
     public function newTask( Request $request )
     {
         $task = new Task;
         $task->name = $request->get('name');
         $task->text = $request->get('text');
+        //$task->type = $request->get('type');
         if ( $task->save() ) {
-            flash("Question submitted!")->success();
+            flash("Activity submitted!")->success();
         } else {
             flash('Unable to save your question. Please contact us.')->error();
         }
@@ -160,19 +105,15 @@ class TaskController extends Controller
         return $next_id;
     }
 
-    public function storeResponse( FeedbackRequest $request, Task $task )
+    public function storeResponse( Request $request, Task $task )
     {
 //        $type = $request->get( 'type' );
-        $input1 = $request->get( 'input1' );
-        $input2 = $request->get( 'input2' );
-        $input3 = $request->get( 'input3' );
 
         $feedback          = new Feedback;
 //		$feedback->comment = $request->get( 'comment' );
         $feedback->user_id = \Auth::id();
         $feedback->task_id = $task->id;
-        $feedback->type = $request->get( 'type' );
-        $feedback->comment = $feedback->constructComment($feedback->type, $input1, $input2, $input3);
+        $feedback->comment = $request->get( 'option' );
 
         $taskName = $task->name;
 
@@ -182,20 +123,23 @@ class TaskController extends Controller
             flash('Unable to save your feedback. Please contact us.')->error();
         }
 
-        \Session::push('visited', $task->id);
+//        \Session::push('visited', $task->id);
 
-        $next = $this->nextTask($task->id);
-
-        if ($next != null) {
-            return redirect()->action(
-                'TaskController@show', ['id' => $next]
-            );
-        }
-        else {
-            return redirect()->action(
-                'TaskController@allProjects'
-            );
-        }
+//        $next = $this->nextTask($task->id);
+//
+//        if ($next != null) {
+//            return redirect()->action(
+//                'TaskController@show', ['id' => $next]
+//            );
+//        }
+//        else {
+//            return redirect()->action(
+//                'TaskController@allProjects'
+//            );
+//        }
+        return redirect()->action(
+            'TaskController@allActivities'
+        );
     }
 
     public function skipQuestion(/**Request $request, **/Task $task)
@@ -263,105 +207,20 @@ class TaskController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show( $id )
+    public function show( $id, $type=1 )
     {
-        $task = Task::where('id',$id)->first();
+        $task = Task::find($id);
 
         if ($task == null) {
             abort(404);
         }
 
-        if ($task->type == Task::TYPE_PROJECT) {
-            $task = $task->immediateDescendants()->first();
-        }
-
-        $view = 'tasks.questions.question';
+        $view = 'tasks.questions.activity';
 
         $title = $task->name;
+
         $options = $task->options;
-        $data = ['task' => $task, 'title' => $title, 'project' => $task->getRoot(), 'test' => implode(" | ",\Session::get('visited')), 'options' => $options];
-        return view($view, $data);
-    }
-
-    /**
-     * Display all facets
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function allFacets()
-    {
-        $view = 'tasks.facets.listAll';
-        $data['title'] = 'Facets';
-		$data['facets'] = Task::getFacets();
-        return view($view, $data);
-    }
-
-    public function singleFacet($slug)
-    {
-        $facet = Task::where('slug',$slug)->first();
-
-        if ($facet == null) {
-            abort(404);
-        }
-
-        $view = 'tasks.facets.singleFacet';
-
-        $data['title'] = $facet->name;
-        $data['tasks'] = $facet->quotes;
-        $data['facet'] = $facet;
-        return view($view, $data);
-    }
-
-    public function allSources()
-    {
-        $view = 'tasks.sources.listAll';
-        $data['title'] = 'Sources';
-        $data['sources'] = Task::getSources();
-        return view($view, $data);
-    }
-
-    public function singleSource($slug)
-    {
-        $source = Task::where('slug',$slug)->first();
-
-        if ($source == null) {
-            abort(404);
-        }
-
-        $view = 'tasks.sources.singleSource';
-
-        $data['title'] = $source->name;
-        $data['source'] = $source;
-        $data['quotes'] = $source->sourceHasQuotes;
-//        $data['quotes'] = Task::get()->where('source_id',25);
-        return view($view, $data);
-    }
-
-    public function allProjects()
-    {
-        $view = 'tasks.questions.projects';
-        $data['title'] = 'Projects';
-        $data['projects'] = Task::getProjects();
-
-        //refresh visited questions when seeing all projects
-        \Session::forget('visited');
-        \Session::put('visited', []);
-
-        return view($view, $data);
-    }
-
-    public function quote($id)
-    {
-        $quote = Task::where('id',$id)->first();
-
-        if ($quote == null) {
-            abort(404);
-        }
-
-        $view = 'tasks.quote';
-
-        $data['title'] = $quote->name;
-        $data['quote'] = $quote;
+        $data = ['task' => $task, 'title' => $title, 'options' => $options];
         return view($view, $data);
     }
 
@@ -386,12 +245,157 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-    public function testDashboard()
+    public function allActivities()
     {
-        $view = 'proto.testtable';
-        $data['cols'] = Topic::all();
-        $data['rows'] = Design_Idea::all();
-
+        $view = 'tasks.questions.allActivities';
+        $data = ['tasks' => Task::all()];
         return view($view, $data);
     }
+
+    /**
+    //	 * Display a listing of the resource.
+    //	 * @return \Illuminate\Http\Response
+    //	 * @throws AuthorizationException
+    //	 */
+//	public function index()
+//	{
+//		$condition = \Auth::user()->condition;
+//
+//		// Don't allow user through if they don't have a condition (means
+//		if ($condition === null) {
+//			throw new AuthorizationException();
+//		}
+//
+//		// Mapping of conditions to template names;
+//		$views = [
+//			User::CONDITION_GENERIC_HOLISTIC => 'tasks.generic.holistic',
+//			User::CONDITION_GENERIC_MICROTASK_OPEN => 'tasks.generic.microtaskOpen',
+//			User::CONDITION_GENERIC_MICROTASK_CLOSED => 'tasks.generic.microtaskClosed',
+//			User::CONDITION_PERSONAL_HOLISTIC => 'tasks.personal.holistic',
+//			User::CONDITION_PERSONAL_MICROTASK_OPEN => 'tasks.personal.microtaskOpen',
+//			User::CONDITION_PERSONAL_MICROTASK_CLOSED => 'tasks.personal.microtaskClosed',
+//		];
+//
+//		// Set template name based on condition
+//		$view = $views[$condition];
+//
+//		// Decide which data to fetch
+//		switch($condition) {
+//			case User::CONDITION_PERSONAL_MICROTASK_CLOSED:
+//				$data = ['task' => \Auth::user()->recommendedTasks->first()];
+//				break;
+//			case User::CONDITION_GENERIC_MICROTASK_CLOSED:
+//				$data = ['task' => Task::find(1)]; // TODO: Change to assigned task later
+//				break;
+//			case User::CONDITION_PERSONAL_MICROTASK_OPEN:
+//				$tasks = Task::allLeaves()->get();
+//				$data = ['tasks' => $tasks];
+//				break;
+//			default:
+//				// Get first root task
+//				$rootTask = Task::root();
+//
+//				// Return tasks and root task
+//				$data = ['tasks' => $rootTask->getDescendants(), 'rootTask' => $rootTask];
+//		}
+//
+//		// Embed recommendations if needed
+//		if ($condition === User::CONDITION_PERSONAL_MICROTASK_OPEN ||
+//		    $condition === User::CONDITION_PERSONAL_HOLISTIC) {
+//			$data['recommendations'] = \Auth::user()->recommendedTasks->pluck('id');
+//		}
+//
+//		return view($view, $data);
+//	}
+
+//    public function testDashboard()
+//    {
+//        $view = 'proto.testtable';
+//        $data['cols'] = Topic::all();
+//        $data['rows'] = Design_Idea::all();
+//
+//        return view($view, $data);
+//    }
+
+    //    /**
+//     * Display all facets
+//     *
+//     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+//     */
+//    public function allFacets()
+//    {
+//        $view = 'tasks.facets.listAll';
+//        $data['title'] = 'Facets';
+//		$data['facets'] = Task::getFacets();
+//        return view($view, $data);
+//    }
+//
+//    public function singleFacet($slug)
+//    {
+//        $facet = Task::where('slug',$slug)->first();
+//
+//        if ($facet == null) {
+//            abort(404);
+//        }
+//
+//        $view = 'tasks.facets.singleFacet';
+//
+//        $data['title'] = $facet->name;
+//        $data['tasks'] = $facet->quotes;
+//        $data['facet'] = $facet;
+//        return view($view, $data);
+//    }
+//
+//    public function allSources()
+//    {
+//        $view = 'tasks.sources.listAll';
+//        $data['title'] = 'Sources';
+//        $data['sources'] = Task::getSources();
+//        return view($view, $data);
+//    }
+//
+//    public function singleSource($slug)
+//    {
+//        $source = Task::where('slug',$slug)->first();
+//
+//        if ($source == null) {
+//            abort(404);
+//        }
+//
+//        $view = 'tasks.sources.singleSource';
+//
+//        $data['title'] = $source->name;
+//        $data['source'] = $source;
+//        $data['quotes'] = $source->sourceHasQuotes;
+////        $data['quotes'] = Task::get()->where('source_id',25);
+//        return view($view, $data);
+//    }
+//
+//    public function allProjects()
+//    {
+//        $view = 'tasks.questions.projects';
+//        $data['title'] = 'Projects';
+//        $data['projects'] = Task::getProjects();
+//
+//        //refresh visited questions when seeing all projects
+//        \Session::forget('visited');
+//        \Session::put('visited', []);
+//
+//        return view($view, $data);
+//    }
+//
+//    public function quote($id)
+//    {
+//        $quote = Task::where('id',$id)->first();
+//
+//        if ($quote == null) {
+//            abort(404);
+//        }
+//
+//        $view = 'tasks.quote';
+//
+//        $data['title'] = $quote->name;
+//        $data['quote'] = $quote;
+//        return view($view, $data);
+//    }
 }
