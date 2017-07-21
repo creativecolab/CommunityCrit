@@ -14,6 +14,11 @@
                     <div class="panel-body">
                         {!! $text !!}
 
+                        @if($path != null)
+                            {{$path}}
+                            <img src="{{'/images/activities/0/bar.jpg'}}">
+                        @endif
+
                         {{--@if( isset($subtasks) )--}}
                         {{--@foreach ($subtasks as $subtask)--}}
                         {{--<strong>{{ $subtask->name }}@if(isset($recommendations) && $recommendations->contains($subtask->id))--}}

@@ -219,7 +219,12 @@ class TaskController extends Controller
         $task = Task::find($id);
 
         $view = 'tasks.questions.image';
-        $data = ['task' => $task, 'name' => $task->name, 'text' => $task->text];
+
+        $path = public_path() . '/images/activities/' . 0 . '/';
+        if(\File::exists($path))
+            $path = '/images/activities/0/';
+        else $path = null;
+        $data = ['task' => $task, 'name' => $task->name, 'text' => $task->text, 'path' => $path];
 
         return view($view, $data);
     }
