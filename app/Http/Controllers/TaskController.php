@@ -9,7 +9,7 @@ use App\User;
 use App\Source;
 use App\Response;
 use App\Topic;
-use App\Design_Idea;
+use App\Project;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -108,21 +108,36 @@ class TaskController extends Controller
 
     public function storeResponse( Request $request, Task $task )
     {
+        $keys = collect($request->except('_token'))->keys()->all();
 //        $type = $request->get( 'type' );
 
-        $feedback          = new Feedback;
-//		$feedback->comment = $request->get( 'comment' );
-        $feedback->user_id = \Auth::id();
-        $feedback->task_id = $task->id;
-        $feedback->comment = $request->get( 'option' );
+        $responses = collect([]);
 
-        $taskName = $task->name;
-
-        if ( $feedback->save() ) {
-            flash("Feedback submitted for ${taskName}!")->success();
-        } else {
-            flash('Unable to save your feedback. Please contact us.')->error();
+        foreach($keys as $key) {
+            $feedback = new Feedback;
+            $feedback->user_id = \Auth::id();
+            $feedback->option = $key;
+            $feedback->comment = $request->get( $key );
+            $responses->push($feedback);
         }
+        if( $task->feedback()->saveMany($responses->all()) ) {
+            flash("Feedback submitted!");
+        } else {
+            flash("Unable to save your feedback. Please contact us.")->error();
+        }
+
+//        $feedback          = new Feedback;
+//        $feedback->user_id = \Auth::id();
+//        $feedback->task_id = $task->id;
+////        $feedback->comment = $request->get( 'option' );
+//        $feedback->comment = collect($keys)->implode(' | ');
+//        $taskName = $task->name;
+//
+//        if ( $feedback->save() ) {
+//            flash("Feedback submitted for ${taskName}!")->success();
+//        } else {
+//            flash('Unable to save your feedback. Please contact us.')->error();
+//        }
 
 //        \Session::push('visited', $task->id);
 
@@ -235,12 +250,15 @@ class TaskController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show( $id, $type=1 )
+    public function show( $id )
     {
         $task = Task::find($id);
 
         if ($task == null) {
             abort(404);
+        }
+        if ($task->type == Task::TYPE_IMAGE) {
+            return redirect()->action( 'TaskController@imageTest', $task->id );
         }
 
         $view = 'tasks.questions.activity';
@@ -278,6 +296,15 @@ class TaskController extends Controller
     {
         $view = 'tasks.questions.allActivities';
         $data = ['tasks' => Task::all()];
+        return view($view, $data);
+    }
+
+    public function dashboard(Request $request)
+    {
+        $view = 'tasks.questions.workflow';
+        $data['topics'] = Topic::all();
+        $data['projects'] = Project::all();
+
         return view($view, $data);
     }
 
@@ -337,14 +364,6 @@ class TaskController extends Controller
 //		return view($view, $data);
 //	}
 
-//    public function testDashboard()
-//    {
-//        $view = 'proto.testtable';
-//        $data['cols'] = Topic::all();
-//        $data['rows'] = Design_Idea::all();
-//
-//        return view($view, $data);
-//    }
 
     //    /**
 //     * Display all facets

@@ -11,6 +11,9 @@ class Task extends Node
 {
 	const TYPE_TEXT = 1;
     const TYPE_RADIO = 2;
+	const TYPE_IMAGE = 3;
+	const TYPE_CHECKBOX = 4;
+    const TYPE_MULTITEXT = 5;
 
 	use CrudTrait;
 	use Sluggable;
@@ -21,6 +24,8 @@ class Task extends Node
         'type',
 		'parent_id',
 		'source_id',
+        'project_id',
+        'topic_id',
 	];
 
     /**
@@ -104,12 +109,12 @@ class Task extends Node
      */
     public function topic()
     {
-        return $this->belongsToMany( 'App\Topic' );
+        return $this->belongsTo( 'App\Topic' );
     }
 
-    public function design_idea()
+    public function project()
     {
-        return $this->belongsTo( 'App\Design_Idea' );
+        return $this->belongsTo( 'App\Project' );
     }
 
 	public function options()

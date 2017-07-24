@@ -2,14 +2,17 @@
 
 namespace App;
 
+use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
 class Option extends Model
 {
-    protected $fillable = ['text'];
+    use CrudTrait;
+
+    protected $fillable = ['text', 'type'];
 
     public function tasks()
     {
-        return $this->belongsToMany('App\Task');
+        return $this->belongsToMany( 'App\Task' );
     }
 }

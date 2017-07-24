@@ -50,6 +50,7 @@ Route::get( 'proto/microtask', function () {
 } );
 
 Route::group( [ 'prefix' => 'activities' ], function() {
+    Route::match(['get', 'post'], 'dash', 'TaskController@dashboard');
     Route::get( 'img/{id}', 'TaskController@imageTest');
     Route::get( '/', 'TaskController@allActivities' );
     Route::get( '/{id}', 'TaskController@show' );
