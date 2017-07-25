@@ -15,7 +15,8 @@
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
-        "ext-gd": "*"
+        "ext-gd": "*",
+        "cornford/googlmapper": "2.*"
     },
     "require-dev": {
         "backpack/generators": "^1.1",
