@@ -13,6 +13,8 @@ use App\Project;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
+//use Cornford\Googlmapper\Mapper;
+use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 
 class TaskController extends Controller
 {
@@ -217,10 +219,12 @@ class TaskController extends Controller
         return view($view, $data);
     }
 
-    public function uploadImage( Request $request )
+    public function uploadImage( Request $request, Task $task )
     {
-        $id = 0;
-        $path = public_path() . '/images/activities/' . $id . '/';
+        $id = \Auth::id();
+        $task_id = $task->id;
+
+        $path = public_path() . '/images/activities/' . $id . '/' . $task_id . '/';
         $img = $request->file('photo');
         if(!\File::exists($path)) {
             \File::makeDirectory($path, 0777, true);
@@ -234,12 +238,13 @@ class TaskController extends Controller
         $task = Task::find($id);
 
         $view = 'tasks.questions.image';
+        $dir = \Auth::id();
 
-        $path = public_path() . '/images/activities/' . 0 . '/';
+        $path = public_path() . '/images/activities/' . $dir . '/' . $id . '/';
         if(\File::exists($path))
-            $path = '/images/activities/0/';
+            $path = '/images/activities/' . $dir . '/' . $id . '/';
         else $path = null;
-        $data = ['task' => $task, 'name' => $task->name, 'text' => $task->text, 'path' => $path];
+        $data = ['task' => $task, 'name' => $task->name, 'text' => $task->text, 'path' => $path, 'id' => $id];
 
         return view($view, $data);
     }
@@ -306,6 +311,16 @@ class TaskController extends Controller
         $data['projects'] = Project::all();
 
         return view($view, $data);
+    }
+
+    public function mapTest()
+    {
+        Mapper::map(53.381128999999990000, -1.470085000000040000);
+//        Mapper::marker(53.381128999999990000, -1.470085000000040000, ['draggable' => true]);
+//        Mapper::informationWindow(53.381128999999990000, -1.470085000000040000, 'Content', ['open' => true, 'maxWidth'=> 300, 'markers' => ['title' => 'Title']]);
+        Mapper::map(52.381128999999990000, 0.470085000000040000)->informationWindow(53.381128999999990000, -1.470085000000040000, 'Content', ['markers' => ['animation' => 'DROP']]);
+
+        return view('proto.map');
     }
 
     /**

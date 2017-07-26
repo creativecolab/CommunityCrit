@@ -31,9 +31,7 @@ Route::get( '/about', function () {
     return view( 'about' );
 } );
 
-Route::get('/presurvey', function () {
-    return view( 'survey/presurvey' );
-} );
+
 
 //Route::group( [ 'prefix' => 'devtest' ], function() {
 //    Route::get('/submit/', function() { return view('proto/testsubmit');});
@@ -45,8 +43,14 @@ Route::get('/presurvey', function () {
 //} );
 
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
-Route::get( 'proto/microtask', function () {
-	return view('proto.microtask');
+
+Route::group( [ 'prefix' => 'ideas' ], function() {
+    Route::get('/submit', 'IdeaController@showSubmit');
+    Route::get('/combine', 'IdeaController@showCombination');
+    Route::get('/{id}', 'IdeaController@show');
+    Route::get('/', 'IdeaController@index');
+    Route::post( '/submit/new', 'IdeaController@submitIdea');
+    Route::post( '/combine/new', 'IdeaController@combine' );
 } );
 
 Route::group( [ 'prefix' => 'activities' ], function() {
@@ -56,7 +60,11 @@ Route::group( [ 'prefix' => 'activities' ], function() {
     Route::get( '/{id}', 'TaskController@show' );
     Route::post( '/{task}/response', 'TaskController@storeResponse' );
     Route::post( '/{id}/skip', 'TaskController@skipQuestion' );
-    Route::post( 'img/upload', 'TaskController@uploadImage');
+    Route::post( 'img/{task}/upload', 'TaskController@uploadImage');
+} );
+
+Route::group( ['prefix' => 'devtest' ], function() {
+    Route::get( '/', 'TaskController@mapTest');
 } );
 //Route::group( [ 'prefix' => 'tasks' ], function () {
 //	Route::get( '/', 'TaskController@index' );
@@ -88,4 +96,7 @@ Route::group( [ 'prefix' => 'activities' ], function() {
 //    Route::get( '/questions/{id}', 'TaskController@show' );
 //    Route::post( 'questions/{task}/feedback', 'TaskController@storeResponse' );
 //    Route::post( 'questions/{task}/skip', 'TaskController@skipQuestion' );
+//} );
+//Route::get('/presurvey', function () {
+//    return view( 'survey/presurvey' );
 //} );
