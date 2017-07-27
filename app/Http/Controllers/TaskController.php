@@ -7,9 +7,7 @@ use App\Http\Requests\FeedbackRequest;
 use App\Task;
 use App\User;
 use App\Source;
-use App\Response;
-use App\Topic;
-use App\Project;
+use App\Idea;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -321,6 +319,40 @@ class TaskController extends Controller
         Mapper::map(52.381128999999990000, 0.470085000000040000)->informationWindow(53.381128999999990000, -1.470085000000040000, 'Content', ['markers' => ['animation' => 'DROP']]);
 
         return view('proto.map');
+    }
+
+    public function connectTaskIdea(Request $request, Task $task)
+    {
+        $ideas = collect($request->except('_token'))->values()->all();
+
+        $task->ideas()->syncWithoutDetaching($ideas);
+        flash('good');
+        return redirect()->back();
+    }
+
+    public function showConnect(Task $task)
+    {
+        $user = \Auth::user();
+        if ($user->admin != 1)
+            return redirect()->action( 'HomeController@index' );
+
+        $view = 'tasks.connectTaskIdea';
+        $data = ['id' => $task->id, 'ideas' => Idea::get()];
+
+        return view($view, $data);
+    }
+
+    public function newsubmit( Request $request )
+    {
+        $inputs = $request->input();
+        $idea = new Idea;
+        $idea->text = $request->get('text');
+        $idea->save();
+        $data = [
+            'success' => true,
+            'message' => 'Your AJAX processed correctly'
+        ];
+        return response()->json($data);
     }
 
     /**

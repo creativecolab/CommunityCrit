@@ -15,8 +15,8 @@
                         {!! $text !!}
 
                         @if($path != null)
-                            {{$path}}
-                            <img src="{{'/images/activities/0/bar.jpg'}}">
+                            {{--{{$path}}--}}
+                            <img src="{{$path . 'bar.jpg'}}">
                         @endif
 
                         {{--@if( isset($subtasks) )--}}
@@ -29,7 +29,7 @@
                     </div>
 
                     <div class="panel-footer">
-                        {!! Form::open(['action' => ['TaskController@uploadImage'], 'files' => 'true']) !!}
+                        {!! Form::open(['action' => ['TaskController@uploadImage', $id], 'files' => 'true']) !!}
                         {!! Form::file('photo', ['text-align' => 'left', 'style' => 'display:inline']) !!}
                         {!! Form::submit('Submit', ['text-align' => 'right', 'style' => 'display:inline']) !!}
                         {!! Form::close() !!}

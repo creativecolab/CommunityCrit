@@ -23,4 +23,19 @@ class Idea extends Node
     {
         return $this->hasMany( 'App\Comment' );
     }
+
+    public function ratings()
+    {
+        return $this->hasMany( 'App\Rating' );
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany( 'App\Task' );
+    }
+
+    public function feedback()
+    {
+        return $this->morphMany('App\Feedback', 'commentable');
+    }
 }

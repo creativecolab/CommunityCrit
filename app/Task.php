@@ -9,24 +9,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Node
 {
-	const TYPE_TEXT = 1;
+    const TYPE_TEXT = 1;
     const TYPE_RADIO = 2;
-	const TYPE_IMAGE = 3;
-	const TYPE_CHECKBOX = 4;
+    const TYPE_IMAGE = 3;
+    const TYPE_CHECKBOX = 4;
     const TYPE_MULTITEXT = 5;
 
-	use CrudTrait;
-	use Sluggable;
+    use CrudTrait;
+    use Sluggable;
 
-	protected $fillable = [
-		'name',
-		'text',
+    protected $fillable = [
+        'name',
+        'text',
         'type',
-		'parent_id',
-		'source_id',
-        'project_id',
-        'topic_id',
-	];
+        'parent_id',
+        'source_id',
+    ];
 
     /**
      * Return the sluggable configuration array for this model.
@@ -42,55 +40,56 @@ class Task extends Node
         ];
     }
 
-	/**
-	 * Returns whether or not the Task has subtasks
-	 *
-	 * @return bool
-	 */
-	public function hasSubtasks()
-	{
-		return $this->subtasks->isNotEmpty();
-	}
+    /**
+     * Returns whether or not the Task has subtasks
+     *
+     * @return bool
+     */
+    public function hasSubtasks()
+    {
+        return $this->subtasks->isNotEmpty();
+    }
 
-	/**
-	 * Gets all subtasks
-	 *
-	 * @return mixed
-	 */
-	public function subtasks()
-	{
-		return $this->children()->get();
-	}
+    /**
+     * Gets all subtasks
+     *
+     * @return mixed
+     */
+    public function subtasks()
+    {
+        return $this->children()->get();
+    }
 
-	/**
-	 * Feedback for this task
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function feedback()
-	{
-		return $this->hasMany( 'App\Feedback' );
-	}
+    /**
+     * Feedback for this task
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function feedback()
+    {
+//		return $this->hasMany( 'App\Feedback' );
+        return $this->morphMany( 'App\Feedback', 'commentable');
+    }
 
-	/**
-	 * Users recommended to this task
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function recommendedUsers()
-	{
-		return $this->belongsToMany('App\User', 'recommendations')->withTimestamps();
-	}
+    /**
+     * Users recommended to this task
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function recommendedUsers()
+    {
+        return $this->belongsToMany('App\User', 'recommendations')->withTimestamps();
+    }
 
-	/**
-	 * Source of the task information (if exists)
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function source()
-	{
-		return $this->belongsTo('App\Task', 'source_id');
-	}
+    /**
+     * Source of the task information (if exists)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function source()
+    {
+        return $this->belongsTo('App\Task', 'source_id');
+    }
 
     /**
      * Quotes for this source
@@ -117,8 +116,18 @@ class Task extends Node
         return $this->belongsTo( 'App\Project' );
     }
 
-	public function options()
-	{
-		return $this->belongsToMany('App\Option');
-	}
+    public function options()
+    {
+        return $this->belongsToMany('App\Option');
+    }
+
+    public function ideas()
+    {
+        return $this->belongsToMany( 'App\Idea' );
+    }
+
+    public function links()
+    {
+        return $this->hasManyThrough('App\Link', 'App\Idea');
+    }
 }

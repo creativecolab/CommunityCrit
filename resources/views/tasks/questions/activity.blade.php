@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="panel panel-default">
-                <div class="panel-heading">@if($task->project){{$task->project->name}}@endif - @if($task->topic){{$task->topic->name}}@endif</div>
+                <div class="panel-heading">Project - Topic</div>
                 <div class="panel-body">
 
                     @if($options->isEmpty())

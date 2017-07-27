@@ -11,14 +11,14 @@
 |
 */
 
-Route::get( '/', function () {
-	return view( 'welcome' );
-} );
-//Route::get( '/', function() {
-//    return redirect()->action(
-//        'TaskController@testShow', ['id' => 0]
-//    );
+//Route::get( '/', function () {
+//	return view( 'welcome' );
 //} );
+Route::get( '/', function() {
+    return redirect()->action(
+        'HomeController@index', []
+    );
+} );
 
 Auth::routes();
 
@@ -32,7 +32,6 @@ Route::get( '/about', function () {
 } );
 
 
-
 //Route::group( [ 'prefix' => 'devtest' ], function() {
 //    Route::get('/submit/', function() { return view('proto/testsubmit');});
 ////    Route::get('/', 'TaskController@testDashboard' );
@@ -43,14 +42,21 @@ Route::get( '/about', function () {
 //} );
 
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
+Route::post( '/home/submit', 'TaskController@newsubmit' );
 
 Route::group( [ 'prefix' => 'ideas' ], function() {
+    Route::get('/submit/link/{id}', 'IdeaController@showSubmitLink');
+    Route::get('/assess/{id}', 'IdeaController@showAssess');
     Route::get('/submit', 'IdeaController@showSubmit');
     Route::get('/combine', 'IdeaController@showCombination');
+    Route::get('/comment/{id}', 'IdeaController@showComment');
     Route::get('/{id}', 'IdeaController@show');
     Route::get('/', 'IdeaController@index');
     Route::post( '/submit/new', 'IdeaController@submitIdea');
     Route::post( '/combine/new', 'IdeaController@combine' );
+    Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
+    Route::post( '/assess/{idea}/new', 'IdeaController@assess');
+    Route::post( '/submit/link/{idea}/new', 'IdeaController@submitLink');
 } );
 
 Route::group( [ 'prefix' => 'activities' ], function() {
@@ -64,7 +70,9 @@ Route::group( [ 'prefix' => 'activities' ], function() {
 } );
 
 Route::group( ['prefix' => 'devtest' ], function() {
+    Route::get( '/attach/{task}', 'TaskController@showConnect' );
     Route::get( '/', 'TaskController@mapTest');
+    Route::post( '/attach/{task}/new', 'TaskController@connectTaskIdea' );
 } );
 //Route::group( [ 'prefix' => 'tasks' ], function () {
 //	Route::get( '/', 'TaskController@index' );

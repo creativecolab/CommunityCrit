@@ -5,7 +5,7 @@
 @section('content')
     @foreach ($ideas as $idea)
         <div class="col-sm-6 col-md-4">
-            <a class="panel-link" href="#">
+            <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="panel-title">Idea #{{$idea->id}}</div>

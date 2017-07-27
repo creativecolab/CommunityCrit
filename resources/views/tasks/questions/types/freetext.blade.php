@@ -22,7 +22,6 @@
                 {!! Form::open(['action' => ['TaskController@storeResponse', $id], 'style' => 'display:inline']) !!}
                 <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                     {!! Form::label('comment', 'Share Your Thoughts:') !!}
-                    <textarea class="form-control" name="type" id="type" style="display:none;">custom</textarea>
                     {!! Form::textarea('input1', '', ['value' => 'custom', 'class' => 'form-control', 'required' => 'true']) !!}
 
                     @if ($errors->has('comment'))

@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
 {
+    const TYPES = [
+        1 => 'text',
+        2 => 'image',
+    ];
 
     use CrudTrait;
 

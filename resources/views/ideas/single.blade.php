@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $title)
+@section('title', 'Idea #' . $idea->id)
 
 @section('content')
 
@@ -11,11 +11,10 @@
         </h1>
     </div>
 
-    @foreach ($quotes as $quote)
-        <p id="1"><strong>{{ $quote->name }}</strong> {!! $quote->text !!} <a class="viewComments" href="{{ action('TaskController@quote', $quote->id) }}"><span class="glyphicon glyphicon-comment" data-state="off" aria-hidden="true"></span><span class="commentCount">{{ $quote->feedback->count() }}</span></a>
-            @foreach ($quote->facets as $facet) <a class="label label-default" href="{{ action('TaskController@singleFacet', $facet->slug) }}">{{$facet->name}}</a> @endforeach
+    @foreach ($links as $link)
+        <p>{{$link->text}}</p>
     @endforeach
 
-    @component('tasks.commentsPage', [ 'task' => $source ])
-    @endcomponent
+    {{--@component('tasks.commentsPage', [ 'task' => $source ])--}}
+    {{--@endcomponent--}}
 @endsection

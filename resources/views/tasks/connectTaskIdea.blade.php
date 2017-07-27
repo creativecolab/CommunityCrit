@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
-@section('title', 'Combination')
+@section('title', 'Admin')
 
 @section('content')
-
-    {!! Form::open(['action' => ['IdeaController@combine']]) !!}
+    {!! Form::open(['action' => ['TaskController@connectTaskIdea', $id]]) !!}
     <div class="form-group">
-        <label class="col-md-4 control-label">Select similar ideas:</label>
+        <label class="col-md-4 control-label">Choose ideas to connect</label>
         <div class="col-md-8">
-            {{--Checkbox for each idea--}}
             @foreach($ideas as $idea)
                 <div class="checkbox">
                     <label>
@@ -17,14 +15,6 @@
                     </label>
                 </div>
             @endforeach
-
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-md-4 control-label">Name your new idea</label>
-        <div class="col-md-6">
-            {!! Form::textarea('name', '', ['class' => 'form-control', 'required' => 'true', 'rows' => 1]) !!}
         </div>
     </div>
 
@@ -35,7 +25,4 @@
         </div>
     </div>
     {!! Form::close() !!}
-    <div class="form-group">
-        <a type="button" class="btn btn-primary" href="#">Skip</a>
-    </div>
 @endsection

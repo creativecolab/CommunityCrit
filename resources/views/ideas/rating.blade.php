@@ -4,28 +4,23 @@
 
 @section('content')
 
-    {!! Form::open(['action' => ['IdeaController@combine']]) !!}
+    {!! Form::open(['action' => ['IdeaController@assess', $idea->id]]) !!}
     <div class="form-group">
-        <label class="col-md-4 control-label">Select similar ideas:</label>
+        @foreach($ratings as $rating)
+        <label class="col-md-4 control-label">Rate on {{$rating}}:</label>
         <div class="col-md-8">
             {{--Checkbox for each idea--}}
-            @foreach($ideas as $idea)
-                <div class="checkbox">
+            @for($i = 1; $i < 6; $i++)
+                <div class="radio-inline">
                     <label>
-                        {!! Form::checkbox($idea->id, $idea->id) !!}
-                        {{$idea->text}}
+                        {!! Form::radio($rating, $i) !!}
+                        {{$i}}
                     </label>
                 </div>
-            @endforeach
+            @endfor
 
         </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-md-4 control-label">Name your new idea</label>
-        <div class="col-md-6">
-            {!! Form::textarea('name', '', ['class' => 'form-control', 'required' => 'true', 'rows' => 1]) !!}
-        </div>
+        @endforeach
     </div>
 
     <div class="form-group">

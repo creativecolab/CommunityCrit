@@ -35,7 +35,7 @@ class Feedback extends Model
 
 	use CrudTrait;
 
-	protected $fillable = [ 'comment', 'task_id', 'user_id', 'type' ];
+	protected $fillable = [ 'comment', 'task_id', 'user_id', 'type', 'commentable_type', 'commentable_id' ];
 
 	/**
 	 * Task for this comment
@@ -56,6 +56,11 @@ class Feedback extends Model
 	{
 		return $this->belongsTo('App\User');
 	}
+
+    public function commentable()
+    {
+        return $this->morphTo();
+    }
 
     /**
      * Determine type of feedback

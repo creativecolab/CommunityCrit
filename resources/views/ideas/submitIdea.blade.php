@@ -15,4 +15,5 @@
         </div>
     </div>
     {!! Form::close() !!}
+    <a type="button" class="btn btn-primary" href="#">Skip</a>
 @endsection
