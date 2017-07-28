@@ -16,6 +16,88 @@ use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 
 class TaskController extends Controller
 {
+    //--------------------- SHOW METHODS ------------------------------
+
+    /**
+     * show question
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show( $id )
+    {
+        $task = Task::find($id);
+
+        if ($task == null) {
+            abort(404);
+        }
+        if ($task->type == Task::TYPE_IMAGE) {
+            return redirect()->action( 'TaskController@imageTest', $task->id );
+        }
+
+        $view = 'tasks.questions.activity';
+
+        $title = $task->name;
+
+
+        $options = $task->options;
+        $data = ['task' => $task, 'title' => $title, 'options' => $options];
+        return view($view, $data);
+    }
+
+    /**
+     * view page for connecting tasks to ideas (for dev use)
+     *
+     * @param Task $task
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function showConnect(Task $task)
+    {
+        $user = \Auth::user();
+        if ($user->admin != 1)
+            return redirect()->action( 'HomeController@index' );
+
+        $view = 'tasks.connectTaskIdea';
+        $data = ['id' => $task->id, 'ideas' => Idea::get()];
+
+        return view($view, $data);
+    }
+
+    /**
+     * view page for elaborate/build type activity
+     *
+     * @param $task_id
+     * @param $idea_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showElaborate( $task_id, $idea_id )
+    {
+        $view = 'tasks.questions.elaboration';
+
+        $idea = Idea::find($idea_id);
+        $task = Task::find($task_id);
+
+        $links = $idea->links;
+
+        $data = ['idea' => $idea, 'link' => $links->first(), 'task' => $task];
+
+        return view($view, $data);
+    }
+
+    /**
+     * view page for overview - reset local storage TODO: put local storage methods elsewhere
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function overview()
+    {
+        //refresh visited questions when seeing overview page
+        \Session::forget('visited');
+        \Session::put('visited', []);
+//        $data = [];
+        return view('overview');
+    }
+
     public function newTask( Request $request )
     {
         $task = new Task;
@@ -177,15 +259,6 @@ class TaskController extends Controller
         }
     }
 
-    public function overview()
-    {
-        //refresh visited questions when seeing all projects
-        \Session::forget('visited');
-        \Session::put('visited', []);
-//        $data = [];
-        return view('overview');
-    }
-
     /**
      * Display single task view
      *
@@ -247,33 +320,6 @@ class TaskController extends Controller
         return view($view, $data);
     }
 
-    /**
-     * show question
-     *
-     * @param $id
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show( $id )
-    {
-        $task = Task::find($id);
-
-        if ($task == null) {
-            abort(404);
-        }
-        if ($task->type == Task::TYPE_IMAGE) {
-            return redirect()->action( 'TaskController@imageTest', $task->id );
-        }
-
-        $view = 'tasks.questions.activity';
-
-        $title = $task->name;
-
-
-        $options = $task->options;
-        $data = ['task' => $task, 'title' => $title, 'options' => $options];
-        return view($view, $data);
-    }
-
     public function testStoreResponse( Request $request, Task $task )
     {
         $feedback          = new Feedback;
@@ -330,18 +376,6 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-    public function showConnect(Task $task)
-    {
-        $user = \Auth::user();
-        if ($user->admin != 1)
-            return redirect()->action( 'HomeController@index' );
-
-        $view = 'tasks.connectTaskIdea';
-        $data = ['id' => $task->id, 'ideas' => Idea::get()];
-
-        return view($view, $data);
-    }
-
     public function newsubmit( Request $request )
     {
         $inputs = $request->input();
@@ -353,6 +387,28 @@ class TaskController extends Controller
             'message' => 'Your AJAX processed correctly'
         ];
         return response()->json($data);
+    }
+
+    public function elaborate( Request $request, Idea $idea )
+    {
+        $feedback = new Feedback;
+        $feedback->user_id = \Auth::id();
+        $feedback->comment = $request->get( 'text' );
+        $feedback->type = 'build';
+
+        if ( $idea->feedback()->save($feedback) ) {
+            flash("Comment submitted!")->success();
+        } else {
+            flash('Unable to save your feedback. Please contact us.')->error();
+        }
+
+        return redirect()->back();
+    }
+
+    private function taskQueue( $task_id )
+    {
+        \Session::push('visited', $task_id);
+        \Session::get('queue');
     }
 
     /**

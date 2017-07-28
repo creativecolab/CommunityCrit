@@ -60,13 +60,15 @@ Route::group( [ 'prefix' => 'ideas' ], function() {
 } );
 
 Route::group( [ 'prefix' => 'activities' ], function() {
-    Route::match(['get', 'post'], 'dash', 'TaskController@dashboard');
+    Route::get( '/build/{task_id}/{idea_id}', 'TaskController@showElaborate');
     Route::get( 'img/{id}', 'TaskController@imageTest');
     Route::get( '/', 'TaskController@allActivities' );
     Route::get( '/{id}', 'TaskController@show' );
+    Route::match(['get', 'post'], '/dash', 'TaskController@dashboard');
     Route::post( '/{task}/response', 'TaskController@storeResponse' );
     Route::post( '/{id}/skip', 'TaskController@skipQuestion' );
     Route::post( 'img/{task}/upload', 'TaskController@uploadImage');
+    Route::post( '/build/{idea}/new', 'TaskController@elaborate');
 } );
 
 Route::group( ['prefix' => 'devtest' ], function() {
