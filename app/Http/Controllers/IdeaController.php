@@ -15,6 +15,22 @@ use Illuminate\Http\Request;
 
 class IdeaController extends Controller
 {
+    /**
+     * Table of Contents:
+     * -private functions
+     * -show functions
+     * -post functions
+     */
+
+
+    //------------ private functions -----------------
+
+    /**
+     * calculates the average ratings on an idea TODO: possibly reorganize database -store ratings in feedback- when design complete
+     *
+     * @param $idea
+     * @return \Illuminate\Support\Collection
+     */
     private function avgRatings($idea)
     {
         $allRatings = $idea->ratings;
@@ -26,6 +42,13 @@ class IdeaController extends Controller
         return collect($ratings);
     }
 
+    //---------------- show functions ----------------
+
+    /**
+     * view page to show all ideas
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index()
     {
         $view = 'ideas.all';
@@ -37,6 +60,12 @@ class IdeaController extends Controller
         return view($view, $data);
     }
 
+    /**
+     * view page to show a single idea
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         $idea = Idea::find($id);
@@ -51,6 +80,11 @@ class IdeaController extends Controller
         return view($view, $data);
     }
 
+    /**
+     * view page to show the combine ideas page --unused
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showCombination()
     {
         $view = 'ideas.combination';
@@ -60,6 +94,11 @@ class IdeaController extends Controller
         return view($view, $data);
     }
 
+    /**
+     * view page to submit a new idea
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showSubmit()
     {
         $view = 'ideas.submitIdea';
@@ -68,6 +107,12 @@ class IdeaController extends Controller
         return view($view, $data);
     }
 
+    /**
+     * view page to comment on an idea
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showComment($id)
     {
         $view = 'ideas.comment';
@@ -79,6 +124,13 @@ class IdeaController extends Controller
         return view($view, $data);
     }
 
+    /**
+     * view page to submit a new link
+     * TODO: allow submission of link to either allow new idea or existing idea
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showSubmitLink($id)
     {
         $idea = Idea::find($id);
@@ -88,6 +140,13 @@ class IdeaController extends Controller
         return view($view, $data);
     }
 
+    /**
+     * view page to rate an idea
+     * TODO: possibly change database structure -- combine ratings into feedback
+     *
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showAssess($id)
     {
         $view = 'ideas.rating';
@@ -98,6 +157,14 @@ class IdeaController extends Controller
         return view($view, $data);
     }
 
+    //------------------ post methods ------------------------
+
+    /**
+     * create a new idea
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submitIdea(Request $request)
     {
         $idea = new Idea;
@@ -112,6 +179,13 @@ class IdeaController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * combine two ideas - creates a new idea and makes this idea a parent of the old ideas
+     * --unused
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function combine( Request $request )
     {
         $subideas = $request->except( ['_token', 'name'] );
@@ -134,6 +208,13 @@ class IdeaController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * create a new comment, linked to an idea
+     *
+     * @param Request $request
+     * @param Idea $idea
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function comment( Request $request, Idea $idea )
     {
         $comment = new Feedback;
@@ -150,6 +231,14 @@ class IdeaController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * create a new Rating, linked to an idea
+     * TODO: see above on ratings
+     *
+     * @param Request $request
+     * @param Idea $idea
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function assess( Request $request, Idea $idea )
     {
         $qualities = Rating::QUALITIES;
@@ -172,6 +261,13 @@ class IdeaController extends Controller
         return redirect()->back();
     }
 
+    /**
+     * submit a new link/reference, linked to an idea
+     *
+     * @param Request $request
+     * @param Idea $idea
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submitLink( Request $request, Idea $idea )
     {
         $link = new Link;

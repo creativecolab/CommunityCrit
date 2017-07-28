@@ -15,6 +15,11 @@ class Task extends Node
     const TYPE_CHECKBOX = 4;
     const TYPE_MULTITEXT = 5;
 
+    const TYPE_EVAL = [100 => 'rating', 101 => 'text', 102 => 'text_link'];
+    const TYPE_IMPROVE = [90 => 'no_link', 91 => 'link'];
+    const TYPE_SUBMIT = [80 => 'idea', 81 => 'link'];
+    const TYPES = ['eval' => Task::TYPE_EVAL, 'improve' => Task::TYPE_IMPROVE, 'submit' => Task::TYPE_SUBMIT];
+
     use CrudTrait;
     use Sluggable;
 
@@ -22,6 +27,7 @@ class Task extends Node
         'name',
         'text',
         'type',
+//        'task_id',
         'parent_id',
         'source_id',
     ];
@@ -126,8 +132,8 @@ class Task extends Node
         return $this->belongsToMany( 'App\Idea' );
     }
 
-    public function links()
-    {
-        return $this->hasManyThrough('App\Link', 'App\Idea');
-    }
+//    public function links()
+//    {
+//        return $this->hasManyThrough('App\Link', 'App\Idea');
+//    }
 }

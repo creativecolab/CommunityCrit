@@ -18,6 +18,14 @@ class TaskController extends Controller
 {
     //--------------------- SHOW METHODS ------------------------------
 
+    private function showRedirect( $task, $type )
+    {
+        $allTypes = Task::TYPES;
+        $evals = collect($allTypes['eval']);
+        $imps = collect($allTypes['improve']);
+        $subs = collect($allTypes['submit']);
+    }
+
     /**
      * show question
      *
