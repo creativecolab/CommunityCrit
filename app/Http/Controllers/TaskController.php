@@ -8,6 +8,7 @@ use App\Task;
 use App\User;
 use App\Source;
 use App\Idea;
+use App\Rating;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -18,12 +19,37 @@ class TaskController extends Controller
 {
     //--------------------- SHOW METHODS ------------------------------
 
+    /**
+     * Redirects to the appropriate view according to the task
+     * TODO: finish for all types of tasks
+     *
+     * @param $task
+     * @param $type
+     * @return string
+     */
     private function showRedirect( $task, $type )
     {
         $allTypes = Task::TYPES;
         $evals = collect($allTypes['eval']);
         $imps = collect($allTypes['improve']);
         $subs = collect($allTypes['submit']);
+        //TODO: change if we do many to many tasks <--> ideas
+        $idea = $task->ideas->first();
+        $view = '';
+        $data = [];
+
+        if ($evals->keys()->contains($type)) {
+            $view = 'ideas.rating';
+            $data['idea'] =  $idea;
+            $data['ratings'] = Rating::QUALITIES;
+        } else if ($imps->keys()->contains($type)) {
+
+        } else if ($subs->keys()->contains($type)) {
+            $view = 'ideas.submitIdea';
+        }
+
+        $vals = ['view' => $view, 'data' => $data];
+        return $vals;
     }
 
     /**
@@ -42,14 +68,16 @@ class TaskController extends Controller
         if ($task->type == Task::TYPE_IMAGE) {
             return redirect()->action( 'TaskController@imageTest', $task->id );
         }
-
-        $view = 'tasks.questions.activity';
-
         $title = $task->name;
-
-
         $options = $task->options;
         $data = ['task' => $task, 'title' => $title, 'options' => $options];
+
+//        $view = 'tasks.questions.activity';
+        $redVals = collect($this->showRedirect( $task, $task->type));
+        $view = $redVals['view'];
+        foreach($redVals['data'] as $key=>$val) {
+            $data[$key] = $val;
+        }
         return view($view, $data);
     }
 
