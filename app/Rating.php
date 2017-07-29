@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
-    //things to rate go here, increment
+    //things to rate go here, increment and follow structure
     const QUALITIES = [
         1 => 'originality',
         2 => 'practicality',
