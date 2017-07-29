@@ -80,7 +80,7 @@ class TaskController extends Controller
      */
     public function showElaborate( $task_id, $idea_id )
     {
-        $view = 'tasks.questions.elaboration';
+        $view = 'activities.elaboration';
 
         $idea = Idea::find($idea_id);
         $task = Task::find($task_id);
