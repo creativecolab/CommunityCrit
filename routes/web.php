@@ -47,7 +47,7 @@ Route::post( '/home/submit', 'TaskController@newsubmit' );
 Route::group( [ 'prefix' => 'ideas' ], function() {
     Route::get('/submit/link/{id}', 'IdeaController@showSubmitLink');
     Route::get('/assess/{id}', 'IdeaController@showAssess');
-    Route::get('/submit', 'IdeaController@showSubmit');
+    Route::get('/submit', 'IdeaController@showSubmit'); // submit a new idea
     Route::get('/combine', 'IdeaController@showCombination');
     Route::get('/comment/{id}', 'IdeaController@showComment');
     Route::get('/{id}', 'IdeaController@show');
@@ -72,7 +72,7 @@ Route::group( [ 'prefix' => 'activities' ], function() {
 } );
 
 Route::group( ['prefix' => 'devtest' ], function() {
-    Route::get( '/attach/{task}', 'TaskController@showConnect' );
+    Route::get( '/attach/{task}', 'TaskController@showConnect' ); // attaches idea and task
     Route::get( '/', 'TaskController@mapTest');
     Route::post( '/attach/{task}/new', 'TaskController@connectTaskIdea' );
 } );
