@@ -25,6 +25,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Idea::class, function (Faker\Generator $faker) {
+	return [
+		'name' => ucwords($faker->name),
+		'text' => $faker->text,
+	];
+});
+
 $factory->define(App\Task::class, function (Faker\Generator $faker) {
 	return [
 		'name' => ucwords($faker->word),

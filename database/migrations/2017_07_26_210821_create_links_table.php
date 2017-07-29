@@ -16,6 +16,7 @@ class CreateLinksTable extends Migration
         Schema::create('links', function (Blueprint $table) {
             $table->increments('id');
             $table->tinyInteger('type')->nullable();
+            $table->tinyInteger('link_type')->nullable();
             $table->tinyInteger('image')->default(0)->nullable();
             $table->text('text')->nullable();
             $table->unsignedInteger('idea_id')->nullable();

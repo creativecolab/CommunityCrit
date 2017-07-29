@@ -28,7 +28,10 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <h4 class="no-marg-top">Reference: Project Goal</h4>
+                            <h4 class="no-marg-top">Reference: 
+                                @component('activities.common.link_type_name', ['link_type' => $link->link_type])
+                                @endcomponent
+                            </h4>
                             <p class="no-marg-bot">
                                 {!! $link->text !!}
                             </p>
