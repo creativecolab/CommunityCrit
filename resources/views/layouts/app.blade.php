@@ -59,7 +59,7 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
-                        <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">12</span></a></li>
+                        <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">{{ $myFeedbackCount }}</span></a></li>
 {{--                        <li><a href="{{ action('TaskController@index') }}">Tasks</a></li>--}}
                         @if(Auth::user()->admin)
                             <li>

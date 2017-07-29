@@ -17,3 +17,5 @@ npm-debug.log
 /public/vendor/
 .phpstorm.meta.php
 _ide_helper.php
+
+app/Http/Controllers/FeedbackController.php
