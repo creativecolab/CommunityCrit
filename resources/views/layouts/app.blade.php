@@ -31,7 +31,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'CommunityCrit') }}
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">

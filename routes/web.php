@@ -41,8 +41,11 @@ Route::get( '/about', function () {
 //    Route::post('/submit/new', 'TaskController@newTask');
 //} );
 
+Route::get( '/do', 'TaskController@showRandomTask');
+
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
 Route::post( '/home/submit', 'TaskController@newsubmit' );
+Route::get( 'my-contributions', 'FeedbackController@showMyFeedback');
 
 Route::group( [ 'prefix' => 'ideas' ], function() {
     Route::get('/submit/link/{id}', 'IdeaController@showSubmitLink');

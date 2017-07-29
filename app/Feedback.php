@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -128,5 +129,15 @@ class Feedback extends Model
         }
 //        $comment = "qhat";
         return $comment;
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
+    }
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
     }
 }

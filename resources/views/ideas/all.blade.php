@@ -8,7 +8,7 @@
             <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <div class="panel-title">Idea #{{$idea->id}}</div>
+                        <div class="panel-title">{{$idea->name}}</div>
                     </div> <!-- .panel-heading -->
                     <div class="panel-body">
                         {!! $idea->text !!}
