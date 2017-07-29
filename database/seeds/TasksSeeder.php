@@ -16,6 +16,11 @@ class TasksSeeder extends Seeder
             'text' => 'Improve the current idea by suggesting changes or additions that support the reference.',
             'type' => '91',
         ],
+        [
+            'name' => 'Critique Idea',
+            'text' => 'How well does the current idea align with this reference?',
+            'type' => '91',
+        ],
     ];
     /**
      * Run the database seeds.
