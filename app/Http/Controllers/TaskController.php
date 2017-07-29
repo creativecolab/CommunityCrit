@@ -114,8 +114,11 @@ class TaskController extends Controller
         $task = Task::find($task_id);
 
         $links = $idea->links;
+        // print(count($links));
+        // $rand_keys = array_rand($links, 2);
+        // print($input[$rand_keys[0]]);
 
-        $data = ['idea' => $idea, 'link' => $links->first(), 'task' => $task];
+        $data = ['idea' => $idea, 'link' => $links[rand(0, count($links)-1)], 'task' => $task];
 
         return view($view, $data);
     }

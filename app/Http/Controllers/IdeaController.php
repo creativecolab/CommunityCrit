@@ -276,7 +276,7 @@ class IdeaController extends Controller
 //        TODO: allow multiple submission types
         $link->text = $request->get( 'text' );
         $link->type = 1;
-        $link->link_type = 1;
+        $link->link_type = rand(1, 5);
 
         if( $idea->links()->save($link) ) {
             flash("Link submitted!");
