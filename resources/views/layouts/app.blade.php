@@ -40,7 +40,7 @@
                     @if (Auth::guest())
                         &nbsp;
                     @else
-                        <li><a href="{{ url('/overview') }}">Overview</a></li>
+                        {{--<li><a href="{{ url('/overview') }}">Overview</a></li>--}}
                         {{--<li><a href="{{ action('TaskController@allFacets') }}">Topics</a></li>--}}
                         {{--<li><a href="{{ action('TaskController@allSources') }}">Sources</a></li>--}}
                         {{--<li class="dropdown"><a href="sources.htm" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Sources<span class="caret"></span></a>--}}
@@ -48,7 +48,7 @@
                         {{--<li><a href="source-detail.htm">14th Street Promenade Master Plan</a></li>--}}
                         {{--<li><a href="source-detail.htm">East Village South Focus Plan</a></li>--}}
                         {{--</ul>--}}
-                        <li><a href="{{ url('/about') }}">About Us</a></li>
+                        <li><a href="{{ url('/about') }}">About</a></li>
                     @endif
                 </ul>
 
@@ -59,6 +59,7 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
+                        <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">12</span></a></li>
 {{--                        <li><a href="{{ action('TaskController@index') }}">Tasks</a></li>--}}
                         @if(Auth::user()->admin)
                             <li>

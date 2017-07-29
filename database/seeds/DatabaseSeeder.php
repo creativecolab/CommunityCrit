@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
 		$this->call( IdeasSeeder::class );
 		//$this->call( SourcesSeeder::class );
 		$this->call( TasksSeeder::class );
+		$this->call( LinksSeeder::class );
 		// $this->call( FacetsSeeder::class );
 		// $this->call( sourceIdSeeder::class );
 		// $this->call( FeedbackSeeder::class );

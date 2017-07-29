@@ -13,7 +13,7 @@ class TasksSeeder extends Seeder
     public $data = [
 	    [
             'name' => 'Improve an Idea',
-            'text' => 'Build a tower that jumps along the way and is in the center of the intersection.',
+            'text' => 'Improve the current idea by suggesting changes or additions that support the reference.',
             'type' => '91',
         ],
     ];

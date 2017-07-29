@@ -8,7 +8,7 @@ class IdeasSeeder extends Seeder
 	public $data = [
         [
             'name' => 'Build a tower',
-            'text' => 'Build a tower that jumps along the way and is in the center of the intersection.',
+            'text' => 'Build a tower in the center of the intersection.',
         ],
     ];
     /**

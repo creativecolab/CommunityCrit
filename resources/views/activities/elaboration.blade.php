@@ -14,10 +14,10 @@
                         </div>
                         <div class="col-md-9">
                             <h2 class="no-marg-top">
-                            Idea: {!! $idea->text !!}
+                            Idea: {!! $idea->name !!}
                             <button class="btn btn-default pull-right">Switch idea</button>
                             </h2>
-                            <p>About the idea...Meantime, Fedallah was calmly eyeing the right whale's head, and ever and anon glancing from the deep wrinkles there to the lines in his own hand. And Ahab chanced so to stand, that the Parsee occupied his shadow; while, if the Parsee's shadow was there at all it seemed only to blend with, and lengthen Ahab's. As the crew toiled on, Laplandish speculations were bandied among them, concerning all these passing things.</p>
+                            <p>{!! $idea->text !!}</p>
                         </div>
                     </div> <!-- .row -->
                 
