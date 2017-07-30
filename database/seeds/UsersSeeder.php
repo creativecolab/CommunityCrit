@@ -13,9 +13,16 @@ class UsersSeeder extends Seeder
     public $data = [
 	    [
             'fname' => 'Michael',
-            'lname' => 'James',
-            'email' => 'mrjames@andrew.cmu.edu',
-            'admin' => 1
+            'lname' => 'Test',
+            'email' => 'test@test.com',
+            'remember_token' => 'cY63GA0xfW'
+        ],
+        [
+            'fname' => 'Mike',
+            'lname' => 'Admin',
+            'email' => 'admin@test.com',
+            'admin' => 1,
+            'remember_token' => 'YwaSQnhZLO'
         ],
     ];
 	/**

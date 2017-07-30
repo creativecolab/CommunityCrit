@@ -28,6 +28,7 @@ class MyContributionsComposer
     public function compose(View $view)
     {
         // $view->with('latestMovie', end($this->movieList));
-        !Auth::guest() ? $view->with('myFeedbackCount', count(auth()->user()->feedback)) : null;
+        $count = count(auth()->user()->feedback) + count(auth()->user()->ideas);
+        !Auth::guest() ? $view->with('myFeedbackCount', $count) : null;
     }
 }

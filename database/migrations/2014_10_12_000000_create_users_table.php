@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('email')->unique();
-            $table->string('password')->default(bcrypt('secret'));
-            $table->rememberToken()->str_random(10);
+            $table->string('password')->default(bcrypt('blueberry'));
+            $table->rememberToken();
             $table->tinyInteger('condition')->nullable()->rand(App\User::CONDITION_MIN, App\User::CONDITION_MAX);
 	        $table->boolean('admin')->default(false);
             $table->timestamps();
