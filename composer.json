@@ -17,7 +17,7 @@
         "laravelcollective/html": "^5.4.0",
         "ext-gd": "*",
         "cornford/googlmapper": "2.*",
-        "fzaninotto/faker": "~1.4",
+        "fzaninotto/faker": "~1.4"
     },
     "require-dev": {
         "backpack/generators": "^1.1",
