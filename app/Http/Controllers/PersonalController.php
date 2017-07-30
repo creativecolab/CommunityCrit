@@ -13,7 +13,7 @@ use App\Rating;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
-class FeedbackController extends Controller
+class PersonalController extends Controller
 {
     /**
      * Table of Contents:
@@ -70,6 +70,8 @@ class FeedbackController extends Controller
         $view = 'user.feedback';
         $data = [];
 
+        $ideas = Auth()->User()->ideas->sortByDesc('created_at');
+        $data['ideas'] = $ideas;
         $feedbacks = Auth()->User()->feedback->sortByDesc('created_at');
         $data['feedbacks'] = $feedbacks;
 

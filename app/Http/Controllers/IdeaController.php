@@ -75,7 +75,7 @@ class IdeaController extends Controller
         $data['idea'] = $idea;
         $data['ratings'] = $this->avgRatings($idea);
         $data['rating_keys'] = $data['ratings']->keys()->all();
-        $data['links'] = $idea->links;
+        $data['links'] = $idea->links->sortBy('link_type');;
 
         return view($view, $data);
     }

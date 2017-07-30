@@ -134,10 +134,22 @@ class Feedback extends Model
     public function getCreatedAtAttribute($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
+        // return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();
+        // return Carbon::parse($date)->diffForHumans();
     }
 
     public function getUpdatedAtAttribute($date)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
+        // return $this->attributes['updated_at'] = Carbon::parse($date)->diffForHumans();
     }
+
+    // public function created_ago() {
+    //     return "hi";
+    //     return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();
+    //     // $end = Carbon::parse($request->input('created_at'));
+    //     // $now = Carbon::now();
+    //     // $length = $end->diffInDays($now);
+    //     // return $length->diffForHumans();
+    // }
 }

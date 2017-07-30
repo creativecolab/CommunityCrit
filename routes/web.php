@@ -14,9 +14,14 @@
 //Route::get( '/', function () {
 //	return view( 'welcome' );
 //} );
+
+// // Route::group ( ['middleware' => 'checkUser'], function () {
+//     Route::get('/', 'TaskController@showRandomTask');
+// // }
+
 Route::get( '/', function() {
     return redirect()->action(
-        'HomeController@index', []
+        'TaskController@showRandomTask', []
     );
 } );
 
@@ -41,31 +46,37 @@ Route::get( '/about', function () {
 //    Route::post('/submit/new', 'TaskController@newTask');
 //} );
 
-Route::get( '/do', 'TaskController@showRandomTask');
 
 Route::get( '/home', 'HomeController@index' )->name( 'home' );
-Route::post( '/home/submit', 'TaskController@newsubmit' );
-Route::get( 'my-contributions', 'FeedbackController@showMyFeedback');
+// Route::post( '/home/submit', 'TaskController@newsubmit' );
+// Route::get( 'my-contributions', 'PersonalController@showMyFeedback');
+
+Route::group( ['middleware' => 'checkUser' ], function() {
+    Route::get( 'my-contributions', 'PersonalController@showMyFeedback');
+});
 
 Route::group( [ 'prefix' => 'ideas' ], function() {
-    Route::get('/submit/link/{id}', 'IdeaController@showSubmitLink');
-    Route::get('/assess/{id}', 'IdeaController@showAssess');
-    Route::get('/submit', 'IdeaController@showSubmit'); // submit a new idea
-    Route::get('/combine', 'IdeaController@showCombination');
-    Route::get('/comment/{id}', 'IdeaController@showComment');
+    Route::get('/', 'IdeaController@index')->name( 'ideas' );
     Route::get('/{id}', 'IdeaController@show');
-    Route::get('/', 'IdeaController@index');
-    Route::post( '/submit/new', 'IdeaController@submitIdea');
-    Route::post( '/combine/new', 'IdeaController@combine' );
-    Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
-    Route::post( '/assess/{idea}/new', 'IdeaController@assess');
-    Route::post( '/submit/link/{idea}/new', 'IdeaController@submitLink');
+    Route::group (['middleware' => 'checkUser'], function () {
+        Route::get('/submit/link/{id}', 'IdeaController@showSubmitLink');
+        Route::get('/assess/{id}', 'IdeaController@showAssess');
+        Route::get('/submit', 'IdeaController@showSubmit'); // submit a new idea
+        Route::get('/combine', 'IdeaController@showCombination');
+        Route::get('/comment/{id}', 'IdeaController@showComment');
+        Route::post( '/submit/new', 'IdeaController@submitIdea');
+        Route::post( '/combine/new', 'IdeaController@combine' );
+        Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
+        Route::post( '/assess/{idea}/new', 'IdeaController@assess');
+        Route::post( '/submit/link/{idea}/new', 'IdeaController@submitLink'); 
+    });
 } );
 
-Route::group( [ 'prefix' => 'activities' ], function() {
+Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function() {
+    Route::get( '/', 'TaskController@showRandomTask')->name( 'do' );
+    // Route::get( '/list', 'TaskController@allActivities' );
     Route::get( '/build/{task_id}/{idea_id}', 'TaskController@showElaborate');
     Route::get( 'img/{id}', 'TaskController@imageTest');
-    Route::get( '/', 'TaskController@allActivities' );
     Route::get( '/{id}', 'TaskController@show' );
     Route::match(['get', 'post'], '/dash', 'TaskController@dashboard');
     Route::post( '/{task}/response', 'TaskController@storeResponse' );
@@ -74,7 +85,7 @@ Route::group( [ 'prefix' => 'activities' ], function() {
     Route::post( '/build/{idea}/new', 'TaskController@elaborate');
 } );
 
-Route::group( ['prefix' => 'devtest' ], function() {
+Route::group( ['prefix' => 'devtest', 'middleware' => 'admin'], function() {
     Route::get( '/attach/{task}', 'TaskController@showConnect' ); // attaches idea and task
     Route::get( '/', 'TaskController@mapTest');
     Route::post( '/attach/{task}/new', 'TaskController@connectTaskIdea' );

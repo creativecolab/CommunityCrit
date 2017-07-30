@@ -138,12 +138,7 @@ class TaskController extends Controller
 
 
         $links = $idea->links;
-        if (count($links) == 0) {
-            $view = 'activities.elaboration-nolink';
-            $link = null;
-        } else {
-            $link = $links[rand(0, count($links)-1)];
-        }
+        $link = count($links) ? $links[rand(0, count($links)-1)] : null;
 
         $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
 

@@ -40,6 +40,7 @@
                     @if (Auth::guest())
                         &nbsp;
                     @else
+                        <li><a href="{{ route('ideas') }}">Ideas</a></li>
                         {{--<li><a href="{{ url('/overview') }}">Overview</a></li>--}}
                         {{--<li><a href="{{ action('TaskController@allFacets') }}">Topics</a></li>--}}
                         {{--<li><a href="{{ action('TaskController@allSources') }}">Sources</a></li>--}}
@@ -48,8 +49,8 @@
                         {{--<li><a href="source-detail.htm">14th Street Promenade Master Plan</a></li>--}}
                         {{--<li><a href="source-detail.htm">East Village South Focus Plan</a></li>--}}
                         {{--</ul>--}}
-                        <li><a href="{{ url('/about') }}">About</a></li>
                     @endif
+                    <li><a href="{{ url('/about') }}">About</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->

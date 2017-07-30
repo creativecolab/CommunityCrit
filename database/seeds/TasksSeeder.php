@@ -19,7 +19,7 @@ class TasksSeeder extends Seeder
         [
             'name' => 'Critique Idea',
             'text' => 'How well does the current idea align with this reference?',
-            'type' => '91',
+            'type' => '101',
         ],
     ];
     /**

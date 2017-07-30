@@ -29,17 +29,19 @@
                                 {!! $task->name !!}
                             </div>
                         </div>
-                        <div class="panel-body">
-                            <h4 class="no-marg-top">Reference: 
-                                @component('activities.common.link_type_name', ['link_type' => $link->link_type])
-                                @endcomponent
-                            </h4>
-                            <p class="no-marg-bot">
-                                {!! $link->text !!}
-                            </p>
-                        </div>
                         <!-- List group -->
                         <ul class="list-group">
+                            @if ($link)
+                                <li class="list-group-item">
+                                    <h4 class="no-marg-top">Reference: 
+                                        @component('utilities.link_type_name', ['link_type' => $link->link_type])
+                                        @endcomponent
+                                    </h4>
+                                    <p class="no-marg-bot">
+                                        {!! $link->text !!}
+                                    </p>
+                                </li>
+                            @endif
                             <li class="list-group-item">
                                 {!! Form::open(['action' => ['TaskController@elaborate', $idea->id], 'style' => 'display:inline']) !!}
                                 <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
@@ -57,7 +59,7 @@
                                     @endif
                                 </div>
                                 {!! Form::submit('Submit', ['class' => 'btn btn-success']) !!}
-                                <button class="btn btn-danger pull-right done">Exit</button>
+                                <button class="btn btn-danger pull-right done">Stop</button>
                                 <button class="btn btn-default pull-right">Skip</button>
                                 {!! Form::close() !!}
                             </li>
