@@ -18,7 +18,9 @@ class Task extends Node
     const TYPE_EVAL = [100 => 'rating', 101 => 'text', 102 => 'text_link'];
     const TYPE_IMPROVE = [90 => 'no_link', 91 => 'link'];
     const TYPE_SUBMIT = [80 => 'idea', 81 => 'link'];
-    const TYPES = ['eval' => Task::TYPE_EVAL, 'improve' => Task::TYPE_IMPROVE, 'submit' => Task::TYPE_SUBMIT];
+    const TYPE_LINK = [70 => 'issue', 71 => 'example'];
+    const TYPE_COMMENT = [20 => 'comment'];
+    const TYPES = ['eval' => Task::TYPE_EVAL, 'link' => Task::TYPE_LINK, 'improve' => Task::TYPE_IMPROVE, 'submit' => Task::TYPE_SUBMIT, 'comment' => Task::TYPE_COMMENT];
 
     use CrudTrait;
     use Sluggable;
