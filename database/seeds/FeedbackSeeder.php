@@ -8,6 +8,38 @@ use Illuminate\Database\Seeder;
 class FeedbackSeeder extends Seeder
 {
 	/**
+     * Data to create
+     *
+     * @var array
+     */
+	public $data = [
+	    [
+            'comment' => 'This is feedback on something that is talking about it.'
+			'user_id' => 1,
+			'type' => 1
+        ],
+        [
+            'comment' => 'This is feedback on something that is talking about it.'
+			'user_id' => 1,
+			'type' => 1
+        ],
+        [
+            'comment' => 'This is feedback on something that is talking about it.'
+			'user_id' => 1,
+			'type' => 1
+        ],
+        [
+            'comment' => 'This is feedback on something that is talking about it.'
+			'user_id' => 1,
+			'type' => 1
+        ],
+        [
+            'comment' => 'This is feedback on something that is talking about it.'
+			'user_id' => 1,
+			'type' => 1
+        ],
+    ];
+	/**
 	 * Run the database seeds.
 	 *
 	 * @return void
@@ -38,6 +70,10 @@ class FeedbackSeeder extends Seeder
 		// 	factory( Feedback::class )->create( [ 'user_id' => $user->id, 'task_id' => $tasks->random()->id, 'type' => 'custom'  ] );
 		// }
 
-		factory(Feedback::class, 5)->create();
+		// factory(Feedback::class, 5)->create();
+
+		foreach ( $this->data as $user ) {
+            User::create($user);
+        }
 	}
 }
