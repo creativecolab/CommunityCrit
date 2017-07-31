@@ -12,12 +12,12 @@ class TasksSeeder extends Seeder
      */
     public $data = [
 	    [
-            'name' => 'Improve an Idea',
+            'name' => 'Improve the Idea',
             'text' => 'Improve the current idea by suggesting changes or additions that support the reference.',
             'type' => '91',
         ],
         [
-            'name' => 'Critique Idea',
+            'name' => 'Critique the Idea',
             'text' => 'How well does the current idea align with this reference?',
             'type' => '101',
         ],
