@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
 		$this->call( LinksSeeder::class );
 		// $this->call( FacetsSeeder::class );
 		// $this->call( sourceIdSeeder::class );
-		// $this->call( FeedbackSeeder::class );
+		$this->call( FeedbackSeeder::class );
 		// $this->call( RecommendationsSeeder::class );
         // $this->call( TagsSeeder::class );
 	}

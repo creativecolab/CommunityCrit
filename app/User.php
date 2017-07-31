@@ -91,6 +91,16 @@ class User extends Authenticatable
 	}
 
 	/**
+	 * Ideas this user has submitted
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function ideas()
+	{
+		return $this->hasMany( 'App\Idea' );
+	}
+
+	/**
 	 * Get User's recommended tasks
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

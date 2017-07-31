@@ -114,14 +114,60 @@ class TaskController extends Controller
         $task = Task::find($task_id);
 
         $links = $idea->links;
-        // print(count($links));
-        // $rand_keys = array_rand($links, 2);
-        // print($input[$rand_keys[0]]);
+        $link = $links[rand(0, count($links)-1)];
+        // print($link);
 
-        $data = ['idea' => $idea, 'link' => $links[rand(0, count($links)-1)], 'task' => $task];
+        $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
 
         return view($view, $data);
     }
+
+    /**
+     * view page for elaborate/build type activity
+     *
+     * @param $task_id
+     * @param $idea_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showRandomTask( )
+    {
+        $view = 'activities.elaboration';
+
+        $idea = Idea::inRandomOrder()->first();
+        $task = Task::inRandomOrder()->first();
+
+
+        $links = $idea->links;
+        $link = count($links) ? $links[rand(0, count($links)-1)] : null;
+
+        $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
+
+        return view($view, $data);
+    }
+
+    // /**
+    //  * view page for elaborate/build type activity
+    //  *
+    //  * @param $task_id
+    //  * @param $idea_id
+    //  * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    //  */
+    // public function showRandomTask()
+    // {
+    //     $view = 'activities.elaboration';
+
+    //     $idea = Idea::inRandomOrder()->get();
+    //     $task = Task::inRandomOrder()->get();
+    //     print($idea);
+    //     print($task);
+    //     // $link = Link::inRandomOrder()->get();
+    //     $link = (object) ['text' => 'A tower is a tall structure, taller than it is wide, often by a significant margin. Towers are distinguished from masts by their lack of guy-wires and are therefore, along with tall buildings, self-supporting structures.', 'link_type' => 5];
+
+    //     $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
+    //     // $data = ['idea' => $idea, 'link' => $links[rand(0, count($links)-1)], 'task' => $task];
+
+    //     return view($view, $data);
+    // }
 
     /**
      * view page for overview - reset local storage TODO: put local storage methods elsewhere
@@ -152,38 +198,38 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-	/**
-	 * Save feedback item for task
-	 *
-	 * @param FeedbackRequest $request
-	 * @param Task $task
-	 *
-	 * @return \Illuminate\Http\RedirectResponse
-	 */
-	public function storeFeedback( FeedbackRequest $request, Task $task )
-	{
+    /**
+     * Save feedback item for task
+     *
+     * @param FeedbackRequest $request
+     * @param Task $task
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeFeedback( FeedbackRequest $request, Task $task )
+    {
 //        $type = $request->get( 'type' );
         $input1 = $request->get( 'input1' );
         $input2 = $request->get( 'input2' );
         $input3 = $request->get( 'input3' );
 
-		$feedback          = new Feedback;
-//		$feedback->comment = $request->get( 'comment' );
-		$feedback->user_id = \Auth::id();
-		$feedback->task_id = $task->id;
+        $feedback          = new Feedback;
+//      $feedback->comment = $request->get( 'comment' );
+        $feedback->user_id = \Auth::id();
+        $feedback->task_id = $task->id;
         $feedback->type = $request->get( 'type' );
         $feedback->comment = $feedback->constructComment($feedback->type, $input1, $input2, $input3);
 
-		$taskName = $task->name;
+        $taskName = $task->name;
 
-		if ( $feedback->save() ) {
-			flash("Feedback submitted for ${taskName}!")->success();
-		} else {
-			flash('Unable to save your feedback. Please contact us.')->error();
-		}
+        if ( $feedback->save() ) {
+            flash("Feedback submitted for ${taskName}!")->success();
+        } else {
+            flash('Unable to save your feedback. Please contact us.')->error();
+        }
 
-		return redirect()->back();
-	}
+        return redirect()->back();
+    }
 
     private function nextTask( $id )
     {
@@ -304,7 +350,7 @@ class TaskController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-	public function testShow( $id )
+    public function testShow( $id )
     {
         if ($id == 0) {
             $task = Task::all()->random(1)->first();
@@ -321,7 +367,7 @@ class TaskController extends Controller
 
         $test = \Session::get('test');
 
-		$title = $task->name;
+        $title = $task->name;
         $options = $task->options;
         $data = ['task' => $task, 'title' => $title, 'options' => $options, 'test' => $test];
         if ($id == 0)
@@ -362,7 +408,7 @@ class TaskController extends Controller
     public function testStoreResponse( Request $request, Task $task )
     {
         $feedback          = new Feedback;
-//		$feedback->comment = $request->get( 'comment' );
+//      $feedback->comment = $request->get( 'comment' );
         $feedback->user_id = \Auth::id();
         $feedback->task_id = $task->id;
         $feedback->type = 'custom';
@@ -451,60 +497,60 @@ class TaskController extends Controller
     }
 
     /**
-    //	 * Display a listing of the resource.
-    //	 * @return \Illuminate\Http\Response
-    //	 * @throws AuthorizationException
-    //	 */
-//	public function index()
-//	{
-//		$condition = \Auth::user()->condition;
+    //   * Display a listing of the resource.
+    //   * @return \Illuminate\Http\Response
+    //   * @throws AuthorizationException
+    //   */
+//  public function index()
+//  {
+//      $condition = \Auth::user()->condition;
 //
-//		// Don't allow user through if they don't have a condition (means
-//		if ($condition === null) {
-//			throw new AuthorizationException();
-//		}
+//      // Don't allow user through if they don't have a condition (means
+//      if ($condition === null) {
+//          throw new AuthorizationException();
+//      }
 //
-//		// Mapping of conditions to template names;
-//		$views = [
-//			User::CONDITION_GENERIC_HOLISTIC => 'tasks.generic.holistic',
-//			User::CONDITION_GENERIC_MICROTASK_OPEN => 'tasks.generic.microtaskOpen',
-//			User::CONDITION_GENERIC_MICROTASK_CLOSED => 'tasks.generic.microtaskClosed',
-//			User::CONDITION_PERSONAL_HOLISTIC => 'tasks.personal.holistic',
-//			User::CONDITION_PERSONAL_MICROTASK_OPEN => 'tasks.personal.microtaskOpen',
-//			User::CONDITION_PERSONAL_MICROTASK_CLOSED => 'tasks.personal.microtaskClosed',
-//		];
+//      // Mapping of conditions to template names;
+//      $views = [
+//          User::CONDITION_GENERIC_HOLISTIC => 'tasks.generic.holistic',
+//          User::CONDITION_GENERIC_MICROTASK_OPEN => 'tasks.generic.microtaskOpen',
+//          User::CONDITION_GENERIC_MICROTASK_CLOSED => 'tasks.generic.microtaskClosed',
+//          User::CONDITION_PERSONAL_HOLISTIC => 'tasks.personal.holistic',
+//          User::CONDITION_PERSONAL_MICROTASK_OPEN => 'tasks.personal.microtaskOpen',
+//          User::CONDITION_PERSONAL_MICROTASK_CLOSED => 'tasks.personal.microtaskClosed',
+//      ];
 //
-//		// Set template name based on condition
-//		$view = $views[$condition];
+//      // Set template name based on condition
+//      $view = $views[$condition];
 //
-//		// Decide which data to fetch
-//		switch($condition) {
-//			case User::CONDITION_PERSONAL_MICROTASK_CLOSED:
-//				$data = ['task' => \Auth::user()->recommendedTasks->first()];
-//				break;
-//			case User::CONDITION_GENERIC_MICROTASK_CLOSED:
-//				$data = ['task' => Task::find(1)]; // TODO: Change to assigned task later
-//				break;
-//			case User::CONDITION_PERSONAL_MICROTASK_OPEN:
-//				$tasks = Task::allLeaves()->get();
-//				$data = ['tasks' => $tasks];
-//				break;
-//			default:
-//				// Get first root task
-//				$rootTask = Task::root();
+//      // Decide which data to fetch
+//      switch($condition) {
+//          case User::CONDITION_PERSONAL_MICROTASK_CLOSED:
+//              $data = ['task' => \Auth::user()->recommendedTasks->first()];
+//              break;
+//          case User::CONDITION_GENERIC_MICROTASK_CLOSED:
+//              $data = ['task' => Task::find(1)]; // TODO: Change to assigned task later
+//              break;
+//          case User::CONDITION_PERSONAL_MICROTASK_OPEN:
+//              $tasks = Task::allLeaves()->get();
+//              $data = ['tasks' => $tasks];
+//              break;
+//          default:
+//              // Get first root task
+//              $rootTask = Task::root();
 //
-//				// Return tasks and root task
-//				$data = ['tasks' => $rootTask->getDescendants(), 'rootTask' => $rootTask];
-//		}
+//              // Return tasks and root task
+//              $data = ['tasks' => $rootTask->getDescendants(), 'rootTask' => $rootTask];
+//      }
 //
-//		// Embed recommendations if needed
-//		if ($condition === User::CONDITION_PERSONAL_MICROTASK_OPEN ||
-//		    $condition === User::CONDITION_PERSONAL_HOLISTIC) {
-//			$data['recommendations'] = \Auth::user()->recommendedTasks->pluck('id');
-//		}
+//      // Embed recommendations if needed
+//      if ($condition === User::CONDITION_PERSONAL_MICROTASK_OPEN ||
+//          $condition === User::CONDITION_PERSONAL_HOLISTIC) {
+//          $data['recommendations'] = \Auth::user()->recommendedTasks->pluck('id');
+//      }
 //
-//		return view($view, $data);
-//	}
+//      return view($view, $data);
+//  }
 
 
     //    /**
@@ -516,7 +562,7 @@ class TaskController extends Controller
 //    {
 //        $view = 'tasks.facets.listAll';
 //        $data['title'] = 'Facets';
-//		$data['facets'] = Task::getFacets();
+//      $data['facets'] = Task::getFacets();
 //        return view($view, $data);
 //    }
 //

@@ -17,6 +17,8 @@ class CreateIdeasTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable();
             $table->string('text');
+            $table->unsignedInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
 
             // These columns are needed for Baum's Nested Set implementation to work.
             // Column names may be changed, but they *must* all exist and be modified

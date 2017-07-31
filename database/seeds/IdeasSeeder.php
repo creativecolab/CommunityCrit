@@ -9,6 +9,12 @@ class IdeasSeeder extends Seeder
         [
             'name' => 'Build a tower',
             'text' => 'Build a tower in the center of the intersection.',
+            'user_id' => 1,
+        ],
+        [
+            'name' => 'Connection Point',
+            'text' => 'Use El Nudillo as a connection between East Village and Barrio Logan.',
+            'user_id' => 1,
         ],
     ];
     /**

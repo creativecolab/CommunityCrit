@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,5 +42,15 @@ class Link extends Model
     public function user()
     {
         return $this->belongsTo( 'App\User' );
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();
+    }
+
+    public function getUpdatedAtAttribute($date)
+    {
+        return $this->attributes['updated_at'] = Carbon::parse($date)->diffForHumans();
     }
 }

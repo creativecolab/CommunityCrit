@@ -1,16 +1,18 @@
 @extends('layouts.app')
 
-@section('title', 'Build')
+@section('title')
+    {!! $task->name !!}
+@endsection
 
 @section('content')
-    <div class="container activity" id="text-link">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+    <div class="activity" id="text-link">
+        <!-- <div class="row"> -->
+            <!-- <div class="col-md-8 col-md-offset-2"> -->
 
-                <div class="well">
+                <!-- <div class="well"> -->
                     <div class="row">
                         <div class="col-md-3">
-                            <img class="img-responsive" src="/images/placeholder.jpg"></img>
+                            <img class="img-responsive" src="/img/placeholder.jpg"></img>
                         </div>
                         <div class="col-md-9">
                             <h2 class="no-marg-top">
@@ -24,20 +26,22 @@
                     <div class="panel panel-default no-marg-bot input">
                         <div class="panel-heading">
                             <div class="panel-title">
-                                Improve the Idea
+                                {!! $task->name !!}
                             </div>
-                        </div>
-                        <div class="panel-body">
-                            <h4 class="no-marg-top">Reference: 
-                                @component('activities.common.link_type_name', ['link_type' => $link->link_type])
-                                @endcomponent
-                            </h4>
-                            <p class="no-marg-bot">
-                                {!! $link->text !!}
-                            </p>
                         </div>
                         <!-- List group -->
                         <ul class="list-group">
+                            @if ($link)
+                                <li class="list-group-item">
+                                    <h4 class="no-marg-top">Reference: 
+                                        @component('utilities.link_type_name', ['link_type' => $link->link_type])
+                                        @endcomponent
+                                    </h4>
+                                    <p class="no-marg-bot">
+                                        {!! $link->text !!}
+                                    </p>
+                                </li>
+                            @endif
                             <li class="list-group-item">
                                 {!! Form::open(['action' => ['TaskController@elaborate', $idea->id], 'style' => 'display:inline']) !!}
                                 <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
@@ -54,16 +58,16 @@
                                         </span>
                                     @endif
                                 </div>
-                                {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
-                                <button class="btn btn-success pull-right done">I'm Done</button>
+                                {!! Form::submit('Submit', ['class' => 'btn btn-success']) !!}
+                                <button class="btn btn-danger pull-right done">Stop</button>
                                 <button class="btn btn-default pull-right">Skip</button>
                                 {!! Form::close() !!}
                             </li>
                         </ul> <!-- list group -->
                     </div> <!-- .panel -->
-                </div> <!-- .well -->
+                <!-- </div> .well -->
 
-            </div> <!-- .col -->
-        </div> <!-- .row -->
+            <!-- </div> .col -->
+        <!-- </div> .row -->
     </div> <!-- .container -->
 @endsection

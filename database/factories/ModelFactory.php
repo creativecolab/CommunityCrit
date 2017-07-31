@@ -43,8 +43,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 $factory->define( App\Feedback::class, function ( Faker\Generator $faker ) {
 	return [
 		'comment' => $faker->paragraph(),
-		'task_id' => 1,
-		'user_id' => 1
+		// 'task_id' => 1,
+		'user_id' => 1,
+		'type' => 1
 	];
 } );
 
