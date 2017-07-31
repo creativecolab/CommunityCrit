@@ -39,26 +39,35 @@
             <div class="col-sm-6 col-lg-4">
                 <!-- <a class="panel-link" href="{{ action( 'IdeaController@show', $feedback->id) }}"> -->
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">Idea: Build a tower</div>
-                            Build a tower in the center of the intersection.
-                        </div> <!-- .panel-heading -->
-                        <div class="panel-body">
-                            <strong>Improve an Idea {{--!! $feedback->task->name !!--}}</strong></br>
-                            Improve the current idea by suggesting changes or additions that support the reference. {{--!! $feedback->task->text !!--}}
-                        </div> <!-- .panel-body -->
+                        @if ($feedback->idea)
+                            <div class="panel-heading">
+                                <div class="panel-title">Idea: {{ $feedback->idea->name }}</div>
+                                {{ $feedback->idea->text }}
+                            </div> <!-- .panel-heading -->
+                        @endif
                         <ul class="list-group">
-                            <li class="list-group-item">
-                                <strong>Reference: Project Goal</strong><br>
-                                Create a memorable and major public open space or series of open spaces to anchor an “innovation district.” Pocket parks and/or green spaces must punctuate the neighborhood.
-                            </li>
+                            @if ($feedback->task)
+                                <li class="list-group-item">
+                                    <strong>{{$feedback->task->name}}</strong></br>
+                                    {!! $feedback->task->text !!}
+                                </li>
+                            @endif
+                            @if ($feedback->link)
+                                <li class="list-group-item">
+                                    <strong>Reference: 
+                                        @component('utilities.link_type_name', ['link_type' => $feedback->link->link_type])
+                                        @endcomponent
+                                    </strong><br>
+                                    {!! $feedback->link->text !!}
+                                </li>
+                            @endif
                             <li class="list-group-item">
                                 {!! $feedback->comment !!}
                             </li>
-                            <li class="list-group-item">
-                                {!! $feedback->created_at !!}
-                            </li>
                         </ul>
+                        <div class="panel-footer">
+                            {!! $feedback->created_at !!}
+                        </div>
                     </div> <!-- .panel -->
                 <!-- </a> -->
             </div> <!-- .col -->

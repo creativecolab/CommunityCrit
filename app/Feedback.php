@@ -36,7 +36,7 @@ class Feedback extends Model
 
 	use CrudTrait;
 
-	protected $fillable = [ 'comment', 'task_id', 'user_id', 'type', 'commentable_type', 'commentable_id' ];
+	protected $fillable = [ 'comment', 'task_id', 'user_id', 'type', 'idea_id', 'link_id'];
 
 	/**
 	 * Task for this comment
@@ -48,6 +48,26 @@ class Feedback extends Model
 		return $this->belongsTo('App\Task');
 	}
 
+    /**
+     * Idea for this comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function idea()
+    {
+        return $this->belongsTo('App\Idea');
+    }
+
+    /**
+     * Link for this comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function link()
+    {
+        return $this->belongsTo('App\Link');
+    }
+
 	/**
 	 * User who made this comment
 	 *
@@ -58,10 +78,10 @@ class Feedback extends Model
 		return $this->belongsTo('App\User');
 	}
 
-    public function commentable()
-    {
-        return $this->morphTo();
-    }
+    // public function commentable()
+    // {
+    //     return $this->morphTo();
+    // }
 
     /**
      * Determine type of feedback
@@ -133,16 +153,26 @@ class Feedback extends Model
 
     public function getCreatedAtAttribute($date)
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
-        // return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();
-        // return Carbon::parse($date)->diffForHumans();
+        return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();
     }
 
     public function getUpdatedAtAttribute($date)
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
-        // return $this->attributes['updated_at'] = Carbon::parse($date)->diffForHumans();
+        return $this->attributes['updated_at'] = Carbon::parse($date)->diffForHumans();
     }
+
+    // public function getCreatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
+    //     // return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();
+    //     // return Carbon::parse($date)->diffForHumans();
+    // }
+
+    // public function getUpdatedAtAttribute($date)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
+    //     // return $this->attributes['updated_at'] = Carbon::parse($date)->diffForHumans();
+    // }
 
     // public function created_ago() {
     //     return "hi";

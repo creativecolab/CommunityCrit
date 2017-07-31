@@ -31,13 +31,14 @@ class Idea extends Node
         return $this->hasMany( 'App\Rating' );
     }
 
-    public function tasks()
-    {
-        return $this->belongsToMany( 'App\Task' );
-    }
+    // public function tasks()
+    // {
+    //     return $this->belongsToMany( 'App\Task' );
+    // }
 
     public function feedback()
     {
-        return $this->morphMany('App\Feedback', 'commentable');
+        return $this->hasMany( 'App\Feedback' );
+        // return $this->morphMany('App\Feedback', 'commentable');
     }
 }
