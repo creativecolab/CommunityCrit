@@ -27,6 +27,11 @@ class TasksSeeder extends Seeder
             'type' => '91',
         ],
         [
+            'name' => 'Add a Story',
+            'text' => 'Tell a story that relates to this idea.',
+            'type' => '91',
+        ],
+        [
             'name' => 'Add an Example',
             'text' => 'Describe something that already exists that relates to this idea.',
             'type' => '91',
@@ -35,11 +40,6 @@ class TasksSeeder extends Seeder
             'name' => 'Improve the Idea',
             'text' => 'Improve the current idea by suggesting changes or additions that support the reference.',
             'type' => '91',
-        ],
-        [
-            'name' => 'Critique the Idea',
-            'text' => 'How well does the current idea align with this reference?',
-            'type' => '102',
         ],
         [
             'name' => 'Evaluate Feasability',
@@ -70,6 +70,11 @@ class TasksSeeder extends Seeder
             'name' => 'Evaluate Impact: Quality of Life',
             'text' => 'How might this idea impact quality of life in this area?',
             'type' => '101',
+        ],
+        [
+            'name' => 'Critique the Idea',
+            'text' => 'How well does the current idea align with this reference?',
+            'type' => '102',
         ],
     ];
     /**
