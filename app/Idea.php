@@ -12,6 +12,8 @@ class Idea extends Node
 
     protected $fillable = [
         'text',
+        'name',
+        'user_id'
     ];
 
     public function links()

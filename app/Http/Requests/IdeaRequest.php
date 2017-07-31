@@ -25,7 +25,9 @@ class IdeaRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'name' => 'required|min:1|max:255',
+            'text' => 'required',
+            'user_id' => 'required'
         ];
     }
 
