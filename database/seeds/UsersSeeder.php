@@ -36,11 +36,11 @@ class UsersSeeder extends Seeder
             User::create($user);
         }
 
-		// $conditions = User::getConditions();
+		$conditions = User::getConditions();
 
-		// // Create users in each condition
-		// foreach ( $conditions as $name => $conditionId ) {
-		// 	factory( User::class, 2 )->create( [ 'condition' => $conditionId ] );
-		// }
+		// Create users in each condition
+		foreach ( $conditions as $name => $conditionId ) {
+			factory( User::class, 2 )->create( [ 'condition' => $conditionId ] );
+		}
 	}
 }
