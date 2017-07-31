@@ -9,6 +9,7 @@ use App\User;
 use App\Source;
 use App\Idea;
 use App\Rating;
+use App\Link;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -474,14 +475,22 @@ class TaskController extends Controller
         return response()->json($data);
     }
 
-    public function elaborate( Request $request, Idea $idea )
+    public function elaborate( Request $request) //Idea $idea, int $task)
     {
         $feedback = new Feedback;
         $feedback->user_id = \Auth::id();
         $feedback->comment = $request->get( 'text' );
-        $feedback->type = 'build';
+        $feedback->idea_id = $request->get( 'idea' );
+        $feedback->task_id = $request->get( 'task' );
+        $feedback->link_id = $request->get( 'link' );
+        // $feedback->link_id = 1;
+        // if ($idea) {$feedback->idea_id = $idea;}
+        // if ($link) {$feedback->link_id = $link;}
+        
+        // $feedback->type = 'build';
 
-        if ( $idea->feedback()->save($feedback) ) {
+        // if ( $task->feedback()->save($feedback) ) {
+        if ( $feedback->save() ) {
             flash("Comment submitted!")->success();
         } else {
             flash('Unable to save your feedback. Please contact us.')->error();

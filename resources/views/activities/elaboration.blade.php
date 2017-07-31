@@ -44,11 +44,19 @@
                             @endif
                             <li class="list-group-item">
                                 {!! Form::open(['action' => ['TaskController@elaborate', $idea->id], 'style' => 'display:inline']) !!}
+                                <!-- Form::open(array('class' => 'form-horizontal', 'method' => 'put', 'action' => array('TankController@update', $aid, $id))) -->
+
+                                {{ Form::hidden('idea', $idea->id) }}
+                                {{ Form::hidden('task', $task->id) }}
+                                @if ($link)
+                                    {{ Form::hidden('link', $link->id) }}
+                                @endif
+
                                 <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
                                     <!-- {!! Form::label('comment', 'Share Your Thoughts:') !!} -->
                                     <div class="form-group">
                                         <label class="instruction" for="submissionText">{!! $task->text !!}</label>
-                                        <textarea class="form-control" rows="3" id="submissionText" name="text" value="text"></textarea>
+                                        <textarea class="form-control" rows="3" id="submissionText" name="text"></textarea>
                                     </div>
                                     <!-- {!! Form::textarea('text', '', ['value' => 'text', 'class' => 'form-control', 'required' => 'true']) !!} -->
 

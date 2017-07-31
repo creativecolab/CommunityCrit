@@ -73,8 +73,8 @@ class Task extends Node
      */
     public function feedback()
     {
-//		return $this->hasMany( 'App\Feedback' );
-        return $this->morphMany( 'App\Feedback', 'commentable');
+        return $this->hasMany( 'App\Feedback' );
+        // return $this->morphMany( 'App\Feedback', 'commentable');
     }
 
     /**
@@ -127,10 +127,10 @@ class Task extends Node
         return $this->belongsToMany('App\Option');
     }
 
-    public function ideas()
-    {
-        return $this->belongsToMany( 'App\Idea' );
-    }
+    // public function ideas()
+    // {
+    //     return $this->belongsToMany( 'App\Idea' );
+    // }
 
 //    public function links()
 //    {
