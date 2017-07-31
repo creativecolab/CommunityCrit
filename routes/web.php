@@ -52,7 +52,8 @@ Route::get( '/home', 'HomeController@index' )->name( 'home' );
 // Route::get( 'my-contributions', 'PersonalController@showMyFeedback');
 
 Route::group( ['middleware' => 'checkUser' ], function() {
-    Route::get( 'my-contributions', 'PersonalController@showMyFeedback');
+    Route::get( '/my-contributions', 'UserController@showMyFeedback')->name( 'my-contributions' );
+    Route::get( '/post', 'UserController@showPost');
 });
 
 Route::group( [ 'prefix' => 'ideas' ], function() {

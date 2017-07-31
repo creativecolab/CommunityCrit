@@ -13,7 +13,7 @@ use App\Rating;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
-class PersonalController extends Controller
+class UserController extends Controller
 {
     /**
      * Table of Contents:
@@ -44,22 +44,6 @@ class PersonalController extends Controller
 
     //---------------- show functions ----------------
 
-    // /**
-    //  * view page to show all ideas
-    //  *
-    //  * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-    //  */
-    // public function index()
-    // {
-    //     $view = 'feedback.all';
-    //     $data = [];
-
-    //     $ideas = Idea::get();
-    //     $data['ideas'] = $ideas;
-
-    //     return view($view, $data);
-    // }
-
     /**
      * view page to show all ideas
      *
@@ -76,6 +60,19 @@ class PersonalController extends Controller
         $data['feedbacks'] = $feedbacks;
 
         return view($view, $data);
+    }
+
+    /**
+     * view page to show all ideas
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showPost()
+    {
+        $view = 'user.post';
+
+        return view($view);
+        // return view($view, $data);
     }
 
     //------------------ post methods ------------------------
