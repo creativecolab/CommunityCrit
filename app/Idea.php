@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Backpack\CRUD\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
 use Baum\Node;
@@ -40,5 +41,16 @@ class Idea extends Node
     {
         return $this->hasMany( 'App\Feedback' );
         // return $this->morphMany('App\Feedback', 'commentable');
+    }
+
+    public function diffForHumans($date)
+    {
+        return Carbon::parse($date)->diffForHumans();
+    }
+
+    public function readableDate($date)
+    {
+        $date = $date->setTimezone('America/Los_Angeles');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
     }
 }

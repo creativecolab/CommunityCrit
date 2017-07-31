@@ -13,7 +13,8 @@
 
     <div class="row">
         @foreach ($ideas as $idea)
-            <div class="col-sm-6 col-lg-4">
+            <div class="col-md-12">
+            <!-- <div class="col-sm-6 col-lg-4"> -->
                 <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -22,6 +23,9 @@
                         <div class="panel-body">
                             {{ $idea->text }}
                         </div> <!-- .panel-body -->
+                        <div class="panel-footer">
+                            {!! $idea->readableDate($idea->created_at) !!}
+                        </div>
                     </div> <!-- .panel -->
                 </a>
             </div> <!-- .col -->
@@ -36,7 +40,8 @@
 
     <div class="row">
         @foreach ($feedbacks as $feedback)
-            <div class="col-sm-6 col-lg-4">
+            <div class="col-md-12">
+            <!-- <div class="col-sm-6 col-lg-4"> -->
                 <!-- <a class="panel-link" href="{{ action( 'IdeaController@show', $feedback->id) }}"> -->
                     <div class="panel panel-default">
                         @if ($feedback->idea)
@@ -66,7 +71,7 @@
                             </li>
                         </ul>
                         <div class="panel-footer">
-                            {!! $feedback->created_at !!}
+                            {!! $feedback->readableDate($feedback->created_at) !!}
                         </div>
                     </div> <!-- .panel -->
                 <!-- </a> -->

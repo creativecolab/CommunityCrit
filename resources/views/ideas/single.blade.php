@@ -16,7 +16,8 @@
 
     <div class="row">
         @foreach ($links as $link)
-            <div class="col-md-4">
+            <div class="col-md-12">
+            <!-- <div class="col-md-4"> -->
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         @component('utilities.link_type_name', ['link_type' => $link->link_type])
@@ -39,7 +40,8 @@
     <h2>Improvements, Critiques, and Assessments <span class="badge">{{count($feedbacks)}}</span></h2>
     <div class="row">
         @foreach ($feedbacks as $feedback)
-            <div class="col-sm-6 col-lg-4">
+            <!-- <div class="col-sm-6 col-lg-4"> -->
+            <div class="col-md-12">
                 <!-- <a class="panel-link" href="{{ action( 'IdeaController@show', $feedback->id) }}"> -->
                     <div class="panel panel-default">
                         <ul class="list-group">
@@ -63,7 +65,7 @@
                             </li>
                         </ul>
                         <div class="panel-footer">
-                            {{ $feedback->user->fname }}, {!! $feedback->created_at !!}
+                            {{ $feedback->user->fname }}, {!! $feedback->diffForHumans($feedback->created_at) !!}
                         </div>
                     </div> <!-- .panel -->
                 <!-- </a> -->
