@@ -13,6 +13,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
 </head>
 <body>
 <div id="app">
@@ -31,7 +34,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'CommunityCrit') }}
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -40,16 +43,17 @@
                     @if (Auth::guest())
                         &nbsp;
                     @else
-                        <li><a href="{{ url('/overview') }}">Overview</a></li>
-                        <li><a href="{{ action('TaskController@allFacets') }}">Facets</a></li>
-                        <li><a href="{{ action('TaskController@allSources') }}">Sources</a></li>
+                        <li><a href="{{ route('ideas') }}">Ideas</a></li>
+                        {{--<li><a href="{{ url('/overview') }}">Overview</a></li>--}}
+                        {{--<li><a href="{{ action('TaskController@allFacets') }}">Topics</a></li>--}}
+                        {{--<li><a href="{{ action('TaskController@allSources') }}">Sources</a></li>--}}
                         {{--<li class="dropdown"><a href="sources.htm" data-toggle="dropdown" role="button" aria-expanded="false" class="dropdown-toggle">Sources<span class="caret"></span></a>--}}
                         {{--<ul role="menu" class="dropdown-menu">--}}
                         {{--<li><a href="source-detail.htm">14th Street Promenade Master Plan</a></li>--}}
                         {{--<li><a href="source-detail.htm">East Village South Focus Plan</a></li>--}}
                         {{--</ul>--}}
-                        <li><a href="{{ url('/about') }}">About Us</a></li>
                     @endif
+                    <li><a href="{{ url('/about') }}">About</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -59,6 +63,7 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
+                        <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">{{ $myFeedbackCount }}</span></a></li>
 {{--                        <li><a href="{{ action('TaskController@index') }}">Tasks</a></li>--}}
                         @if(Auth::user()->admin)
                             <li>

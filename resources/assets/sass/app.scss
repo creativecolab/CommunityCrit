@@ -11,3 +11,25 @@
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Web
+@import "components/activities";
+
+a.panel-link {
+  text-decoration: none;
+}
+
+a.panel-link {
+  color: inherit;
+}
+
+a.panel-link .panel:hover .panel-body {
+  background-color: #eee;
+}
+
+a.panel-link .panel:hover.panel-default .panel-heading {
+  background-color: #eee;
+}
+
+figcaption {
+	font-style: italic !important;
+}

@@ -19,7 +19,7 @@ class TaskCrudController extends CrudController
         |--------------------------------------------------------------------------
         */
         $this->crud->setModel('App\Task');
-        $this->crud->setRoute(config('backpack.base.route_prefix') . '/task');
+        $this->crud->setRoute(config('backpack.base.route_prefix') . '/tasks');
         $this->crud->setEntityNameStrings('task', 'tasks');
 
         /*

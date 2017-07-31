@@ -101,7 +101,7 @@
 
         html += '<textarea class="form-control" name="type" id="type" style="display:none;">' + shareType + '</textarea>';
 
-        html += '<textarea class="form-control" name="input1" id="input1" placeholder="' + input1placeholder +' "></textarea>' +
+        html += '<textarea class="form-control" required="true" name="input1" id="input1" placeholder="' + input1placeholder +' "></textarea>' +
                 '</div>';
 
 //        html += '<textarea class="form-control" id="input1" placeholder="' + input1placeholder +' "></textarea>' +
