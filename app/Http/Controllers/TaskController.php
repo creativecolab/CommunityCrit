@@ -475,7 +475,7 @@ class TaskController extends Controller
         return response()->json($data);
     }
 
-    public function elaborate( Request $request) //Idea $idea, int $task)
+    public function submitText( Request $request) //Idea $idea, int $task)
     {
         $feedback = new Feedback;
         $feedback->user_id = \Auth::id();
@@ -483,20 +483,30 @@ class TaskController extends Controller
         $feedback->idea_id = $request->get( 'idea' );
         $feedback->task_id = $request->get( 'task' );
         $feedback->link_id = $request->get( 'link' );
-        // $feedback->link_id = 1;
-        // if ($idea) {$feedback->idea_id = $idea;}
-        // if ($link) {$feedback->link_id = $link;}
-        
-        // $feedback->type = 'build';
+        $exit = $request->get( 'exit' );
 
-        // if ( $task->feedback()->save($feedback) ) {
-        if ( $feedback->save() ) {
-            flash("Comment submitted!")->success();
-        } else {
-            flash('Unable to save your feedback. Please contact us.')->error();
+        if ($exit == 'Submit') {
+            // if ( $task->feedback()->save($feedback) ) {
+            if ( $feedback->save() ) {
+                // flash($exit)->success();
+                flash("Your contribution was submitted! You may do another or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            return redirect()->back();
         }
+        else {
+            // if ( $task->feedback()->save($feedback) ) {
+            if ( $feedback->save() ) {
+                // flash($exit)->success();
+                flash("Your contribution was submitted!")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
 
-        return redirect()->back();
+            return redirect()->route('post');
+        }
     }
 
     private function taskQueue( $task_id )

@@ -53,7 +53,7 @@ Route::get( '/home', 'HomeController@index' )->name( 'home' );
 
 Route::group( ['middleware' => 'checkUser' ], function() {
     Route::get( '/my-contributions', 'UserController@showMyFeedback')->name( 'my-contributions' );
-    Route::get( '/post', 'UserController@showPost');
+    Route::get( '/post', 'UserController@showPost')->name( 'post' );
 });
 
 Route::group( [ 'prefix' => 'ideas' ], function() {
@@ -83,7 +83,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( '/{task}/response', 'TaskController@storeResponse' );
     Route::post( '/{id}/skip', 'TaskController@skipQuestion' );
     Route::post( 'img/{task}/upload', 'TaskController@uploadImage');
-    Route::post( '/build/{idea}/new', 'TaskController@elaborate');
+    Route::post( '/build/{idea_id}/new', 'TaskController@submitText');
 } );
 
 Route::group( ['prefix' => 'devtest', 'middleware' => 'admin'], function() {
