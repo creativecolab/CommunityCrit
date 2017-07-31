@@ -63,7 +63,7 @@
                             </li>
                         </ul>
                         <div class="panel-footer">
-                            {!! $feedback->created_at !!}
+                            {{ $feedback->user->fname }}, {!! $feedback->created_at !!}
                         </div>
                     </div> <!-- .panel -->
                 <!-- </a> -->
