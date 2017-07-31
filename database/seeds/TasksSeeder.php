@@ -22,8 +22,8 @@ class TasksSeeder extends Seeder
             'type' => '80',
         ],
         [
-            'name' => 'Report a Related Issue',
-            'text' => 'What challenges have you observed that relate to this idea?',
+            'name' => 'Raise a Related Issue',
+            'text' => 'What issues do you think relate to this idea?',
             'type' => '91',
         ],
         [
@@ -42,7 +42,7 @@ class TasksSeeder extends Seeder
             'type' => '91',
         ],
         [
-            'name' => 'Evaluate Feasability',
+            'name' => 'Evaluate Feasibility',
             'text' => 'How feasible is this idea?',
             'type' => '101',
         ],
