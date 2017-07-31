@@ -14,7 +14,7 @@ class AddOptionToFeedbackTable extends Migration
     public function up()
     {
         Schema::table('feedback', function (Blueprint $table) {
-            $table->text('option')->nullable();
+            // $table->text('option')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddOptionToFeedbackTable extends Migration
     public function down()
     {
         Schema::table('feedback', function (Blueprint $table) {
-            $table->dropColumn('option');
+            // $table->dropColumn('option');
         });
     }
 }
