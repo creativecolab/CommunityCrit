@@ -54,7 +54,6 @@ class RegisterController extends Controller
             'lname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'consent' => 'required|boolean|True'
         ]);
     }
 
@@ -71,7 +70,7 @@ class RegisterController extends Controller
             'lname' => $data['lname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-            'consent' => $data['consent'],
+            'consent' => $data['consent'] ? 1 : 0,
 	        'condition' => rand(User::CONDITION_MIN, User::CONDITION_MAX), // TODO: Move condition to after survey
         ]);
     }

@@ -79,7 +79,7 @@
                         <div class="row">
                             <label for="consent" class="col-md-8 col-md-offset-2">Consent Form</label>
                         
-                            <div class="col-md-6" style="height:200px;width:470px;border:1px solid #ccc;padding-top:10px;padding-left:5px;padding-right:5px;padding-bottom:10px;font:14px;background-color:#f5f8fa;overflow:auto;">
+                            <div class="col-md-8 col-md-offset-2" style="height:200px;width:470px;border:1px solid #ccc;padding-top:10px;padding-left:5px;padding-right:5px;padding-bottom:10px;font:14px;background-color:#f5f8fa;overflow:auto;">
                                 <p><strong>
                                 University of California, San Diego<br> 
                                 Consent to Act as a Research Subject
@@ -127,15 +127,15 @@
 
                                 <strong>Your Signature and Consent</strong><br>
                                 You have received a copy of this consent document.<br>
-                                You agree to participate.
+                                By checking the box below, you agree to participate.
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-12">
+                                <div class="col-md-8 col-md-offset-2">
                                 <div class="checkbox">
                                     <label>
-                                    <input type="checkbox" id="consent" required>
-                                    I am 18 years of age or older, received the consent form, and consent to participate in this study.
+                                        <input type="checkbox" input id="consent" name="consent" required>
+                                        I am 18 years of age or older, received the consent form, and consent to participate in this study.
                                     </label>
                                 </div>
                                 </div>
