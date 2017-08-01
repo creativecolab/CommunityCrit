@@ -25,9 +25,9 @@ class FeedbackRequest extends \Backpack\CRUD\app\Http\Requests\CrudRequest
     public function rules()
     {
         return [
-            'input1' => 'required|string',
+            // 'input1' => 'required|string',
 //            'input2' => 'string'
-//	        'comment' => 'required|string'
+	        // 'comment' => 'required|string'
         ];
     }
 

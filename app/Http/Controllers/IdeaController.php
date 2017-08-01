@@ -12,6 +12,7 @@ use App\Comment;
 use App\Rating;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Validator;
 
 class IdeaController extends Controller
 {
@@ -73,8 +74,8 @@ class IdeaController extends Controller
         $data = [];
 
         $data['idea'] = $idea;
-        $data['ratings'] = $this->avgRatings($idea);
-        $data['rating_keys'] = $data['ratings']->keys()->all();
+        // $data['ratings'] = $this->avgRatings($idea);
+        // $data['rating_keys'] = $data['ratings']->keys()->all();
         $data['links'] = $idea->links->sortBy('link_type');
         $data['feedbacks'] = $idea->feedback->sortByDesc('created_at');
 
@@ -102,10 +103,11 @@ class IdeaController extends Controller
      */
     public function showSubmit()
     {
-        $view = 'ideas.submitIdea';
-        $data = [];
+        $submitIdea = Task::where('type', '=', 80)->first();
 
-        return view($view, $data);
+        return redirect()->action(
+            'TaskController@showTask', [$submitIdea->id, 0, 0]
+        );
     }
 
     /**
@@ -168,16 +170,40 @@ class IdeaController extends Controller
      */
     public function submitIdea(Request $request)
     {
-        $idea = new Idea;
-        $idea->text = $request->get('text');
+        $exit = $request->get( 'exit' );
 
-        if ($idea->save()) {
-            flash("Idea submitted!");
-        } else {
-            flash("Unable to save your idea. Please contact us.")->error();
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                // 'name' => 'required|string',
+                'text' => 'required|string',
+            ]);
         }
 
-        return redirect()->back();
+        $idea = new Idea;
+        $idea->name = $request->get('name');
+        $idea->text = $request->get('text');
+        $idea->user_id = \Auth::id();
+
+        if ($exit == 'Submit') {
+            if ($idea->save() ) {
+                flash("Your idea was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            return redirect()->route('do');
+        }
+        else {
+            if ($idea->text) {
+                if ($idea->save() ) {
+                    flash("Your idea was submitted!")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
+            }
+
+            return redirect()->route('post');
+        }
     }
 
     /**

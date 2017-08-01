@@ -76,6 +76,11 @@ class TasksSeeder extends Seeder
             'text' => 'How well does the current idea align with this reference?',
             'type' => '102',
         ],
+        [
+            'name' => 'Rate the Idea',
+            'text' => 'Rate the idea across the criteria below.',
+            'type' => '100',
+        ],
     ];
     /**
      * Run the database seeds.
