@@ -548,7 +548,7 @@ class TaskController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
-            return redirect()->back();
+            return redirect()->route('do');
         }
         else {
             if ($feedback->comment) {

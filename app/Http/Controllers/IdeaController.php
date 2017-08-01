@@ -74,8 +74,8 @@ class IdeaController extends Controller
         $data = [];
 
         $data['idea'] = $idea;
-        $data['ratings'] = $this->avgRatings($idea);
-        $data['rating_keys'] = $data['ratings']->keys()->all();
+        // $data['ratings'] = $this->avgRatings($idea);
+        // $data['rating_keys'] = $data['ratings']->keys()->all();
         $data['links'] = $idea->links->sortBy('link_type');
         $data['feedbacks'] = $idea->feedback->sortByDesc('created_at');
 
@@ -103,10 +103,11 @@ class IdeaController extends Controller
      */
     public function showSubmit()
     {
-        $view = 'ideas.submitIdea';
-        $data = [];
+        $submitIdea = Task::where('type', '=', 80)->first();
 
-        return view($view, $data);
+        return redirect()->action(
+            'TaskController@showTask', [$submitIdea->id, 0, 0]
+        );
     }
 
     /**
@@ -190,7 +191,7 @@ class IdeaController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
-            return redirect()->back();
+            return redirect()->route('do');
         }
         else {
             if ($idea->text) {

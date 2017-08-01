@@ -56,21 +56,22 @@ Route::group( ['middleware' => 'checkUser' ], function() {
     Route::get( '/post', 'UserController@showPost')->name( 'post' );
 });
 
+Route::group (['prefix' => 'ideas', 'middleware' => 'checkUser'], function () {
+    Route::get('/submit/link/{id}', 'IdeaController@showSubmitLink');
+    Route::get('/assess/{id}', 'IdeaController@showAssess');
+    Route::get('/submit', 'IdeaController@showSubmit')->name('submit-idea'); // submit a new idea
+    Route::get('/combine', 'IdeaController@showCombination');
+    // Route::get('/comment/{id}', 'IdeaController@showComment');
+    Route::post( '/submit/new', 'IdeaController@submitIdea');
+    Route::post( '/combine/new', 'IdeaController@combine' );
+    Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
+    Route::post( '/assess/{idea}/new', 'IdeaController@assess');
+    Route::post( '/submit/link/{idea}/new', 'IdeaController@submitLink');
+});
+
 Route::group( [ 'prefix' => 'ideas' ], function() {
     Route::get('/', 'IdeaController@index')->name( 'ideas' );
     Route::get('/{id}', 'IdeaController@show');
-    Route::group (['middleware' => 'checkUser'], function () {
-        Route::get('/submit/link/{id}', 'IdeaController@showSubmitLink');
-        Route::get('/assess/{id}', 'IdeaController@showAssess');
-        Route::get('/submit', 'IdeaController@showSubmit'); // submit a new idea
-        Route::get('/combine', 'IdeaController@showCombination');
-        // Route::get('/comment/{id}', 'IdeaController@showComment');
-        Route::post( '/submit/new', 'IdeaController@submitIdea');
-        Route::post( '/combine/new', 'IdeaController@combine' );
-        Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
-        Route::post( '/assess/{idea}/new', 'IdeaController@assess');
-        Route::post( '/submit/link/{idea}/new', 'IdeaController@submitLink');
-    });
 } );
 
 Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function() {
@@ -82,6 +83,9 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     // Route::get( '/build/{task_id}/{idea_id}', 'TaskController@showElaborate');
     // Route::get( 'img/{id}', 'TaskController@imageTest');
     // Route::get( '/{id}', 'TaskController@show' );
+    // Route::get( '/submit', function () {
+    //     return redirect( '/activities/2/0/0' );}
+    // )->name('submit');
     Route::match(['get', 'post'], '/dash', 'TaskController@dashboard');
     Route::post( '/{task}/response', 'TaskController@storeResponse' );
     Route::post( '/{id}/skip', 'TaskController@skipQuestion' );
