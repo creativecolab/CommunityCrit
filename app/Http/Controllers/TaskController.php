@@ -132,14 +132,25 @@ class TaskController extends Controller
      */
     public function showRandomTask( )
     {
+
+        // $task = Task::inRandomOrder()->first();
+        
+        // for testing a specific task type
+        $tasks = Task::all();
+        $task = $tasks->filter(function($item) {
+            return $item->type == 80;
+        })->first();
+
+        if (($task->type / 10) != 8) {
+            $idea = Idea::inRandomOrder()->first();
+            $links = $idea->links;
+            $link = count($links) ? $links[rand(0, count($links)-1)] : null;
+        } else {
+            $idea = null;
+            $link = null;
+        }
+
         $view = 'activities.elaboration';
-
-        $idea = Idea::inRandomOrder()->first();
-        $task = Task::inRandomOrder()->first();
-
-
-        $links = $idea->links;
-        $link = count($links) ? $links[rand(0, count($links)-1)] : null;
 
         $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
 
@@ -486,10 +497,8 @@ class TaskController extends Controller
         $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
-            // if ( $task->feedback()->save($feedback) ) {
             if ( $feedback->save() ) {
-                // flash($exit)->success();
-                flash("Your contribution was submitted! You may do another or exit below.")->success();
+                flash("Your contribution was submitted! You may do another activity or exit below.")->success();
             } else {
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
@@ -497,9 +506,7 @@ class TaskController extends Controller
             return redirect()->back();
         }
         else {
-            // if ( $task->feedback()->save($feedback) ) {
             if ( $feedback->save() ) {
-                // flash($exit)->success();
                 flash("Your contribution was submitted!")->success();
             } else {
                 flash('Unable to save your feedback. Please contact us.')->error();

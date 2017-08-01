@@ -12,6 +12,7 @@ use App\Comment;
 use App\Rating;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
+use Validator;
 
 class IdeaController extends Controller
 {
@@ -161,6 +162,20 @@ class IdeaController extends Controller
     //------------------ post methods ------------------------
 
     /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validatorIdea(array $data)
+    {
+        return Validator::make($data, [
+            // 'name' => 'required|string',
+            'text' => 'required|string',
+        ]);
+    }
+
+    /**
      * create a new idea
      *
      * @param Request $request
@@ -168,16 +183,39 @@ class IdeaController extends Controller
      */
     public function submitIdea(Request $request)
     {
-        $idea = new Idea;
-        $idea->text = $request->get('text');
+        $exit = $request->get( 'exit' );
 
-        if ($idea->save()) {
-            flash("Idea submitted!");
-        } else {
-            flash("Unable to save your idea. Please contact us.")->error();
+        if ($exit == 'Submit') {
+            $this->validatorIdea($request->all())->validate();
         }
 
-        return redirect()->back();
+        $idea = new Idea;
+        $idea->name = $request->get('name');
+        $idea->text = $request->get('text');
+        $idea->user_id = \Auth::id();
+
+        if ($exit == 'Submit') {
+            if ($idea->text) {
+                if ($idea->save() ) {
+                    flash("Your idea was submitted! You may do another activity or exit below.")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
+            }         
+
+            return redirect()->back();
+        }
+        else {
+            if ($idea->text) {
+                if ($idea->save() ) {
+                    flash("Your idea was submitted!")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
+            }
+
+            return redirect()->route('post');
+        }
     }
 
     /**
