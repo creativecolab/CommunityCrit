@@ -24,6 +24,13 @@ class UsersSeeder extends Seeder
             'admin' => 1,
             'remember_token' => 'YwaSQnhZLO'
         ],
+        [
+            'fname' => 'Wkshp Participant',
+            'lname' => 'Admin',
+            'email' => 'admin1@test.com',
+            'admin' => 1,
+            'remember_token' => 'YwaSQnhZLL'
+        ],
     ];
 	/**
 	 * Run the database seeds.

@@ -14,29 +14,46 @@ class FeedbackSeeder extends Seeder
      */
 	public $data = [
 	    [
-            'comment' => 'This is feedback on something that is talking about it.',
-			'user_id' => 1,
-			'type' => 1
+            'comment' => 'A structure or monument at the Nudillo could incorporate an audio component: When the California Tower play chimes, the chimes could emanate from there as well.',
+			'user_id' => 3,
+			'task_id' => 
+			'link_id' =>
+			'idea_id' => 1,
         ],
         [
-            'comment' => 'This is feedback on something that is talking about it.',
-			'user_id' => 1,
-			'type' => 1
+            'comment' => 'The built form should be lit at night.',
+			'user_id' => 3,
+			'task_id' =>
+			'link_id' =>
+			'idea_id' => 1,
         ],
         [
-            'comment' => 'This is feedback on something that is talking about it.',
-			'user_id' => 1,
-			'type' => 1
+            'comment' => 'More than a plaza, the space can be activated through landscape, a place for food trucks nearby, and implementing a tower structure to memorialize the view/connection to Balboa Park.',
+			'user_id' => 3,
+			'task_id' =>
+			'link_id' =>
+			'idea_id' => 1,
         ],
         [
-            'comment' => 'This is feedback on something that is talking about it.',
-			'user_id' => 1,
-			'type' => 1
+            'comment' => 'The structure could incorporate an observation deck. It could echo the tower elements of the California Tower (which is visible from the Nudillo) and the MTS clock tower.',
+			'user_id' => 3,
+			'task_id' =>
+			'link_id' =>
+			'idea_id' => 1,
         ],
         [
-            'comment' => 'This is feedback on something that is talking about it.',
-			'user_id' => 1,
-			'type' => 1
+            'comment' => 'This could be an obelisk or major art piece authored by Barrio artists.',
+			'user_id' => 3,
+			'task_id' =>
+			'link_id' =>
+			'idea_id' => 2,
+        ],
+        [
+            'comment' => 'It is envisioned as a small traffic roundabout with a major art piece in the center in the spirit of Tijuana or Mexico City.',
+			'user_id' => 3,
+			'task_id' =>
+			'link_id' =>
+			'idea_id' => 2,
         ],
     ];
 	/**
@@ -72,8 +89,8 @@ class FeedbackSeeder extends Seeder
 
 		factory(Feedback::class, 5)->create();
 
-		// foreach ( $this->data as $user ) {
-            // User::create($user);
-        // }
+		 foreach ( $this->data as $feedback ) {
+             Feedback::create($feedback);
+         }
 	}
 }

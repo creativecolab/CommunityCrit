@@ -8,13 +8,13 @@ class IdeasSeeder extends Seeder
 	public $data = [
         [
             'name' => 'Build a tower',
-            'text' => 'Build a tower in the center of the intersection.',
-            'user_id' => 1,
+            'text' => 'Build a tower in the center of El Nudillo, the intersection of 14th Street and National Avenue.',
+            'user_id' => 3,
         ],
         [
-            'name' => 'Connection Point',
-            'text' => 'Use El Nudillo as a connection between East Village and Barrio Logan.',
-            'user_id' => 1,
+            'name' => 'Public Art',
+            'text' => 'Make El Nudillo, the intersection of 14th Street and National Avenue, a place for public creative expression.',
+            'user_id' => 3,
         ],
     ];
     /**

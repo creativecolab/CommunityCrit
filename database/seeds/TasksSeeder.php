@@ -22,8 +22,8 @@ class TasksSeeder extends Seeder
             'type' => '80',
         ],
         [
-            'name' => 'Report a Related Issue',
-            'text' => 'What challenges have you observed that relate to this idea?',
+            'name' => 'Raise an Issue',
+            'text' => 'What issues relate to this idea? What consequences might it have?',
             'type' => '91',
         ],
         [
@@ -33,7 +33,7 @@ class TasksSeeder extends Seeder
         ],
         [
             'name' => 'Add an Example',
-            'text' => 'Describe something that already exists that relates to this idea.',
+            'text' => 'Describe an example (such as a place or an object) of this idea.',
             'type' => '91',
         ],
         [
@@ -46,24 +46,24 @@ class TasksSeeder extends Seeder
             'text' => 'How feasible is this idea?',
             'type' => '101',
         ],
-        [
-            'name' => 'Evaluate Benefit',
-            'text' => 'How might this idea benefit the community?',
-            'type' => '101',
-        ],
-        [
-            'name' => 'Evaluate Values',
-            'text' => 'How does this idea relate to the values of the surrounding community?',
-            'type' => '101',
-        ],
+//        [
+//            'name' => 'Evaluate Benefit',
+//            'text' => 'How might this idea benefit the community?',
+//            'type' => '101',
+//        ],
+//        [
+//            'name' => 'Evaluate Values',
+//            'text' => 'How well does this idea align with the values of the community?',
+//            'type' => '101',
+//        ],
         [
             'name' => 'Evaluate Impact: Safety',
             'text' => 'How might this idea impact safety in this area?',
             'type' => '101',
         ],
         [
-            'name' => 'Evaluate Impact: Traffic',
-            'text' => 'How might this idea impact traffic in this area?',
+            'name' => 'Evaluate Impact: Mobility',
+            'text' => 'How might this idea impact mobility in this area?',
             'type' => '101',
         ],
         [
@@ -72,7 +72,7 @@ class TasksSeeder extends Seeder
             'type' => '101',
         ],
         [
-            'name' => 'Critique the Idea',
+            'name' => 'Analyze the Idea',
             'text' => 'How well does the current idea align with this reference?',
             'type' => '102',
         ],
