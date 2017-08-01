@@ -162,20 +162,6 @@ class IdeaController extends Controller
     //------------------ post methods ------------------------
 
     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validatorIdea(array $data)
-    {
-        return Validator::make($data, [
-            // 'name' => 'required|string',
-            'text' => 'required|string',
-        ]);
-    }
-
-    /**
      * create a new idea
      *
      * @param Request $request
@@ -186,7 +172,10 @@ class IdeaController extends Controller
         $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
-            $this->validatorIdea($request->all())->validate();
+            $this->validate($request, [
+                // 'name' => 'required|string',
+                'text' => 'required|string',
+            ]);
         }
 
         $idea = new Idea;
@@ -195,13 +184,11 @@ class IdeaController extends Controller
         $idea->user_id = \Auth::id();
 
         if ($exit == 'Submit') {
-            if ($idea->text) {
-                if ($idea->save() ) {
-                    flash("Your idea was submitted! You may do another activity or exit below.")->success();
-                } else {
-                    flash('Unable to save your feedback. Please contact us.')->error();
-                }
-            }         
+            if ($idea->save() ) {
+                flash("Your idea was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
 
             return redirect()->back();
         }

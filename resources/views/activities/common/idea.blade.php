@@ -4,7 +4,10 @@
     </div>
     <div class="col-md-9">
         <h2 class="no-marg-top">
-        Idea: {!! $idea->name !!}
+        Idea<!-- 
+        -->@if ($idea->name)<!-- 
+             -->: {!! $idea->name !!}
+        @endif
         <!-- <button class="btn btn-default pull-right">Switch idea</button> -->
         </h2>
         <p>{!! $idea->text !!}</p>

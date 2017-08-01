@@ -53,7 +53,7 @@
                         <textarea class="form-control" rows="3" id="submissionText" name="text"></textarea>
                         @if ($errors->has('text'))
                             <span class="help-block">
-                                <strong>You must enter a description of your idea to submit.</strong>
+                                <strong>{{ $errors->first('text') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -71,7 +71,7 @@
 
                     {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
                     {!! Form::submit('Go to exit survey', ['class' => 'btn btn-default', 'name' => 'exit']) !!}
-                    <button type="button" class="btn btn-default" onClick="window.location.reload();">Skip</button>
+                    <a type="button" class="btn btn-default" href="{{ route('do') }}">Skip</a>
                     {!! Form::close() !!}
                 </li>
             </ul> <!-- list group -->

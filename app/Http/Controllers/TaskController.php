@@ -130,32 +130,58 @@ class TaskController extends Controller
      * @param $idea_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showRandomTask( )
-    {
 
-        // $task = Task::inRandomOrder()->first();
-        
-        // for testing a specific task type
-        $tasks = Task::all();
-        $task = $tasks->filter(function($item) {
-            return $item->type == 80;
-        })->first();
-
-        if (($task->type / 10) != 8) {
-            $idea = Idea::inRandomOrder()->first();
-            $links = $idea->links;
-            $link = count($links) ? $links[rand(0, count($links)-1)] : null;
-        } else {
-            $idea = null;
-            $link = null;
-        }
-
+    public function showTask(int $task_id, int $idea_id, int $link_id ){
         $view = 'activities.elaboration';
 
-        $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
+        $data = ['idea' => Idea::find($idea_id), 'link' => Link::find($link_id), 'task' => Task::find($task_id)];
 
         return view($view, $data);
     }
+
+    /**
+     * select task for elaborate/build type activity
+     *
+     * @param $task_id
+     * @param $idea_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showRandomTask( )
+    {
+
+        $task = Task::inRandomOrder()->first();
+        
+        // for testing a specific task type
+        // $tasks = Task::all();
+        // $task = $tasks->filter(function($item) {
+        //     return $item->type == 80;
+        // })->first();
+
+        $task_id = $task->id;
+
+        if (($task->type / 10) != 8) {
+            $idea = Idea::inRandomOrder()->first();
+            $idea_id = $idea->id;
+            $links = $idea->links;
+            if (count($links)) {
+                $link = $links[rand(0, count($links)-1)];
+                $link_id = $link->id;
+            } else {
+                $link_id = 0;
+            }
+        } else {
+            $idea_id = 0;
+            $link_id = 0;
+        }
+
+        // $path = '/' + $task_id + '/' + $idea_id + '/' + $link_id;
+        // print($path);
+
+        // return redirect()->route('ideas');
+        return redirect()->route('show-task', [$task_id, $idea_id, $link_id]);
+    }
+
+    
 
     // /**
     //  * view page for elaborate/build type activity
@@ -486,15 +512,34 @@ class TaskController extends Controller
         return response()->json($data);
     }
 
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'text.required' => 'A title is required',
+        ];
+    }
+
     public function submitText( Request $request) //Idea $idea, int $task)
     {
+        $exit = $request->get( 'exit' );
+
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                'text' => 'required|string',
+            ]);
+        }
+
         $feedback = new Feedback;
         $feedback->user_id = \Auth::id();
         $feedback->comment = $request->get( 'text' );
         $feedback->idea_id = $request->get( 'idea' );
         $feedback->task_id = $request->get( 'task' );
         $feedback->link_id = $request->get( 'link' );
-        $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
             if ( $feedback->save() ) {
@@ -506,10 +551,12 @@ class TaskController extends Controller
             return redirect()->back();
         }
         else {
-            if ( $feedback->save() ) {
-                flash("Your contribution was submitted!")->success();
-            } else {
-                flash('Unable to save your feedback. Please contact us.')->error();
+            if ($feedback->comment) {
+                if ( $feedback->save() ) {
+                    flash("Your contribution was submitted!")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
             }
 
             return redirect()->route('post');
