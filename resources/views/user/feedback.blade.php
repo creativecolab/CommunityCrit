@@ -8,7 +8,7 @@
     <h2>Submitted Ideas <span class="badge">{{count($ideas)}}</span></h2>
     @if (!count($ideas))
         <h4>You have not submitted any ideas yet.</h4>
-        <a href="{{ route('do') }}">Submit an Idea</a>
+        <a href="{{ route('submit-idea') }}">Submit an Idea</a>
     @endif
 
     <div class="row">

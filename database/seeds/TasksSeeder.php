@@ -21,11 +21,11 @@ class TasksSeeder extends Seeder
             'text' => 'What would you like to see or do at El Nudillo, the intersection of 14th Street and National Avenue?',
             'type' => '80',
         ],
-        [
-            'name' => 'Raise an Issue',
-            'text' => 'What issues relate to this idea? What consequences might it have?',
-            'type' => '91',
-        ],
+//         [
+//             'name' => 'Raise a Related Issue',
+//             'text' => 'What issues do you think relate to this idea?',
+//             'type' => '91',
+//         ],
         [
             'name' => 'Add a Story',
             'text' => 'Tell a story that relates to this idea.',
@@ -42,7 +42,7 @@ class TasksSeeder extends Seeder
             'type' => '91',
         ],
         [
-            'name' => 'Evaluate Feasability',
+            'name' => 'Evaluate Feasibility',
             'text' => 'How feasible is this idea?',
             'type' => '101',
         ],
@@ -75,6 +75,11 @@ class TasksSeeder extends Seeder
             'name' => 'Analyze the Idea',
             'text' => 'How well does the current idea align with this reference?',
             'type' => '102',
+        ],
+        [
+            'name' => 'Rate the Idea',
+            'text' => 'Rate the idea across the criteria below.',
+            'type' => '100',
         ],
     ];
     /**

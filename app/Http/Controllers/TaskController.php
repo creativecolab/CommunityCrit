@@ -130,21 +130,58 @@ class TaskController extends Controller
      * @param $idea_id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showRandomTask( )
-    {
+
+    public function showTask(int $task_id, int $idea_id, int $link_id ){
         $view = 'activities.elaboration';
 
-        $idea = Idea::inRandomOrder()->first();
-        $task = Task::inRandomOrder()->first();
-
-
-        $links = $idea->links;
-        $link = count($links) ? $links[rand(0, count($links)-1)] : null;
-
-        $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
+        $data = ['idea' => Idea::find($idea_id), 'link' => Link::find($link_id), 'task' => Task::find($task_id)];
 
         return view($view, $data);
     }
+
+    /**
+     * select task for elaborate/build type activity
+     *
+     * @param $task_id
+     * @param $idea_id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showRandomTask( )
+    {
+
+        $task = Task::inRandomOrder()->first();
+        
+        // for testing a specific task type
+        // $tasks = Task::all();
+        // $task = $tasks->filter(function($item) {
+        //     return $item->type == 80;
+        // })->first();
+
+        $task_id = $task->id;
+
+        if (($task->type / 10) != 8) {
+            $idea = Idea::inRandomOrder()->first();
+            $idea_id = $idea->id;
+            $links = $idea->links;
+            if (count($links)) {
+                $link = $links[rand(0, count($links)-1)];
+                $link_id = $link->id;
+            } else {
+                $link_id = 0;
+            }
+        } else {
+            $idea_id = 0;
+            $link_id = 0;
+        }
+
+        // $path = '/' + $task_id + '/' + $idea_id + '/' + $link_id;
+        // print($path);
+
+        // return redirect()->route('ideas');
+        return redirect()->route('show-task', [$task_id, $idea_id, $link_id]);
+    }
+
+    
 
     // /**
     //  * view page for elaborate/build type activity
@@ -475,28 +512,55 @@ class TaskController extends Controller
         return response()->json($data);
     }
 
-    public function elaborate( Request $request) //Idea $idea, int $task)
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
     {
+        return [
+            'text.required' => 'A title is required',
+        ];
+    }
+
+    public function submitText( Request $request) //Idea $idea, int $task)
+    {
+        $exit = $request->get( 'exit' );
+
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                'text' => 'required|string',
+            ]);
+        }
+
         $feedback = new Feedback;
         $feedback->user_id = \Auth::id();
         $feedback->comment = $request->get( 'text' );
         $feedback->idea_id = $request->get( 'idea' );
         $feedback->task_id = $request->get( 'task' );
         $feedback->link_id = $request->get( 'link' );
-        // $feedback->link_id = 1;
-        // if ($idea) {$feedback->idea_id = $idea;}
-        // if ($link) {$feedback->link_id = $link;}
-        
-        // $feedback->type = 'build';
 
-        // if ( $task->feedback()->save($feedback) ) {
-        if ( $feedback->save() ) {
-            flash("Comment submitted!")->success();
-        } else {
-            flash('Unable to save your feedback. Please contact us.')->error();
+        if ($exit == 'Submit') {
+            if ( $feedback->save() ) {
+                flash("Your contribution was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            return redirect()->route('do');
         }
+        else {
+            if ($feedback->comment) {
+                if ( $feedback->save() ) {
+                    flash("Your contribution was submitted!")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
+            }
 
-        return redirect()->back();
+            return redirect()->route('post');
+        }
     }
 
     private function taskQueue( $task_id )
