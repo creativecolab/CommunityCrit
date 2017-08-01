@@ -25,18 +25,27 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Task::class, function (Faker\Generator $faker) {
-	return [
-		'name' => ucwords($faker->word),
-		'text' => $faker->paragraphs(3, true)
-	];
-});
+// $factory->define(App\Idea::class, function (Faker\Generator $faker) {
+// 	return [
+// 		'name' => ucwords($faker->word),
+// 		'text' => $faker->text,
+// 	];
+// });
+
+// $factory->define(App\Task::class, function (Faker\Generator $faker) {
+// 	return [
+// 		'name' => ucwords($faker->name),
+		// 'text' => $faker->paragraph()
+// 		// 'text' => $faker->paragraph(3, true)
+// 	];
+// });
 
 $factory->define( App\Feedback::class, function ( Faker\Generator $faker ) {
 	return [
 		'comment' => $faker->paragraph(),
-		'task_id' => 1,
-		'user_id' => 1
+		// 'task_id' => 1,
+		'user_id' => 1,
+		'type' => 1
 	];
 } );
 
