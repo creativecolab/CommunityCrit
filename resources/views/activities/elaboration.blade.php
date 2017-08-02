@@ -25,7 +25,7 @@
                 </div>
             </div> -->
             <!-- <div class="well"> -->
-                <blockquote style="margin-top: 15px;">
+                <blockquote >
                     <p>{!! $link->text !!}</p>
                 </blockquote>
             <!-- </div> -->
