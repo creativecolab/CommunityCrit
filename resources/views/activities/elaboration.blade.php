@@ -49,6 +49,8 @@
                     @elseif (intval(($task->type) / 10) == 7)
                         {!! Form::open(['action' => ['LinkController@submitLink'], 'style' => 'display:inline']) !!}
                         <!-- <em>Link!</em> -->
+                    @elseif ($task->type == 100)
+                        {!! Form::open(['action' => ['TaskController@submitRatings'], 'style' => 'display:inline']) !!}
                     @else
                         {!! Form::open(['action' => ['TaskController@submitText', $idea->id], 'style' => 'display:inline']) !!}
                         <!-- <em>Everything else!</em> -->
@@ -64,16 +66,21 @@
                     @endif
                     {{ Form::hidden('task', $task->id) }}
                     
-
-                    <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
-                        <label class="instruction" for="submissionText">{!! $task->text !!}</label>
-                        <textarea class="form-control" rows="3" id="submissionText" name="text"></textarea>
-                        @if ($errors->has('text'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('text') }}</strong>
-                            </span>
-                        @endif
-                    </div>
+                    @if ($task->type != 100)
+                        <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
+                            <label class="instruction" for="submissionText">{!! $task->text !!}</label>
+                            <textarea class="form-control" rows="3" id="submissionText" name="text"></textarea>
+                            @if ($errors->has('text'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('text') }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    @else
+                        <label class="instruction">{!! $task->text !!}</label>
+                        @component('activities.common.rating', ['qualities' => $qualities])
+                        @endcomponent
+                    @endif
 
                     @if (($task->type) / 10 == 8)
                         <div class="row">

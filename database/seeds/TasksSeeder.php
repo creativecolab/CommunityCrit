@@ -76,6 +76,11 @@ class TasksSeeder extends Seeder
             'text' => 'The above reference provides a guideline for the design of this idea. What do you think of this idea based on the reference?',
             'type' => '102',
         ],
+        [
+            'name' => 'Rate the Idea',
+            'text' => 'Rate this idea across the following dimensions.',
+            'type' => '100',
+        ],
     ];
     /**
      * Run the database seeds.
