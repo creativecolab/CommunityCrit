@@ -20,9 +20,13 @@
 // // }
 
 Route::get( '/', function() {
-    return redirect()->action(
-        'TaskController@showRandomTask', []
-    );
+    if (Auth::check()) {
+        return redirect()->action(
+            'TaskController@showRandomTask', []);
+    }
+    else {
+        return view('welcome');
+    }
 } );
 
 Auth::routes();
