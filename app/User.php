@@ -111,6 +111,16 @@ class User extends Authenticatable
 	}
 
 	/**
+	 * Ratings this user has submitted
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function ratings()
+	{
+		return $this->hasMany( 'App\Rating' );
+	}
+
+	/**
 	 * Get User's recommended tasks
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
