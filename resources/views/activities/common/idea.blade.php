@@ -19,6 +19,7 @@
             <!-- <button class="btn btn-default pull-right">Switch idea</button> -->
             </h2>
             <p style="font-size: 120%;">{!! $idea->text !!}</p>
+            <p><em>Suggested by {{ $idea->user->fname }}</em></p>
         </div>
     </div>
 </div> <!-- .row -->
