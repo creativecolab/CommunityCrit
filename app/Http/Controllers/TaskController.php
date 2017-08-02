@@ -197,7 +197,7 @@ class TaskController extends Controller
         // for testing a specific task type
         // $tasks = Task::all();
         // $task = $tasks->filter(function($item) {
-        //     return $item->type == 102;
+            // return $item->type == 102;
         // })->first();
 
         $type = $task->type;
@@ -238,17 +238,22 @@ class TaskController extends Controller
                 $format = 'text';
             } else if (in_array($type, $text_link)) {
                 // if a text with link task, select an idea with links and a link
-                $idea = Idea::all()->filter(function ($value, $key) {
-                   return count($value->links());
+                $ideas = Idea::all();
+                $idea = $ideas->filter(function ($item) {
+                   return (count($item->links));
                 })->random();
+                // $idea = Idea::all()->random();
 
-                $link = $idea->links->random();
-                $link_id = $link->id;
-                // $format = 'text-link';
+                if (count($idea->links)) {
+                    $links = $idea->links;
+                    $link = $links->shuffle()->first();
+                    $link_id = $link->id;
+                } else {
+                    $link_id = 0;
+                }
             } else {
                 $idea = Idea::all()->random();
                 $link_id = 0;
-                // $format = 'exception';
             }
 
             $idea_id = $idea->id;

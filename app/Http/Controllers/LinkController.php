@@ -14,7 +14,7 @@ use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Validator;
 
-class IdeaController extends Controller
+class LinkController extends Controller
 {
     /**
      * Table of Contents:
@@ -107,7 +107,7 @@ class IdeaController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function submitIdea(Request $request)
+    public function submitLink(Request $request)
     {
         $exit = $request->get( 'exit' );
 
@@ -118,13 +118,15 @@ class IdeaController extends Controller
             ]);
         }
 
-        $idea = new Idea;
-        $idea->name = $request->get('name');
-        $idea->text = $request->get('text');
-        $idea->user_id = \Auth::id();
+        $link = new Link;
+        $link->user_id = \Auth::id();
+        $link->text = $request->get('text');
+        $link->idea_id = $request->get( 'idea' );
+        $task = Task::find($request->get( 'task' ));
+        $link->link_type = $task->type % 10;
 
         if ($exit == 'Submit') {
-            if ($idea->save() ) {
+            if ($link->save() ) {
                 flash("Your idea was submitted! You may do another activity or exit below.")->success();
             } else {
                 flash('Unable to save your feedback. Please contact us.')->error();
@@ -133,8 +135,8 @@ class IdeaController extends Controller
             return redirect()->route('do');
         }
         else {
-            if ($idea->text) {
-                if ($idea->save() ) {
+            if ($link->text) {
+                if ($link->save() ) {
                     flash("Your idea was submitted!")->success();
                 } else {
                     flash('Unable to save your feedback. Please contact us.')->error();
@@ -145,30 +147,30 @@ class IdeaController extends Controller
         }
     }
 
-    /**
-     * submit a new link/reference, linked to an idea
-     *
-     * @param Request $request
-     * @param Idea $idea
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function submitLink( Request $request, Idea $idea )
-    {
-        $link = new Link;
-        $link->user_id = \Auth::id();
+//     /**
+//      * submit a new link/reference, linked to an idea
+//      *
+//      * @param Request $request
+//      * @param Idea $idea
+//      * @return \Illuminate\Http\RedirectResponse
+//      */
+//     public function submitLink( Request $request )
+//     {
+//         $link = new Link;
+//         $link->user_id = \Auth::id();
 
-//        TODO: allow multiple submission types
-        $link->text = $request->get( 'text' );
-        $link->type = 1;
-        $link->link_type = rand(1, 5);
+// //        TODO: allow multiple submission types
+//         $link->text = $request->get( 'text' );
+//         $link->type = 1;
+//         $link->link_type = rand(1, 5);
 
-        if( $idea->links()->save($link) ) {
-            flash("Link submitted!");
-        } else {
-            flash("Unable to save your link. Please contact us.")->error();
-        }
+//         if( $idea->links()->save($link) ) {
+//             flash("Link submitted!");
+//         } else {
+//             flash("Unable to save your link. Please contact us.")->error();
+//         }
 
-        return redirect()->back();
-    }
+//         return redirect()->back();
+//     }
 
 }

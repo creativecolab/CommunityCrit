@@ -11,6 +11,6 @@
         @endif
         <!-- <button class="btn btn-default pull-right">Switch idea</button> -->
         </h2>
-        <p>{!! $idea->text !!}</p>
+        <p style="font-size: 120%;">{!! $idea->text !!}</p>
     </div>
 </div> <!-- .row -->
