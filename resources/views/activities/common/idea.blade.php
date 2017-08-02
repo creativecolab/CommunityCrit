@@ -1,8 +1,9 @@
 <div class="row">
-    <div class="col-md-3">
-        <img class="img-responsive" src="/img/placeholder.jpg"></img>
-    </div>
-    <div class="col-md-9">
+    <!-- <div class="col-md-3"> -->
+        <!-- <img class="img-responsive" src="/img/placeholder.jpg"></img> -->
+    <!-- </div> -->
+    <!-- <div class="col-md-9"> -->
+    <div class="col-md-12">
         <h2 class="no-marg-top">
         Idea<!-- 
         -->@if ($idea->name)<!-- 

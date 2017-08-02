@@ -59,7 +59,7 @@ Route::group( ['middleware' => 'checkUser' ], function() {
 Route::group (['prefix' => 'ideas', 'middleware' => 'checkUser'], function () {
     Route::get('/submit/link/{id}', 'IdeaController@showSubmitLink');
     Route::get('/assess/{id}', 'IdeaController@showAssess');
-    Route::get('/submit', 'IdeaController@showSubmit')->name('submit-idea'); // submit a new idea
+    Route::get('/submit', 'IdeaController@showSubmitIdea')->name('submit-idea'); // submit a new idea
     Route::get('/combine', 'IdeaController@showCombination');
     // Route::get('/comment/{id}', 'IdeaController@showComment');
     Route::post( '/submit/new', 'IdeaController@submitIdea');
@@ -78,6 +78,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::get( '/', 'TaskController@showRandomTask')->name( 'do' );
     // Route::get( '/list', 'TaskController@allActivities' );
     Route::get( '/{task_id}/{idea_id}/{link_id}', 'TaskController@showTask')->name('show-task');
+    // Route::get( '/eval', 'TaskController@showTaskOfTypeCat');
     // Route::get( '/{task_id}/{idea_id}', 'TaskController@showTask')->name('show-task');
     // Route::get( '/{task_id}', 'TaskController@showTask')->name('show-task');
     // Route::get( '/build/{task_id}/{idea_id}', 'TaskController@showElaborate');

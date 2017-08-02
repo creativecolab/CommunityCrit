@@ -11,25 +11,35 @@
             @endcomponent
         @endif
 
+        @if ($link)
+            <!-- <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                    Reference: 
+                    @component('utilities.link_type_name', ['link_type' => $link->link_type])
+                    @endcomponent
+                    </h4>
+                </div>
+                <div class="panel-body">
+                    {!! $link->text !!}
+                </div>
+            </div> -->
+            <!-- <div class="well"> -->
+                <blockquote style="margin-top: 15px;">
+                    <p>{!! $link->text !!}</p>
+                </blockquote>
+            <!-- </div> -->
+        @endif
+
         <div class="panel panel-default no-marg-bot input">
-            <div class="panel-heading">
+            <!-- <div class="panel-heading">
                 <div class="panel-title">
                     {!! $task->name !!}
                 </div>
-            </div>
+            </div> -->
             <!-- List group -->
             <ul class="list-group">
-                @if ($link)
-                    <li class="list-group-item">
-                        <h4 class="no-marg-top">Reference: 
-                            @component('utilities.link_type_name', ['link_type' => $link->link_type])
-                            @endcomponent
-                        </h4>
-                        <p class="no-marg-bot">
-                            {!! $link->text !!}
-                        </p>
-                    </li>
-                @endif
+                
                 <li class="list-group-item">
                     @if (($task->type) / 10 == 8)
                         {!! Form::open(['action' => ['IdeaController@submitIdea'], 'style' => 'display:inline']) !!}

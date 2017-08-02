@@ -142,20 +142,26 @@ class TaskController extends Controller
     /**
      * select task for elaborate/build type activity
      *
-     * @param $task_id
-     * @param $idea_id
+     * @param $type
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showRandomTask( )
+    public function showTaskOfTypeCat( )
     {
 
-        $task = Task::inRandomOrder()->first();
+        // //given $task and $type
+        // $typeCat = 'eval';
+
+        // $allTypes = Task::TYPES;
+        // $type = random($allTypes[ $typeCat ]);
+        // print($type;)
         
-        // for testing a specific task type
-        // $tasks = Task::all();
-        // $task = $tasks->filter(function($item) {
-        //     return $item->type == 80;
-        // })->first();
+        // $task = Task::all()->filter(function($item) {
+        //     return $item->type == $type;
+        // })->random();
+
+        // print($task);
+
+        $task = Task::all()->random();
 
         $task_id = $task->id;
 
@@ -174,11 +180,81 @@ class TaskController extends Controller
             $link_id = 0;
         }
 
-        // $path = '/' + $task_id + '/' + $idea_id + '/' + $link_id;
-        // print($path);
-
-        // return redirect()->route('ideas');
         return redirect()->route('show-task', [$task_id, $idea_id, $link_id]);
+
+    }
+
+    /**
+     * select task for elaborate/build type activity
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showRandomTask( )
+    {
+        // select a random task that is meant for queuing
+        $task = Task::where('type', '>', 50)->inRandomOrder()->first();
+        
+        // for testing a specific task type
+        // $tasks = Task::all();
+        // $task = $tasks->filter(function($item) {
+        //     return $item->type == 102;
+        // })->first();
+
+        $type = $task->type;
+
+        $allTypes = Task::TYPES;
+        $evals = collect($allTypes['eval']);
+        $imps = collect($allTypes['improve']);
+        $links = collect($allTypes['link']);
+        $subs = collect($allTypes['submit']);
+        // $idea = $task->ideas->first();
+        // $view = '';
+        // $data = [];
+
+        $allFormats = Task::FORMATS;
+        $rate = $allFormats['rate'];
+        $text = $allFormats['text'];
+        $text_link = $allFormats['text_link'];
+
+        if ($subs->keys()->contains($type)) {
+            // if a submit task, no idea needed
+            $idea_id = 0;
+            $link_id = 0;
+            $format = 'submit-idea';
+        } else {
+            // if ($rate->has(102)) {
+            if (in_array($type, $rate)) {
+                // if a rating task, select an idea but no link
+                $idea = Idea::all()->random();
+                $link_id = 0;
+                // $view = 'ideas.rating';
+                // $data['idea'] =  $idea;
+                // $data['ratings'] = Rating::QUALITIES;
+                $format = 'rate-idea';
+            } else if (in_array($type, $text)) {
+                // if a text task, select an idea but no link
+                $idea = Idea::all()->random();
+                $link_id = 0;
+                $format = 'text';
+            } else if (in_array($type, $text_link)) {
+                // if a text with link task, select an idea with links and a link
+                $idea = Idea::all()->filter(function ($value, $key) {
+                   return count($value->links());
+                })->random();
+
+                $link = $idea->links->random();
+                $link_id = $link->id;
+                // $format = 'text-link';
+            } else {
+                $idea = Idea::all()->random();
+                $link_id = 0;
+                // $format = 'exception';
+            }
+
+            $idea_id = $idea->id;
+        }
+
+        return redirect()->route('show-task', [$task->id, $idea_id, $link_id]);
     }
 
     

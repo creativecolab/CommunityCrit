@@ -15,12 +15,21 @@ class Task extends Node
     const TYPE_CHECKBOX = 4;
     const TYPE_MULTITEXT = 5;
 
+    // types equal to or greater than 50 are included in the queue
     const TYPE_EVAL = [100 => 'rating', 101 => 'text', 102 => 'text_link'];
     const TYPE_IMPROVE = [90 => 'no_link', 91 => 'link'];
     const TYPE_SUBMIT = [80 => 'idea', 81 => 'link'];
-    const TYPE_LINK = [70 => 'issue', 71 => 'example'];
+    const TYPE_LINK = [71 => 'design_guideline', 72 => 'project_goal', 73 => 'project_constraint', 74 => 'issue', 75 => 'example', 76 => 'story'];
+    // types less than 50 are not included in the queue
     const TYPE_COMMENT = [20 => 'comment'];
+
     const TYPES = ['eval' => Task::TYPE_EVAL, 'link' => Task::TYPE_LINK, 'improve' => Task::TYPE_IMPROVE, 'submit' => Task::TYPE_SUBMIT, 'comment' => Task::TYPE_COMMENT];
+    
+    const FORMAT_RATE = [100];
+    const FORMAT_TEXT = [101, 90, 80, 71, 72, 73, 74, 75, 76, 20];
+    const FORMAT_TEXTWLINK = [102, 91, 81];
+    const FORMATS = ['rate' => Task::FORMAT_RATE, 'text' => Task::FORMAT_TEXT, 'text_link' => Task::FORMAT_TEXTWLINK];
+    
 
     use CrudTrait;
     use Sluggable;
@@ -47,6 +56,16 @@ class Task extends Node
             ]
         ];
     }
+
+    // *
+    //  * Return a task type ID when given a category.
+    //  *
+    //  * @return array
+     
+    // public function findByType()
+    // {
+    //     return static::TYPES->get('link');
+    // }
 
     /**
      * Returns whether or not the Task has subtasks
