@@ -56,6 +56,10 @@ class UserController extends Controller
 
         $ideas = Auth()->User()->ideas->sortByDesc('created_at');
         $data['ideas'] = $ideas;
+        
+        $links = Auth()->User()->links->sortByDesc('created_at');
+        $data['links'] = $links;
+
         $feedbacks = Auth()->User()->feedback->sortByDesc('created_at');
         $data['feedbacks'] = $feedbacks;
 

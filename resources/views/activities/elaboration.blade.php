@@ -25,11 +25,13 @@
                 </div>
             </div> -->
             <!-- <div class="well"> -->
-                <blockquote >
+                <blockquote>
                     <p>{!! $link->text !!}</p>
                 </blockquote>
             <!-- </div> -->
         @endif
+
+        <!-- <em>Task Type: {{ ($task->type) }}</em> -->
 
         <div class="panel panel-default no-marg-bot input">
             <!-- <div class="panel-heading">
@@ -41,10 +43,15 @@
             <ul class="list-group">
                 
                 <li class="list-group-item">
-                    @if (($task->type) / 10 == 8)
+                    @if (intval(($task->type) / 10) == 8)
                         {!! Form::open(['action' => ['IdeaController@submitIdea'], 'style' => 'display:inline']) !!}
+                        <!-- <em>Submission!</em> -->
+                    @elseif (intval(($task->type) / 10) == 7)
+                        {!! Form::open(['action' => ['LinkController@submitLink'], 'style' => 'display:inline']) !!}
+                        <!-- <em>Link!</em> -->
                     @else
                         {!! Form::open(['action' => ['TaskController@submitText', $idea->id], 'style' => 'display:inline']) !!}
+                        <!-- <em>Everything else!</em> -->
                     @endif
 
                     {{ csrf_field() }}

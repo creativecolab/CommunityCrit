@@ -101,6 +101,16 @@ class User extends Authenticatable
 	}
 
 	/**
+	 * Links this user has submitted
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function links()
+	{
+		return $this->hasMany( 'App\Link' );
+	}
+
+	/**
 	 * Get User's recommended tasks
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

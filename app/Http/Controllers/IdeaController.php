@@ -288,30 +288,30 @@ class IdeaController extends Controller
         return redirect()->back();
     }
 
-    /**
-     * submit a new link/reference, linked to an idea
-     *
-     * @param Request $request
-     * @param Idea $idea
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function submitLink( Request $request, Idea $idea )
-    {
-        $link = new Link;
-        $link->user_id = \Auth::id();
+//     /**
+//      * submit a new link/reference, linked to an idea
+//      *
+//      * @param Request $request
+//      * @param Idea $idea
+//      * @return \Illuminate\Http\RedirectResponse
+//      */
+//     public function submitLink( Request $request, Idea $idea )
+//     {
+//         $link = new Link;
+//         $link->user_id = \Auth::id();
 
-//        TODO: allow multiple submission types
-        $link->text = $request->get( 'text' );
-        $link->type = 1;
-        $link->link_type = rand(1, 5);
+// //        TODO: allow multiple submission types
+//         $link->text = $request->get( 'text' );
+//         $link->type = 1;
+//         $link->link_type = rand(1, 5);
 
-        if( $idea->links()->save($link) ) {
-            flash("Link submitted!");
-        } else {
-            flash("Unable to save your link. Please contact us.")->error();
-        }
+//         if( $idea->links()->save($link) ) {
+//             flash("Link submitted!");
+//         } else {
+//             flash("Unable to save your link. Please contact us.")->error();
+//         }
 
-        return redirect()->back();
-    }
+//         return redirect()->back();
+//     }
 
 }

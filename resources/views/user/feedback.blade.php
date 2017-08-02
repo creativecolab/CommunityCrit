@@ -17,9 +17,11 @@
             <!-- <div class="col-sm-6 col-lg-4"> -->
                 <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="panel-title">{{ $idea->name }}</div>
-                        </div> <!-- .panel-heading -->
+                        @if ($idea->name)
+                            <div class="panel-heading">
+                                <div class="panel-title">{{ $idea->name }}</div>
+                            </div> <!-- .panel-heading -->
+                        @endif
                         <div class="panel-body">
                             {{ $idea->text }}
                         </div> <!-- .panel-body -->
@@ -28,6 +30,36 @@
                         </div>
                     </div> <!-- .panel -->
                 </a>
+            </div> <!-- .col -->
+        @endforeach
+    </div>
+
+    <h2>References <span class="badge">{{count($links)}}</span></h2>
+    @if (!count($links))
+        <h4>You have not submitted any references yet.</h4>
+        <!-- <a href="{{ route('do') }}">Get Started</a> -->
+    @endif
+
+    <div class="row">
+        @foreach ($links as $link)
+            <div class="col-md-12">
+            <!-- <div class="col-sm-6 col-lg-4"> -->
+                <!-- <a class="panel-link"> -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                @component('utilities.link_type_name', ['link_type' => $link->link_type])
+                                @endcomponent
+                            </div>
+                        </div> <!-- .panel-heading -->
+                        <div class="panel-body">
+                            {!! $link->text !!}
+                        </div>
+                        <div class="panel-footer">
+                            {{ $link->created_at }}
+                        </div>
+                    </div> <!-- .panel -->
+                <!-- </a> -->
             </div> <!-- .col -->
         @endforeach
     </div>

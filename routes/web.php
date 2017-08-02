@@ -73,6 +73,10 @@ Route::group (['prefix' => 'ideas', 'middleware' => 'checkUser'], function () {
     Route::post( '/submit/link/{idea}/new', 'IdeaController@submitLink');
 });
 
+Route::group (['prefix' => 'links', 'middleware' => 'checkUser'], function () {
+    Route::post( '/submit/new', 'LinkController@submitLink');
+});
+
 Route::group( [ 'prefix' => 'ideas' ], function() {
     Route::get('/', 'IdeaController@index')->name( 'ideas' );
     Route::get('/{id}', 'IdeaController@show');
