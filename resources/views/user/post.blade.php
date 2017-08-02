@@ -11,6 +11,6 @@
 
     <p>Please help us by completing the short survey below. You may also look at <a href="{{ route('my-contributions') }}">your contributions</a> or see the <a href="{{ route('ideas') }}">contributions of your fellow community members.</a></p>
 
-    <p>[post-survey goes here]</p>
+    <p><iframe style="border: 0;" src="https://ucsdsocialsciences.co1.qualtrics.com/jfe/form/SV_39JQ1w8xjnvVPWR" height="800px" width="800px"></iframe></p>
 
 @endsection
