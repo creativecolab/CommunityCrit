@@ -79,7 +79,7 @@
                         <label for="consent" class="col-md-8 col-md-offset-2">Consent Form</label>
                     
                         <div class="col-md-8 col-md-offset-2">
-                            <div style="height:200px;width:470px;border:1px solid #ccc;padding-top:10px;padding-left:5px;padding-right:5px;padding-bottom:10px;font:14px;background-color:#f5f8fa;overflow:auto;">
+                            <div style="height:200px;border:1px solid #ccc;padding-top:10px;padding-left:5px;padding-right:5px;padding-bottom:10px;font:14px;background-color:#f5f8fa;overflow:auto;">
                                 <p><strong>
                                 University of California, San Diego<br> 
                                 Consent to Act as a Research Subject
@@ -141,6 +141,7 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                         
 
