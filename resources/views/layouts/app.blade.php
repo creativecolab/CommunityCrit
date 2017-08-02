@@ -43,7 +43,7 @@
                     @if (Auth::guest())
                         &nbsp;
                     @else
-                        <li><a href="{{ route('ideas') }}">Ideas</a></li>
+                        <!-- <li><a href="{{ route('ideas') }}">Ideas</a></li> -->
                         {{--<li><a href="{{ url('/overview') }}">Overview</a></li>--}}
                         {{--<li><a href="{{ action('TaskController@allFacets') }}">Topics</a></li>--}}
                         {{--<li><a href="{{ action('TaskController@allSources') }}">Sources</a></li>--}}
