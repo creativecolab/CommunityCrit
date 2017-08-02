@@ -134,7 +134,12 @@ class TaskController extends Controller
     public function showTask(int $task_id, int $idea_id, int $link_id ){
         $view = 'activities.elaboration';
 
-        $data = ['idea' => Idea::find($idea_id), 'link' => Link::find($link_id), 'task' => Task::find($task_id)];
+        $task = Task::find($task_id);
+
+        $data = ['idea' => Idea::find($idea_id), 'link' => Link::find($link_id), 'task' => $task];
+        if ($task->type == 100) {
+            $data['qualities'] = Rating::QUALITIES;
+        }
 
         return view($view, $data);
     }
@@ -197,7 +202,7 @@ class TaskController extends Controller
         // for testing a specific task type
         // $tasks = Task::all();
         // $task = $tasks->filter(function($item) {
-            // return $item->type == 102;
+            // return $item->type == 100;
         // })->first();
 
         $type = $task->type;
@@ -230,7 +235,7 @@ class TaskController extends Controller
                 // $view = 'ideas.rating';
                 // $data['idea'] =  $idea;
                 // $data['ratings'] = Rating::QUALITIES;
-                $format = 'rate-idea';
+                // return view($view, $data);
             } else if (in_array($type, $text)) {
                 // if a text task, select an idea but no link
                 $idea = Idea::all()->random();
@@ -638,6 +643,53 @@ class TaskController extends Controller
                 } else {
                     flash('Unable to save your feedback. Please contact us.')->error();
                 }
+            }
+
+            return redirect()->route('post');
+        }
+    }
+
+    public function submitRatings( Request $request) //Idea $idea, int $task)
+    {
+        $exit = $request->get( 'exit' );
+
+        $qualities = Rating::QUALITIES;
+
+        if ($exit == 'Submit') {
+            foreach($qualities as $quality) {
+                $this->validate($request, [
+                    $quality => 'required',
+                ]);
+            }
+        }
+
+        $ratings = collect([]);
+        foreach($qualities as $key=>$quality) {
+            $rating = new Rating;
+            $rating->user_id = \Auth::id();
+            $rating->type = $key;
+            $rating->rating = $request->get( $quality );
+            if ($rating->rating != null)
+                $ratings->push($rating);
+        }
+
+        $idea_id = $request->get( 'idea' );
+        $idea = Idea::find($idea_id);
+
+        if ($exit == 'Submit') {
+            if ( $idea->ratings()->saveMany($ratings->all()) ) {
+                flash("Ratings submitted!");
+            } else {
+                flash("Unable to save your ratings. Please contact us.")->error();
+            }
+
+            return redirect()->route('do');
+        }
+        else {
+            if ( $idea->ratings()->saveMany($ratings->all()) ) {
+                flash("Ratings submitted!");
+            } else {
+                flash("Unable to save your ratings. Please contact us.")->error();
             }
 
             return redirect()->route('post');

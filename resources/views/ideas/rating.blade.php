@@ -1,26 +1,29 @@
 @extends('layouts.app')
 
-@section('title', 'Combination')
+@section('title', 'Rating')
 
 @section('content')
 
     {!! Form::open(['action' => ['IdeaController@assess', $idea->id]]) !!}
-    <div class="form-group">
-        @foreach($ratings as $rating)
-        <label class="col-md-4 control-label">Rate on {{$rating}}:</label>
-        <div class="col-md-8">
-            {{--Checkbox for each idea--}}
-            @for($i = 1; $i < 6; $i++)
-                <div class="radio-inline">
-                    <label>
-                        {!! Form::radio($rating, $i) !!}
-                        {{$i}}
-                    </label>
-                </div>
-            @endfor
+    <div class="row">
+        <div class="form-group">
+            @foreach($ratings as $rating)
+            <label class="col-md-2 control-label">Not {{$rating}} at all</label>
+            <div class="col-md-3">
+                {{--Checkbox for each idea--}}
+                @for($i = 1; $i < 6; $i++)
+                    <div class="radio-inline">
+                        <label>
+                            {!! Form::radio($rating, $i) !!}
+                            {{$i}}
+                        </label>
+                    </div>
+                @endfor
 
+            </div>
+            <label class="col-md-7 control-label">Extremely {{$rating}}</label>
+            @endforeach
         </div>
-        @endforeach
     </div>
 
     <div class="form-group">
