@@ -48,6 +48,11 @@ class Idea extends Node
         // return $this->morphMany('App\Feedback', 'commentable');
     }
 
+    public function user()
+    {
+        return $this->belongsTo( 'App\User' );
+    }
+
     public function diffForHumans($date)
     {
         return Carbon::parse($date)->diffForHumans();
