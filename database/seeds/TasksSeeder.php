@@ -33,7 +33,7 @@ class TasksSeeder extends Seeder
         ],
         [
             'name' => 'Add an Example',
-            'text' => 'Can you think of any examples (such as a place or an object) that could inspire the design of this idea?',
+            'text' => 'What examples (such as a place or an object) come to mind that could inspire the design of this idea?',
             'type' => '75',
         ],
         [
@@ -43,7 +43,7 @@ class TasksSeeder extends Seeder
         ],
         [
             'name' => 'Evaluate Feasability',
-            'text' => 'Do you think this idea is feasible? Why or why not?',
+            'text' => 'How feasible do you think this idea is?',
             'type' => '101',
         ],
 //        [
