@@ -66,7 +66,7 @@
                 font-size: 125%;
             }
 
-            @media screen and (min-width: 480px) {
+            @media screen and (min-width: 576px) {
                 .title {
                     font-size: 70px;
                 }

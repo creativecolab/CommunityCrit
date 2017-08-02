@@ -1,15 +1,15 @@
 <div class="row" style="margin-bottom: 20px;">
     <div class="col-md-12">
         @if ($idea->img_url)
-            <div style="float: left; margin-right: 22px; max-width: 30%;">
+            <div class="idea-img" style="">
             <!-- <div class="col-md-3"> -->
-                <img class="img-responsive" src="{!! $idea->img_url !!}" style="max-height: 250px;"></img>
+                <img class="img-responsive" src="{!! $idea->img_url !!}"></img>
             <!-- </div> -->
             <!-- <div class="col-md-9"> -->
             </div>
-            <div style="float: left; max-width: 60%;">
+            <div class="idea-name-text">
         @else
-            <div style="float: left; max-width: 100%;">
+            <div style="max-width: 100%;">
         @endif
             <h2 class="no-marg-top">
             Idea<!-- 
