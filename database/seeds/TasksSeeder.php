@@ -27,8 +27,8 @@ class TasksSeeder extends Seeder
 //            'type' => '91',
 //        ],
         [
-            'name' => 'Add a Story',
-            'text' => 'Do you have a story or personal experience related to this idea?',
+            'name' => 'Share a Story',
+            'text' => 'Share a story or personal experience related to this idea.',
             'type' => '76',
         ],
         [
