@@ -3,67 +3,158 @@
 namespace App;
 
 use Backpack\CRUD\CrudTrait;
+use Cviebrock\EloquentSluggable\Sluggable;
 use Baum\Node;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Node
 {
-	use CrudTrait;
+    const TYPE_TEXT = 1;
+    const TYPE_RADIO = 2;
+    const TYPE_IMAGE = 3;
+    const TYPE_CHECKBOX = 4;
+    const TYPE_MULTITEXT = 5;
 
-	protected $fillable = [
-		'name',
-		'text',
-		'parent_id',
-		'source_id',
-	];
+    // types equal to or greater than 50 are included in the queue
+    const TYPE_EVAL = [100 => 'rating', 101 => 'text', 102 => 'text_link'];
+    const TYPE_IMPROVE = [90 => 'no_link', 91 => 'link'];
+    const TYPE_SUBMIT = [80 => 'idea', 81 => 'link'];
+    const TYPE_LINK = [71 => 'design_guideline', 72 => 'project_goal', 73 => 'project_constraint', 74 => 'issue', 75 => 'example', 76 => 'story'];
+    // types less than 50 are not included in the queue
+    const TYPE_COMMENT = [20 => 'comment'];
 
-	/**
-	 * Returns whether or not the Task has subtasks
-	 *
-	 * @return bool
-	 */
-	public function hasSubtasks()
-	{
-		return $this->subtasks->isNotEmpty();
-	}
+    const TYPES = ['eval' => Task::TYPE_EVAL, 'link' => Task::TYPE_LINK, 'improve' => Task::TYPE_IMPROVE, 'submit' => Task::TYPE_SUBMIT, 'comment' => Task::TYPE_COMMENT];
+    
+    const FORMAT_RATE = [100];
+    const FORMAT_TEXT = [101, 90, 80, 71, 72, 73, 74, 75, 76, 20];
+    const FORMAT_TEXTWLINK = [102, 91, 81];
+    const FORMATS = ['rate' => Task::FORMAT_RATE, 'text' => Task::FORMAT_TEXT, 'text_link' => Task::FORMAT_TEXTWLINK];
+    
 
-	/**
-	 * Gets all subtasks
-	 *
-	 * @return mixed
-	 */
-	public function subtasks()
-	{
-		return $this->children()->get();
-	}
+    use CrudTrait;
+    use Sluggable;
 
-	/**
-	 * Feedback for this task
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function feedback()
-	{
-		return $this->hasMany( 'App\Feedback' );
-	}
+    protected $fillable = [
+        'name',
+        'text',
+        'type',
+//        'task_id',
+        'parent_id',
+        'source_id',
+    ];
 
-	/**
-	 * Users recommended to this task
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-	 */
-	public function recommendedUsers()
-	{
-		return $this->belongsToMany('App\User', 'recommendations')->withTimestamps();
-	}
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 
-	/**
-	 * Source of the task information (if exists)
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function source()
-	{
-		return $this->belongsTo('App\Source');
-	}
+    // *
+    //  * Return a task type ID when given a category.
+    //  *
+    //  * @return array
+     
+    // public function findByType()
+    // {
+    //     return static::TYPES->get('link');
+    // }
+
+    /**
+     * Returns whether or not the Task has subtasks
+     *
+     * @return bool
+     */
+    public function hasSubtasks()
+    {
+        return $this->subtasks->isNotEmpty();
+    }
+
+    /**
+     * Gets all subtasks
+     *
+     * @return mixed
+     */
+    public function subtasks()
+    {
+        return $this->children()->get();
+    }
+
+    /**
+     * Feedback for this task
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function feedback()
+    {
+        return $this->hasMany( 'App\Feedback' );
+        // return $this->morphMany( 'App\Feedback', 'commentable');
+    }
+
+    /**
+     * Users recommended to this task
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function recommendedUsers()
+    {
+        return $this->belongsToMany('App\User', 'recommendations')->withTimestamps();
+    }
+
+    /**
+     * Source of the task information (if exists)
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function source()
+    {
+        return $this->belongsTo('App\Task', 'source_id');
+    }
+
+    /**
+     * Quotes for this source
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function sourceHasQuotes()
+    {
+        return $this->hasMany('App\Task', 'source_id');
+    }
+
+    /**
+     * Facets for this task
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function topic()
+    {
+        return $this->belongsTo( 'App\Topic' );
+    }
+
+    public function project()
+    {
+        return $this->belongsTo( 'App\Project' );
+    }
+
+    public function options()
+    {
+        return $this->belongsToMany('App\Option');
+    }
+
+    // public function ideas()
+    // {
+    //     return $this->belongsToMany( 'App\Idea' );
+    // }
+
+//    public function links()
+//    {
+//        return $this->hasManyThrough('App\Link', 'App\Idea');
+//    }
 }
