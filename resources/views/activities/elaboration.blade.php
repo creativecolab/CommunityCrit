@@ -117,8 +117,8 @@
                     @endif
 
                     {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
-                    {!! Form::submit('Go to exit survey', ['class' => 'btn btn-default', 'name' => 'exit']) !!}
                     <a type="button" class="btn btn-default" href="{{ route('do') }}">Skip</a>
+                    {!! Form::submit('I want to stop', ['class' => 'btn btn-default pull-right', 'name' => 'exit']) !!}
                     {!! Form::close() !!}
                 </li>
             </ul> <!-- list group -->
