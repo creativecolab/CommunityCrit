@@ -100,6 +100,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( '/{id}/skip', 'TaskController@skipQuestion' );
     Route::post( 'img/{task}/upload', 'TaskController@uploadImage');
     Route::post( '/build/{idea_id}/new', 'TaskController@submitText');
+    Route::post( '/submit/rating/new', 'TaskController@submitRatings');
 } );
 
 Route::group( ['prefix' => 'devtest', 'middleware' => 'admin'], function() {
