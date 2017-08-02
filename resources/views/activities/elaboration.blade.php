@@ -118,7 +118,9 @@
 
                     {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
                     <a type="button" class="btn btn-default" href="{{ route('do') }}">Skip</a>
-                    {!! Form::submit('I want to stop', ['class' => 'btn btn-default pull-right', 'name' => 'exit']) !!}
+                    @if ((count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 4)) >= 4)
+                        {!! Form::submit('I want to stop', ['class' => 'btn btn-default pull-right', 'name' => 'exit']) !!}
+                    @endif
                     {!! Form::close() !!}
                 </li>
             </ul> <!-- list group -->
