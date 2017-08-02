@@ -11,8 +11,9 @@ class LinksSeeder extends Seeder
             'type' => '1',
             'image' => '0',
             'link_type' => '1',
-            'text' => '<br><strong>14th Street Promenade Workshop: Key Concepts</strong></br>
-                        <p><b>Respect Neighborhood Scale</b></p><p>The height limits of East Village/downtown (440 feet) and Barrio Logan (40 feet) converge here. Height should be treated in a sensitive manner. It is a great opportunity for pedestrians to pause and do a 360 of what surrounds them.</p>',
+            'text' => '<strong>14th Street Promenade Workshop: Key Concepts</strong>
+                        <p><b>Respect Neighborhood Scale</b></p>
+                        <p>The height limits of East Village/downtown (440 feet) and Barrio Logan (40 feet) converge here. Height should be treated in a sensitive manner. It is a great opportunity for pedestrians to pause and do a 360 of what surrounds them.</p>',
             'idea_id' => '1',
             'user_id' => '3',
             'hidden' => '0',
@@ -21,8 +22,13 @@ class LinksSeeder extends Seeder
             'type' => '1',
             'image' => '0',
             'link_type' => '1',
-            'text' => '<br><strong>East Village South Draft Focus Plan: Define a Unique Neighborhood</strong></br>
-                        <p><b>Lighting:</b></p><ul><li>Use lighting as a way to further distinguish and differentiate East Village South from other downtown neighborhoods. A professional lighting designer should be retained to create a plan to make East Village South subtly unique at night.</li><li>No neon stripes permitted.</li><li>No digital billboards or moving images permitted except behind first story storefront glass.</li></ul>',
+            'text' => '<strong>East Village South Draft Focus Plan: Define a Unique Neighborhood</strong>
+                        <p><b>Lighting:</b></p>
+                        <ul>
+                            <li>Use lighting as a way to further distinguish and differentiate East Village South from other downtown neighborhoods. A professional lighting designer should be retained to create a plan to make East Village South subtly unique at night.</li>
+                            <li>No neon stripes permitted.</li>
+                            <li>No digital billboards or moving images permitted except behind first story storefront glass.</li>
+                        </ul>',
             'idea_id' => '1',
             'user_id' => '3',
             'hidden' => '0',
@@ -31,7 +37,7 @@ class LinksSeeder extends Seeder
             'type' => '1',
             'image' => '0',
             'link_type' => '2',
-            'text' => '<br><strong>East Village South Draft Focus Plan: Enhance Livability through Public Open Space</strong></br>
+            'text' => '<strong>East Village South Draft Focus Plan: Enhance Livability through Public Open Space</strong>
                     <p>As 14th Street turns to the south at Logan Avenue, there is a perfect opportunity to create a major connection point between Barrio Logan and the East Village neighborhood. For purposes of this Focus Plan it has been named this the Nudillo (Spanish for knuckle) to represent <b>the gateway between the two communities</b>...[it] can be enhanced to promote gathering and social interaction. It will become an important public space and celebrate camaraderie between the two communities.</p>',
             'idea_id' => '1',
             'user_id' => '3',
@@ -41,7 +47,7 @@ class LinksSeeder extends Seeder
             'type' => '1',
             'image' => '0',
             'link_type' => '2',
-            'text' => '<br><strong>East Village South Draft Focus Plan: Enhance Livability through Public Open Space</strong></br>
+            'text' => '<strong>East Village South Draft Focus Plan: Enhance Livability through Public Open Space</strong>
                     <p>As 14th Street turns to the south at Logan Avenue, there is a perfect opportunity to create a major connection point between Barrio Logan and the East Village neighborhood. For purposes of this Focus Plan it has been named this the Nudillo (Spanish for knuckle) to represent <b>the gateway between the two communities</b>...[it] can be enhanced to promote gathering and social interaction. It will become an important public space and celebrate camaraderie between the two communities.</p>',
             'idea_id' => '2',
             'user_id' => '3',
