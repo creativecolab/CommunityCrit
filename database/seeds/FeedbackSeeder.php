@@ -75,7 +75,7 @@ class FeedbackSeeder extends Seeder
 		// 	factory( Feedback::class )->create( [ 'user_id' => $user->id, 'task_id' => $tasks->random()->id, 'type' => 'custom'  ] );
 		// }
 
-		factory(Feedback::class, 5)->create();
+		// factory(Feedback::class, 5)->create();
 
 		 foreach ( $this->data as $feedback ) {
              Feedback::create($feedback);
