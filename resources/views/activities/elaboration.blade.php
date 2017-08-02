@@ -6,6 +6,29 @@
 
 @section('content')
     <div class="activity" id="text-link">
+        <div class="panel-group" role="tablist" style="margin-bottom: 30px;">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="collapseListGroupHeading1">
+                    <h4 class="panel-title">
+                        <a href="#collapseListGroup1" class="" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="collapseListGroup1"> About the Project </a>
+                    </h4>
+                </div>
+                <div class="panel-collapse collapse in" role="tabpanel" id="collapseListGroup1" aria-labelledby="collapseListGroupHeading1" aria-expanded="true">
+                    <div class="panel-body">
+                        <!-- <li class="list-group-item"> -->
+                            <!-- <p><b>CommunityCrit allows the public to participate in the urban design process.</b> By offering a quick and easy way to voice opinions, CommunityCrit empowers anyone to help shape the future of their community. By collecting ideas from anyone, anywhere, at any time, CommunityCrit enables organizers to engage their community in the development of planning proposals.</p> -->
+                        <!-- </li> -->
+                        <!-- <li class="list-group-item"> -->
+                            <p>Currently, community leaders are collaborating with the public and local experts to design the intersection of 14th Street and National Avenue, called <strong>“El Nudillo.”</strong> The future El Nudillo is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p>
+                            <strong>Please share your thoughts below!</strong>
+                        <!-- </li> -->
+                    </div>
+                    <!-- <div class="panel-footer">Footer
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
         @if ($idea)
             @component('activities.common.idea', ['idea' => $idea])
             @endcomponent

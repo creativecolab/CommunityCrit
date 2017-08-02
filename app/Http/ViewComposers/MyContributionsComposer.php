@@ -29,7 +29,7 @@ class MyContributionsComposer
     {
         // $view->with('latestMovie', end($this->movieList));
         if (!Auth::guest()) {
-            $count = count(auth()->user()->feedback) + count(auth()->user()->ideas);
+            $count = count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 4);
         }
         else {
             $count = null;
