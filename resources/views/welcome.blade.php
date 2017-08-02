@@ -98,6 +98,9 @@
                         </div>
                     </div>
                 </div>
+                <div class ="panel-body" style="padding-left:120px; padding-right:120px" align=left>
+                <p><strong>CommunityCrit allows the public to participate in the urban design process.</strong> By offering a quick and easy way to voice opinions, suggest ideas, and share values, CommunityCrit empowers anyone to help shape the future of their community. And by collecting ideas from anyone, anywhere, at any time, CommunityCrit provides city planners with the feedback they need to develop great planning proposals.</p><p>Currently, community leaders are engaging the public and local experts to design a portion of the 14th Street Promenade called “El Nudillo.” El Nudillo—the intersection of 14th Street and National Avenue—is imagined to become a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p><p>We would love to hear from you! Click "CommunityCrit" above to share your thoughts.</p>
+                </div>
             </div>
         </div>
     </body>
