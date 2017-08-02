@@ -16,6 +16,9 @@ case 4:
 case 5:
     $link_type_name = 'Example';
     break;
+case 6:
+    $link_type_name = 'Story';
+    break;
 default: 
 	$link_type_name = 'General';
 }

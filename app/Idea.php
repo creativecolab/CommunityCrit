@@ -22,6 +22,11 @@ class Idea extends Node
         return $this->hasMany( 'App\Link' );
     }
 
+    // public function hasLinks()
+    // {
+    //     return count($this->hasMany( 'App\Link' ));
+    // }
+
     public function comments()
     {
         return $this->hasMany( 'App\Comment' );

@@ -101,7 +101,7 @@ class IdeaController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showSubmit()
+    public function showSubmitIdea()
     {
         $submitIdea = Task::where('type', '=', 80)->first();
 

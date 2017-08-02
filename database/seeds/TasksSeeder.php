@@ -29,12 +29,12 @@ class TasksSeeder extends Seeder
         [
             'name' => 'Add a Story',
             'text' => 'Do you have a story or personal experience related to this idea?',
-            'type' => '91',
+            'type' => '76',
         ],
         [
             'name' => 'Add an Example',
             'text' => 'Can you think of any examples (such as a place or an object) that could inspire the design of this idea?',
-            'type' => '91',
+            'type' => '75',
         ],
         [
             'name' => 'Improve the Idea',
