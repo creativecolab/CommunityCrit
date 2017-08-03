@@ -130,10 +130,10 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Proceed to Exit Survey</h4>
                                     </div>
                                     <div class="modal-body">
-                                        Are you sure you're done contributing? Click "No, go back" to continue contributing or click "Yes, I'm done" to stop contributing.
+                                        Thanks for your contributions. Are you sure you want to stop contributing for now?
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">No, go back</button>
