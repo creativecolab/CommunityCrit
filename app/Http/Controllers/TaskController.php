@@ -135,8 +135,8 @@ class TaskController extends Controller
         $view = 'activities.elaboration';
 
         $task = Task::find($task_id);
-        $idea = Idea::all()->where('status', 1)->find($idea_id);
-        $link = Link::find($link_id);
+        $idea = $idea_id ? Idea::all()->where('status', 1)->find($idea_id) : new Idea;
+        $link = $link_id ? Link::all()->where('status', 1)->find($link_id) : new Link;
 
         if ($idea) {
             $data = ['idea' => Idea::find($idea_id), 'link' => Link::find($link_id), 'task' => $task];
@@ -256,8 +256,8 @@ class TaskController extends Controller
                 })->random();
                 // $idea = Idea::all()->random();
 
-                if (count($idea->links)) {
-                    $links = $idea->links;
+                $links = $idea->links->where('status', 1);
+                if (count($links)) {
                     $link = $links->shuffle()->first();
                     $link_id = $link->id;
                 } else {
