@@ -121,10 +121,27 @@
                     @endif
 
                     {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
-                    <a type="button" class="btn btn-default" href="{{ route('do') }}">Skip</a>
+                    <a type="button" class="btn btn-default" href="{{ route('do')}}">Skip</a>
                     @if ($count >= 4)
-                        {!! Form::submit('I want to stop', ['class' => 'btn btn-default pull-right', 'name' => 'exit']) !!}
+                        <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">I want to stop</a>
                     @endif
+                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Are you sure?</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you're done contributing? Click "No, go back" to continue contributing or click "Yes, I'm done" to stop contributing.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">No, go back</button>
+                                        {!! Form::submit('Yes, I\'m done', ['class' => 'btn btn-primary', 'name' => 'exit']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     {!! Form::close() !!}
                 </li>
             </ul> <!-- list group -->
