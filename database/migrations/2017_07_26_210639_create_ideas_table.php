@@ -16,7 +16,7 @@ class CreateIdeasTable extends Migration
         Schema::create('ideas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->string('text');
+            $table->text('text');
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
 
