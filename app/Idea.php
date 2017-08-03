@@ -22,10 +22,11 @@ class Idea extends Node
         'user_id'
     ];
 
-    // public function approved()
-    // {
-    //     return $this->filter('status', 1);
-    // }
+    // https://stackoverflow.com/questions/23658479/laravel-custom-model-methods
+    public static function approved()
+    {
+        return Idea::where('status', 1);
+    }
 
     public function links()
     {

@@ -228,6 +228,7 @@ class TaskController extends Controller
         $text_link = $allFormats['text_link'];
 
         $ideas = Idea::all()->where('status', 1);
+        // $ideas = Idea::approved();
 
         if ($subs->keys()->contains($type)) {
             // if a submit task, no idea needed
