@@ -6,3 +6,6 @@ CRUD::resource( 'feedback', 'FeedbackCrudController' );
 CRUD::resource( 'tasks', 'TaskCrudController' );
 CRUD::resource( 'sources', 'SourceCrudController' );
 CRUD::resource( 'users', 'UserCrudController' );
+CRUD::resource( 'options', 'OptionCrudController' );
+CRUD::resource( 'ideas', 'IdeaCrudController' );
+CRUD::resource( 'links', 'LinkCrudController' );

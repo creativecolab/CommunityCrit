@@ -25,7 +25,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fname', 'lname', 'email', 'password', 'condition',
+        'fname', 'lname', 'email', 'password', 'condition', 'consent'
     ];
 
     /**
@@ -88,6 +88,36 @@ class User extends Authenticatable
 	public function feedback()
 	{
 		return $this->hasMany( 'App\Feedback' );
+	}
+
+	/**
+	 * Ideas this user has submitted
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function ideas()
+	{
+		return $this->hasMany( 'App\Idea' );
+	}
+
+	/**
+	 * Links this user has submitted
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function links()
+	{
+		return $this->hasMany( 'App\Link' );
+	}
+
+	/**
+	 * Ratings this user has submitted
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function ratings()
+	{
+		return $this->hasMany( 'App\Rating' );
 	}
 
 	/**

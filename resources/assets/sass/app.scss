@@ -1,3 +1,6 @@
+.label-default.label-purple {
+  background-color: #b130d1;
+}
 
 // Fonts
 @import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
@@ -7,3 +10,51 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Web
+@import "components/activities";
+
+a.panel-link {
+  text-decoration: none;
+}
+
+a.panel-link {
+  color: inherit;
+}
+
+a.panel-link .panel:hover .panel-body {
+  background-color: #eee;
+}
+
+a.panel-link .panel:hover.panel-default .panel-heading {
+  background-color: #eee;
+}
+
+figcaption {
+	font-style: italic !important;
+}
+
+.idea-img {
+	float: none;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+
+.idea-name-text {
+	max-width: 100%;
+}
+
+@media screen and (min-width: 576px) {
+    .idea-img {
+        float: left;
+		margin-right: 22px;
+		max-width: 30%;
+    }
+    .idea-name-text {
+        float: left;
+		max-width: 60%;
+    }
+    .idea-img img {
+    	max-height: 250px;
+    }
+}

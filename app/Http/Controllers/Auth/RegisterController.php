@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -70,6 +70,7 @@ class RegisterController extends Controller
             'lname' => $data['lname'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'consent' => $data['consent'] ? 1 : 0,
 	        'condition' => rand(User::CONDITION_MIN, User::CONDITION_MAX), // TODO: Move condition to after survey
         ]);
     }
