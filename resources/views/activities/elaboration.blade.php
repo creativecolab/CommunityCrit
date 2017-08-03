@@ -125,7 +125,7 @@
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label class="instruction" for="submissionText">{{ $task->text2 }} </label>
-                                    <input type="text" class="form-control" name="name"></input>
+                                    <input type="text" class="form-control" name="text2"></input>
                                 </div>
                             </div> <!-- .col -->
                         </div>
