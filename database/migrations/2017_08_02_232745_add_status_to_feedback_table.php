@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImgUrgUrlToIdeasTable extends Migration
+class AddStatusToFeedbackTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddImgUrgUrlToIdeasTable extends Migration
      */
     public function up()
     {
-        Schema::table('ideas', function (Blueprint $table) {
-            $table->string('img_url')->nullable()->after('text');
-            // $table->text('text')->change();
+        Schema::table('feedback', function (Blueprint $table) {
+            $table->unsignedInteger('status')->nullable()->after('task_id');
         });
     }
 
@@ -26,9 +25,8 @@ class AddImgUrgUrlToIdeasTable extends Migration
      */
     public function down()
     {
-        Schema::table('ideas', function (Blueprint $table) {
-            // $table->string('text')->change();
-            $table->dropColumn('img_url');
+        Schema::table('feedback', function (Blueprint $table) {
+            $table->dropColumn('status');
         });
     }
 }
