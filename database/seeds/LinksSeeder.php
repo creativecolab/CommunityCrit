@@ -16,6 +16,7 @@ class LinksSeeder extends Seeder
             'idea_id' => '1',
             'user_id' => '3',
             'hidden' => '0',
+            'status' => 1,
         ],
         [
             'type' => '1',
@@ -31,6 +32,7 @@ class LinksSeeder extends Seeder
             'idea_id' => '1',
             'user_id' => '3',
             'hidden' => '0',
+            'status' => 1,
         ],
         [
             'type' => '1',
@@ -41,6 +43,7 @@ class LinksSeeder extends Seeder
             'idea_id' => '3',
             'user_id' => '3',
             'hidden' => '0',
+            'status' => 1,
         ],
         [
             'type' => '1',
@@ -50,6 +53,7 @@ class LinksSeeder extends Seeder
             'idea_id' => '2',
             'user_id' => '3',
             'hidden' => '0',
+            'status' => 1,
         ],
         [
             'type' => '1',
@@ -59,6 +63,7 @@ class LinksSeeder extends Seeder
             'idea_id' => '3',
             'user_id' => '3',
             'hidden' => '0',
+            'status' => 1,
         ],
         [
             'type' => '1',
@@ -68,6 +73,7 @@ class LinksSeeder extends Seeder
             'idea_id' => '2',
             'user_id' => '3',
             'hidden' => '0',
+            'status' => 1,
         ],
         [
             'type' => '1',
@@ -77,6 +83,7 @@ class LinksSeeder extends Seeder
             'idea_id' => '4',
             'user_id' => '3',
             'hidden' => '0',
+            'status' => 1,
         ],
         [
             'type' => '1',
@@ -86,6 +93,7 @@ class LinksSeeder extends Seeder
             'idea_id' => '4',
             'user_id' => '3',
             'hidden' => '0',
+            'status' => 1,
         ],
     ];
     /**

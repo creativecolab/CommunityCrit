@@ -9,6 +9,11 @@ use Baum\Node;
 
 class Idea extends Node
 {
+    const STATUSES = [
+        1 => 'approved',
+        2 => 'unapproved',
+    ];
+
     use CrudTrait;
 
     protected $fillable = [
@@ -16,6 +21,12 @@ class Idea extends Node
         'name',
         'user_id'
     ];
+
+    // https://stackoverflow.com/questions/23658479/laravel-custom-model-methods
+    public static function approved()
+    {
+        return Idea::where('status', 1);
+    }
 
     public function links()
     {
