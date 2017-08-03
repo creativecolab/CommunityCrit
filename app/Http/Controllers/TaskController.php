@@ -138,8 +138,8 @@ class TaskController extends Controller
         $idea = $idea_id ? Idea::all()->where('status', 1)->find($idea_id) : new Idea;
         $link = $link_id ? Link::all()->where('status', 1)->find($link_id) : new Link;
 
-        if ($idea) {
-            $data = ['idea' => Idea::find($idea_id), 'link' => Link::find($link_id), 'task' => $task];
+        if ($idea && $link && $task) {
+            $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
             if ($task->type == 100) {
                 $data['qualities'] = Rating::QUALITIES;
             }
