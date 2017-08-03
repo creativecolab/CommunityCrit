@@ -32,28 +32,8 @@
         @endif
 
         @if ($link->id)
-            @if ($link-> type >= 3)
-                <p><em>Here's a reference submitted by <strong>{{ $idea->user->fname }}</strong>.</em></p>
-            @else
-                <p><em>Here's a reference related to this idea.</em></p>
-            @endif
-            <!-- <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">
-                    Reference: 
-                    @component('utilities.link_type_name', ['link_type' => $link->link_type])
-                    @endcomponent
-                    </h4>
-                </div>
-                <div class="panel-body">
-                    {!! $link->text !!}
-                </div>
-            </div> -->
-            <!-- <div class="well"> -->
-                <blockquote>
-                    {!! $link->text !!}
-                </blockquote>
-            <!-- </div> -->
+            @component('activities.common.link', ['link' => $link])
+            @endcomponent
         @endif
 
         <!-- <em>Task Type: {{ ($task->type) }}</em> -->

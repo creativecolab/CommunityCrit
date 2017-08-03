@@ -1,6 +1,12 @@
 <div class="row" style="margin-bottom: 20px;">
     <div class="col-md-12">
-        <p><em>The following idea was submitted by {{ ($idea->user->id == 3) ? 'a ' : '' }}<strong>{{ $idea->user->fname }}</strong>. Please help to improve it below.</em></p>
+        <p><em>The following idea was submitted by
+        @if ($idea->user->id == 3)
+            a <strong>{{ strtolower($idea->user->fname) }}.</strong>
+        @else
+            <strong>{{ $idea->user->fname }}.</strong>
+        @endif
+        Please help to improve it below.</em></p>
         <!-- @if ($idea->img_url) -->
             <!-- <div class="idea-img" style=""> -->
             <!-- <div class="col-md-3"> -->
@@ -23,4 +29,4 @@
             <!-- <p><em>Suggested by {{ $idea->user->fname }}</em></p> -->
         </div>
     </div>
-</div> <!-- .row -->
+</div> <!-- .row -->    

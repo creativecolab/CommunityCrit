@@ -29,13 +29,13 @@ class TasksSeeder extends Seeder
         [
             'name' => 'Share a Story',
             'text' => 'Share a story or personal experience related to this idea.',
-            'text2' => 'How does the story relate to the idea?'
+            'text2' => 'How does the story relate to the idea?',
             'type' => '76',
         ],
         [
             'name' => 'Add an Example',
             'text' => 'Share or find an example of a place, installation, or project that could inform or improve this idea.',
-            'text2' => 'How does the example relate to the idea?'
+            'text2' => 'How does the example relate to the idea?',
             'type' => '75',
         ],
         [

@@ -126,6 +126,7 @@ class LinkController extends Controller
         }
         $link->idea_id = $request->get( 'idea' );
         $task = Task::find($request->get( 'task' ));
+        $link->$task_id = $task;
         $link->link_type = $task->type % 10;
 
         if ($exit == 'Submit') {
