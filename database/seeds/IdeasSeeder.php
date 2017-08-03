@@ -20,7 +20,7 @@ class IdeasSeeder extends Seeder
         ],
         [
             'name' => 'Roundabout',
-            'text' => 'The intersection right now is basically just an empty lot. We could easily make it a roundabout, so that traffic from National Ave and Commercial St can still get around but so people can also use the open space in the center. If we throw in a few crosswalks and create a welcoming space in the center, a roundabout would be the perfect way to optimize this space for drivers and pedestrians.',
+            'text' => 'The intersection right now is basically just an empty lot. We could easily make it a roundabout with three crosswalks so that traffic from National Ave and Commercial St can still get around but so people can also use the open space in the center.',
             'user_id' => 3,
             'img_url' => 'https://bethineurope.files.wordpress.com/2015/07/img_1239.jpg'
         ],
