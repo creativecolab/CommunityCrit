@@ -9,6 +9,11 @@ use Baum\Node;
 
 class Idea extends Node
 {
+    const STATUSES = [
+        1 => 'approved',
+        2 => 'unapproved',
+    ];
+
     use CrudTrait;
 
     protected $fillable = [
@@ -16,6 +21,11 @@ class Idea extends Node
         'name',
         'user_id'
     ];
+
+    // public function approved()
+    // {
+    //     return $this->filter('status', 1);
+    // }
 
     public function links()
     {

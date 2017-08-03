@@ -54,7 +54,7 @@ class UserController extends Controller
         $view = 'user.feedback';
         $data = [];
 
-        $ideas = Auth()->User()->ideas->sortByDesc('created_at');
+        $ideas = Auth()->User()->ideas->where('status', 1)->sortByDesc('created_at');
         $data['ideas'] = $ideas;
         
         $links = Auth()->User()->links->sortByDesc('created_at');

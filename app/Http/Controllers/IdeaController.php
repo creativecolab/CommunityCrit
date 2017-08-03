@@ -55,7 +55,7 @@ class IdeaController extends Controller
         $view = 'ideas.all';
         $data = [];
 
-        $ideas = Idea::get();
+        $ideas = Idea::all()->where('status', 1);
         $data['ideas'] = $ideas;
 
         return view($view, $data);
@@ -69,17 +69,23 @@ class IdeaController extends Controller
      */
     public function show($id)
     {
-        $idea = Idea::find($id);
-        $view = 'ideas.single';
-        $data = [];
+        $idea = Idea::all()->where('status', 1)->find($id);
 
-        $data['idea'] = $idea;
-        // $data['ratings'] = $this->avgRatings($idea);
-        // $data['rating_keys'] = $data['ratings']->keys()->all();
-        $data['links'] = $idea->links->sortBy('link_type');
-        $data['feedbacks'] = $idea->feedback->sortByDesc('created_at');
+        if ($idea) {
+            $view = 'ideas.single';
+            $data = [];
 
-        return view($view, $data);
+            $data['idea'] = $idea;
+            // $data['ratings'] = $this->avgRatings($idea);
+            // $data['rating_keys'] = $data['ratings']->keys()->all();
+            $data['links'] = $idea->links->sortBy('link_type');
+            $data['feedbacks'] = $idea->feedback->sortByDesc('created_at');
+
+            return view($view, $data);
+        } else {
+            abort(404);
+        }
+        
     }
 
     /**

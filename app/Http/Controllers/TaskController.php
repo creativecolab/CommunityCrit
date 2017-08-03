@@ -135,13 +135,19 @@ class TaskController extends Controller
         $view = 'activities.elaboration';
 
         $task = Task::find($task_id);
+        $idea = Idea::all()->where('status', 1)->find($idea_id);
+        $link = Link::find($link_id);
 
-        $data = ['idea' => Idea::find($idea_id), 'link' => Link::find($link_id), 'task' => $task];
-        if ($task->type == 100) {
-            $data['qualities'] = Rating::QUALITIES;
+        if ($idea) {
+            $data = ['idea' => Idea::find($idea_id), 'link' => Link::find($link_id), 'task' => $task];
+            if ($task->type == 100) {
+                $data['qualities'] = Rating::QUALITIES;
+            }
+
+            return view($view, $data);
+        } else {
+            abort(404);
         }
-
-        return view($view, $data);
     }
 
     /**
@@ -221,6 +227,8 @@ class TaskController extends Controller
         $text = $allFormats['text'];
         $text_link = $allFormats['text_link'];
 
+        $ideas = Idea::all()->where('status', 1);
+
         if ($subs->keys()->contains($type)) {
             // if a submit task, no idea needed
             $idea_id = 0;
@@ -230,7 +238,7 @@ class TaskController extends Controller
             // if ($rate->has(102)) {
             if (in_array($type, $rate)) {
                 // if a rating task, select an idea but no link
-                $idea = Idea::all()->random();
+                $idea = $ideas->random();
                 $link_id = 0;
                 // $view = 'ideas.rating';
                 // $data['idea'] =  $idea;
@@ -238,12 +246,11 @@ class TaskController extends Controller
                 // return view($view, $data);
             } else if (in_array($type, $text)) {
                 // if a text task, select an idea but no link
-                $idea = Idea::all()->random();
+                $idea = $ideas->random();
                 $link_id = 0;
                 $format = 'text';
             } else if (in_array($type, $text_link)) {
                 // if a text with link task, select an idea with links and a link
-                $ideas = Idea::all();
                 $idea = $ideas->filter(function ($item) {
                    return (count($item->links));
                 })->random();
