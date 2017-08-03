@@ -83,9 +83,9 @@
 
                     {{ csrf_field() }}
 
-                    @if ($idea)
+                    @if ($idea->id)
                         {{ Form::hidden('idea', $idea->id) }}
-                        @if ($link)
+                        @if ($link->id)
                         {{ Form::hidden('link', $link->id) }}
                     @endif
                     @endif
@@ -107,11 +107,24 @@
                         @endcomponent
                     @endif
 
-                    @if (($task->type) / 10 == 8)
+                    <!-- submission task -->
+                    @if (intval($task->type) / 10 == 8)
                         <div class="row">
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label class="instruction" for="submissionText">Give your idea a name. <span class="text-muted">(optional)</span></label>
+                                    <input type="text" class="form-control" name="name"></input>
+                                </div>
+                            </div> <!-- .col -->
+                        </div>
+                    @endif
+
+                    <!-- linking task -->
+                    @if ((intval($task->type / 10) == 7) && ($task->text2))
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+                                    <label class="instruction" for="submissionText">{{ $task->text2 }} </label>
                                     <input type="text" class="form-control" name="name"></input>
                                 </div>
                             </div> <!-- .col -->
