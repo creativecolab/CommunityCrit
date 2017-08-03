@@ -33,12 +33,12 @@
             </div>
         </div>
 
-        @if ($idea)
+        @if ($idea->id)
             @component('activities.common.idea', ['idea' => $idea])
             @endcomponent
         @endif
 
-        @if ($link)
+        @if ($link->id)
             <!-- <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">
@@ -53,7 +53,7 @@
             </div> -->
             <!-- <div class="well"> -->
                 <blockquote>
-                    <p>{!! $link->text !!}</p>
+                    {!! $link->text !!}
                 </blockquote>
             <!-- </div> -->
         @endif
