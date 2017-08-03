@@ -15,7 +15,7 @@ class AddImgUrgUrlToIdeasTable extends Migration
     {
         Schema::table('ideas', function (Blueprint $table) {
             $table->string('img_url')->nullable()->after('text');
-            $table->text('text')->change();
+            // $table->text('text')->change();
         });
     }
 
@@ -27,7 +27,7 @@ class AddImgUrgUrlToIdeasTable extends Migration
     public function down()
     {
         Schema::table('ideas', function (Blueprint $table) {
-            $table->string('text')->change();
+            // $table->string('text')->change();
             $table->dropColumn('img_url');
         });
     }
