@@ -1,109 +1,28 @@
 @extends('layouts.app')
 
-@section('title', 'Home')
+@section('title', 'Overview')
 
 @section('content')
-    {{--<meta name="_token" content="{{ csrf_token() }}" />--}}
-    <div class="page-header">
-        <h1>
-            <span>Park Link Challenge</span>
-            <!-- <a role="button" class="btn btn-default pull-right" href="home.htm#this">View in context</a> -->
-        </h1>
-        <p>Text</p>
-        <p>Text</p>
-    </div>
-
-    <h2>El Nudillo</h2>
-    <div class="tab-content">
-
-        <div>
-            <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#submit" aria-controls="home" role="tab" data-toggle="tab">Submit an Idea</a></li>
-                <li role="presentation"><a href="#improve" aria-controls="profile" role="tab" data-toggle="tab">Improve an Existing Idea</a></li>
-                <li role="presentation"><a href="#rank" aria-controls="profile" role="tab" data-toggle="tab">Rank Proposals</a></li>
-                <li role="presentation"><a href="{{ action( 'IdeaController@index' ) }}" aria-controls="profile">View All Ideas</a></li>
-            </ul>
-        </div>
-
-        <div role="tabpanel" class="tab-pane active" id="submit">
-            <p></p>
-            {{--'action' => ['IdeaController@submitIdea'],--}}
-            {!! Form::open([ 'action' => ['IdeaController@submitIdea'], 'id' => 'newsubmit']) !!}
-            <div class="form-group">
-                {!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => 1, 'required' => true]) !!}
-            </div>
-            <div class="form-group">
-                <div>
-                    {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-left']) !!}
-                    {{--                                    <a type="submit" class="btn btn-primary" href="{{ action('SurveyController@index', $page+1) }}">Next</a>--}}
-                </div>
-            </div>
-            {!! Form::close() !!}
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="improve">
-            {!! Form::open(['action' => ['IdeaController@submitIdea']]) !!}
-            <p>something activity here</p>
-            <div class="form-group">
-                {!! Form::textarea('text', null, ['class' => 'form-control', 'rows' => 1, 'required' => true]) !!}
-            </div>
-            <div class="form-group">
-                <div>
-                    {!! Form::submit('Submit', ['class' => 'btn btn-primary pull-left']) !!}
-                    {{--                                    <a type="submit" class="btn btn-primary" href="{{ action('SurveyController@index', $page+1) }}">Next</a>--}}
-                </div>
-            </div>
-            {!! Form::close() !!}
-        </div>
-
-    </div>
-
-    {{--<script>--}}
-        {{--$document.getElementById("newsubmit").on('submit', function (e) {--}}
-            {{--e.preventDefault(e);--}}
-            {{--$.ajaxSetup({--}}
-                {{--header:$('meta[name="_token"]').attr('content')--}}
-            {{--});--}}
-
-            {{--$.ajax({--}}
-
-                {{--type: "POST",--}}
-                {{--url: '/home/submit',--}}
-                {{--data: $(this).serialize(),--}}
-                {{--dataType: 'json',--}}
-                {{--success: function (data) {--}}
-{{--//                    console.log(data);--}}
-                {{--},--}}
-                {{--error: function (data) {--}}
-
-                {{--}--}}
-            {{--})--}}
-        {{--});--}}
-
-        {{--function ajaxsubmit() {--}}
-            {{--var x = document.getElementById('newsubmit');--}}
-            {{--alert("The form was submitted");--}}
-            {{--return false;--}}
-{{--//            preventDefault();--}}
-{{--//            $.ajaxSetup({--}}
-{{--//                header:$('meta[name="_token"]').attr('content')--}}
-{{--//            });--}}
-{{--//--}}
-{{--//            $.ajax({--}}
-{{--//--}}
-{{--//                type: "POST",--}}
-{{--//                url: '/home/submit',--}}
-{{--//                data: $(this).serialize(),--}}
-{{--//                dataType: 'json',--}}
-{{--//                success: function (data) {--}}
-{{--////                    console.log(data);--}}
-{{--//                },--}}
-{{--//                error: function (data) {--}}
-{{--//--}}
-{{--//                }--}}
-{{--//            });--}}
-{{--//            return false;--}}
-        {{--}--}}
-    {{--</script>--}}
-
+    <h1>Overview</h1>
+    <div class="row">
+        <div class="col-md-9">
+            <h3>El Nudillo</h3>
+            <p>The 14th Street Promenade, which was approved by the city in 2016, will be a pedestrian-friendly “green street” extending from City College in the north to the intersection of 14th Street and National Avenue in the south. It will feature widened sidewalks, outdoor furniture, and art, in order to promote social gathering and a unique neighborhood feel. The overarching goal for the 14th Street Promenade is to help create a more sustainable, walkable downtown.</p>
+            <p>We are now engaging the public and local experts to develop the intersection of 14th Street, National Avenue, and Commercial Street, which marks the end of the 14th Street Promenade. This intersection—known as El Nudillo, or “the knuckle”—is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p>
+            <h3>Here's Where You Come In</h3>
+            <p>Right now, El Nudillo is just an intersection. We need your help to figure out what El Nudillo should be!</p> 
+            <p>CommunityCrit makes it easy to help shape plans for the future of your community. You will be able to suggest your own ideas and comment upon the ideas of other contributors for how El Nudillo can be transformed. Please answer as many or as few questions as you would like—you are always free to skip questions.</p>
+            <p>All input will be shared with sponsors, designers, and community members to help shape the ultimate plan.</p>
+            <a type="button" class="btn btn-primary btn-lg" style="margin-top: 10px;" href="{{ route('do') }}">Take Me To an Activity</a>
+        </div> <!-- .col -->
+        <div class="col-md-3">
+            <figure>
+              <img src="{{ asset('img/vector-map.png') }}" alt="project map" class="img-responsive">
+              <figcaption>A map of the location of El Nudillo.</figcaption>
+            </figure>
+        </div> <!-- .col -->
+    </div> <!-- .row -->
+    
+           
+        
 @endsection

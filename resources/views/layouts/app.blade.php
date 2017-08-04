@@ -53,7 +53,8 @@
                         {{--<li><a href="source-detail.htm">East Village South Focus Plan</a></li>--}}
                         {{--</ul>--}}
                     @endif
-                    <li><a href="{{ url('/about') }}">About</a></li>
+                    <li><a href="{{ url('overview') }}">Overview</a></li>
+                    <li><a href="{{ url('/about') }}">About Us</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -105,5 +106,30 @@
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<!-- <script src="{{ asset('js/activities.js') }}"></script> -->
+<script>
+    function btntest_onclick() 
+    {
+        if ($('.activity #idea').length > 0) {
+            $('#task-panel').fadeTo(500, 0);
+            $('.activity #idea').delay(500).fadeTo(500, 0, function() {
+                $('#waiting').show();
+                window.location.assign("{{ route('do')}}");
+            });
+        }
+        else {
+            $('#task-panel').fadeTo(500, 0, function() {
+                $('#waiting').show();
+                window.location.assign("{{ route('do')}}");
+            });
+        }
+    }
+
+    $( document ).ready(function() {
+        $('#waiting').hide();
+        $('.activity #idea').fadeTo(500, 1);
+        $('#task-panel').delay(500).fadeTo(500, 1);
+    });
+</script>
 </body>
 </html>

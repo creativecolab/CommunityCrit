@@ -79,7 +79,7 @@ class LinksSeeder extends Seeder
             'type' => '1',
             'image' => '0',
             'link_type' => '1',
-            'text' => '<strong>San Diego General Plan</strong></br>San Diego has a semi-arid coastal climate with coastal areas receiving an average of ten inches of rain annually. The historically reliable water supply is credited to its ability to import and store water supplies from the Colorado River and Northern Californiaa. However, these imported water supplies are limited, and to meet the needs of population increases, economic growth, and competing regional demands, San Diego must develop additional water resources to ensure an adequate supply for present and future generations.',
+            'text' => '<strong>San Diego General Plan</strong></br>San Diego has a semi-arid coastal climate with coastal areas receiving an average of ten inches of rain annually. The historically reliable water supply is credited to its ability to import and store water supplies from the Colorado River and Northern California. However, these imported water supplies are limited, and to meet the needs of population increases, economic growth, and competing regional demands, San Diego must develop additional water resources to ensure an adequate supply for present and future generations.',
             'idea_id' => '4',
             'user_id' => '3',
             'hidden' => '0',
