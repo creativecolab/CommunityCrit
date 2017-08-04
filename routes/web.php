@@ -34,7 +34,9 @@ Auth::routes();
 //Route::get( '/overview', function () {
 //    return view( 'overview' );
 //} );
-Route::get( '/overview', 'HomeController@index' );
+Route::get( '/overview', function () {
+    return view( 'landing' );
+} )->name('overview');
 
 Route::get( '/about', function () {
     return view( 'about' );
@@ -51,7 +53,7 @@ Route::get( '/about', function () {
 //} );
 
 
-Route::get( '/home', 'HomeController@index' )->name( 'home' );
+// Route::get( '/home', 'HomeController@index' )->name( 'home' );
 // Route::post( '/home/submit', 'TaskController@newsubmit' );
 // Route::get( 'my-contributions', 'PersonalController@showMyFeedback');
 
