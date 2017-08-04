@@ -5,6 +5,10 @@
 @endsection
 
 @section('content')
+    <h4 class="text-center" id="waiting">
+        Finding an activity for you...
+    </h4>
+
     <div style="display: none">
         {{ $count = count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 4) }}
     </div>
@@ -27,23 +31,18 @@
         </div> -->
 
         @if ($idea->id)
-            @component('activities.common.idea', ['idea' => $idea])
-            @endcomponent
-        @endif
-
-        @if ($link->id)
-            @component('activities.common.link', ['link' => $link])
+            @component('activities.common.idea', ['idea' => $idea, 'link' => $link])
             @endcomponent
         @endif
 
         <!-- <em>Task Type: {{ ($task->type) }}</em> -->
 
-        <div class="panel panel-default no-marg-bot input">
-            <!-- <div class="panel-heading">
+        <div class="panel panel-primary no-marg-bot input" id="task-panel" style="opacity: 0;">
+            <div class="panel-heading">
                 <div class="panel-title">
                     {!! $task->name !!}
                 </div>
-            </div> -->
+            </div>
             <!-- List group -->
             <ul class="list-group">
                 
@@ -102,9 +101,9 @@
                     <!-- linking task -->
                     @if ((intval($task->type / 10) == 7) && ($task->text2))
                         <div class="row">
-                            <div class="col-sm-6 col-md-4">
+                            <div class="col-md-12">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label class="instruction" for="submissionText">{{ $task->text2 }} </label>
+                                    <label class="instruction" for="submissionText">{{ $task->text2 }} <span class="text-muted">(optional)</span></label>
                                     <input type="text" class="form-control" name="text2"></input>
                                 </div>
                             </div> <!-- .col -->
@@ -112,7 +111,7 @@
                     @endif
 
                     {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
-                    <a type="button" class="btn btn-default" href="{{ route('do')}}">Skip</a>
+                    <input id="btntest" type="button" class="btn btn-default" value="Skip" onclick="return btntest_onclick()" />
                     @if ($count >= 4)
                         <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">I want to stop</a>
                     @endif
@@ -137,6 +136,5 @@
                 </li>
             </ul> <!-- list group -->
         </div> <!-- .panel -->
-
     </div> <!-- .container -->
 @endsection
