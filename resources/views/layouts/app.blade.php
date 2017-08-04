@@ -53,7 +53,8 @@
                         {{--<li><a href="source-detail.htm">East Village South Focus Plan</a></li>--}}
                         {{--</ul>--}}
                     @endif
-                    <li><a href="{{ url('/about') }}">About</a></li>
+                    <li><a href="{{ url('overview') }}">Overview</a></li>
+                    <li><a href="{{ url('/about') }}">About Us</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
