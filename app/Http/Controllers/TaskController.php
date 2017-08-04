@@ -618,6 +618,56 @@ class TaskController extends Controller
         ];
     }
 
+    /**
+     * create a new idea
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function submitIdea(Request $request)
+    {
+        $exit = $request->get( 'exit' );
+
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                // 'name' => 'required|string',
+                'text' => 'required|string',
+            ]);
+        }
+
+        $idea = new Idea;
+        $idea->name = $request->get('name');
+        $idea->text = $request->get('text');
+        $idea->user_id = \Auth::id();
+
+        if ($exit == 'Submit') {
+            if ($idea->save() ) {
+                flash("Your idea was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            return redirect()->route('do');
+        }
+        else {
+            if ($idea->text) {
+                if ($idea->save() ) {
+                    flash("Your idea was submitted!")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
+            }
+
+            return redirect()->route('post');
+        }
+    }
+
+    /**
+     * create a new feedback
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submitText( Request $request) //Idea $idea, int $task)
     {
         $exit = $request->get( 'exit' );
@@ -657,6 +707,62 @@ class TaskController extends Controller
         }
     }
 
+    /**
+     * create a new link
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function submitLink(Request $request)
+    {
+        $exit = $request->get( 'exit' );
+
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                // 'name' => 'required|string',
+                'text' => 'required|string',
+            ]);
+        }
+
+        $link = new Link;
+        $link->user_id = \Auth::id();
+        $link->text = $request->get('text');
+        if ($request->get('text2')) {
+            $link->text2 = $request->get('text2');
+        }
+        $link->idea_id = $request->get( 'idea' );
+        $task = Task::find($request->get( 'task' ));
+        $link->task_id = $task->id;
+        $link->link_type = $task->type % 10;
+
+        if ($exit == 'Submit') {
+            if ($link->save() ) {
+                flash("Your idea was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            return redirect()->route('do');
+        }
+        else {
+            if ($link->text) {
+                if ($link->save() ) {
+                    flash("Your idea was submitted!")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
+            }
+
+            return redirect()->route('post');
+        }
+    }
+
+    /**
+     * create new rating(s)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submitRatings( Request $request) //Idea $idea, int $task)
     {
         $exit = $request->get( 'exit' );
@@ -703,6 +809,27 @@ class TaskController extends Controller
             return redirect()->route('post');
         }
     }
+
+    // /**
+    //  * create task_history and redirect to correct submit function
+    //  *
+    //  * @param Request $request
+    //  * @return \Illuminate\Http\Request
+    //  */
+    // public function submitTask(Request $request)
+    // {
+    //     $task = Task::find($request->get( 'task' ));
+
+    //     if (intval($task->type / 10) == 8) {
+    //         return redirect()->action( 'TaskController@submitIdea', $request );
+    //     } else if (intval($task->type / 10) == 7) {
+    //         return redirect()->action( 'TaskController@submitLink', $request );
+    //     } else if ($task->type == 100) {
+    //         return redirect()->action( 'TaskController@submitRating', $request );
+    //     } else {
+    //         return redirect()->action( 'TaskController@submitText', $request );
+    //     }
+    // }
 
     private function taskQueue( $task_id )
     {

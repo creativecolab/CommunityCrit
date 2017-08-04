@@ -46,27 +46,29 @@
             <!-- List group -->
             <ul class="list-group">
                 
-                <li class="list-group-item">
+                <li class="list-group-item">{{--
                     @if (intval(($task->type) / 10) == 8)
-                        {!! Form::open(['action' => ['IdeaController@submitIdea'], 'style' => 'display:inline']) !!}
+                        {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline']) !!}
                         <!-- <em>Submission!</em> -->
                     @elseif (intval(($task->type) / 10) == 7)
-                        {!! Form::open(['action' => ['LinkController@submitLink'], 'style' => 'display:inline']) !!}
+                        {!! Form::open(['action' => ['TaskController@submitLink'], 'style' => 'display:inline']) !!}
                         <!-- <em>Link!</em> -->
                     @elseif ($task->type == 100)
                         {!! Form::open(['action' => ['TaskController@submitRatings'], 'style' => 'display:inline']) !!}
                     @else
                         {!! Form::open(['action' => ['TaskController@submitText', $idea->id], 'style' => 'display:inline']) !!}
                         <!-- <em>Everything else!</em> -->
-                    @endif
+                    @endif--}}
+
+                    {!! Form::open(['action' => ['TaskController@submitTask'], 'style' => 'display:inline']) !!}
 
                     {{ csrf_field() }}
 
                     @if ($idea->id)
                         {{ Form::hidden('idea', $idea->id) }}
                         @if ($link->id)
-                        {{ Form::hidden('link', $link->id) }}
-                    @endif
+                            {{ Form::hidden('link', $link->id) }}
+                        @endif
                     @endif
                     {{ Form::hidden('task', $task->id) }}
                     

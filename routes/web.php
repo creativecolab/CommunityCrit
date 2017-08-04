@@ -72,11 +72,10 @@ Route::group (['prefix' => 'ideas', 'middleware' => 'checkUser'], function () {
     Route::post( '/combine/new', 'IdeaController@combine' );
     Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
     Route::post( '/assess/{idea}/new', 'IdeaController@assess');
-    Route::post( '/submit/link/{idea}/new', 'IdeaController@submitLink');
 });
 
 Route::group (['prefix' => 'links', 'middleware' => 'checkUser'], function () {
-    Route::post( '/submit/new', 'LinkController@submitLink');
+    
 });
 
 Route::group( [ 'prefix' => 'ideas' ], function() {
@@ -88,6 +87,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::get( '/', 'TaskController@showRandomTask')->name( 'do' );
     // Route::get( '/list', 'TaskController@allActivities' );
     Route::get( '/{task_id}/{idea_id}/{link_id}', 'TaskController@showTask')->name('show-task');
+
     // Route::get( '/eval', 'TaskController@showTaskOfTypeCat');
     // Route::get( '/{task_id}/{idea_id}', 'TaskController@showTask')->name('show-task');
     // Route::get( '/{task_id}', 'TaskController@showTask')->name('show-task');
@@ -97,12 +97,19 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     // Route::get( '/submit', function () {
     //     return redirect( '/activities/2/0/0' );}
     // )->name('submit');
+
     Route::match(['get', 'post'], '/dash', 'TaskController@dashboard');
+
+    // POST methods
     Route::post( '/{task}/response', 'TaskController@storeResponse' );
     Route::post( '/{id}/skip', 'TaskController@skipQuestion' );
     Route::post( 'img/{task}/upload', 'TaskController@uploadImage');
-    Route::post( '/build/{idea_id}/new', 'TaskController@submitText');
-    Route::post( '/submit/rating/new', 'TaskController@submitRatings');
+    // activity center
+    Route::post( '/submit/select', 'TaskController@submitTask' );
+    Route::post( '/submit/feedback/new', 'TaskController@submitText' );
+    Route::post( '/submit/idea/new', 'TaskController@submitIdea' );
+    Route::post( '/submit/rating/new', 'TaskController@submitRatings' );
+    Route::post( '/submit/link/new', 'TaskController@submitLink' );
 } );
 
 Route::group( ['prefix' => 'devtest', 'middleware' => 'admin'], function() {
