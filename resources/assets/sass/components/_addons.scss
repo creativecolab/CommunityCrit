@@ -1,0 +1,52 @@
+a.panel-link {
+  text-decoration: none;
+}
+
+a.panel-link {
+  color: inherit;
+}
+
+a.panel-link .panel:hover .panel-body {
+  background-color: #eee;
+}
+
+a.panel-link .panel:hover.panel-default .panel-heading {
+  background-color: #eee;
+}
+
+a.panel-link .panel-heading:hover {
+  background-color: #eee;
+}
+
+figcaption {
+	font-style: italic !important;
+}
+
+.idea-img {
+	float: none;
+	max-width: 100%;
+	margin-bottom: 20px;
+}
+
+.idea-name-text {
+	max-width: 100%;
+}
+
+.smaller-txt {
+  font-size: 87.5%;
+}
+
+@media screen and (min-width: 576px) {
+    .idea-img {
+        float: left;
+		margin-right: 22px;
+		max-width: 30%;
+    }
+    .idea-name-text {
+        float: left;
+		max-width: 60%;
+    }
+    .idea-img img {
+    	max-height: 250px;
+    }
+}
