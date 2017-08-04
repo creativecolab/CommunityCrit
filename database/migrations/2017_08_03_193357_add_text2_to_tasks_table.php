@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImgUrgUrlToIdeasTable extends Migration
+class AddText2ToTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddImgUrgUrlToIdeasTable extends Migration
      */
     public function up()
     {
-        Schema::table('ideas', function (Blueprint $table) {
-            $table->string('img_url')->nullable()->after('text');
-            // $table->text('text')->change();
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->text('text2')->nullable();
         });
     }
 
@@ -26,9 +25,8 @@ class AddImgUrgUrlToIdeasTable extends Migration
      */
     public function down()
     {
-        Schema::table('ideas', function (Blueprint $table) {
-            // $table->string('text')->change();
-            $table->dropColumn('img_url');
+        Schema::table('tasks', function (Blueprint $table) {
+            $table->dropColumn('text2');
         });
     }
 }
