@@ -25,7 +25,7 @@ Route::get( '/', function() {
             'TaskController@showRandomTask', []);
     }
     else {
-        return view('welcome');
+        return redirect()->route('welcome');
     }
 } );
 
@@ -41,6 +41,10 @@ Route::get( '/overview', function () {
 Route::get( '/about', function () {
     return view( 'about' );
 } );
+
+Route::get( '/welcome', function () {
+    return view( 'welcome' );
+} )->name('welcome');
 
 
 //Route::group( [ 'prefix' => 'devtest' ], function() {
