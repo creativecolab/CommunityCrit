@@ -30,6 +30,10 @@ a.panel-link .panel:hover.panel-default .panel-heading {
   background-color: #eee;
 }
 
+a.panel-link .panel-heading:hover {
+  background-color: #eee;
+}
+
 figcaption {
 	font-style: italic !important;
 }
@@ -42,6 +46,10 @@ figcaption {
 
 .idea-name-text {
 	max-width: 100%;
+}
+
+.smaller-txt {
+  font-size: 87.5%;
 }
 
 @media screen and (min-width: 576px) {

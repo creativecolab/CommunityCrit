@@ -25,7 +25,7 @@ class UsersSeeder extends Seeder
             'remember_token' => 'YwaSQnhZLO'
         ],
         [
-            'fname' => 'Wkshp Participant',
+            'fname' => 'Workshop Participant',
             'lname' => 'Admin',
             'email' => 'admin1@test.com',
             'admin' => 1,
