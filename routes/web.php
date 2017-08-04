@@ -34,7 +34,7 @@ Auth::routes();
 //Route::get( '/overview', function () {
 //    return view( 'overview' );
 //} );
-Route::get( '/overview', 'TaskController@overview' );
+Route::get( '/overview', 'HomeController@index' );
 
 Route::get( '/about', function () {
     return view( 'about' );

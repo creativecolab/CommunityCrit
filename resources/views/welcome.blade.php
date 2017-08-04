@@ -96,9 +96,8 @@
                                 Community<span>Crit</span>
                             </div>
                             <div class="body desc-text">
-                                <p><b>CommunityCrit allows the public to participate in the urban design process.</b> By offering a quick and easy way to voice opinions, CommunityCrit empowers anyone to help shape the future of their community. By collecting ideas from anyone, anywhere, at any time, CommunityCrit enables organizers to engage their community in the development of planning proposals.</p>
-                                <p>Currently, community leaders are collaborating with the public and local experts to design the intersection of 14th Street and National Avenue, called <strong>“El Nudillo.”</strong> The future El Nudillo is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p>
-                                <p><strong>We would love to hear your thoughts!</strong></p>
+                                <p><b>CommunityCrit allows the public to participate in the urban design process.</b> By offering a quick and easy way to voice opinions, CommunityCrit empowers anyone to help shape the future of their community.</p><p>Currently, we are collecting feedback upon an effort to expand the 14th Street Promenade in East Village. The intersection of 14th Street, National Avenue, and Commercial Street—referred to as “El Nudillo,” or “the knuckle”—is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p><p>What do you think El Nudillo should be? We would love to hear your thoughts!</p>
+
                                 <a type="button" class="btn btn-primary btn-lg" style="margin-top: 10px;" href="{{ route('register') }}">Get Started</a>
                             </div>
                         </div>
