@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddComment2ToFeedbackTable extends Migration
+class RmComment2FromFeedbackTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddComment2ToFeedbackTable extends Migration
     public function up()
     {
         Schema::table('feedback', function (Blueprint $table) {
-            $table->text('comment2')->nullable()->after('comment');
+            $table->dropColumn('comment2');
         });
     }
 
@@ -26,7 +26,7 @@ class AddComment2ToFeedbackTable extends Migration
     public function down()
     {
         Schema::table('feedback', function (Blueprint $table) {
-            $table->dropColumn('comment2');
+            $table->text('comment2')->nullable()->after('comment');
         });
     }
 }

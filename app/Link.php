@@ -35,6 +35,16 @@ class Link extends Model
     }
 
     /**
+     * Task for this comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function task()
+    {
+        return $this->belongsTo('App\Task');
+    }
+
+    /**
      * user this link belongs to
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
