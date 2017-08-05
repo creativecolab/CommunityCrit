@@ -106,7 +106,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( 'img/{task}/upload', 'TaskController@uploadImage');
     // activity center
     // Route::post( '/submit/select', 'TaskController@submitTask' );
-    Route::post( '/track/show', 'TaskController@createTaskHist' );
+    // Route::post( '/track/show', 'TaskController@createTaskHist' );
     Route::post( '/submit/feedback/new', 'TaskController@submitText' );
     Route::post( '/submit/idea/new', 'TaskController@submitIdea' );
     Route::post( '/submit/rating/new', 'TaskController@submitRatings' );
