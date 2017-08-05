@@ -145,6 +145,8 @@ class TaskController extends Controller
                 $data['qualities'] = Rating::QUALITIES;
             }
 
+            createTaskHist($task->id, $idea->id, $link->id);
+
             return view($view, $data);
         } else {
             abort(404);
@@ -646,7 +648,7 @@ class TaskController extends Controller
      */
     public function trackSkip(Request $request)
     {
-        $hist = createTaskHist($request, 5);
+        $hist = updateTaskHist($request, 5);
 
         return redirect()->route('do');
     }
@@ -680,7 +682,7 @@ class TaskController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
-            $hist = createTaskHist($request, 1);
+            $hist = updateTaskHist($request, 1);
 
             return redirect()->route('do');
         }
@@ -692,9 +694,9 @@ class TaskController extends Controller
                     flash('Unable to save your feedback. Please contact us.')->error();
                 }
 
-                $hist = createTaskHist($request, 2);
+                $hist = updateTaskHist($request, 2);
             } else {
-                $hist = createTaskHist($request, 3);
+                $hist = updateTaskHist($request, 3);
             }
 
             return redirect()->route('exit');
@@ -731,7 +733,7 @@ class TaskController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
-            $hist = createTaskHist($request, 1);
+            $hist = updateTaskHist($request, 1);
 
             return redirect()->route('do');
         }
@@ -743,9 +745,9 @@ class TaskController extends Controller
                     flash('Unable to save your feedback. Please contact us.')->error();
                 }
 
-                $hist = createTaskHist($request, 2);
+                $hist = updateTaskHist($request, 2);
             } else {
-                $hist = createTaskHist($request, 3);
+                $hist = updateTaskHist($request, 3);
             }
 
             return redirect()->route('exit');
@@ -788,7 +790,7 @@ class TaskController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
-            $hist = createTaskHist($request, 1);
+            $hist = updateTaskHist($request, 1);
 
             return redirect()->route('do');
         }
@@ -800,9 +802,9 @@ class TaskController extends Controller
                     flash('Unable to save your feedback. Please contact us.')->error();
                 }
 
-                $hist = createTaskHist($request, 2);
+                $hist = updateTaskHist($request, 2);
             } else {
-                $hist = createTaskHist($request, 3);
+                $hist = updateTaskHist($request, 3);
             }
 
             return redirect()->route('exit');
@@ -849,7 +851,7 @@ class TaskController extends Controller
                 flash("Unable to save your ratings. Please contact us.")->error();
             }
 
-            $hist = createTaskHist($request, 1);
+            $hist = updateTaskHist($request, 1);
 
             return redirect()->route('do');
         }
@@ -860,7 +862,7 @@ class TaskController extends Controller
                 flash("Unable to save your ratings. Please contact us.")->error();
             }
 
-            $hist = createTaskHist($request, 4);
+            $hist = updateTaskHist($request, 4);
 
             return redirect()->route('exit');
         }
