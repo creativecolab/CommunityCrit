@@ -136,52 +136,7 @@
         $('.activity #idea').fadeTo(500, 1);
         $('#task-panel').delay(500).fadeTo(500, 1);
 
-        if ($('#text-link').length > 0) {
-            // $.ajax({
-            //     type: "POST",
-            //     url: "{{ action('TaskController@createTaskHist') }}",
-            //     data: {
-            //       // task_id: {{ $task->id ? $task->id : "null" }},
-            //       // idea_id: {{ $idea->id ? $idea->id : "null" }},
-            //       // link_id: {{ $link->id ? $link->id : "null" }},
-            //     },
-            //     success: function(data) {
-            //       // POST was successful - do something with the response
-            //       alert('Server sent back: ' + data);
-            //     },
-            //     error: function(data) {
-            //       // Server error, e.g. 404, 500, error
-            //       alert(data.responseText);
-            //     }
-            // });
-
-            postAJAX();
-        }
     });
-
-    // function postAJAX() {
-    //     var id = 12; // A random variable for this example
-
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         }
-    //     });
-
-    //     $.ajax({
-    //         method: 'POST', // Type of response and matches what we said in the route
-    //         url: '/activities/submit/idea/new', // This is the url we gave in the route
-    //         // url: '/activities/track/show', // This is the url we gave in the route
-    //         // data: {'id' : id}, // a JSON object to send back
-    //         success: function(response){ // What to do if we succeed
-    //             console.log(response); 
-    //         },
-    //         error: function(jqXHR, textStatus, errorThrown) { // What to do if we fail
-    //             console.log(JSON.stringify(jqXHR));
-    //             console.log("AJAX error: " + textStatus + ' : ' + errorThrown);
-    //         }
-    //     });
-    // }
 </script>
 </body>
 </html>
