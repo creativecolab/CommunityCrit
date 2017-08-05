@@ -36,6 +36,10 @@ figcaption {
   font-size: 87.5%;
 }
 
+.footer {
+  margin-bottom: 15px;
+}
+
 @media screen and (min-width: 576px) {
     .idea-img {
         float: left;
@@ -48,5 +52,13 @@ figcaption {
     }
     .idea-img img {
     	max-height: 250px;
+    }
+
+    #el-nudillo-map {
+      max-height: 250px;
+    }
+
+    .footer {
+      margin-bottom: 75px;
     }
 }
