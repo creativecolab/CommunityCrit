@@ -93,6 +93,11 @@
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label class="instruction" for="submissionText">Give your idea a name. <span class="text-muted">(optional)</span></label>
                                     <input type="text" class="form-control" name="name"></input>
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div> <!-- .col -->
                         </div>
