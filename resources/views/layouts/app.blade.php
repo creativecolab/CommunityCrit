@@ -16,6 +16,8 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
+    @include("utilities.analytics")
+
 </head>
 <body>
 <div id="app">
