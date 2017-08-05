@@ -69,6 +69,18 @@
                         <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">{{ $myFeedbackCount }}</span></a></li>
 {{--                        <li><a href="{{ action('TaskController@index') }}">Tasks</a></li>--}}
                         @if(Auth::user()->admin)
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                Moderation <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ action('ModerationController@showPending') }}">Pending</a>
+                                </li>
+                            </ul>
+                        </li>
                             <li>
                                 <a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}">Admin</a>
                             </li>

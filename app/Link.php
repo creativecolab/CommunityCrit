@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Backpack\CRUD\CrudTrait;
+use Hootlex\Moderation\Moderatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
@@ -13,6 +14,7 @@ class Link extends Model
         2 => 'image',
     ];
 
+    use Moderatable;
     use CrudTrait;
 
     protected $fillable = [

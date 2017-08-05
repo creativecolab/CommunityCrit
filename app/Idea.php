@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Backpack\CRUD\CrudTrait;
+// use Hootlex\Moderation\Moderatable;
 use Illuminate\Database\Eloquent\Model;
 use Baum\Node;
 
@@ -14,6 +15,7 @@ class Idea extends Node
         2 => 'unapproved',
     ];
 
+    // use Moderatable;
     use CrudTrait;
 
     protected $fillable = [
@@ -21,12 +23,6 @@ class Idea extends Node
         'name',
         'user_id'
     ];
-
-    // https://stackoverflow.com/questions/23658479/laravel-custom-model-methods
-    public static function approved()
-    {
-        return Idea::where('status', 1);
-    }
 
     public function links()
     {
