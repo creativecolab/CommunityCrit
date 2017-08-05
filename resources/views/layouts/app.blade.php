@@ -54,7 +54,7 @@
                         {{--</ul>--}}
                     @endif
                     <li><a href="{{ url('overview') }}">Overview</a></li>
-                    <li><a href="{{ url('/about') }}">About Us</a></li>
+                    <li><a href="{{ url('/about') }}">About</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -98,7 +98,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container footer">
         @include('flash::message')
         @yield('content')
     </div>
