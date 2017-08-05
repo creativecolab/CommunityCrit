@@ -168,49 +168,49 @@ class IdeaController extends Controller
 
     //------------------ post methods ------------------------
 
-    /**
-     * create a new idea
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function submitIdea(Request $request)
-    {
-        $exit = $request->get( 'exit' );
+    // /**
+    //  * create a new idea
+    //  *
+    //  * @param Request $request
+    //  * @return \Illuminate\Http\RedirectResponse
+    //  */
+    // public function submitIdea(Request $request)
+    // {
+    //     $exit = $request->get( 'exit' );
 
-        if ($exit == 'Submit') {
-            $this->validate($request, [
-                // 'name' => 'required|string',
-                'text' => 'required|string',
-            ]);
-        }
+    //     if ($exit == 'Submit') {
+    //         $this->validate($request, [
+    //             // 'name' => 'required|string',
+    //             'text' => 'required|string',
+    //         ]);
+    //     }
 
-        $idea = new Idea;
-        $idea->name = $request->get('name');
-        $idea->text = $request->get('text');
-        $idea->user_id = \Auth::id();
+    //     $idea = new Idea;
+    //     $idea->name = $request->get('name');
+    //     $idea->text = $request->get('text');
+    //     $idea->user_id = \Auth::id();
 
-        if ($exit == 'Submit') {
-            if ($idea->save() ) {
-                flash("Your idea was submitted! You may do another activity or exit below.")->success();
-            } else {
-                flash('Unable to save your feedback. Please contact us.')->error();
-            }
+    //     if ($exit == 'Submit') {
+    //         if ($idea->save() ) {
+    //             flash("Your idea was submitted! You may do another activity or exit below.")->success();
+    //         } else {
+    //             flash('Unable to save your feedback. Please contact us.')->error();
+    //         }
 
-            return redirect()->route('do');
-        }
-        else {
-            if ($idea->text) {
-                if ($idea->save() ) {
-                    flash("Your idea was submitted!")->success();
-                } else {
-                    flash('Unable to save your feedback. Please contact us.')->error();
-                }
-            }
+    //         return redirect()->route('do');
+    //     }
+    //     else {
+    //         if ($idea->text) {
+    //             if ($idea->save() ) {
+    //                 flash("Your idea was submitted!")->success();
+    //             } else {
+    //                 flash('Unable to save your feedback. Please contact us.')->error();
+    //             }
+    //         }
 
-            return redirect()->route('post');
-        }
-    }
+    //         return redirect()->route('post');
+    //     }
+    // }
 
     /**
      * combine two ideas - creates a new idea and makes this idea a parent of the old ideas

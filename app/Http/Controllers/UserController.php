@@ -74,9 +74,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showPost()
+    public function showExit()
     {
-        $view = 'user.post';
+        $view = 'user.exit';
 
         return view($view);
         // return view($view, $data);

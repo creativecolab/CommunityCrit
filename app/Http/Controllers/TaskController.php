@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Feedback;
 use App\Http\Requests\FeedbackRequest;
 use App\Task;
+use App\TaskHist;
 use App\User;
 use App\Source;
 use App\Idea;
@@ -618,6 +619,94 @@ class TaskController extends Controller
         ];
     }
 
+    // /**
+    //  * create a task history record
+    //  *
+    //  * 
+    //  */
+    // public function createTaskHist(Request $request)
+    // {
+    //     // $data = $request->all(); // This will get all the request data.
+
+    //     // print($data); // This will dump and die
+
+    //     $taskHist = new TaskHist;
+    //     $taskHist->user_id = \Auth::id();
+    //     // // $taskHist->idea_id = $request->get( 'idea' );
+    //     // // $taskHist->task_id = $request->get( 'task' );
+    //     // // $taskHist->link_id = $request->get( 'link' );
+    //     $taskHist->save();
+    // }
+
+    /**
+     * create a new idea
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function trackSkip(Request $request)
+    {
+        $hist = createTaskHist($request, 5);
+
+        return redirect()->route('do');
+    }
+
+    /**
+     * create a new idea
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function submitIdea(Request $request)
+    {
+        $exit = $request->get( 'exit' );
+
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                'name' => 'max:255|string',
+                'text' => 'required|string',
+            ]);
+        }
+
+        $idea = new Idea;
+        $idea->name = $request->get('name');
+        $idea->text = $request->get('text');
+        $idea->user_id = \Auth::id();
+
+        if ($exit == 'Submit') {
+            if ($idea->save() ) {
+                flash("Your idea was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            $hist = createTaskHist($request, 1);
+
+            return redirect()->route('do');
+        }
+        else {
+            if ($idea->text) {
+                if ($idea->save() ) {
+                    flash("Your idea was submitted!")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
+
+                $hist = createTaskHist($request, 2);
+            } else {
+                $hist = createTaskHist($request, 3);
+            }
+
+            return redirect()->route('exit');
+        }
+    }
+
+    /**
+     * create a new feedback
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submitText( Request $request) //Idea $idea, int $task)
     {
         $exit = $request->get( 'exit' );
@@ -642,6 +731,8 @@ class TaskController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
+            $hist = createTaskHist($request, 1);
+
             return redirect()->route('do');
         }
         else {
@@ -651,12 +742,79 @@ class TaskController extends Controller
                 } else {
                     flash('Unable to save your feedback. Please contact us.')->error();
                 }
+
+                $hist = createTaskHist($request, 2);
+            } else {
+                $hist = createTaskHist($request, 3);
             }
 
-            return redirect()->route('post');
+            return redirect()->route('exit');
         }
     }
 
+    /**
+     * create a new link
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function submitLink(Request $request)
+    {
+        $exit = $request->get( 'exit' );
+
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                // 'name' => 'required|string',
+                'text' => 'required|string',
+                'text2' => 'string'
+            ]);
+        }
+
+        $link = new Link;
+        $link->user_id = \Auth::id();
+        $link->text = $request->get('text');
+        if ($request->get('text2')) {
+            $link->text2 = $request->get('text2');
+        }
+        $link->idea_id = $request->get( 'idea' );
+        $task = Task::find($request->get( 'task' ));
+        $link->task_id = $task->id;
+        $link->link_type = $task->type % 10;
+
+        if ($exit == 'Submit') {
+            if ($link->save() ) {
+                flash("Your idea was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            $hist = createTaskHist($request, 1);
+
+            return redirect()->route('do');
+        }
+        else {
+            if ($link->text) {
+                if ($link->save() ) {
+                    flash("Your idea was submitted!")->success();
+                } else {
+                    flash('Unable to save your feedback. Please contact us.')->error();
+                }
+
+                $hist = createTaskHist($request, 2);
+            } else {
+                $hist = createTaskHist($request, 3);
+            }
+
+            return redirect()->route('exit');
+        }
+    }
+
+    /**
+     * create new rating(s)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function submitRatings( Request $request) //Idea $idea, int $task)
     {
         $exit = $request->get( 'exit' );
@@ -691,6 +849,8 @@ class TaskController extends Controller
                 flash("Unable to save your ratings. Please contact us.")->error();
             }
 
+            $hist = createTaskHist($request, 1);
+
             return redirect()->route('do');
         }
         else {
@@ -700,9 +860,32 @@ class TaskController extends Controller
                 flash("Unable to save your ratings. Please contact us.")->error();
             }
 
-            return redirect()->route('post');
+            $hist = createTaskHist($request, 4);
+
+            return redirect()->route('exit');
         }
     }
+
+    // /**
+    //  * create task_history and redirect to correct submit function
+    //  *
+    //  * @param Request $request
+    //  * @return \Illuminate\Http\Request
+    //  */
+    // public function submitTask(Request $request)
+    // {
+    //     $task = Task::find($request->get( 'task' ));
+
+    //     if (intval($task->type / 10) == 8) {
+    //         return redirect()->action( 'TaskController@submitIdea', $request );
+    //     } else if (intval($task->type / 10) == 7) {
+    //         return redirect()->action( 'TaskController@submitLink', $request );
+    //     } else if ($task->type == 100) {
+    //         return redirect()->action( 'TaskController@submitRating', $request );
+    //     } else {
+    //         return redirect()->action( 'TaskController@submitText', $request );
+    //     }
+    // }
 
     private function taskQueue( $task_id )
     {

@@ -101,55 +101,7 @@ class LinkController extends Controller
 
     //------------------ post methods ------------------------
 
-    /**
-     * create a new idea
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function submitLink(Request $request)
-    {
-        $exit = $request->get( 'exit' );
-
-        if ($exit == 'Submit') {
-            $this->validate($request, [
-                // 'name' => 'required|string',
-                'text' => 'required|string',
-            ]);
-        }
-
-        $link = new Link;
-        $link->user_id = \Auth::id();
-        $link->text = $request->get('text');
-        if ($request->get('text2')) {
-            $link->text2 = $request->get('text2');
-        }
-        $link->idea_id = $request->get( 'idea' );
-        $task = Task::find($request->get( 'task' ));
-        $link->$task_id = $task;
-        $link->link_type = $task->type % 10;
-
-        if ($exit == 'Submit') {
-            if ($link->save() ) {
-                flash("Your idea was submitted! You may do another activity or exit below.")->success();
-            } else {
-                flash('Unable to save your feedback. Please contact us.')->error();
-            }
-
-            return redirect()->route('do');
-        }
-        else {
-            if ($link->text) {
-                if ($link->save() ) {
-                    flash("Your idea was submitted!")->success();
-                } else {
-                    flash('Unable to save your feedback. Please contact us.')->error();
-                }
-            }
-
-            return redirect()->route('post');
-        }
-    }
+    
 
 //     /**
 //      * submit a new link/reference, linked to an idea

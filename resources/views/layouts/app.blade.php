@@ -112,17 +112,21 @@
 <script>
     function btntest_onclick() 
     {
+        $("#task-form").attr("action", "{{ action('TaskController@trackSkip') }}").submit();
+
+        console.log("test");
+
         if ($('.activity #idea').length > 0) {
             $('#task-panel').fadeTo(500, 0);
             $('.activity #idea').delay(500).fadeTo(500, 0, function() {
                 $('#waiting').show();
-                window.location.assign("{{ route('do')}}");
+                // window.location.assign("{{ route('do') }}");
             });
         }
         else {
             $('#task-panel').fadeTo(500, 0, function() {
                 $('#waiting').show();
-                window.location.assign("{{ route('do')}}");
+                // window.location.assign("{{ route('do') }}");
             });
         }
     }
@@ -131,6 +135,7 @@
         $('#waiting').hide();
         $('.activity #idea').fadeTo(500, 1);
         $('#task-panel').delay(500).fadeTo(500, 1);
+
     });
 </script>
 </body>

@@ -187,7 +187,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 	    App\Providers\TaskRecommendationsServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
-
+        App\Providers\HelpersServiceProvider::class,
     ],
 
     /*
