@@ -46,7 +46,7 @@
             <!-- List group -->
             <ul class="list-group">
                 
-                <li class="list-group-item">{{--
+                <li class="list-group-item">
                     @if (intval(($task->type) / 10) == 8)
                         {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline']) !!}
                         <!-- <em>Submission!</em> -->
@@ -58,9 +58,7 @@
                     @else
                         {!! Form::open(['action' => ['TaskController@submitText', $idea->id], 'style' => 'display:inline']) !!}
                         <!-- <em>Everything else!</em> -->
-                    @endif--}}
-
-                    {!! Form::open(['action' => ['TaskController@submitTask'], 'style' => 'display:inline']) !!}
+                    @endif
 
                     {{ csrf_field() }}
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Feedback;
 use App\Http\Requests\FeedbackRequest;
 use App\Task;
+use App\TaskHist;
 use App\User;
 use App\Source;
 use App\Idea;
@@ -619,6 +620,23 @@ class TaskController extends Controller
     }
 
     /**
+    * save a task history record
+    *
+    * @param Request $request
+    * @return \Illuminate\Http\RedirectResponse
+    */
+    public function createTaskHistory(Request $request)
+    {
+        $taskHist = new TaskHist;
+        $taskHist->user_id = \Auth::id();
+        $taskHist->idea_id = $request->get( 'idea' );
+        $taskHist->task_id = $request->get( 'task' );
+        $taskHist->link_id = $request->get( 'link' );
+        $taskHist->action = 1;
+        $taskHist->save();
+    }
+
+    /**
      * create a new idea
      *
      * @param Request $request
@@ -626,6 +644,14 @@ class TaskController extends Controller
      */
     public function submitIdea(Request $request)
     {
+        $taskHist = new TaskHist;
+        $taskHist->user_id = \Auth::id();
+        $taskHist->idea_id = $request->get( 'idea' );
+        $taskHist->task_id = $request->get( 'task' );
+        $taskHist->link_id = $request->get( 'link' );
+        $taskHist->action = 1;
+        $taskHist->save();
+
         $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
@@ -670,6 +696,14 @@ class TaskController extends Controller
      */
     public function submitText( Request $request) //Idea $idea, int $task)
     {
+        $taskHist = new TaskHist;
+        $taskHist->user_id = \Auth::id();
+        $taskHist->idea_id = $request->get( 'idea' );
+        $taskHist->task_id = $request->get( 'task' );
+        $taskHist->link_id = $request->get( 'link' );
+        $taskHist->action = 1;
+        $taskHist->save();
+
         $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
@@ -715,6 +749,14 @@ class TaskController extends Controller
      */
     public function submitLink(Request $request)
     {
+        $taskHist = new TaskHist;
+        $taskHist->user_id = \Auth::id();
+        $taskHist->idea_id = $request->get( 'idea' );
+        $taskHist->task_id = $request->get( 'task' );
+        $taskHist->link_id = $request->get( 'link' );
+        $taskHist->action = 1;
+        $taskHist->save();
+
         $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
@@ -765,6 +807,14 @@ class TaskController extends Controller
      */
     public function submitRatings( Request $request) //Idea $idea, int $task)
     {
+        $taskHist = new TaskHist;
+        $taskHist->user_id = \Auth::id();
+        $taskHist->idea_id = $request->get( 'idea' );
+        $taskHist->task_id = $request->get( 'task' );
+        $taskHist->link_id = $request->get( 'link' );
+        $taskHist->action = 1;
+        $taskHist->save();
+
         $exit = $request->get( 'exit' );
 
         $qualities = Rating::QUALITIES;
