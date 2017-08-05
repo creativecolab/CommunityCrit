@@ -11,7 +11,8 @@ class TaskHist extends Model
         1 => 'submit',
         2 => 'go to exit - submit',
         3 => 'go to exit - empty',
-        4 => 'skip',
+        4 => 'go to exit - unknown',
+        5 => 'skip',
     ];
 
     use CrudTrait;

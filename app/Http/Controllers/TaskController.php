@@ -620,20 +620,35 @@ class TaskController extends Controller
     }
 
     /**
-    * save a task history record
-    *
-    * @param Request $request
-    * @return \Illuminate\Http\RedirectResponse
-    */
-    public function createTaskHistory(Request $request)
+     * create a task history record
+     *
+     * 
+     */
+    public function createTaskHist(Request $request)
     {
+        // $data = $request->all(); // This will get all the request data.
+
+        // print($data); // This will dump and die
+
         $taskHist = new TaskHist;
         $taskHist->user_id = \Auth::id();
-        $taskHist->idea_id = $request->get( 'idea' );
-        $taskHist->task_id = $request->get( 'task' );
-        $taskHist->link_id = $request->get( 'link' );
-        $taskHist->action = 1;
+        // // $taskHist->idea_id = $request->get( 'idea' );
+        // // $taskHist->task_id = $request->get( 'task' );
+        // // $taskHist->link_id = $request->get( 'link' );
         $taskHist->save();
+    }
+
+    /**
+     * create a new idea
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function trackSkip(Request $request)
+    {
+        $hist = updateTaskHist($request, 5);
+
+        return redirect()->route('do');
     }
 
     /**
@@ -644,14 +659,6 @@ class TaskController extends Controller
      */
     public function submitIdea(Request $request)
     {
-        $taskHist = new TaskHist;
-        $taskHist->user_id = \Auth::id();
-        $taskHist->idea_id = $request->get( 'idea' );
-        $taskHist->task_id = $request->get( 'task' );
-        $taskHist->link_id = $request->get( 'link' );
-        $taskHist->action = 1;
-        $taskHist->save();
-
         $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
@@ -673,6 +680,8 @@ class TaskController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
+            $hist = updateTaskHist($request, 1);
+
             return redirect()->route('do');
         }
         else {
@@ -682,9 +691,13 @@ class TaskController extends Controller
                 } else {
                     flash('Unable to save your feedback. Please contact us.')->error();
                 }
+
+                $hist = updateTaskHist($request, 2);
+            } else {
+                $hist = updateTaskHist($request, 3);
             }
 
-            return redirect()->route('post');
+            return redirect()->route('exit');
         }
     }
 
@@ -696,14 +709,6 @@ class TaskController extends Controller
      */
     public function submitText( Request $request) //Idea $idea, int $task)
     {
-        $taskHist = new TaskHist;
-        $taskHist->user_id = \Auth::id();
-        $taskHist->idea_id = $request->get( 'idea' );
-        $taskHist->task_id = $request->get( 'task' );
-        $taskHist->link_id = $request->get( 'link' );
-        $taskHist->action = 1;
-        $taskHist->save();
-
         $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
@@ -726,6 +731,8 @@ class TaskController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
+            $hist = updateTaskHist($request, 1);
+
             return redirect()->route('do');
         }
         else {
@@ -735,9 +742,13 @@ class TaskController extends Controller
                 } else {
                     flash('Unable to save your feedback. Please contact us.')->error();
                 }
+
+                $hist = updateTaskHist($request, 2);
+            } else {
+                $hist = updateTaskHist($request, 3);
             }
 
-            return redirect()->route('post');
+            return redirect()->route('exit');
         }
     }
 
@@ -749,14 +760,6 @@ class TaskController extends Controller
      */
     public function submitLink(Request $request)
     {
-        $taskHist = new TaskHist;
-        $taskHist->user_id = \Auth::id();
-        $taskHist->idea_id = $request->get( 'idea' );
-        $taskHist->task_id = $request->get( 'task' );
-        $taskHist->link_id = $request->get( 'link' );
-        $taskHist->action = 1;
-        $taskHist->save();
-
         $exit = $request->get( 'exit' );
 
         if ($exit == 'Submit') {
@@ -784,6 +787,8 @@ class TaskController extends Controller
                 flash('Unable to save your feedback. Please contact us.')->error();
             }
 
+            $hist = updateTaskHist($request, 1);
+
             return redirect()->route('do');
         }
         else {
@@ -793,9 +798,13 @@ class TaskController extends Controller
                 } else {
                     flash('Unable to save your feedback. Please contact us.')->error();
                 }
+
+                $hist = updateTaskHist($request, 2);
+            } else {
+                $hist = updateTaskHist($request, 3);
             }
 
-            return redirect()->route('post');
+            return redirect()->route('exit');
         }
     }
 
@@ -807,14 +816,6 @@ class TaskController extends Controller
      */
     public function submitRatings( Request $request) //Idea $idea, int $task)
     {
-        $taskHist = new TaskHist;
-        $taskHist->user_id = \Auth::id();
-        $taskHist->idea_id = $request->get( 'idea' );
-        $taskHist->task_id = $request->get( 'task' );
-        $taskHist->link_id = $request->get( 'link' );
-        $taskHist->action = 1;
-        $taskHist->save();
-
         $exit = $request->get( 'exit' );
 
         $qualities = Rating::QUALITIES;
@@ -847,6 +848,8 @@ class TaskController extends Controller
                 flash("Unable to save your ratings. Please contact us.")->error();
             }
 
+            $hist = updateTaskHist($request, 1);
+
             return redirect()->route('do');
         }
         else {
@@ -856,7 +859,9 @@ class TaskController extends Controller
                 flash("Unable to save your ratings. Please contact us.")->error();
             }
 
-            return redirect()->route('post');
+            $hist = updateTaskHist($request, 4);
+
+            return redirect()->route('exit');
         }
     }
 

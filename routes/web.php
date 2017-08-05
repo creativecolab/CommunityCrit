@@ -59,7 +59,7 @@ Route::get( '/about', function () {
 
 Route::group( ['middleware' => 'checkUser' ], function() {
     Route::get( '/my-contributions', 'UserController@showMyFeedback')->name( 'my-contributions' );
-    Route::get( '/post', 'UserController@showPost')->name( 'post' );
+    Route::get( '/exit', 'UserController@showExit')->name( 'exit' );
 });
 
 Route::group (['prefix' => 'ideas', 'middleware' => 'checkUser'], function () {
@@ -106,10 +106,12 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( 'img/{task}/upload', 'TaskController@uploadImage');
     // activity center
     // Route::post( '/submit/select', 'TaskController@submitTask' );
+    Route::post( '/track/show', 'TaskController@createTaskHist' );
     Route::post( '/submit/feedback/new', 'TaskController@submitText' );
     Route::post( '/submit/idea/new', 'TaskController@submitIdea' );
     Route::post( '/submit/rating/new', 'TaskController@submitRatings' );
     Route::post( '/submit/link/new', 'TaskController@submitLink' );
+    Route::post( '/skip', 'TaskController@trackSkip' )->name('skip');
 } );
 
 Route::group( ['prefix' => 'devtest', 'middleware' => 'admin'], function() {
