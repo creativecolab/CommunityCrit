@@ -48,15 +48,15 @@
                 
                 <li class="list-group-item">
                     @if (intval(($task->type) / 10) == 8)
-                        {!! Form::open(['action' => ['IdeaController@submitIdea'], 'style' => 'display:inline']) !!}
+                        {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                         <!-- <em>Submission!</em> -->
                     @elseif (intval(($task->type) / 10) == 7)
-                        {!! Form::open(['action' => ['LinkController@submitLink'], 'style' => 'display:inline']) !!}
+                        {!! Form::open(['action' => ['TaskController@submitLink'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                         <!-- <em>Link!</em> -->
                     @elseif ($task->type == 100)
-                        {!! Form::open(['action' => ['TaskController@submitRatings'], 'style' => 'display:inline']) !!}
+                        {!! Form::open(['action' => ['TaskController@submitRatings'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                     @else
-                        {!! Form::open(['action' => ['TaskController@submitText', $idea->id], 'style' => 'display:inline']) !!}
+                        {!! Form::open(['action' => ['TaskController@submitText', $idea->id], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                         <!-- <em>Everything else!</em> -->
                     @endif
 
@@ -65,8 +65,8 @@
                     @if ($idea->id)
                         {{ Form::hidden('idea', $idea->id) }}
                         @if ($link->id)
-                        {{ Form::hidden('link', $link->id) }}
-                    @endif
+                            {{ Form::hidden('link', $link->id) }}
+                        @endif
                     @endif
                     {{ Form::hidden('task', $task->id) }}
                     
@@ -93,6 +93,11 @@
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label class="instruction" for="submissionText">Give your idea a name. <span class="text-muted">(optional)</span></label>
                                     <input type="text" class="form-control" name="name"></input>
+                                    @if ($errors->has('name'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('name') }}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div> <!-- .col -->
                         </div>
@@ -111,7 +116,8 @@
                     @endif
 
                     {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
-                    <input id="btntest" type="button" class="btn btn-default" value="Skip" onclick="return btntest_onclick()" />
+                    <input id="btntest" type="button" class="btn btn-default" value="Skip" onclick="return btntest_onclick();" />
+                    <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
                     @if ($count >= 4)
                         <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">I want to stop</a>
                     @endif
