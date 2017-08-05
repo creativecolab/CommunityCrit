@@ -111,7 +111,7 @@
     function btntest_onclick() 
     {
         if ($('.activity #idea').length > 0) {
-            $('#task-panel').delay(1000).fadeTo(500, 1);
+            $('#task-panel').fadeTo(500, 0);
             $('.activity #idea').delay(500).fadeTo(500, 0, function() {
                 $('#waiting').show();
                 window.location.assign("{{ route('do')}}");
