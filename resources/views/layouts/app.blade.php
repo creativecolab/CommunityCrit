@@ -98,7 +98,7 @@
         </div>
     </nav>
 
-    <div class="container">
+    <div class="container footer">
         @include('flash::message')
         @yield('content')
     </div>
