@@ -46,8 +46,8 @@ class Feedback extends Model
         'idea_id',
         'link_id',
         'status',
-        'updated_at',
-        'updated_by'];
+        'moderated_at',
+        'moderated_by'];
 
 	/**
 	 * Task for this comment
