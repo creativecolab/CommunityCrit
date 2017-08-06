@@ -28,7 +28,7 @@ class RemoveSkippedTypeFromFeedbackTable extends Migration
     {
         Schema::table('feedback', function (Blueprint $table) {
             $table->boolean('skipped')->default(false)->after('user_id');
-            $table->string('type')->nullable()-after('id');
+            $table->string('type')->nullable()->after('id');
         });
     }
 }
