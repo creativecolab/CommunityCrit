@@ -21,6 +21,7 @@ class AddModerationToIdeasTable extends Migration
             $table->smallInteger('status')->default(0)->after('user_id');
             $table->dateTime('moderated_at')->nullable()->after('status');
             $table->integer('moderated_by')->nullable()->unsigned()->after('moderated_at');
+            $table->foreign('moderated_by')->references('id')->on('users');
         });
     }
 
@@ -32,6 +33,7 @@ class AddModerationToIdeasTable extends Migration
     public function down()
     {
         Schema::table('ideas', function (Blueprint $table) {
+            $table->dropForeign(['moderated_by']);
             $table->dropColumn(['status', 'moderated_at', 'moderated_by']);
         });
 

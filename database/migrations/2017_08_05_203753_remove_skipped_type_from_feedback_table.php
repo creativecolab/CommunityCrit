@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveUnusedFieldsFromFeedbackTable2 extends Migration
+class RemoveSkippedTypeFromFeedbackTable extends Migration
 {
     /**
      * Run the migrations.
@@ -28,7 +28,7 @@ class RemoveUnusedFieldsFromFeedbackTable2 extends Migration
     {
         Schema::table('feedback', function (Blueprint $table) {
             $table->boolean('skipped')->default(false)->after('user_id');
-            $table->string('type')->nullable()-after('id');
+            $table->string('type')->nullable()->after('id');
         });
     }
 }
