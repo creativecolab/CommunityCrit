@@ -4,7 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Backpack\CRUD\CrudTrait;
-use Hootlex\Moderation\Moderatable;
+// use Hootlex\Moderation\Moderatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
@@ -35,10 +35,19 @@ class Feedback extends Model
                     Feedback::STR_CON => Feedback::LABEL_CON,
                     Feedback::STR_CUSTOM => Feedback::LABEL_CUSTOM];
 
-	use Moderatable;
+	// use Moderatable;
     use CrudTrait;
 
-	protected $fillable = [ 'comment', 'task_id', 'user_id', 'type', 'idea_id', 'link_id'];
+	protected $fillable = [
+        'comment',
+        'task_id',
+        'user_id',
+        'type',
+        'idea_id',
+        'link_id',
+        'status',
+        'updated_at',
+        'updated_by'];
 
 	/**
 	 * Task for this comment

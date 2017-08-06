@@ -77,7 +77,16 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ action('ModerationController@showPending') }}">Pending</a>
+                                    <a href="{{ action('ModerationController@showUpdateByStatus', 0) }}">Pending</a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('ModerationController@showUpdateByStatus', 1) }}">Approved</a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('ModerationController@showUpdateByStatus', 2) }}">Rejected</a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('ModerationController@showUpdateByStatus', 3) }}">Postponed</a>
                                 </li>
                             </ul>
                         </li>

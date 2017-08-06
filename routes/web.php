@@ -57,8 +57,14 @@ Route::get( '/about', function () {
 
 Route::group( ['prefix' => 'moderation', 'middleware' => 'admin'], function() {
     Route::get( '/pending', 'ModerationController@showPending' );
+    Route::get( '/show/{status}', 'ModerationController@showByStatus' );
+    Route::get( '/update/{status}', 'ModerationController@showUpdateByStatus' );
+
     Route::post( '/pending/ideas/save', 'ModerationController@savePendingIdeas' );
     Route::post( '/pending/links/save', 'ModerationController@savePendingLinks' );
+    Route::post( '/update/{status}/ideas/save', 'ModerationController@updateIdeasStatus' );
+    Route::post( '/update/{status}/links/save', 'ModerationController@updateLinksStatus' );
+    Route::post( '/update/{status}/feedbacks/save', 'ModerationController@updateFeedbacksStatus' );
 } );
 
 Route::group( ['middleware' => 'checkUser' ], function() {

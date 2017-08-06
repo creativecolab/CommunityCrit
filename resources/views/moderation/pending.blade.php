@@ -41,7 +41,6 @@
 
 			<div class="row">
 				{!! Form::submit('Save', ['class' => 'btn btn-primary pull-right']) !!}
-				{!! Form::close() !!}
 			</div>
 		@else
 			</table>
@@ -49,6 +48,7 @@
 				No pending ideas.
 			</h4>
 		@endif
+		{!! Form::close() !!}
 
 	<h2>Links</h2>
 	{!! Form::open(['action' => ['ModerationController@savePendingLinks'], 'style' => 'display:inline']) !!}
@@ -83,13 +83,13 @@
 
 			<div class="row">
 				{!! Form::submit('Save', ['class' => 'btn btn-primary pull-right']) !!}
-				{!! Form::close() !!}
 			</div>
 		@else
 			</table>
 			<h4 class="text-center">
-				No pending ideas.
+				No pending links.
 			</h4>
 		@endif
+		{!! Form::close() !!}
 
 @endsection

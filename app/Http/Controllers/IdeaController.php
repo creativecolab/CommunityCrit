@@ -80,8 +80,12 @@ class IdeaController extends Controller
             $data['idea'] = $idea;
             // $data['ratings'] = $this->avgRatings($idea);
             // $data['rating_keys'] = $data['ratings']->keys()->all();
-            $data['links'] = $idea->links->sortBy('link_type');
-            $data['feedbacks'] = $idea->feedback->sortByDesc('created_at');
+            $data['links'] = $idea->links
+                ->where('status', 1)
+                ->sortBy('link_type');
+            $data['feedbacks'] = $idea->feedback
+                ->whereIn('status', [0, 1])
+                ->sortByDesc('created_at');
 
             return view($view, $data);
         } else {

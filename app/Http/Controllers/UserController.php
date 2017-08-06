@@ -47,12 +47,14 @@ class UserController extends Controller
     /**
      * view page to show all ideas
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showMyFeedback()
     {
         $view = 'user.feedback';
         $data = [];
+
+        $user_id = \Auth::id();
 
         $ideas = Idea::all()
             ->where('status', 1)
@@ -62,10 +64,7 @@ class UserController extends Controller
         $data['ideas'] = $ideas;
 
         $myIdeas = Auth()->User()->ideas
-            ->where('status', 1)
             ->sortByDesc('created_at');
-        // $myIdeas = Auth()->User()->ideas
-            // ->sortByDesc('created_at'); // w laravel mod
         $data['myIdeas'] = $myIdeas;
         
         $myLinks = Auth()->User()->links
