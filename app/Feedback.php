@@ -34,25 +34,9 @@ class Feedback extends Model
                     Feedback::STR_CON => Feedback::LABEL_CON,
                     Feedback::STR_CUSTOM => Feedback::LABEL_CUSTOM];
 
-<<<<<<< HEAD
-	// use Moderatable;
-    use CrudTrait;
-
-	protected $fillable = [
-        'comment',
-        'task_id',
-        'user_id',
-        'type',
-        'idea_id',
-        'link_id',
-        'status',
-        'moderated_at',
-        'moderated_by'];
-=======
 	use CrudTrait;
 
 	protected $fillable = [ 'comment', 'task_id', 'user_id', 'type', 'idea_id', 'link_id'];
->>>>>>> parent of 777f9c0... Merge pull request #133 from creativecolab/moderation-switch
 
 	/**
 	 * Task for this comment
