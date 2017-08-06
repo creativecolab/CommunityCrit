@@ -14,6 +14,10 @@ class AddModerationToIdeasTable extends Migration
     public function up()
     {
         Schema::table('ideas', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
+
+        Schema::table('ideas', function (Blueprint $table) {
             $table->smallInteger('status')->default(0)->after('user_id')->change();
             $table->dateTime('moderated_at')->nullable()->after('status');
             //If you want to track who moderated the Model add 'moderated_by' too.
@@ -28,9 +32,13 @@ class AddModerationToIdeasTable extends Migration
      */
     public function down()
     {
+        Schema::table('ideas', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
+
         Schema::table('ideas', function(Blueprint $table)
         {
-            $table->unsignedInteger('status')->nullable()->after('img_url')->change();
+            $table->unsignedInteger('status')->nullable()->after('img_url');
             $table->dropColumn('moderated_at');
             $table->dropColumn('moderated_by');
         });
