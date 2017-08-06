@@ -176,7 +176,6 @@ return [
         Cviebrock\EloquentSluggable\ServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
-        Hootlex\Moderation\ModerationServiceProvider::class,
 
         /*
          * Application Service Providers...
