@@ -15,7 +15,6 @@
         "cviebrock/eloquent-sluggable": "^4.2",
         "doctrine/dbal": "^2.6",
         "fzaninotto/faker": "~1.4",
-        "hootlex/laravel-moderation": "^1.0",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
