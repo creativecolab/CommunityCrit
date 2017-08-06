@@ -38,6 +38,7 @@ if (! function_exists('updateTaskHist')) {
             ->where('task_id', $task_id)
             ->where('idea_id', $idea_id)
             ->where('link_id', $link_id);
+            // ->last();
 
         if ($taskHist) {
             $taskHist->update(['action' => $action]);
