@@ -13,7 +13,7 @@ class AddModerationToFeedbackTable extends Migration
      */
     public function up()
     {
-        Schema::table('feedback', function (Blueprint $table) {
+        Schema::hasColumn('feedback', function (Blueprint $table) {
             $table->dropColumn('status');
         });
 

@@ -13,7 +13,7 @@ class MakeStatus0IdeasTable extends Migration
      */
     public function up()
     {
-        Schema::table('ideas', function (Blueprint $table) {
+        Schema::hasColumn('ideas', function (Blueprint $table) {
             $table->dropColumn('status');
         });
 
@@ -29,7 +29,7 @@ class MakeStatus0IdeasTable extends Migration
      */
     public function down()
     {
-        Schema::table('ideas', function (Blueprint $table) {
+        Schema::hasColumn('ideas', function (Blueprint $table) {
             $table->dropColumn('status');
         });
 

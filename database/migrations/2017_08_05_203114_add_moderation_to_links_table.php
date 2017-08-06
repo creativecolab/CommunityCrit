@@ -13,7 +13,7 @@ class AddModerationToLinksTable extends Migration
      */
     public function up()
     {
-        Schema::table('links', function (Blueprint $table) {
+        Schema::hasColumn('links', function (Blueprint $table) {
             $table->dropColumn('status');
         });
 
@@ -32,7 +32,7 @@ class AddModerationToLinksTable extends Migration
      */
     public function down()
     {
-        Schema::table('links', function (Blueprint $table) {
+        Schema::hasColumn('links', function (Blueprint $table) {
             $table->dropColumn('status');
         });
 
