@@ -42,6 +42,7 @@ Route::get( '/about', function () {
     return view( 'about' );
 } );
 
+
 //Route::group( [ 'prefix' => 'devtest' ], function() {
 //    Route::get('/submit/', function() { return view('proto/testsubmit');});
 ////    Route::get('/', 'TaskController@testDashboard' );
@@ -51,21 +52,10 @@ Route::get( '/about', function () {
 //    Route::post('/submit/new', 'TaskController@newTask');
 //} );
 
+
 // Route::get( '/home', 'HomeController@index' )->name( 'home' );
 // Route::post( '/home/submit', 'TaskController@newsubmit' );
 // Route::get( 'my-contributions', 'PersonalController@showMyFeedback');
-
-Route::group( ['prefix' => 'moderation', 'middleware' => 'admin'], function() {
-    Route::get( '/pending', 'ModerationController@showPending' );
-    Route::get( '/show/{status}', 'ModerationController@showByStatus' );
-    Route::get( '/update/{status}', 'ModerationController@showUpdateByStatus' );
-
-    Route::post( '/pending/ideas/save', 'ModerationController@savePendingIdeas' );
-    Route::post( '/pending/links/save', 'ModerationController@savePendingLinks' );
-    Route::post( '/update/{status}/ideas/save', 'ModerationController@updateIdeasStatus' );
-    Route::post( '/update/{status}/links/save', 'ModerationController@updateLinksStatus' );
-    Route::post( '/update/{status}/feedbacks/save', 'ModerationController@updateFeedbacksStatus' );
-} );
 
 Route::group( ['middleware' => 'checkUser' ], function() {
     Route::get( '/my-contributions', 'UserController@showMyFeedback')->name( 'my-contributions' );
@@ -129,7 +119,6 @@ Route::group( ['prefix' => 'devtest', 'middleware' => 'admin'], function() {
     Route::get( '/', 'TaskController@mapTest');
     Route::post( '/attach/{task}/new', 'TaskController@connectTaskIdea' );
 } );
-
 //Route::group( [ 'prefix' => 'tasks' ], function () {
 //	Route::get( '/', 'TaskController@index' );
 //    Route::get( '/{id}', 'TaskController@testShow' );

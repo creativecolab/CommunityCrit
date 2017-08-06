@@ -68,6 +68,7 @@
                     @else
                         <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">{{ $myFeedbackCount }}</span></a></li>
 {{--                        <li><a href="{{ action('TaskController@index') }}">Tasks</a></li>--}}
+<<<<<<< HEAD
                         @if (Auth::user()->admin)
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -94,6 +95,9 @@
                                 </li>
                             </ul>
                         </li>
+=======
+                        @if(Auth::user()->admin)
+>>>>>>> parent of 777f9c0... Merge pull request #133 from creativecolab/moderation-switch
                             <li>
                                 <a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}">Admin</a>
                             </li>

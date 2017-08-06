@@ -55,7 +55,6 @@ class IdeaController extends Controller
         $view = 'ideas.all';
         $data = [];
 
-        // $ideas = Idea::all(); // w/ laravel-mod
         $ideas = Idea::all()->where('status', 1);
         $data['ideas'] = $ideas;
 
@@ -70,7 +69,6 @@ class IdeaController extends Controller
      */
     public function show($id)
     {
-        // $idea = Idea::all()->find($id); // w/ laravel-mod
         $idea = Idea::all()->where('status', 1)->find($id);
 
         if ($idea) {
@@ -80,12 +78,8 @@ class IdeaController extends Controller
             $data['idea'] = $idea;
             // $data['ratings'] = $this->avgRatings($idea);
             // $data['rating_keys'] = $data['ratings']->keys()->all();
-            $data['links'] = $idea->links
-                ->where('status', 1)
-                ->sortBy('link_type');
-            $data['feedbacks'] = $idea->feedback
-                ->whereIn('status', [0, 1])
-                ->sortByDesc('created_at');
+            $data['links'] = $idea->links->where('status', 1)->sortBy('link_type');
+            $data['feedbacks'] = $idea->feedback->sortByDesc('created_at');
 
             return view($view, $data);
         } else {
