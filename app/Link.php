@@ -26,7 +26,7 @@ class Link extends Model
         'hidden',
         'status',
         'moderated_at',
-        'moderated_by'
+        'moderated_by',
     ];
 
     /**

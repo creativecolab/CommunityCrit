@@ -771,8 +771,8 @@ class TaskController extends Controller
         if ($exit == 'Submit') {
             $this->validate($request, [
                 // 'name' => 'required|string',
-                'text' => 'required|string',
-                'text2' => 'string'
+                'text' => 'required',
+                // 'text2' => 'text'
             ]);
         }
 
@@ -786,6 +786,7 @@ class TaskController extends Controller
         $task = Task::find($request->get( 'task' ));
         $link->task_id = $task->id;
         $link->link_type = $task->type % 10;
+        $link->type = 1;
 
         if ($exit == 'Submit') {
             if ($link->save() ) {
