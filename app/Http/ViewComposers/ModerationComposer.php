@@ -31,7 +31,7 @@ class ModerationComposer
     {
         $counts = collect([]);
         $statuses = 4;
-        if (Auth::user()->admin) {
+        if (!Auth::guest() && Auth::user()->admin) {
             $ideas = Idea::all();
             $links = Link::all();
             $feedbacks = Feedback::all();
