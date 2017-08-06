@@ -30,11 +30,6 @@ class ComposerServiceProvider extends ServiceProvider {
             'layouts.app',
             'App\Http\ViewComposers\MyContributionsComposer'
         );
-
-        view()->composer(
-            'layouts.app',
-            'App\Http\ViewComposers\ModerationComposer'
-        );
     }
 
     /**
