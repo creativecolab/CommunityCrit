@@ -30,6 +30,7 @@ class ModerationComposer
     public function compose(View $view)
     {
         $counts = collect([]);
+        $important = 0;
         $statuses = 4;
         if (!Auth::guest() && Auth::user()->admin) {
             $ideas = Idea::all();
@@ -43,15 +44,13 @@ class ModerationComposer
                     count($feedbacks->where('status', $i))
                 );
             }
+
+            $important = count($ideas->where('status', 0)) +
+            count($links->where('status', 0));
         } else {
             $count = null;
         }
-
-
-
-        $important = count($ideas->where('status', 0)) +
-            count($links->where('status', 0));
-
+        
         $send = array(
             $counts,
             $important,
