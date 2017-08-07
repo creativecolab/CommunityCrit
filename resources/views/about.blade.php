@@ -3,7 +3,7 @@
 @section('title', 'About')
 
 @section('content')
-    <h1>About</h1>
+    <h1>About</h1></br>
         
         <div class="col-sm-2">
     		<figure>
@@ -20,6 +20,7 @@
         <h3>Partners</h3>
         <p><a href="mailto:beth@callenderworks.com">Beth Callender</a></p>
         <p>Citizens Coordinate for Century 3</p>
-        <p>East Village People</p>
+        <p><a href="https://www.facebook.com/eastvillagesouth/" target="_blank">East Village South</a></p>
+        
 
 @endsection
