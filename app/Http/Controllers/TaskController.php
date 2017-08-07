@@ -143,7 +143,7 @@ class TaskController extends Controller
         if ($idea && $link && $task) {
             $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
             if ($task->type == 100) {
-                $data['qualities'] = Rating::QUALITIES;
+                $data['qualities'] = collect(collect(Rating::QUALITIES)->only(5,6,7)->random());
             }
 
             createTaskHist($task->id, $idea->id, $link->id);
