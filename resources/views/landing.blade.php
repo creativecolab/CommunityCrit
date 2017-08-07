@@ -4,6 +4,12 @@
 
 @section('content')
     <!-- <h1>Overview</h1> -->
+    <h3>CommunityCrit</h3>
+    <div class="row">
+        <div class="col-sm-10">
+            <p>CommunityCrit is a new research tool, developed by researchers at the University of California San Diego's Design Lab. The goal of CommunityCrit is to enable people to co-design the future of their communities by facilitating public contribution on urban design proposals. We have chosen the recent planning efforts around the 14th Street Promenade in the East Village neighborhood of downtown San Diego as our test case.</p>
+        </div>
+    </div>
     <h3>El Nudillo</h3>
     <div class="row">
         <div class="col-sm-10">
