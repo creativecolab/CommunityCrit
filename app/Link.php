@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Backpack\CRUD\CrudTrait;
+// use Hootlex\Moderation\Moderatable;
 use Illuminate\Database\Eloquent\Model;
 
 class Link extends Model
@@ -13,6 +14,7 @@ class Link extends Model
         2 => 'image',
     ];
 
+    // use Moderatable;
     use CrudTrait;
 
     protected $fillable = [
@@ -22,6 +24,9 @@ class Link extends Model
         'idea_id',
         'user_id',
         'hidden',
+        'status',
+        'moderated_at',
+        'moderated_by',
     ];
 
     /**
@@ -54,13 +59,13 @@ class Link extends Model
         return $this->belongsTo( 'App\User' );
     }
 
-    public function getCreatedAtAttribute($date)
-    {
-        return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();
-    }
+    // public function getCreatedAtAttribute($date)
+    // {
+    //     return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();
+    // }
 
-    public function getUpdatedAtAttribute($date)
-    {
-        return $this->attributes['updated_at'] = Carbon::parse($date)->diffForHumans();
-    }
+    // public function getUpdatedAtAttribute($date)
+    // {
+    //     return $this->attributes['updated_at'] = Carbon::parse($date)->diffForHumans();
+    // }
 }

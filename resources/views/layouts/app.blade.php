@@ -68,7 +68,32 @@
                     @else
                         <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">{{ $myFeedbackCount }}</span></a></li>
 {{--                        <li><a href="{{ action('TaskController@index') }}">Tasks</a></li>--}}
-                        @if(Auth::user()->admin)
+                        @if (Auth::user()->admin)
+                            <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                Moderation <span class="badge" style="{{ $modData[1] ? 'background-color: #b94a48;' : '' }}">{{ $modData[0]->sum() }}</span> <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <a href="{{ action('ModerationController@showUpdateByStatus', 0) }}">Pending <span class="badge">{{ $modData[0][0] }}</span>
+                                    @if ($modData[1])
+                                        <span class="badge" style="background-color: #b94a48;">{{ $modData[1] }}</span>
+                                    @endif
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('ModerationController@showUpdateByStatus', 1) }}">Approved <span class="badge">{{ $modData[0][1] }}</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('ModerationController@showUpdateByStatus', 2) }}">Rejected <span class="badge">{{ $modData[0][2] }}</span></a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('ModerationController@showUpdateByStatus', 3) }}">Postponed <span class="badge">{{ $modData[0][3] }}</span></a>
+                                </li>
+                            </ul>
+                        </li>
                             <li>
                                 <a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}">Admin</a>
                             </li>

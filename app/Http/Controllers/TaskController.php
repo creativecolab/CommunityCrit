@@ -136,8 +136,9 @@ class TaskController extends Controller
         $view = 'activities.elaboration';
 
         $task = Task::find($task_id);
+        // $idea = $idea_id ? Idea::all()->find($idea_id) : new Idea; // with laravel-mod
         $idea = $idea_id ? Idea::all()->where('status', 1)->find($idea_id) : new Idea;
-        $link = $link_id ? Link::all()->where('status', 1)->find($link_id) : new Link;
+        $link = $link_id ? Link::all()->find($link_id) : new Link;
 
         if ($idea && $link && $task) {
             $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
@@ -230,8 +231,11 @@ class TaskController extends Controller
         $text = $allFormats['text'];
         $text_link = $allFormats['text_link'];
 
+        // $ideas = Idea::all(); // with laravel-mod
         $ideas = Idea::all()->where('status', 1);
-        // $ideas = Idea::approved();
+        if (!count($ideas)) {
+            return redirect()->route('overview');
+        }
 
         if ($subs->keys()->contains($type)) {
             // if a submit task, no idea needed
@@ -255,11 +259,12 @@ class TaskController extends Controller
                 $format = 'text';
             } else if (in_array($type, $text_link)) {
                 // if a text with link task, select an idea with links and a link
+                // TODO: handle when there are no links for any ideas
                 $idea = $ideas->filter(function ($item) {
                    return (count($item->links));
                 })->random();
-                // $idea = Idea::all()->random();
 
+                // $links = $idea->links; // w/ laravel-mod
                 $links = $idea->links->where('status', 1);
                 if (count($links)) {
                     $link = $links->shuffle()->first();
@@ -277,7 +282,6 @@ class TaskController extends Controller
 
         return redirect()->route('show-task', [$task->id, $idea_id, $link_id]);
     }
-
     
 
     // /**
@@ -768,7 +772,6 @@ class TaskController extends Controller
             $this->validate($request, [
                 // 'name' => 'required|string',
                 'text' => 'required',
-                // 'text2' => 'string'
             ]);
         }
 
@@ -782,6 +785,7 @@ class TaskController extends Controller
         $task = Task::find($request->get( 'task' ));
         $link->task_id = $task->id;
         $link->link_type = $task->type % 10;
+        $link->type = 1;
 
         if ($exit == 'Submit') {
             if ($link->save() ) {

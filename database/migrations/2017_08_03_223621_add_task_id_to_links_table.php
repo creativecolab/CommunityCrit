@@ -27,6 +27,7 @@ class AddTaskIdToLinksTable extends Migration
     public function down()
     {
         Schema::table('links', function (Blueprint $table) {
+            $table->dropForeign(['task_id']);
             $table->dropColumn('task_id');
         });
     }
