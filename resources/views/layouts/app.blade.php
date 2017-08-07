@@ -54,8 +54,10 @@
                         {{--<li><a href="source-detail.htm">14th Street Promenade Master Plan</a></li>--}}
                         {{--<li><a href="source-detail.htm">East Village South Focus Plan</a></li>--}}
                         {{--</ul>--}}
+                        <li><a href="{{ route('do') }}">Do An Activity</a></li>
+                        {{--<li><a href="{{ route('submit-idea') }}">Submit an Idea</a></li>--}}
                     @endif
-                    <li><a href="{{ url('overview') }}">Overview</a></li>
+                    {{--<li><a href="{{ url('overview') }}">Overview</a></li>--}}
                     <li><a href="{{ url('/about') }}">About</a></li>
                 </ul>
 
@@ -125,9 +127,12 @@
         </div>
     </nav>
 
-    <div class="container footer">
+    <div class="container">
         @include('flash::message')
         @yield('content')
+    </div>
+    <div class="text-center footer">
+        <a href="{{ url('/privacy-policy') }}">Privacy Policy</a>
     </div>
 </div>
 

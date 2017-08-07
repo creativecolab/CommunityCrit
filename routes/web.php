@@ -21,8 +21,9 @@
 
 Route::get( '/', function() {
     if (Auth::check()) {
-        return redirect()->action(
-            'TaskController@showRandomTask', []);
+        return redirect()->route('overview');
+        // return redirect()->action(
+            // 'TaskController@showRandomTask', []);
     }
     else {
         return view('welcome');
@@ -40,6 +41,10 @@ Route::get( '/overview', function () {
 
 Route::get( '/about', function () {
     return view( 'about' );
+} );
+
+Route::get( '/privacy-policy', function () {
+    return view( 'privacypolicy' );
 } );
 
 //Route::group( [ 'prefix' => 'devtest' ], function() {
