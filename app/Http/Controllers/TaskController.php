@@ -772,7 +772,6 @@ class TaskController extends Controller
             $this->validate($request, [
                 // 'name' => 'required|string',
                 'text' => 'required',
-                // 'text2' => 'text'
             ]);
         }
 
