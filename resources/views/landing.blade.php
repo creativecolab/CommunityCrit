@@ -25,7 +25,7 @@
         <div class="col-sm-8">
             <p>Right now, El Nudillo is just an intersection. We need your help to figure out what El Nudillo should be!</p> 
             <p>CommunityCrit makes it easy to help shape plans for the future of your community. You will be able to suggest your own ideas and comment upon the ideas of other contributors for how El Nudillo can be transformed. Please answer as many or as few questions as you would like—you are always free to skip questions.</p>
-            <p>All input will be shared with sponsors, designers, and community members to help shape the ultimate plan.</p>
+            <p>All input will be shared with sponsors, designers, and community members to help shape the ultimate plan. Click <a href="{{ route('do') }}">here</a> to get started.</p>
 
             <img src="{{ asset('img/timeline.png') }}" alt="project map" class="img-responsive" style="padding-top: 15px; padding-bottom: 15px;">
         </div>
