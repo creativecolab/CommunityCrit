@@ -36,5 +36,7 @@
             <img src="{{ asset('img/timeline.png') }}" alt="project map" class="img-responsive" style="padding-top: 15px; padding-bottom: 15px;">
         </div>
     </div> <!-- .row -->
-    <a type="button" class="btn btn-primary btn-lg" style="margin-top: 10px;" href="{{ route('do') }}">Take Me To An Activity</a>
+    <a type="button" class="btn btn-primary btn-lg hidden-xs" style="margin-top: 10px;" href="{{ route('do') }}">Take Me To An Activity</a>
+
+    <a type="button" class="btn btn-primary btn-lg btn-block hidden-sm hidden-md hidden-lg" style="margin-top: 10px;" href="{{ route('do') }}">Take Me To An Activity</a>
 @endsection
