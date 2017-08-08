@@ -20,6 +20,8 @@ use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 
 class TaskController extends Controller
 {
+    const NUM_TASKS = 5;
+
     //--------------------- SHOW METHODS ------------------------------
 
     /**
@@ -206,6 +208,13 @@ class TaskController extends Controller
         $data = [];
         $data['ideas'] = Idea::all();
 
+        \Session::forget('idea');
+        \Session::forget('t_queue');
+        \Session::forget('t_ptr');
+
+        \Session::put('t_queue', collect([]));
+        \Session::put('t_ptr', 1);
+
         return view($view, $data);
     }
 
@@ -222,8 +231,15 @@ class TaskController extends Controller
         }
 
         // select a random task that is meant for queuing
-        $task = Task::where('type', '>', 50)->inRandomOrder()->first();
-        
+//        $task = Task::where('type', '>', 50)->inRandomOrder()->first();
+
+        //get task from queue
+
+        $task = $this->taskQueue($idea_id);
+        if ($task == null) {
+            return redirect()->action('TaskController@showIdeaSelect');
+        }
+
         // for testing a specific task type
         // $tasks = Task::all();
         // $task = $tasks->filter(function($item) {
@@ -686,6 +702,8 @@ class TaskController extends Controller
     {
         $hist = updateTaskHist($request, 5);
 
+        $this->incrementPtr();
+
         return redirect()->route('do', [$idea_id]);
     }
 
@@ -755,6 +773,8 @@ class TaskController extends Controller
             ]);
         }
 
+        $this->incrementPtr();
+
         $idea = $request->get('idea');
 
         $feedback = new Feedback;
@@ -809,6 +829,8 @@ class TaskController extends Controller
                 'text' => 'required',
             ]);
         }
+
+        $this->incrementPtr();
 
         $idea_id = $request->get( 'idea' );
 
@@ -872,6 +894,8 @@ class TaskController extends Controller
             }
         }
 
+        $this->incrementPtr();
+
         $ratings = collect([]);
         foreach($qualities as $key=>$quality) {
             $rating = new Rating;
@@ -930,10 +954,43 @@ class TaskController extends Controller
     //     }
     // }
 
-    private function taskQueue( $task_id )
+    /**
+     * creates task queue
+     *
+     * @param $idea_id
+     * @return null
+     */
+    private function taskQueue($idea_id)
     {
-        \Session::push('visited', $task_id);
-        \Session::get('queue');
+        //retrieve session vars
+        $session_idea = \Session::get('idea');
+        $t_queue = \Session::pull('t_queue');
+        $t_ptr = \Session::get('t_ptr');
+
+        if ($session_idea != null && $idea_id != $session_idea) {
+            $t_queue = collect([]);
+            $t_ptr = 1;
+        }
+
+        if ($t_queue->isEmpty()) {
+            $tasks = Task::inRandomOrder()->take(static::NUM_TASKS)->get();
+            \Session::put('idea', $idea_id);
+            \Session::put('t_queue', $tasks);
+//            \Session::put('t_ptr', $t_ptr+1);
+        } else if ($t_ptr > static::NUM_TASKS) {
+            return null;
+        }
+        else {
+            \Session::put('t_queue', $t_queue);
+//            \Session::put('t_ptr', $t_ptr+1);
+        }
+        return \Session::get('t_queue')[\Session::get('t_ptr')-1];
+    }
+
+    private function incrementPtr()
+    {
+        $t_ptr = \Session::pull('t_ptr');
+        \Session::put('t_ptr', $t_ptr+1);
     }
 
     /**

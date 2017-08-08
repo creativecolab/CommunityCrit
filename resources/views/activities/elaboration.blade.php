@@ -40,7 +40,7 @@
         <div class="panel panel-primary no-marg-bot input" id="task-panel" style="opacity: 0;">
             <div class="panel-heading">
                 <div class="panel-title">
-                    {!! $task->name !!}
+                    {!! $task->name !!} -- You are on task {{\Session::get('t_ptr')}} of 5
                 </div>
             </div>
             <!-- List group -->
