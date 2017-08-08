@@ -5,48 +5,48 @@
 @endsection
 
 @section('content')
+    <!-- standby instruction -->
     <h4 class="text-center" id="waiting">
         Finding an activity for you...
     </h4>
 
+    <!-- set count var -->
     <div style="display: none">
         {{ $count = count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 4) }}
     </div>
 
     <div class="activity" id="text-link">
-        <!-- <div class="panel-group" role="tablist" style="margin-bottom: 30px;">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="collapseListGroupHeading1">
-                    <h4 class="panel-title">
-                        <a href="#collapseListGroup1" class="" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="collapseListGroup1"> About the Project </a>
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse {{ $count < 1 ? 'in' : '' }} " role="tabpanel" id="collapseListGroup1" aria-labelledby="collapseListGroupHeading1" aria-expanded="true">
-                    <div class="panel-body">
-                            <p>Currently, community leaders are collaborating with the public and local experts to design the intersection of 14th Street and National Avenue, called <strong>“El Nudillo.”</strong> The future El Nudillo is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p>
-                            <strong>Please share your thoughts below!</strong>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        @if ($idea->id)
-            @component('activities.common.idea', ['idea' => $idea, 'link' => $link])
-            @endcomponent
-        @endif
-
-        <!-- <em>Task Type: {{ ($task->type) }}</em> -->
-
-        <div class="panel panel-primary no-marg-bot input" id="task-panel" style="opacity: 0;">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    {!! $task->name !!} -- You are on task {{\Session::get('t_ptr')}} of 5
-                </div>
-            </div>
             <!-- List group -->
             <ul class="list-group">
+                <li class="list-group-item" id="idea">
+                    @if ($idea->id)
+                        @component('activities.common.idea', ['idea' => $idea, 'link' => $link])
+                        @endcomponent
+                    @endif
+                </li>
+
+                <li class="list-group-item dark">
+                    <h3>
+                        Question {{\Session::get('t_ptr')}} of 5: 
+                        @if ($task->type == 61)
+                            {!! $ques->text !!}
+                        @else
+                            {!! $task->text !!}
+                        @endif
+                    </h3>
+
+                </li>
                 
                 <li class="list-group-item">
+                    @if ($link->id)
+                        <ul class="list-group" id="link">
+                            <li class="list-group-item">
+                                @component('activities.common.link', ['link' => $link])
+                                @endcomponent
+                            </li>
+                        </ul>
+                    @endif
+
                     @if (intval(($task->type) / 10) == 8)
                         {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                         <!-- <em>Submission!</em> -->
@@ -76,11 +76,8 @@
                     @if ($task->type != 100)
                         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                             <label class="instruction" for="submissionText">
-                                @if ($task->type == 61)
-                                    {!! $ques->text !!}
-                                @else
-                                    {!! $task->text !!}
-                                @endif
+                                
+                                {!! $task->name !!}
 
                             </label>
                             <textarea class="form-control" rows="3" id="submissionText" name="text"></textarea>
@@ -125,12 +122,16 @@
                         </div>
                     @endif
 
-                    {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
-                    <input id="btntest" type="button" class="btn btn-link" value="Skip" onclick="return btntest_onclick();" />
-                    <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
-                    @if ($count >= 4)
-                        <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">I want to stop</a>
-                    @endif
+                    <div class="pull-right">
+                        <a id="skip" value="Skip >" onclick="return skip_onclick();">Skip ></a>
+                        <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
+                        {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
+                        @if ($count >= 4)
+                            <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">I want to stop</a>
+                        @endif
+                    </div>
+                    <div class="clearfix"></div>
+                    
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -154,7 +155,7 @@
         </div> <!-- .panel -->
     </div> <!-- .container -->
     <script>
-        function btntest_onclick()
+        function skip_onclick()
         {
             $("#task-form").attr("action", "{{ action('TaskController@trackSkip', $idea->id) }}").submit();
 

@@ -149,7 +149,6 @@
         $('#waiting').hide();
         $('.activity #idea').fadeTo(500, 1);
         $('#task-panel').delay(500).fadeTo(500, 1);
-
     });
 </script>
 </body>

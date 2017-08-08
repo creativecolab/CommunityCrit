@@ -17,6 +17,9 @@ $brand-success: #2ab27b;
 $brand-warning: #cbb956;
 $brand-danger: #bf5329;
 
+// Colors
+$task-bg-color: #355F7B;
+
 // Typography
 $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 $font-family-sans-serif: "Raleway", sans-serif;
@@ -38,6 +41,7 @@ $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels
 $panel-default-heading-bg: #fff;
+$panel-border-radius: 6px;
 
 // Shadows
-$shadow-default: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+$shadow-default: 0 4px 8px 0 rgba(0, 0, 0, 0.2); //, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
