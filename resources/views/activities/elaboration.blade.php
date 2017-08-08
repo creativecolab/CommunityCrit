@@ -153,4 +153,26 @@
             </ul> <!-- list group -->
         </div> <!-- .panel -->
     </div> <!-- .container -->
+    <script>
+        function btntest_onclick()
+        {
+            $("#task-form").attr("action", "{{ action('TaskController@trackSkip', $idea->id) }}").submit();
+
+            console.log("test");
+
+            if ($('.activity #idea').length > 0) {
+                $('#task-panel').fadeTo(500, 0);
+                $('.activity #idea').delay(500).fadeTo(500, 0, function() {
+                    $('#waiting').show();
+                    // window.location.assign("{{ route('do') }}");
+                });
+            }
+            else {
+                $('#task-panel').fadeTo(500, 0, function() {
+                    $('#waiting').show();
+                    // window.location.assign("{{ route('do') }}");
+                });
+            }
+        }
+    </script>
 @endsection

@@ -1,23 +1,28 @@
 @extends('layouts.app')
 
-@section('title', 'Dev')
+@section('title', 'Dev - Idea Select')
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                <div class="panel-heading">Help Us Find the Right Info for You {{$test}}</div>
-                <div class="panel-body">
-
-                    {{--@component('proto.testoptions', ['text' => $task->text, 'options' => $options, 'task' => $task->id])--}}
-                    {{--@endcomponent--}}
-                    @component('proto.microtask', ['text' => $task->text, 'id' => $task->id, 'name' => $task->name, 'test' => $test])
-                    @endcomponent
-
-                </div> <!-- .panel-body -->
-                </div> <!-- .panel -->
+    <div class="page-header">
+        <h1>Ideas</h1>
+    </div>
+    <div class="row">
+        @foreach ($ideas as $idea)
+            <div class="col-sm-6 col-md-4">
+                <a class="panel-link" href="{{ action( 'TaskController@showRandomTask', $idea->id) }}">
+                    <div class="panel panel-default">
+                        @if ($idea->name)
+                            <div class="panel-heading">
+                                <div class="panel-title">{{$idea->name}}</div>
+                            </div> <!-- .panel-heading -->
+                        @endif
+                        <div class="panel-body">
+                            {!! $idea->text !!}
+                        </div> <!-- .panel-body -->
+                    </div> <!-- .panel -->
+                </a>
             </div> <!-- .col -->
-        </div> <!-- .row -->
-    </div> <!-- .container -->
+        @endforeach
+    </div>
+
 @endsection
