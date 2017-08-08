@@ -213,7 +213,7 @@ class TaskController extends Controller
         // for testing a specific task type
         // $tasks = Task::all();
         // $task = $tasks->filter(function($item) {
-            // return $item->type == 61;
+            // return $item->type == 102;
         // })->first();
 
         $type = $task->type;
@@ -248,9 +248,14 @@ class TaskController extends Controller
                 return redirect()->route('show-task', [$task->id, $idea_id]);
             } else if ($type == 61) {
                 // if a respond to a specific question task, select an idea and question
-                $idea = $ideas->filter(function ($item) {
+                $ideasWQuestions = $ideas->filter(function ($item) {
                    return (count($item->questions->where('status', 1)));
-                })->random();
+                });
+                if (!count($ideasWQuestions)) {
+                    return redirect()->route('do');
+                } else {
+                    $idea = $ideasWQuestions->random();
+                }
                 $idea_id = $idea->id;
                 $link_id = 0;
 
@@ -273,9 +278,14 @@ class TaskController extends Controller
             } else if (in_array($type, $text_link)) {
                 // if a text with link task, select an idea with links and a link
                 // TODO: handle when there are no links for any ideas
-                $idea = $ideas->filter(function ($item) {
+                $ideasWLinks = $ideas->filter(function ($item) {
                    return (count($item->links->where('status', 1)));
-                })->random();
+                });
+                if (!count($ideasWLinks)) {
+                    return redirect()->route('do');
+                } else {
+                    $idea = $ideasWLinks->random();
+                }
                 $idea_id = $idea->id;
 
                 $links = $idea->links->where('status', 1);
