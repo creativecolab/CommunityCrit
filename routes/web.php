@@ -135,7 +135,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( '/skip/{idea_id?}', 'TaskController@trackSkip' )->name('skip');
 } );
 
-Route::group( ['prefix' => 'devtest', 'middleware' => 'admin'], function() {
+Route::group( ['prefix' => 'devtest'], function() {
 //    Route::get( '/attach/{task}', 'TaskController@showConnect' ); // attaches idea and task
     Route::get( '/', 'TaskController@showIdeaSelect');
 //    Route::post( '/attach/{task}/new', 'TaskController@connectTaskIdea' );
