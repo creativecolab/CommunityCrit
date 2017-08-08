@@ -43,6 +43,7 @@ class Task extends Node
 //        'task_id',
         'parent_id',
         'source_id',
+        'hidden',
     ];
 
     /**
