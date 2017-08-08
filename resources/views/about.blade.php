@@ -21,7 +21,7 @@
         <div class="col-md-3">
             <figure>
                 <img src="{{ asset('img/vector-map.png') }}" alt="project map" class="img-responsive">
-                <figcaption>A map of the Park Link project showing the four design challenges community leaders are exploring. The blocks approved for 14th Street Master Plan are marked in green.</figcaption>
+                <figcaption>A map of the Park Link project area showing the El Nudillo challenge. The blocks approved for 14th Street Master Plan are marked in green.</figcaption>
             </figure>
         </div> <!-- .col -->
     </div> <!-- .row -->
