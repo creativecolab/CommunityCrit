@@ -133,7 +133,7 @@ class TaskController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function showTask(int $task_id, int $idea_id, int $link_id, int $ques_id ) {
+    public function showTask(int $task_id, int $idea_id = 0, int $link_id = 0, int $ques_id = 0) {
         $view = 'activities.elaboration';
 
         $task = Task::find($task_id);
@@ -240,47 +240,69 @@ class TaskController extends Controller
             $link_id = 0;
             $ques_id = 0;
             $format = 'submit-idea';
+
+            return redirect()->route('show-task', [$task->id]);
         } else {
             if (in_array($type, $rate)) {
                 // if a rating task, select an idea but no link
                 $idea = $ideas->random();
+                $idea_id = $idea->id;
                 $link_id = 0;
                 $ques_id = 0;
+
+                return redirect()->route('show-task', [$task->id, $idea_id]);
             } else if ($type == 61) {
                 // if a respond to a specific question task, select an idea and question
                 $idea = $ideas->filter(function ($item) {
                    return (count($item->questions));
                 })->random();
+                $idea_id = $idea->id;
                 $link_id = 0;
 
                 $questions = $idea->questions->where('status', 1);
-                $question = $questions->shuffle()->first();
-                $ques_id = $question->id;
+                if (count($questions)) {
+                    $question = $questions->shuffle()->first();
+                    $ques_id = $question->id;
+                } else {
+                    $ques_id = 0;
+                }
+
+                return redirect()->route('show-task', [$task->id, $idea_id, $link_id, $ques_id]);
             } else if (in_array($type, $text)) {
                 // if a text task, select an idea but no link
                 $idea = $ideas->random();
+                $idea_id = $idea->id;
                 $link_id = 0;
                 $ques_id = 0;
+                $idea_id = $idea->id;
+
+                return redirect()->route('show-task', [$task->id, $idea_id]);
             } else if (in_array($type, $text_link)) {
                 // if a text with link task, select an idea with links and a link
                 // TODO: handle when there are no links for any ideas
                 $idea = $ideas->filter(function ($item) {
                    return (count($item->links));
                 })->random();
+                $idea_id = $idea->id;
 
                 $links = $idea->links->where('status', 1);
-                $link = $links->shuffle()->first();
-                $link_id = $link->id;
+                if (count($links)) {
+                    $link = $links->shuffle()->first();
+                    $link_id = $link->id;
+                } else {
+                    $link_id = 0;
+                }
+                
 
                 $ques_id = 0;
+
+                return redirect()->route('show-task', [$task->id, $idea_id, $link_id]);
             } else {
                 abort(405);
             }
 
             $idea_id = $idea->id;
         }
-
-        return redirect()->route('show-task', [$task->id, $idea_id, $link_id, $ques_id]);
     }
     
 
