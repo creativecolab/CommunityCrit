@@ -20,6 +20,9 @@ use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 
 class TaskController extends Controller
 {
+    const NUM_TASKS = 5;
+    const NUM_IDEAS = 5;
+
     //--------------------- SHOW METHODS ------------------------------
 
     /**
@@ -133,7 +136,7 @@ class TaskController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function showTask(int $task_id, int $idea_id, int $link_id, int $ques_id ) {
+    public function showTask(int $task_id, int $idea_id = 0, int $link_id = 0, int $ques_id = 0) {
         $view = 'activities.elaboration';
 
         $task = Task::find($task_id);
@@ -200,20 +203,48 @@ class TaskController extends Controller
 
     }
 
+    public function showIdeaSelect()
+    {
+        $view = 'proto.test';
+        $data = [];
+        $data['ideas'] = Idea::inRandomOrder()->take(static::NUM_IDEAS)->get();
+
+        \Session::forget('idea');
+        \Session::forget('t_queue');
+        \Session::forget('t_ptr');
+
+        \Session::put('t_queue', collect([]));
+        \Session::put('t_ptr', 1);
+
+        return view($view, $data);
+    }
+
     /**
      * select task for elaborate/build type activity
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showRandomTask( )
+    public function showRandomTask( $idea_id=null )
     {
+        //no idea selected, redirect to idea selection
+        if ($idea_id == null) {
+            return redirect()->action('TaskController@showIdeaSelect');
+        }
+
         // select a random task that is meant for queuing
-        $task = Task::where('type', '>', 50)->inRandomOrder()->first();
-        
+//        $task = Task::where('type', '>', 50)->inRandomOrder()->first();
+
+        //get task from queue
+
+        $task = $this->taskQueue($idea_id);
+        if ($task == null) {
+            return redirect()->action('TaskController@showIdeaSelect');
+        }
+
         // for testing a specific task type
         // $tasks = Task::all();
         // $task = $tasks->filter(function($item) {
-            // return $item->type == 61;
+            // return $item->type == 102;
         // })->first();
 
         $type = $task->type;
@@ -224,63 +255,81 @@ class TaskController extends Controller
         $links = collect($allTypes['link']);
         $subs = collect($allTypes['submit']);
 
+        $link_id = null;
+        $ques_id = null;
+
         $allFormats = Task::FORMATS;
         $rate = $allFormats['rate'];
         $text = $allFormats['text'];
         $text_link = $allFormats['text_link'];
 
         $ideas = Idea::all()->where('status', 1);
+
+        //if no ideas
         if (!count($ideas)) {
             return redirect()->route('overview');
         }
 
-        if ($subs->keys()->contains($type)) {
-            // if a submit task, no idea needed
-            $idea_id = 0;
-            $link_id = 0;
-            $ques_id = 0;
-            $format = 'submit-idea';
-        } else {
-            if (in_array($type, $rate)) {
-                // if a rating task, select an idea but no link
-                $idea = $ideas->random();
-                $link_id = 0;
-                $ques_id = 0;
-            } else if ($type == 61) {
-                // if a respond to a specific question task, select an idea and question
-                $idea = $ideas->filter(function ($item) {
-                   return (count($item->questions));
-                })->random();
-                $link_id = 0;
+        if (in_array($type, $rate)) {
+            // if a rating task, select an idea but no link
+            $idea = $ideas->random();
+//            $idea_id = $idea->id;
 
-                $questions = $idea->questions->where('status', 1);
+            return redirect()->route('show-task', [$task->id, $idea_id]);
+        } else if ($type == 61) {
+            // if a respond to a specific question task, select an idea and question
+            $ideasWQuestions = $ideas->filter(function ($item) {
+               return (count($item->questions->where('status', 1)));
+            });
+            if (!count($ideasWQuestions)) {
+                return redirect()->route('do');
+            } else {
+                $idea = $ideasWQuestions->random();
+            }
+//            $idea_id = $idea->id;
+            $link_id = 0;
+
+            $questions = $idea->questions->where('status', 1);
+            // if (count($questions)) {
                 $question = $questions->shuffle()->first();
                 $ques_id = $question->id;
-            } else if (in_array($type, $text)) {
-                // if a text task, select an idea but no link
-                $idea = $ideas->random();
-                $link_id = 0;
-                $ques_id = 0;
-            } else if (in_array($type, $text_link)) {
-                // if a text with link task, select an idea with links and a link
-                // TODO: handle when there are no links for any ideas
-                $idea = $ideas->filter(function ($item) {
-                   return (count($item->links));
-                })->random();
+            // } else {
+                // $ques_id = 0;
+            // }
 
-                $links = $idea->links->where('status', 1);
+            return redirect()->route('show-task', [$task->id, $idea_id, $link_id, $ques_id]);
+        } else if (in_array($type, $text)) {
+            // if a text task, select an idea but no link
+            $idea = $ideas->random();
+//            $idea_id = $idea->id;
+
+            return redirect()->route('show-task', [$task->id, $idea_id]);
+        } else if (in_array($type, $text_link)) {
+            // if a text with link task, select an idea with links and a link
+            // TODO: handle when there are no links for any ideas
+            $ideasWLinks = $ideas->filter(function ($item) {
+               return (count($item->links->where('status', 1)));
+            });
+            if (!count($ideasWLinks)) {
+                return redirect()->route('do');
+            } else {
+                $idea = $ideasWLinks->random();
+            }
+//            $idea_id = $idea->id;
+
+            $links = $idea->links->where('status', 1);
+            // if (count($links)) {
                 $link = $links->shuffle()->first();
                 $link_id = $link->id;
+            // } else {
+                // $link_id = 0;
+            // }
 
-                $ques_id = 0;
-            } else {
-                abort(405);
-            }
-
-            $idea_id = $idea->id;
+            return redirect()->route('show-task', [$task->id, $idea_id, $link_id]);
+        } else {
+            abort(405);
         }
-
-        return redirect()->route('show-task', [$task->id, $idea_id, $link_id, $ques_id]);
+//        return redirect()->route('show-task', [$task->id, $idea_id, $link_id, $ques_id]);
     }
     
 
@@ -650,11 +699,13 @@ class TaskController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function trackSkip(Request $request)
+    public function trackSkip(Request $request, $idea_id)
     {
         $hist = updateTaskHist($request, 5);
 
-        return redirect()->route('do');
+        $this->incrementPtr();
+
+        return redirect()->route('do', [$idea_id]);
     }
 
     /**
@@ -723,6 +774,10 @@ class TaskController extends Controller
             ]);
         }
 
+        $this->incrementPtr();
+
+        $idea = $request->get('idea');
+
         $feedback = new Feedback;
         $feedback->user_id = \Auth::id();
         $feedback->comment = $request->get( 'text' );
@@ -740,7 +795,7 @@ class TaskController extends Controller
 
             $hist = updateTaskHist($request, 1);
 
-            return redirect()->route('do');
+            return redirect()->route('do', [$idea]);
         }
         else {
             if ($feedback->comment) {
@@ -776,6 +831,10 @@ class TaskController extends Controller
             ]);
         }
 
+        $this->incrementPtr();
+
+        $idea_id = $request->get( 'idea' );
+
         $link = new Link;
         $link->user_id = \Auth::id();
         $link->text = $request->get('text');
@@ -797,7 +856,7 @@ class TaskController extends Controller
 
             $hist = updateTaskHist($request, 1);
 
-            return redirect()->route('do');
+            return redirect()->route('do', [$idea_id]);
         }
         else {
             if ($link->text) {
@@ -836,6 +895,8 @@ class TaskController extends Controller
             }
         }
 
+        $this->incrementPtr();
+
         $ratings = collect([]);
         foreach($qualities as $key=>$quality) {
             $rating = new Rating;
@@ -858,7 +919,7 @@ class TaskController extends Controller
 
             $hist = updateTaskHist($request, 1);
 
-            return redirect()->route('do');
+            return redirect()->route('do', [$idea_id]);
         }
         else {
             if ( $idea->ratings()->saveMany($ratings->all()) ) {
@@ -894,10 +955,43 @@ class TaskController extends Controller
     //     }
     // }
 
-    private function taskQueue( $task_id )
+    /**
+     * creates task queue
+     *
+     * @param $idea_id
+     * @return null
+     */
+    private function taskQueue($idea_id)
     {
-        \Session::push('visited', $task_id);
-        \Session::get('queue');
+        //retrieve session vars
+        $session_idea = \Session::get('idea');
+        $t_queue = \Session::pull('t_queue');
+        $t_ptr = \Session::get('t_ptr');
+
+        if ($session_idea != null && $idea_id != $session_idea) {
+            $t_queue = collect([]);
+            $t_ptr = 1;
+        }
+
+        if ($t_queue->isEmpty()) {
+            $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+            \Session::put('idea', $idea_id);
+            \Session::put('t_queue', $tasks);
+//            \Session::put('t_ptr', $t_ptr+1);
+        } else if ($t_ptr > static::NUM_TASKS) {
+            return null;
+        }
+        else {
+            \Session::put('t_queue', $t_queue);
+//            \Session::put('t_ptr', $t_ptr+1);
+        }
+        return \Session::get('t_queue')[\Session::get('t_ptr')-1];
+    }
+
+    private function incrementPtr()
+    {
+        $t_ptr = \Session::pull('t_ptr');
+        \Session::put('t_ptr', $t_ptr+1);
     }
 
     /**

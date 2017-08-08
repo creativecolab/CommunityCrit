@@ -127,12 +127,17 @@
         </div>
     </nav>
 
+    @yield('structured-content')
     <div class="container">
         @include('flash::message')
         @yield('content')
     </div>
-    <div class="text-center footer">
-        <a href="{{ url('/privacy-policy') }}">Privacy Policy</a>
+    <div class="footer">
+        <div class="center">
+            <a href="{{ url('/overview') }}">Overview</a><br class="rwd-break"/>
+            <a href="{{ url('/about') }}">About</a><br class="rwd-break"/>
+            <a href="{{ url('/privacy-policy') }}">Privacy Policy</a>
+        </div>
     </div>
 </div>
 
@@ -140,27 +145,6 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- <script src="{{ asset('js/activities.js') }}"></script> -->
 <script>
-    function btntest_onclick() 
-    {
-        $("#task-form").attr("action", "{{ action('TaskController@trackSkip') }}").submit();
-
-        console.log("test");
-
-        if ($('.activity #idea').length > 0) {
-            $('#task-panel').fadeTo(500, 0);
-            $('.activity #idea').delay(500).fadeTo(500, 0, function() {
-                $('#waiting').show();
-                // window.location.assign("{{ route('do') }}");
-            });
-        }
-        else {
-            $('#task-panel').fadeTo(500, 0, function() {
-                $('#waiting').show();
-                // window.location.assign("{{ route('do') }}");
-            });
-        }
-    }
-
     $( document ).ready(function() {
         $('#waiting').hide();
         $('.activity #idea').fadeTo(500, 1);
