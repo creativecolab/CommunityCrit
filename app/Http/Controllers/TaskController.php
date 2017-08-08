@@ -669,8 +669,8 @@ class TaskController extends Controller
 
         if ($exit == 'Submit') {
             $this->validate($request, [
-                'name' => 'max:255|string',
-                'text' => 'required|string',
+                'name' => 'max:255',
+                'text' => 'required',
             ]);
         }
 
@@ -719,7 +719,7 @@ class TaskController extends Controller
 
         if ($exit == 'Submit') {
             $this->validate($request, [
-                'text' => 'required|string',
+                'text' => 'required',
             ]);
         }
 
