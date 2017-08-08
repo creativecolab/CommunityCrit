@@ -208,13 +208,13 @@ class TaskController extends Controller
     public function showRandomTask( )
     {
         // select a random task that is meant for queuing
-        // $task = Task::where('type', '>', 50)->inRandomOrder()->first();
+        $task = Task::where('type', '>', 50)->inRandomOrder()->first();
         
         // for testing a specific task type
-        $tasks = Task::all();
-        $task = $tasks->filter(function($item) {
-            return $item->type == 61;
-        })->first();
+        // $tasks = Task::all();
+        // $task = $tasks->filter(function($item) {
+            // return $item->type == 61;
+        // })->first();
 
         $type = $task->type;
 
