@@ -9,13 +9,14 @@ if (! function_exists('createTaskHistory')) {
      *
      * @param  Request $request
      */
-    function createTaskHist($task_id, $idea_id, $link_id, $action = null)
+    function createTaskHist($task_id, $idea_id, $link_id, $ques_id, $action = null)
     {
         $taskHist = new TaskHist;
         $taskHist->user_id = \Auth::id();
         $taskHist->task_id = $task_id;
         $taskHist->idea_id = $idea_id;
         $taskHist->link_id = $link_id;
+        $taskHist->ques_id = $ques_id;
         $taskHist->action = $action;
         $taskHist->save();
     }
@@ -32,6 +33,7 @@ if (! function_exists('updateTaskHist')) {
         $task_id = $request->get( 'task' );
         $idea_id = $request->get( 'idea' );
         $link_id = $request->get( 'link' );
+        $ques_id = $request->get( 'ques' );
         $user_id = \Auth::id();
 
         $taskHist = TaskHist::where('user_id', $user_id)

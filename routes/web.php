@@ -101,7 +101,7 @@ Route::group( [ 'prefix' => 'ideas' ], function() {
 Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function() {
     Route::get( '/', 'TaskController@showRandomTask')->name( 'do' );
     // Route::get( '/list', 'TaskController@allActivities' );
-    Route::get( '/{task_id}/{idea_id}/{link_id}', 'TaskController@showTask')->name('show-task');
+    Route::get( '/{task_id}/{idea_id}/{link_id}/{ques_id}', 'TaskController@showTask')->name('show-task');
 
     // Route::get( '/eval', 'TaskController@showTaskOfTypeCat');
     // Route::get( '/{task_id}/{idea_id}', 'TaskController@showTask')->name('show-task');

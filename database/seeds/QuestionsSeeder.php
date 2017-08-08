@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 
 class QuestionsSeeder extends Seeder
 {
-	/**
+    /**
      * Data to create
      *
      * @var array
