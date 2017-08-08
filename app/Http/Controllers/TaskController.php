@@ -11,6 +11,7 @@ use App\Source;
 use App\Idea;
 use App\Rating;
 use App\Link;
+use App\Question;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
@@ -132,21 +133,21 @@ class TaskController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function showTask(int $task_id, int $idea_id, int $link_id ){
+    public function showTask(int $task_id, int $idea_id, int $link_id, int $ques_id ) {
         $view = 'activities.elaboration';
 
         $task = Task::find($task_id);
-        // $idea = $idea_id ? Idea::all()->find($idea_id) : new Idea; // with laravel-mod
         $idea = $idea_id ? Idea::all()->where('status', 1)->find($idea_id) : new Idea;
-        $link = $link_id ? Link::all()->find($link_id) : new Link;
+        $link = $link_id ? Link::all()->where('status', 1)->find($link_id) : new Link;
+        $ques = $ques_id ? Question::all()->where('status', 1)->find($ques_id) : new Question;
 
-        if ($idea && $link && $task) {
-            $data = ['idea' => $idea, 'link' => $link, 'task' => $task];
+        if ($task && $idea && $link && $ques) {
+            $data = ['idea' => $idea, 'link' => $link, 'task' => $task, 'ques' => $ques];
             if ($task->type == 100) {
                 $data['qualities'] = Rating::QUALITIES;
             }
 
-            createTaskHist($task->id, $idea->id, $link->id);
+            createTaskHist($task->id, $idea->id, $link->id, $ques->id);
 
             return view($view, $data);
         } else {
@@ -212,7 +213,7 @@ class TaskController extends Controller
         // for testing a specific task type
         // $tasks = Task::all();
         // $task = $tasks->filter(function($item) {
-            // return $item->type == 100;
+            // return $item->type == 61;
         // })->first();
 
         $type = $task->type;
@@ -222,16 +223,12 @@ class TaskController extends Controller
         $imps = collect($allTypes['improve']);
         $links = collect($allTypes['link']);
         $subs = collect($allTypes['submit']);
-        // $idea = $task->ideas->first();
-        // $view = '';
-        // $data = [];
 
         $allFormats = Task::FORMATS;
         $rate = $allFormats['rate'];
         $text = $allFormats['text'];
         $text_link = $allFormats['text_link'];
 
-        // $ideas = Idea::all(); // with laravel-mod
         $ideas = Idea::all()->where('status', 1);
         if (!count($ideas)) {
             return redirect()->route('overview');
@@ -241,22 +238,29 @@ class TaskController extends Controller
             // if a submit task, no idea needed
             $idea_id = 0;
             $link_id = 0;
+            $ques_id = 0;
             $format = 'submit-idea';
         } else {
-            // if ($rate->has(102)) {
             if (in_array($type, $rate)) {
                 // if a rating task, select an idea but no link
                 $idea = $ideas->random();
                 $link_id = 0;
-                // $view = 'ideas.rating';
-                // $data['idea'] =  $idea;
-                // $data['ratings'] = Rating::QUALITIES;
-                // return view($view, $data);
+                $ques_id = 0;
+            } else if ($type == 61) {
+                // if a respond to a specific question task, select an idea and question
+                $idea = $ideas->filter(function ($item) {
+                   return (count($item->questions));
+                })->random();
+                $link_id = 0;
+
+                $questions = $idea->questions->where('status', 1);
+                $question = $questions->shuffle()->first();
+                $ques_id = $question->id;
             } else if (in_array($type, $text)) {
                 // if a text task, select an idea but no link
                 $idea = $ideas->random();
                 $link_id = 0;
-                $format = 'text';
+                $ques_id = 0;
             } else if (in_array($type, $text_link)) {
                 // if a text with link task, select an idea with links and a link
                 // TODO: handle when there are no links for any ideas
@@ -264,23 +268,19 @@ class TaskController extends Controller
                    return (count($item->links));
                 })->random();
 
-                // $links = $idea->links; // w/ laravel-mod
                 $links = $idea->links->where('status', 1);
-                if (count($links)) {
-                    $link = $links->shuffle()->first();
-                    $link_id = $link->id;
-                } else {
-                    $link_id = 0;
-                }
+                $link = $links->shuffle()->first();
+                $link_id = $link->id;
+
+                $ques_id = 0;
             } else {
-                $idea = Idea::all()->random();
-                $link_id = 0;
+                abort(405);
             }
 
             $idea_id = $idea->id;
         }
 
-        return redirect()->route('show-task', [$task->id, $idea_id, $link_id]);
+        return redirect()->route('show-task', [$task->id, $idea_id, $link_id, $ques_id]);
     }
     
 
@@ -669,8 +669,8 @@ class TaskController extends Controller
 
         if ($exit == 'Submit') {
             $this->validate($request, [
-                'name' => 'max:255|string',
-                'text' => 'required|string',
+                'name' => 'max:255',
+                'text' => 'required',
             ]);
         }
 
@@ -719,7 +719,7 @@ class TaskController extends Controller
 
         if ($exit == 'Submit') {
             $this->validate($request, [
-                'text' => 'required|string',
+                'text' => 'required',
             ]);
         }
 
@@ -729,6 +729,7 @@ class TaskController extends Controller
         $feedback->idea_id = $request->get( 'idea' );
         $feedback->task_id = $request->get( 'task' );
         $feedback->link_id = $request->get( 'link' );
+        $feedback->ques_id = $request->get( 'ques' );
 
         if ($exit == 'Submit') {
             if ( $feedback->save() ) {
