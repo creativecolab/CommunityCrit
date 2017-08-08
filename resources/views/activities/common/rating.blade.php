@@ -1,20 +1,18 @@
 <div style="margin-bottom: 10px;">
     @foreach($qualities as $key=>$quality)
         <div class="row">
-            <div class="form-group{{ $errors->has($quality) ? ' has-error' : '' }}">
-                <label class="col-md-3 col-lg-2 control-label">Not {{$quality}} at all</label>
-                <div class="col-md-4 col-lg-3">
-                    {{--Checkbox for each idea--}}
-                    @for($i = 1; $i < 6; $i++)
-                        <div class="radio-inline">
-                            <label>
-                                {!! Form::radio($quality, $i) !!}
-                                {{$i}}
-                            </label>
-                        </div>
-                    @endfor
-                </div>
-                <label class="col-md-5 col-lg-7 control-label">Extremely {{$quality}}</label>
+            <div class="col-md-12 form-group{{ $errors->has($quality) ? ' has-error' : '' }}">
+                <label class="control-label" style="margin-right: 10px;">Not {{$quality}} at all</label>
+                {{--Checkbox for each idea--}}
+                @for($i = 1; $i < 6; $i++)
+                    <div class="radio-inline">
+                        <label>
+                            {!! Form::radio($quality, $i) !!}
+                            {{$i}}
+                        </label>
+                    </div>
+                @endfor
+                <label class="control-label" style="margin-left: 10px;">Extremely {{$quality}}</label>
                 @if ($errors->has($quality))
                     <div class="col-md-12 help-block">
                         <strong>{{ $errors->first($quality) }}</strong>
