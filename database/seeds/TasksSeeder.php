@@ -80,7 +80,7 @@ class TasksSeeder extends Seeder
         ],
         [
             'name' => 'Rate the Idea',
-            'text' => 'Rate this idea across the following dimension.',
+            'text' => 'Rate this idea across the following dimensions.',
             'type' => '100',
         ],
     ];
