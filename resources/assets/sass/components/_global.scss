@@ -1,0 +1,97 @@
+
+$footer-height: 140px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: $footer-height;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: $footer-height;
+  background-color: $brand-primary;
+  text-transform: uppercase;
+  display: table; overflow: hidden;
+
+  /* center contents*/
+  .center {
+    @extend .text-center;
+    /*padding: 60px 0;*/
+    /*line-height: 200px;*/
+
+    display: table-cell; vertical-align: middle;
+  }
+    
+  a {
+    color: #fff;
+    padding: $navbar-padding-horizontal;
+    font-weight: 700;
+
+    &:hover {
+      /*text-decoration: none;*/
+    }
+  }
+}
+
+h2 {
+  font-weight: 700;
+  color: #000;
+}
+
+.container {
+  &.pad {
+    &.bot {
+      padding-bottom: $jumbotron-padding;
+    }
+  }
+}
+
+.jumbotron {
+  &.bg-lt {
+    background-color: white;
+  } 
+
+  &.bg-no {
+    background-color: inherit;
+  } 
+
+  p {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+}
+
+figure {
+  img {
+    margin-bottom: 20px;
+    
+    &.shdw {
+      box-shadow: $shadow-default;
+    }
+  }
+
+  figcaption {
+    /*font-style: italic !important;*/
+    font-size: 90%;
+
+    p {
+      /*padding-top: 15px;  */
+    }
+    
+  }
+}
+
+.btn {
+  text-transform: uppercase;
+  padding: 12px 18px;
+  font-weight: 700;
+  box-shadow: $shadow-default;
+}
