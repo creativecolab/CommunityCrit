@@ -974,7 +974,7 @@ class TaskController extends Controller
         }
 
         if ($t_queue->isEmpty()) {
-            $tasks = Task::inRandomOrder()->take(static::NUM_TASKS)->get();
+            $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
 //            \Session::put('t_ptr', $t_ptr+1);
