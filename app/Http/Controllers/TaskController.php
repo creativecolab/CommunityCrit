@@ -21,6 +21,7 @@ use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 class TaskController extends Controller
 {
     const NUM_TASKS = 5;
+    const NUM_IDEAS = 5;
 
     //--------------------- SHOW METHODS ------------------------------
 
@@ -206,7 +207,7 @@ class TaskController extends Controller
     {
         $view = 'proto.test';
         $data = [];
-        $data['ideas'] = Idea::all();
+        $data['ideas'] = Idea::inRandomOrder()->take(static::NUM_IDEAS)->get();
 
         \Session::forget('idea');
         \Session::forget('t_queue');
@@ -973,7 +974,7 @@ class TaskController extends Controller
         }
 
         if ($t_queue->isEmpty()) {
-            $tasks = Task::inRandomOrder()->take(static::NUM_TASKS)->get();
+            $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
 //            \Session::put('t_ptr', $t_ptr+1);
