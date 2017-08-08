@@ -67,12 +67,22 @@
                         @if ($link->id)
                             {{ Form::hidden('link', $link->id) }}
                         @endif
+                        @if ($ques->id)
+                            {{ Form::hidden('ques', $ques->id) }}
+                        @endif
                     @endif
                     {{ Form::hidden('task', $task->id) }}
                     
                     @if ($task->type != 100)
                         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
-                            <label class="instruction" for="submissionText">{!! $task->text !!}</label>
+                            <label class="instruction" for="submissionText">
+                                @if ($task->type == 61)
+                                    {!! $ques->text !!}
+                                @else
+                                    {!! $task->text !!}
+                                @endif
+
+                            </label>
                             <textarea class="form-control" rows="3" id="submissionText" name="text"></textarea>
                             @if ($errors->has('text'))
                                 <span class="help-block">

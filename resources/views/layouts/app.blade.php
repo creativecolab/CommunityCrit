@@ -55,7 +55,7 @@
                         {{--<li><a href="source-detail.htm">East Village South Focus Plan</a></li>--}}
                         {{--</ul>--}}
                         <li><a href="{{ route('do') }}">Do An Activity</a></li>
-                        <li><a href="{{ route('submit-idea') }}">Submit an Idea</a></li>
+                        {{--<li><a href="{{ route('submit-idea') }}">Submit an Idea</a></li>--}}
                     @endif
                     {{--<li><a href="{{ url('overview') }}">Overview</a></li>--}}
                     <li><a href="{{ url('/about') }}">About</a></li>
