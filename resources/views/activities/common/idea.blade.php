@@ -1,12 +1,19 @@
 <div class="panel panel-default" style="opacity: 0;" id="idea">
     <div class="panel-body">
-        <p><em>The following idea was submitted by
+        <h2 style="margin-top: 12.5px;">
+        Idea<!-- 
+        -->@if ($idea->name)<!-- 
+             -->: {!! $idea->name !!}
+        @endif
+        <!-- <button class="btn btn-default pull-right">Switch idea</button> -->
+        </h2>
+        <p><em>Submitted by 
         @if ($idea->user->id == 3)
             a <strong>{{ strtolower($idea->user->fname) }}.</strong>
         @else
             <strong>{{ $idea->user->fname }}.</strong>
         @endif
-        Please help to improve it below.</em></p>
+        </em></p>
         <!-- @if ($idea->img_url) -->
             <!-- <div class="idea-img" style=""> -->
             <!-- <div class="col-md-3"> -->
@@ -18,13 +25,6 @@
         <!-- @else -->
             <!-- <div style="max-width: 100%;"> -->
         <!-- @endif -->
-        <h2 style="margin-top: 12.5px;">
-        Idea<!-- 
-        -->@if ($idea->name)<!-- 
-             -->: {!! $idea->name !!}
-        @endif
-        <!-- <button class="btn btn-default pull-right">Switch idea</button> -->
-        </h2>
         {!! $idea->text !!}
         <!-- <p><em>Suggested by {{ $idea->user->fname }}</em></p> -->
     </div>

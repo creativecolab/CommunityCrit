@@ -126,7 +126,7 @@
                     @endif
 
                     {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
-                    <input id="btntest" type="button" class="btn btn-default" value="Skip" onclick="return btntest_onclick();" />
+                    <input id="btntest" type="button" class="btn btn-link" value="Skip" onclick="return btntest_onclick();" />
                     <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
                     @if ($count >= 4)
                         <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">I want to stop</a>
