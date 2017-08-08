@@ -75,7 +75,7 @@ class TasksSeeder extends Seeder
         ],
         [
             'name' => 'Critique the Idea',
-            'text' => 'The above reference provides a guideline for the design of this idea. What do you think of this idea based on the reference?',
+            'text' => 'What do you think of this idea based on the following reference?',
             'type' => '102',
         ],
         [

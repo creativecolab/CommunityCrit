@@ -128,7 +128,7 @@
     </nav>
 
     @yield('structured-content')
-    <div class="container">
+    <div class="container pad bot">
         @include('flash::message')
         @yield('content')
     </div>
