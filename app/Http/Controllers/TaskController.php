@@ -236,9 +236,6 @@ class TaskController extends Controller
 
         if ($subs->keys()->contains($type)) {
             // if a submit task, no idea needed
-            $idea_id = 0;
-            $link_id = 0;
-            $ques_id = 0;
             $format = 'submit-idea';
 
             return redirect()->route('show-task', [$task->id]);
@@ -247,8 +244,6 @@ class TaskController extends Controller
                 // if a rating task, select an idea but no link
                 $idea = $ideas->random();
                 $idea_id = $idea->id;
-                $link_id = 0;
-                $ques_id = 0;
 
                 return redirect()->route('show-task', [$task->id, $idea_id]);
             } else if ($type == 61) {
@@ -272,8 +267,6 @@ class TaskController extends Controller
                 // if a text task, select an idea but no link
                 $idea = $ideas->random();
                 $idea_id = $idea->id;
-                $link_id = 0;
-                $ques_id = 0;
                 $idea_id = $idea->id;
 
                 return redirect()->route('show-task', [$task->id, $idea_id]);
@@ -293,15 +286,10 @@ class TaskController extends Controller
                     $link_id = 0;
                 }
                 
-
-                $ques_id = 0;
-
                 return redirect()->route('show-task', [$task->id, $idea_id, $link_id]);
             } else {
                 abort(405);
             }
-
-            $idea_id = $idea->id;
         }
     }
     
