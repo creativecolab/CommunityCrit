@@ -32,6 +32,11 @@ class Idea extends Node
         return $this->hasMany( 'App\Link' );
     }
 
+    public function questions()
+    {
+        return $this->hasMany( 'App\Question' );
+    }
+
     // public function hasLinks()
     // {
     //     return count($this->hasMany( 'App\Link' ));
