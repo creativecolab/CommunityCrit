@@ -47,7 +47,7 @@
             <ul class="list-group">
                 
                 <li class="list-group-item">
-                    @if (intval(($task->type) / 10) == 8)
+                    @if (intval(($task->type) / 10) == 4)
                         {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                         <!-- <em>Submission!</em> -->
                     @elseif (intval(($task->type) / 10) == 7)

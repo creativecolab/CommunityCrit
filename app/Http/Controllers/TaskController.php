@@ -235,9 +235,8 @@ class TaskController extends Controller
 //        $task = Task::where('type', '>', 50)->inRandomOrder()->first();
 
         //get task from queue
-
         $task = $this->taskQueue($idea_id);
-        if ($task == null) {
+        if ($task == null) {    //after going through queue
             return redirect()->action('TaskController@showIdeaSelect');
         }
 
@@ -699,7 +698,7 @@ class TaskController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function trackSkip(Request $request, $idea_id)
+    public function trackSkip(Request $request, $idea_id=0)
     {
         $hist = updateTaskHist($request, 5);
 
