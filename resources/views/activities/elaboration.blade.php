@@ -17,7 +17,7 @@
 
     <div class="activity" id="text-link">
         {{--@if ($count >= 4)--}}
-            <a type="button" class="btn btn-default" id="back" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back to Main Menu</a>
+            <a type="button" class="btn btn-default" id="back" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back to Do An Activity</a>
         {{--@endif--}}
         <!-- List group -->
         <ul class="list-group">
@@ -143,7 +143,7 @@
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Proceed to Exit Survey</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Return to Do An Activity</h4>
                                     </div>
                                     <div class="modal-body">
                                         Thanks for your help. Are you sure you want to stop working on this idea?
