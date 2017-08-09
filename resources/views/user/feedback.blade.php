@@ -102,7 +102,11 @@
                                 <ul class="list-group">
                                     @if ($myFeedback->task)
                                         <li class="list-group-item">
+                                            @if($myFeedback->task->id != 12)
                                             {!! $myFeedback->task->text !!}
+                                            @else
+                                            {!! $questions->where('id',$myFeedback->ques_id)->first()->text !!}
+                                            @endif
                                         </li>
                                     @endif
                                     @if ($myFeedback->link)

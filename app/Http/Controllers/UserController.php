@@ -10,6 +10,7 @@ use App\Idea;
 use App\Link;
 use App\Comment;
 use App\Rating;
+use App\Question;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 
@@ -74,6 +75,8 @@ class UserController extends Controller
         $myFeedbacks = Auth()->User()->feedback
             ->sortByDesc('created_at');
         $data['myFeedbacks'] = $myFeedbacks;
+
+        $data['questions'] = Question::all();
 
         return view($view, $data);
     }
