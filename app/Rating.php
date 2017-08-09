@@ -12,9 +12,9 @@ class Rating extends Model
         2 => 'feasible',
         3 => 'valuable',
         4 => 'impactful',
-        5 => 'likely to visit',
-        6 => 'likely to enjoy spending time here',
-        7 => 'likely to be positively impacted',
+        5 => 'likely-to-visit',
+        6 => 'likely-to-enjoy-spending-time-here',
+        7 => 'likely-to-be-positively-impacted',
     ];
 
     protected $fillable = [

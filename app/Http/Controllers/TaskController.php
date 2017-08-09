@@ -147,7 +147,12 @@ class TaskController extends Controller
         if ($task && $idea && $link && $ques) {
             $data = ['idea' => $idea, 'link' => $link, 'task' => $task, 'ques' => $ques];
             if ($task->type == 100) {
-                $data['qualities'] = collect(collect(Rating::QUALITIES)->only(5,6,7));
+                $qualities = collect(collect(Rating::QUALITIES)->only(5,6,7));
+                $map_qualities = $qualities->map( function ($item, $key) {
+                    return str_replace('-',' ',$item);
+                });
+                $data['mapped_qualities'] = $map_qualities;
+                $data['qualities'] = $qualities;
             }
 
             createTaskHist($task->id, $idea->id, $link->id, $ques->id);
@@ -885,7 +890,7 @@ class TaskController extends Controller
     {
         $exit = $request->get( 'exit' );
 
-        $qualities = Rating::QUALITIES;
+        $qualities = collect(Rating::QUALITIES)->only(5,6,7);
 
         if ($exit == 'Submit') {
             foreach($qualities as $quality) {

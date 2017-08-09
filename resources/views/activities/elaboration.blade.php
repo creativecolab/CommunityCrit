@@ -92,7 +92,7 @@
                         </div>
                     @else
                         <label class="instruction">{!! $task->text !!}</label>
-                        @component('activities.common.rating', ['qualities' => $qualities])
+                        @component('activities.common.rating', ['qualities' => $qualities, 'mapped_qualities' => $mapped_qualities])
                         @endcomponent
                     @endif
 
