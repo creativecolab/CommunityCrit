@@ -1,13 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Thanks for Contributing')
+@section('title', 'Exit Survey')
 
 @section('content')
-    <div class="page-header">
-        <h1>Thanks for Contributing</h1>
-    </div>
+    <h1>Exit Survey</h1>
 
-    <p>Thank you for contributing to the Park Link project! Please fill out the brief survey below, which will help us improve CommunityCrit.</p>
+    <p>Thank you for contributing to the Park Link project! We will use your responses to the following questions to improve CommunityCrit.</p>
 
     <div style="display: none;">
     	{{ $user_id= strval(Auth::id() ) }}
