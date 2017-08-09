@@ -23,6 +23,10 @@ class TaskController extends Controller
     const NUM_TASKS = 5;
     const NUM_IDEAS = 3;
 
+    const TYPE_FEEDBACK = 1;
+    const TYPE_LINK = 2;
+    const TYPE_RATING = 3;
+
     //--------------------- SHOW METHODS ------------------------------
 
     /**
@@ -242,9 +246,14 @@ class TaskController extends Controller
 
         //get task from queue
         $task = $this->taskQueue($idea_id);
+
+        //TODO: remove, redirects to summary page from within taskQueue
         if ($task == null) {    //after going through queue
-            return redirect()->action('TaskController@showIdeaSelect');
+//            $session_data = $this->summaryData();
+            return redirect()->action('TaskController@showSummary');
         }
+
+        \Session::push('r_types',$task->type);
 
         // for testing a specific task type
         // $tasks = Task::all();
@@ -335,6 +344,18 @@ class TaskController extends Controller
             abort(405);
         }
 //        return redirect()->route('show-task', [$task->id, $idea_id, $link_id, $ques_id]);
+    }
+
+    public function showSummary(  )
+    {
+//        if ($data == 0) {
+//            return redirect()->route('main-menu');
+//        }
+
+        $view = 'activities.summary';
+        $data = ['num_responses' => 5-\Session::get('responses')->count()];
+
+        return view($view, $data);
     }
     
 
@@ -708,7 +729,9 @@ class TaskController extends Controller
     {
         $hist = updateTaskHist($request, 5);
 
+        //update session data
         $this->incrementPtr();
+        \Session::push('responses', 0);
 
         return redirect()->route('do', [$idea_id]);
     }
@@ -900,6 +923,7 @@ class TaskController extends Controller
             }
         }
 
+        //update session task queue pointer
         $this->incrementPtr();
 
         $ratings = collect([]);
@@ -973,6 +997,11 @@ class TaskController extends Controller
         $t_queue = \Session::pull('t_queue');
         $t_ptr = \Session::get('t_ptr');
 
+        //null check
+        if ($t_queue == null) {
+            $t_queue = collect([]);
+        }
+
         if ($session_idea != null && $idea_id != $session_idea) {
             $t_queue = collect([]);
             $t_ptr = 1;
@@ -983,7 +1012,11 @@ class TaskController extends Controller
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
 //            \Session::put('t_ptr', $t_ptr+1);
+
+            \Session::put('responses', collect([]));
+            \Session::put('r_types', collect([]));
         } else if ($t_ptr > static::NUM_TASKS) {
+            //TODO: redirect to summary page
             return null;
         }
         else {
@@ -997,6 +1030,18 @@ class TaskController extends Controller
     {
         $t_ptr = \Session::pull('t_ptr');
         \Session::put('t_ptr', $t_ptr+1);
+    }
+
+    public function summaryData()
+    {
+//        $tasks = $t_queue->map( function ($item, $key) {
+//            return Task::find($item);
+//        });
+        $skips = \Session::get('responses')->count();
+        $data = ['responses' => static::NUM_TASKS-$skips];
+
+        return $data;
+
     }
 
     /**

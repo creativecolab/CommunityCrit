@@ -30,9 +30,10 @@
             Submit a New Idea
         </a>
 
-        <h2>All done?</h2><p>Please take this survey when you are done contributing. Your feedback will help us improve CommunityCrit so it can better serve communities in the urban design process.</p>
-        <a class="btn btn-primary" href="{{ route( 'exit') }}">
-            Go to Exit Survey
-        </a>
+        {{--<h2>All done?</h2>--}}
+        {{--<a class="btn btn-primary" href="{{ route( 'exit') }}">--}}
+            {{--Go to Exit Survey--}}
+        {{--</a>--}}
+
     </div>
 @endsection
