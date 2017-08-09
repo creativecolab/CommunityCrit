@@ -134,8 +134,6 @@
     </div>
     <div class="footer">
         <div class="center">
-            <a href="{{ url('/overview') }}">Overview</a><br class="rwd-break"/>
-            <a href="{{ url('/about') }}">About</a><br class="rwd-break"/>
             <a href="{{ url('/privacy-policy') }}">Privacy Policy</a>
         </div>
     </div>
