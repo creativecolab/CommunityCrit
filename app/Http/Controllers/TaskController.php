@@ -207,7 +207,7 @@ class TaskController extends Controller
     {
         $view = 'proto.test';
         $data = [];
-        $data['ideas'] = Idea::inRandomOrder()->take(static::NUM_IDEAS)->get();
+        $data['ideas'] = Idea::where("status", 1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
 
         \Session::forget('idea');
         \Session::forget('t_queue');
