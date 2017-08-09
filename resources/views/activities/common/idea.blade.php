@@ -1,4 +1,4 @@
-<h2 style="margin-top: 12.5px;">
+<h2>
 Idea<!-- 
 -->@if ($idea->name)<!-- 
      -->: {!! $idea->name !!}

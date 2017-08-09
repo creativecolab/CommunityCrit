@@ -1,13 +1,14 @@
-<h4>
-	@component('utilities.link_type_name', ['link_type' => $link->link_type])
-	@endcomponent
-</h4>
+<h3>
+	Submission
+</h3>
 
-<blockquote style="margin-bottom: 0;">
+<blockquote>
     {!! $link->text !!}
-    <footer>
-    	@if ($link->link_type >= 3)
-		    <em>Submitted by
+	@if ($link->link_type >= 3)
+    	<footer>
+		    <em>This
+		    {{ strtolower($link->type_str) }}
+			was submitted by
 		    @if ($link->user->id == 3)
 		    	 a <strong>{{ strtolower($link->user->fname) }}.</strong>
 		    @else
@@ -22,6 +23,6 @@
 		    @endif--}}
 		{{--@else
 		    <p><em>Here's a reference related to this idea.</em></p>--}}
-		@endif
-    </footer>
+		</footer>
+	@endif
 </blockquote>

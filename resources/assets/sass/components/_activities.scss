@@ -1,4 +1,8 @@
 .activity {
+	a#back {
+		margin-bottom: $line-height-computed;
+	}
+
 	button.done {
 		margin-left: 10px;
 	}
@@ -17,10 +21,6 @@
 
 	.no-marg-bot {
 		margin-bottom: 0;
-	}
-
-	blockquote {
-		font-size: 100%;
 	}
 
 	$padding-task-panel: 65px;
@@ -47,13 +47,18 @@
 				background-color: $task-bg-color;
 				color: #fff;
 
-				h2, h3, h4 {
+				h1, h2, h3, h4 {
 					color: #fff !important;
 				}
 			}
 
+			h1:first-child, h2:first-child,
+			h3:first-child, h4:first-child {
+				margin-top: 0;
+			}
+
 			&:first-child {
-				padding-top: $padding-task-panel - 30px;
+				padding-top: $padding-task-panel - 25px;
 			}
 
 			&:last-child {
@@ -63,7 +68,15 @@
 
 		#link {
 			blockquote {
-				padding-bottom: $padding-task-item;
+				font-size: 100%;
+				margin-bottom: $padding-task-item;
+				border-left: 5px solid #AFD3EB;
+				border-left: 8px solid #eeeeee;
+
+				footer {
+					font-size: 100%;
+					margin-top: 10px;
+				}
 			}
 
 			h4 {
