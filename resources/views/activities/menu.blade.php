@@ -32,9 +32,9 @@
             Submit a New Idea
         </a>
 
-        <h2>All done?</h2>
-        <a class="btn btn-primary" href="{{ route( 'exit') }}">
-            Go to Exit Survey
-        </a>
+        {{--<h2>All done?</h2>--}}
+        {{--<a class="btn btn-primary" href="{{ route( 'exit') }}">--}}
+            {{--Go to Exit Survey--}}
+        {{--</a>--}}
     </div>
 @endsection
