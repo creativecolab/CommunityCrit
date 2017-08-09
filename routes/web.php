@@ -100,6 +100,7 @@ Route::group( [ 'prefix' => 'ideas' ], function() {
 
 Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function() {
     Route::get( '/random/{idea_id?}', 'TaskController@showRandomTask')->name( 'do' );
+    Route::get( '/menu', 'TaskController@showIdeaSelect')->name('main-menu');
     // Route::get( '/list', 'TaskController@allActivities' );
     // Route::get( '/{task_id}', 'TaskController@showTask');
     // Route::get( '/{task_id}/{idea_id}', 'TaskController@showTask');
@@ -135,11 +136,11 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( '/skip/{idea_id?}', 'TaskController@trackSkip' )->name('skip');
 } );
 
-Route::group( ['prefix' => 'devtest'], function() {
+//Route::group( ['prefix' => 'devtest'], function() {
 //    Route::get( '/attach/{task}', 'TaskController@showConnect' ); // attaches idea and task
-    Route::get( '/', 'TaskController@showIdeaSelect')->name('main-menu');
+//    Route::get( '/', 'TaskController@showIdeaSelect')->name('main-menu');
 //    Route::post( '/attach/{task}/new', 'TaskController@connectTaskIdea' );
-} );
+//} );
 
 //Route::group( [ 'prefix' => 'tasks' ], function () {
 //	Route::get( '/', 'TaskController@index' );

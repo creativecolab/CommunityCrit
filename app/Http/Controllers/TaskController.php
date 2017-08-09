@@ -136,7 +136,7 @@ class TaskController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
 
-    public function showTask(int $task_id, int $idea_id = 0, int $link_id = 0, int $ques_id = 0) {
+    public function showTask( $task_id,  $idea_id = 0,  $link_id = 0,  $ques_id = 0) {
         $view = 'activities.elaboration';
 
         $task = Task::find($task_id);
@@ -205,9 +205,10 @@ class TaskController extends Controller
 
     public function showIdeaSelect()
     {
-        $view = 'proto.test';
+        $view = 'activities.menu';
         $data = [];
-        $data['ideas'] = Idea::where("status", 1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
+
+        $data['ideas'] = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
 
         \Session::forget('idea');
         \Session::forget('t_queue');
