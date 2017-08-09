@@ -129,10 +129,11 @@
                         {{--@if ($count >= 4)--}}
                             <a type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Back to Main Menu</a>
                         {{--@endif--}} -->
-                    
                         <div class="pull-right" id="actions">
+                            @if (intval(($task->type) / 10) != 4)
                             <a id="skip" value="Skip >" onclick="return skip_onclick();">Skip <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
-                            <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
+                                    <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
+                            @endif
                             {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
                         </div>
                         <div class="clearfix"></div>
