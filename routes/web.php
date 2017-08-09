@@ -137,7 +137,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
 
 Route::group( ['prefix' => 'devtest'], function() {
 //    Route::get( '/attach/{task}', 'TaskController@showConnect' ); // attaches idea and task
-    Route::get( '/', 'TaskController@showIdeaSelect');
+    Route::get( '/', 'TaskController@showIdeaSelect')->name('main-menu');
 //    Route::post( '/attach/{task}/new', 'TaskController@connectTaskIdea' );
 } );
 

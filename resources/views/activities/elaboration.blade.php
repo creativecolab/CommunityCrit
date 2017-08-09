@@ -5,48 +5,51 @@
 @endsection
 
 @section('content')
-    <h4 class="text-center" id="waiting">
+    <!-- standby instruction -->
+    <!-- <h4 class="text-center" id="waiting">
         Finding an activity for you...
-    </h4>
+    </h4> -->
 
+    <!-- set count var -->
     <div style="display: none">
         {{ $count = count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 4) }}
     </div>
 
     <div class="activity" id="text-link">
-        <!-- <div class="panel-group" role="tablist" style="margin-bottom: 30px;">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="collapseListGroupHeading1">
-                    <h4 class="panel-title">
-                        <a href="#collapseListGroup1" class="" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="collapseListGroup1"> About the Project </a>
-                    </h4>
-                </div>
-                <div class="panel-collapse collapse {{ $count < 1 ? 'in' : '' }} " role="tabpanel" id="collapseListGroup1" aria-labelledby="collapseListGroupHeading1" aria-expanded="true">
-                    <div class="panel-body">
-                            <p>Currently, community leaders are collaborating with the public and local experts to design the intersection of 14th Street and National Avenue, called <strong>“El Nudillo.”</strong> The future El Nudillo is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p>
-                            <strong>Please share your thoughts below!</strong>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        {{--@if ($count >= 4)--}}
+            <a type="button" class="btn btn-default" id="back" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back to Main Menu</a>
+        {{--@endif--}}
+        <!-- List group -->
+        <ul class="list-group">
+            @if ($idea->id)
+                <li class="list-group-item" id="idea">
+                    @component('activities.common.idea', ['idea' => $idea, 'link' => $link])
+                    @endcomponent
+                </li>
+            @endif
 
-        @if ($idea->id)
-            @component('activities.common.idea', ['idea' => $idea, 'link' => $link])
-            @endcomponent
-        @endif
-
-        <!-- <em>Task Type: {{ ($task->type) }}</em> -->
-
-        <div class="panel panel-primary no-marg-bot input" id="task-panel" style="opacity: 0;">
-            <div class="panel-heading">
-                <div class="panel-title">
-                    {!! $task->name !!} -- You are on task {{\Session::get('t_ptr')}} of 5
-                </div>
-            </div>
-            <!-- List group -->
-            <ul class="list-group">
+            <li class="list-group-item dark" id="question" style="opacity: 0;">
+                <h4>Question {{\Session::get('t_ptr')}}/5</h4>
+                <h3>
+                    @if ($task->type == 61)
+                        {!! $ques->text !!}
+                    @else
+                        {!! $task->text !!}
+                    @endif
+                </h3>
+            </li>
+            
+            <li class="list-group-item" id="detail" style="opacity: 0;">
                 
-                <li class="list-group-item">
+                <div id="link">
+                    @if ($link->id)
+                        @component('activities.common.link', ['link' => $link])
+                        @endcomponent
+                    @endif
+                </div>
+
+                <div id="response">
+
                     @if (intval(($task->type) / 10) == 4)
                         {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                         <!-- <em>Submission!</em> -->
@@ -75,15 +78,12 @@
                     
                     @if ($task->type != 100)
                         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
-                            <label class="instruction" for="submissionText">
-                                @if ($task->type == 61)
-                                    {!! $ques->text !!}
-                                @else
-                                    {!! $task->text !!}
-                                @endif
+                            <!-- <label class="instruction" for="submissionText">
+                                
+                                {!! $task->name !!}
 
-                            </label>
-                            <textarea class="form-control" rows="3" id="submissionText" name="text"></textarea>
+                            </label> -->
+                            <textarea class="form-control" rows="3" id="submissionText" name="text" placeholder="Please enter your response here."></textarea>
                             @if ($errors->has('text'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('text') }}</strong>
@@ -99,7 +99,7 @@
                     <!-- submission task -->
                     @if (intval($task->type) / 10 == 8)
                         <div class="row">
-                            <div class="col-sm-6 col-md-4">
+                            <div class="col-sm-8 col-md-6">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label class="instruction" for="submissionText">Give your idea a name. <span class="text-muted">(optional)</span></label>
                                     <input type="text" class="form-control" name="name"></input>
@@ -125,12 +125,19 @@
                         </div>
                     @endif
 
-                    {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
-                    <input id="btntest" type="button" class="btn btn-default" value="Skip" onclick="return btntest_onclick();" />
-                    <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
-                    @if ($count >= 4)
-                        <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#myModal">I want to stop</a>
-                    @endif
+                    <!-- <div>
+                        {{--@if ($count >= 4)--}}
+                            <a type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Back to Main Menu</a>
+                        {{--@endif--}} -->
+                    
+                        <div class="pull-right" id="actions">
+                            <a id="skip" value="Skip >" onclick="return skip_onclick();">Skip <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
+                            <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
+                            {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
+                        </div>
+                        <div class="clearfix"></div>
+                    <!-- </div> -->
+                    
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -139,40 +146,47 @@
                                         <h4 class="modal-title" id="myModalLabel">Proceed to Exit Survey</h4>
                                     </div>
                                     <div class="modal-body">
-                                        Thanks for your contributions. Are you sure you want to stop contributing for now?
+                                        Thanks for your help. Are you sure you want to stop working on this idea?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">No, go back</button>
-                                        {!! Form::submit('Yes, I\'m done', ['class' => 'btn btn-primary', 'name' => 'exit']) !!}
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">No, continue</button>
+                                        {!! Form::submit("Yes, I'm done", ['class' => 'btn btn-primary', 'name' => 'exit']) !!}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     {!! Form::close() !!}
-                </li>
-            </ul> <!-- list group -->
-        </div> <!-- .panel -->
+                </div> <!-- #response -->
+            </li>
+        </ul> <!-- list group -->
+        <!-- <div>
+            {{--@if ($count >= 4)--}}
+                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Back to Main Menu</a>
+            {{--@endif--}}
+        </div> -->
     </div> <!-- .container -->
     <script>
-        function btntest_onclick()
+        function skip_onclick()
         {
             $("#task-form").attr("action", "{{ action('TaskController@trackSkip', $idea->id) }}").submit();
 
-            console.log("test");
+            // console.log("test");
 
-            if ($('.activity #idea').length > 0) {
-                $('#task-panel').fadeTo(500, 0);
-                $('.activity #idea').delay(500).fadeTo(500, 0, function() {
-                    $('#waiting').show();
-                    // window.location.assign("{{ route('do') }}");
-                });
-            }
-            else {
-                $('#task-panel').fadeTo(500, 0, function() {
-                    $('#waiting').show();
-                    // window.location.assign("{{ route('do') }}");
-                });
-            }
+            // var speed = 400;
+
+            // if ($('.activity #idea').length > 0) {
+            //     $('#task-panel').fadeTo(speed, 0);
+            //     $('.activity #idea').delay(speed).fadeTo(speed, 0, function() {
+            //         $('#waiting').show();
+            //         // window.location.assign("{{ route('do') }}");
+            //     });
+            // }
+            // else {
+            //     $('#task-panel').fadeTo(speed, 0, function() {
+            //         $('#waiting').show();
+            //         // window.location.assign("{{ route('do') }}");
+            //     });
+            // }
         }
     </script>
 @endsection

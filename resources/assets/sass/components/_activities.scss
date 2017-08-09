@@ -1,4 +1,8 @@
 .activity {
+	a#back {
+		margin-bottom: $line-height-computed;
+	}
+
 	button.done {
 		margin-left: 10px;
 	}
@@ -19,8 +23,77 @@
 		margin-bottom: 0;
 	}
 
-	blockquote {
-		font-size: 100%;
+	$padding-task-panel: 65px;
+	$padding-task-item: 30px;
+
+	.list-group {
+		.list-group-item {
+			padding-left: $padding-task-panel - 15px;
+			padding-right: $padding-task-panel;
+			padding-top: $padding-task-item;
+			padding-bottom: $padding-task-item;
+
+			&#idea {
+				h2 {
+					margin-bottom: 0;
+				}
+
+				p + p {
+					padding-top: $padding-base-vertical;
+				}
+			}
+
+			&.dark {
+				background-color: $task-bg-color;
+				color: #fff;
+
+				h1, h2, h3, h4 {
+					color: #fff !important;
+				}
+			}
+
+			h1:first-child, h2:first-child,
+			h3:first-child, h4:first-child {
+				margin-top: 0;
+			}
+
+			&:first-child {
+				padding-top: $padding-task-panel - 25px;
+			}
+
+			&:last-child {
+				padding-bottom: $padding-task-panel - 25px;
+			}
+		}
+
+		#link {
+			blockquote {
+				font-size: 100%;
+				margin-bottom: $padding-task-item;
+				border-left: 5px solid #AFD3EB;
+				border-left: 8px solid #eeeeee;
+
+				footer {
+					font-size: 100%;
+					margin-top: 10px;
+				}
+			}
+
+			h4 {
+				margin-bottom: $line-height-computed / 4;
+			}
+		}
+
+		#actions {
+		padding-top: $padding-large-vertical;
+
+			a#skip {
+				padding: 12px 18px;
+				font-weight: 700;
+				cursor: pointer;
+				text-decoration: none;
+			}
+		}
 	}
 }
 

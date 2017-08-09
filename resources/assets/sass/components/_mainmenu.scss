@@ -1,0 +1,16 @@
+#main-menu {
+	.panel {
+		.panel-body {
+			&.lg {
+				font-size: 120%;
+				font-weight: 700;
+			}
+		}
+	}
+
+	a {
+		&.btn {
+			margin-bottom: $line-height-computed;
+		}
+	}
+}

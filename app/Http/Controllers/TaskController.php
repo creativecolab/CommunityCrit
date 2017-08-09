@@ -21,7 +21,7 @@ use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 class TaskController extends Controller
 {
     const NUM_TASKS = 5;
-    const NUM_IDEAS = 5;
+    const NUM_IDEAS = 3;
 
     //--------------------- SHOW METHODS ------------------------------
 
@@ -753,7 +753,7 @@ class TaskController extends Controller
                 $hist = updateTaskHist($request, 3);
             }
 
-            return redirect()->route('exit');
+            return redirect()->route('main-menu');
         }
     }
 
@@ -809,7 +809,7 @@ class TaskController extends Controller
                 $hist = updateTaskHist($request, 3);
             }
 
-            return redirect()->route('exit');
+            return redirect()->route('main-menu');
         }
     }
 
@@ -870,7 +870,7 @@ class TaskController extends Controller
                 $hist = updateTaskHist($request, 3);
             }
 
-            return redirect()->route('exit');
+            return redirect()->route('main-menu');
         }
     }
 
@@ -929,7 +929,7 @@ class TaskController extends Controller
 
             $hist = updateTaskHist($request, 4);
 
-            return redirect()->route('exit');
+            return redirect()->route('main-menu');
         }
     }
 

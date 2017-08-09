@@ -128,7 +128,7 @@
     </nav>
 
     @yield('structured-content')
-    <div class="container">
+    <div class="container pad bot">
         @include('flash::message')
         @yield('content')
     </div>
@@ -146,10 +146,10 @@
 <!-- <script src="{{ asset('js/activities.js') }}"></script> -->
 <script>
     $( document ).ready(function() {
-        $('#waiting').hide();
-        $('.activity #idea').fadeTo(500, 1);
-        $('#task-panel').delay(500).fadeTo(500, 1);
-
+        // $('#waiting').hide();
+        var speed = 400;
+        $('.activity #question').fadeTo(speed, 1);
+        $('.activity #detail').delay(speed).fadeTo(speed, 1);
     });
 </script>
 </body>
