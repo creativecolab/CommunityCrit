@@ -355,6 +355,8 @@ class TaskController extends Controller
         $view = 'activities.summary';
         $data = ['num_responses' => 5-\Session::get('responses')->count()];
 
+        $this->flushSession();
+
         return view($view, $data);
     }
     
@@ -992,6 +994,8 @@ class TaskController extends Controller
      */
     private function taskQueue($idea_id)
     {
+        $idea = Idea::find($idea_id);
+
         //retrieve session vars
         $session_idea = \Session::get('idea');
         $t_queue = \Session::pull('t_queue');
@@ -1008,6 +1012,7 @@ class TaskController extends Controller
         }
 
         if ($t_queue->isEmpty()) {
+            //check if idea has links
             $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
@@ -1042,6 +1047,15 @@ class TaskController extends Controller
 
         return $data;
 
+    }
+
+    private function flushSession()
+    {
+        \Session::forget('responses');
+        \Session::forget('r_types');
+        \Session::forget('idea');
+        \Session::forget('t_queue');
+        \Session::forget('t_ptr');
     }
 
     /**
