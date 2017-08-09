@@ -8,7 +8,7 @@
         <p>Please select an option below to begin contributing.</p>
 
 
-        <h2>Pick an Idea to Work On</h2><p>Select an idea below to complete five activities related to that idea. You are always free to skip activities, and you can switch to a different idea by going back to the main menu at any time.</p>
+        <h2>Pick an Idea to Work On</h2><p>Here are three random ideas that were submitted by community members. Select one to complete five activities related to that idea. You are always free to skip activities, and you can switch to a different idea by coming back to this Do An Activity Page at any time.</p>
         <div class="row">
             @foreach ($ideas as $idea)
                 <div class="col-sm-6 col-md-4">
@@ -30,7 +30,7 @@
             Submit a New Idea
         </a>
 
-        <h2>All done?</h2><p>Please take this survey when you are done contributing. Your feedback will help us improve CommunityCrit so it can better serve communities in the urban design process.</p>
+        <h2>All done?</h2><p>Please take this survey when you are done contributing. Your feedback will help us make changes to CommunityCrit so it can better serve communities in the urban design process.</p>
         <a class="btn btn-primary" href="{{ route( 'exit') }}">
             Go to Exit Survey
         </a>
