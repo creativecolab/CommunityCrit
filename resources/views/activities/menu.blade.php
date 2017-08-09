@@ -7,10 +7,8 @@
         <h1>Do An Activity</h1>
         <p>Please select an option below to begin contributing.</p>
 
-        <p>You can select an idea someone else submitted to provide feedback about that idea. If you think of a new idea, you can submit it for others to work on. After you have completed a few tasks, please consider taking our exit survey.</p>
 
-
-        <h2>Pick an Idea to Work On</h2>
+        <h2>Pick an Idea to Work On</h2><p>Select an idea below to complete five activities related to that idea. You are always free to skip activities, and you can switch to a different idea by going back to the main menu at any time.</p>
         <div class="row">
             @foreach ($ideas as $idea)
                 <div class="col-sm-6 col-md-4">
@@ -27,12 +25,12 @@
             @endforeach
         </div>
 
-        <h2>Have an idea?</h2>
+        <h2>Have an idea?</h2><p>Click here to submit your own idea for the future of El Nudillo.</p>
         <a class="btn btn-primary" href="{{ route( 'submit-idea') }}">
             Submit a New Idea
         </a>
 
-        <h2>All done?</h2>
+        <h2>All done?</h2><p>Please take this survey when you are done contributing. Your feedback will help us improve CommunityCrit so it can better serve communities in the urban design process.</p>
         <a class="btn btn-primary" href="{{ route( 'exit') }}">
             Go to Exit Survey
         </a>
