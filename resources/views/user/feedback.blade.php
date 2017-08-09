@@ -129,7 +129,7 @@
         </div>
 
         <div class="col-md-6">
-            <h2>All Ideas <span class="badge">{{count($ideas)}}</span></h2>
+            <h1>All Ideas <span class="badge">{{count($ideas)}}</span></h1>
             @if (!count($ideas))
                 <h4>No ideas have been submitted yet.</h4>
                 <a href="{{ route('submit-idea') }}">Submit an Idea</a>
