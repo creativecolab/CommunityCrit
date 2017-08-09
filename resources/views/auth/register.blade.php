@@ -5,12 +5,12 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div class="panel-title">Register</div>
+        <ul class="list-group">
+            <li class="list-group-item dark">
+                <h3>Register</h3>
                 In order for us to keep people's responses separate, we ask you to please make an account below. We will keep your personal information secure and confidential.
-            </div>
-            <div class="panel-body">
+            </li>
+            <li class="list-group-item">
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
 
@@ -156,8 +156,8 @@
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </div>
 @endsection

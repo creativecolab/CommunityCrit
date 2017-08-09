@@ -73,6 +73,24 @@ h1, h2, h3, h4 {
   }
 }
 
+.list-group {
+  .list-group-item {
+    &.dark {
+      background-color: $task-bg-color;
+      color: #fff;
+
+      h1, h2, h3, h4 {
+        color: #fff !important;
+      }
+    }
+
+    h1:first-child, h2:first-child,
+    h3:first-child, h4:first-child {
+      margin-top: $line-height-computed / 2;
+    }
+  }
+}
+
 figure {
   img {
     margin-bottom: 20px;
@@ -98,4 +116,8 @@ figure {
   padding: 12px 18px;
   font-weight: 700;
   box-shadow: $shadow-default;
+}
+
+.btn-link {
+  padding: 12px 18px;
 }

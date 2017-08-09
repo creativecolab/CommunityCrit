@@ -29,7 +29,12 @@ $text-color: #636b6f;
 $link-color: $brand-default;
 
 // Navbar
-$navbar-default-bg: #fff;
+$navbar-default-bg: $brand-primary;
+$navbar-default-color: #fff !default;
+$navbar-default-link-color: #fff !default;
+$navbar-default-link-hover-color: darken($navbar-default-link-color, 13%) !default;
+$navbar-default-link-active-color: darken($navbar-default-link-color, 19.5%) !default;
+
 
 // Buttons
 $btn-default-color: $text-color;
