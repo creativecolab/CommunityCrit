@@ -5,9 +5,11 @@
 @section('content')
 <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">Login</div>
-            <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item dark">
+                <h3>Login</h3>
+            </li>
+            <li class="list-group-item">
                 <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}
 
@@ -55,14 +57,14 @@
                                 Login
                             </button>
 
-                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                            <a class="btn-link" href="{{ route('password.request') }}">
                                 Forgot Your Password?
                             </a>
                         </div>
                     </div>
                 </form>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </div>
 @endsection

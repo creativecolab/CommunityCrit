@@ -18,16 +18,18 @@ class Task extends Node
     // types equal to or greater than 50 are included in the queue
     const TYPE_EVAL = [100 => 'rating', 101 => 'text', 102 => 'text_link'];
     const TYPE_IMPROVE = [90 => 'no_link', 91 => 'link'];
-    const TYPE_SUBMIT = [80 => 'idea', 81 => 'link'];
     const TYPE_LINK = [71 => 'design_guideline', 72 => 'project_goal', 73 => 'project_constraint', 74 => 'issue', 75 => 'example', 76 => 'story'];
+    const TYPE_SPECIFIC = [60 => 'create', 61 => 'respond'];
     // types less than 50 are not included in the queue
+
     const TYPE_COMMENT = [20 => 'comment'];
+    const TYPE_SUBMIT = [40 => 'idea', 41 => 'link'];
 
     const TYPES = ['eval' => Task::TYPE_EVAL, 'link' => Task::TYPE_LINK, 'improve' => Task::TYPE_IMPROVE, 'submit' => Task::TYPE_SUBMIT, 'comment' => Task::TYPE_COMMENT];
     
     const FORMAT_RATE = [100];
-    const FORMAT_TEXT = [101, 90, 80, 71, 72, 73, 74, 75, 76, 20];
-    const FORMAT_TEXTWLINK = [102, 91, 81];
+    const FORMAT_TEXT = [101, 90, 40, 71, 72, 73, 74, 75, 76, 20, 60, 61];
+    const FORMAT_TEXTWLINK = [102, 91, 41];
     const FORMATS = ['rate' => Task::FORMAT_RATE, 'text' => Task::FORMAT_TEXT, 'text_link' => Task::FORMAT_TEXTWLINK];
     
 
@@ -41,6 +43,7 @@ class Task extends Node
 //        'task_id',
         'parent_id',
         'source_id',
+        'hidden',
     ];
 
     /**

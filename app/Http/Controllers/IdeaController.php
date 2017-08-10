@@ -115,7 +115,7 @@ class IdeaController extends Controller
      */
     public function showSubmitIdea()
     {
-        $submitIdea = Task::where('type', '=', 80)->first();
+        $submitIdea = Task::where('type', '=', 40)->first();
 
         return redirect()->action(
             'TaskController@showTask', [$submitIdea->id, 0, 0]

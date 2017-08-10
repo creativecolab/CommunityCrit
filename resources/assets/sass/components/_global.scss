@@ -1,0 +1,140 @@
+
+$footer-height: 140px;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: $footer-height;
+}
+
+nav {
+  font-weight: 500;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: $footer-height;
+  background-color: $brand-primary;
+  text-transform: uppercase;
+  display: table; overflow: hidden;
+
+  /* center contents*/
+  .center {
+    @extend .text-center;
+    /*padding: 60px 0;*/
+    /*line-height: 200px;*/
+
+    display: table-cell; vertical-align: middle;
+  }
+    
+  a {
+    color: #fff;
+    padding: $navbar-padding-horizontal;
+    font-weight: 700;
+
+    &:hover {
+      /*text-decoration: none;*/
+    }
+  }
+}
+
+h1, h2, h3, h4 {
+  font-weight: 700;
+  color: #000;
+}
+
+.accent {
+  color: $accent-color;
+}
+
+.container {
+  &.pad {
+    &.top {
+      padding-top: $jumbotron-padding;
+    }
+
+    &.bot {
+      padding-bottom: $jumbotron-padding;
+    }
+  }
+}
+
+.jumbotron {
+  &.bg-lt {
+    background-color: white;
+  } 
+
+  &.bg-no {
+    background-color: inherit;
+  } 
+
+  p {
+    font-size: inherit;
+    font-weight: inherit;
+  }
+}
+
+.list-group {
+  .list-group-item {
+    &.dark {
+      background-color: $task-bg-color;
+      color: #fff;
+
+      h1, h2, h3, h4 {
+        color: #fff !important;
+      }
+    }
+
+    h1:first-child, h2:first-child,
+    h3:first-child, h4:first-child {
+      margin-top: $line-height-computed / 2;
+    }
+  }
+}
+
+figure {
+  img {
+    margin-bottom: 20px;
+    
+    &.shdw {
+      box-shadow: $shadow-default;
+    }
+  }
+
+  figcaption {
+    /*font-style: italic !important;*/
+    font-size: 90%;
+
+    p {
+      /*padding-top: 15px;  */
+    }
+    
+  }
+}
+
+.btn {
+  text-transform: uppercase;
+  padding: 12px 18px;
+  box-shadow: $shadow-default;
+
+  + .btn {
+    margin-left: 5px;
+  }
+}
+
+.btn-link {
+  padding: 12px 18px;
+}
+
+#feedback {
+  h4 {
+    margin-top: $line-height-computed/4;
+  }
+}

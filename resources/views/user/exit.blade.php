@@ -1,15 +1,11 @@
 @extends('layouts.app')
 
-@section('title', 'Thanks for Contributing')
+@section('title', 'Exit Survey')
 
 @section('content')
-    <div class="page-header">
-        <h1>Thanks for Contributing</h1>
-    </div>
+    <h1>Exit Survey</h1>
 
-    <p>Thank you for contributing to the Park Link project! Your input will be shared with the sponsors, designers, and community members to help shape the plan.</p>
-
-    <p>Please help us by completing the short survey below. You may also look at <a href="{{ route('my-contributions') }}">your contributions</a> or see the <a href="{{ route('ideas') }}">contributions of your fellow community members.</a></p>
+    <p>Thank you for contributing to the Park Link project! We will use your responses to the following questions to improve CommunityCrit.</p>
 
     <div style="display: none;">
     	{{ $user_id= strval(Auth::id() ) }}

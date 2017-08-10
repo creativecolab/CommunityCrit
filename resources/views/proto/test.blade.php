@@ -1,23 +1,39 @@
 @extends('layouts.app')
 
-@section('title', 'Dev')
+@section('title', 'Dev - Idea Select')
 
 @section('content')
-    <div class="container">
+    <div id="main-menu">
+        <h1>Do An Activity</h1>
+        <p>Please select an option below to begin contributing.</p>
+
+        <p>You can select an idea someone else submitted to provide feedback about that idea. If you think of a new idea, you can submit it for others to work on. After you have completed a few tasks, please consider taking our exit survey.</p>
+
+        <h2>Pick an Idea to Work On</h2>
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                <div class="panel-heading">Help Us Find the Right Info for You {{$test}}</div>
-                <div class="panel-body">
+            @foreach ($ideas as $idea)
+                <div class="col-sm-6 col-md-4">
+                    <a class="panel-link" href="{{ action( 'TaskController@showRandomTask', $idea->id) }}">
+                        <div class="panel panel-default">
+                            <div class="panel-body lg">
+                                @if ($idea->name)
+                                    {{$idea->name}}
+                                @endif
+                            </div>
+                        </div> <!-- .panel -->
+                    </a>
+                </div> <!-- .col -->
+            @endforeach
+        </div>
 
-                    {{--@component('proto.testoptions', ['text' => $task->text, 'options' => $options, 'task' => $task->id])--}}
-                    {{--@endcomponent--}}
-                    @component('proto.microtask', ['text' => $task->text, 'id' => $task->id, 'name' => $task->name, 'test' => $test])
-                    @endcomponent
+        <h2>Have an idea?</h2>
+        <a class="btn btn-primary" href="{{ route( 'submit-idea') }}">
+            Submit a New Idea
+        </a>
 
-                </div> <!-- .panel-body -->
-                </div> <!-- .panel -->
-            </div> <!-- .col -->
-        </div> <!-- .row -->
-    </div> <!-- .container -->
+        <h2>All done?</h2>
+        <a class="btn btn-primary" href="{{ route( 'exit') }}">
+            Go to Exit Survey
+        </a>
+    </div>
 @endsection

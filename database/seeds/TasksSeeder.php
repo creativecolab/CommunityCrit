@@ -19,7 +19,7 @@ class TasksSeeder extends Seeder
         [
             'name' => 'Submit an Idea',
             'text' => 'What would you like to see or do at El Nudillo, the intersection of 14th Street and National Avenue, by yourself or with family and friends?',
-            'type' => '80',
+            'type' => '40',
         ],
 //        [
 //            'name' => 'Raise an Issue',
@@ -75,7 +75,7 @@ class TasksSeeder extends Seeder
         ],
         [
             'name' => 'Critique the Idea',
-            'text' => 'The above reference provides a guideline for the design of this idea. What do you think of this idea based on the reference?',
+            'text' => 'What do you think of this idea based on the following reference?',
             'type' => '102',
         ],
         [

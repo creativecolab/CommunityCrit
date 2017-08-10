@@ -1,0 +1,16 @@
+#main-menu {
+	.panel {
+		box-shadow: $shadow-default;
+
+		.panel-body {
+			&.lg {
+				font-size: 120%;
+				font-weight: 700;
+			}
+		}
+	}
+
+	section {
+		padding-bottom: $line-height-computed;
+	}
+}

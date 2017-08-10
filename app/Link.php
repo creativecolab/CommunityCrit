@@ -14,6 +14,15 @@ class Link extends Model
         2 => 'image',
     ];
 
+    const LINK_TYPES = [
+        1 => 'Design Guideline',
+        2 => 'Project Goal',
+        3 => 'Project Constraint',
+        4 => 'Reported Issue',
+        5 => 'Example',
+        6 => 'Story',
+    ];
+
     // use Moderatable;
     use CrudTrait;
 
@@ -57,6 +66,28 @@ class Link extends Model
     public function user()
     {
         return $this->belongsTo( 'App\User' );
+    }
+
+    /**
+     * returns link type text
+     *
+     * @return str
+     */
+    public function getTypeStrAttribute()
+    {
+        $types = static::LINK_TYPES;
+        return $types[$this->link_type];
+    }
+
+    public function diffForHumans($date)
+    {
+        return Carbon::parse($date)->diffForHumans();
+    }
+
+    public function readableDate($date)
+    {
+        $date = $date->setTimezone('America/Los_Angeles');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
     }
 
     // public function getCreatedAtAttribute($date)
