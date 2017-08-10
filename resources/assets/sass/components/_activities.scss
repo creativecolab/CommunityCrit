@@ -23,10 +23,14 @@
 		margin-bottom: 0;
 	}
 
-	$padding-task-panel: 65px;
+	$padding-task-panel: 20px;
 	$padding-task-item: 30px;
 
-
+	#overview-btn {
+		float: none;
+		margin-left: 0 !important;
+		margin-bottom: $padding-large-vertical * 2;
+	}
 
 	#overview {
 		padding: 25px;
@@ -53,7 +57,7 @@
 
 	.list-group {
 		.list-group-item {
-			padding-left: $padding-task-panel - 15px;
+			padding-left: $padding-task-panel;
 			padding-right: $padding-task-panel;
 			padding-top: $padding-task-item;
 			padding-bottom: $padding-task-item;
@@ -74,11 +78,11 @@
 			}
 
 			&:first-child {
-				padding-top: $padding-task-panel - 25px;
+				padding-top: $padding-task-panel;
 			}
 
 			&:last-child {
-				padding-bottom: $padding-task-panel - 25px;
+				padding-bottom: $padding-task-panel;
 			}
 		}
 
@@ -116,5 +120,27 @@
 #text-link {
 	.panel.input {
 		/*margin-top: 10px;*/
+	}
+}
+
+@media screen and (min-width: 768px) {
+
+	#overview-btn {
+		float: right !important;
+	}
+
+	$padding-task-panel: 65px;
+
+	.activity .list-group .list-group-item {
+		padding-left: $padding-task-panel;
+		padding-right: $padding-task-panel;
+
+		&:first-child {
+			padding-top: $padding-task-panel - 25px;
+		}
+
+		&:last-child {
+			padding-bottom: $padding-task-panel - 25px;
+		}
 	}
 }
