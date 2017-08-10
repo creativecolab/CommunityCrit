@@ -34,8 +34,7 @@
                     <div class="col-sm-8">
                         <div class="about">
                             <h3>About El Nudillo</h3>
-                            <p>In the East Village South workshops held last year, the concept of El Nudillo was created. Spanish for joint or knuckle, this is the place where 14th Street ends at the trolley tracks on Commercial Street just at the intersection of National Avenue. This is where the familiar N-S, E-W grid pattern of downtown streets turns 45 degrees. Both literally and figuratively, El Nudillo is the joining point of downtown and the barrio.</p>
-                            <p>Folks in this workshop further noted that, with the MTS building/station and Greyhound Bus terminal at El Nudillo, it would make a great spot for a transit hub. Also, four MTS bus routes currently stop there.<p>
+                            <p>The concept of El Nudillo was created during two workshops held in East Village last year. El Nudillo—Spanish for "joint" or "knuckle"—is where 14th Street ends at the trolley tracks on Commercial Street, just at the intersection of National Avenue. This is also where the familiar north-south, east-west grid pattern of downtown streets turns 45 degrees, and where four MTS bus routes currently stop. Finally, El Nudillo marks the transition between downtown and Barrio Logan.</p>
                         </div>
                     </div>
                 </div>
@@ -130,7 +129,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label class="instruction" for="submissionText">Give your idea a name.</label>
+                                    <label class="instruction" for="submissionText">Give your idea a name. <span class="text-muted">(required)</span></label>
                                     <input type="text" class="form-control" name="name"></input>
                                     @if ($errors->has('name'))
                                         <span class="help-block">
