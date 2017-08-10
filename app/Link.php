@@ -79,6 +79,17 @@ class Link extends Model
         return $types[$this->link_type];
     }
 
+    public function diffForHumans($date)
+    {
+        return Carbon::parse($date)->diffForHumans();
+    }
+
+    public function readableDate($date)
+    {
+        $date = $date->setTimezone('America/Los_Angeles');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
+    }
+
     // public function getCreatedAtAttribute($date)
     // {
     //     return $this->attributes['created_at'] = Carbon::parse($date)->diffForHumans();

@@ -149,6 +149,13 @@
         $('.activity #question').fadeTo(speed, 1);
         $('.activity #detail').delay(speed).fadeTo(speed, 1);
     });
+
+    var visible = false;
+    function overview_onClick() {
+        visible = !visible;
+        var text = (visible) ? 'hide' : 'show';
+        $('#overview-btn-instr').text(text);
+    }
 </script>
 </body>
 </html>

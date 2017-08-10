@@ -101,6 +101,7 @@ Route::group( [ 'prefix' => 'ideas' ], function() {
 Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function() {
     Route::get( '/random/{idea_id?}', 'TaskController@showRandomTask')->name( 'do' );
     Route::get( '/menu', 'TaskController@showIdeaSelect')->name('main-menu');
+    Route::get( '/summary', 'TaskController@showSummary');
     // Route::get( '/list', 'TaskController@allActivities' );
     // Route::get( '/{task_id}', 'TaskController@showTask');
     // Route::get( '/{task_id}/{idea_id}', 'TaskController@showTask');

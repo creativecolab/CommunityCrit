@@ -26,6 +26,31 @@
 	$padding-task-panel: 65px;
 	$padding-task-item: 30px;
 
+
+
+	#overview {
+		padding: 25px;
+
+		figure {
+			float: left;
+			max-width: 275px;
+		}
+
+    	img {
+    		/*max-height: 275px;*/
+    		margin-bottom: 0;
+    	}
+
+    	.about {
+    		float: left;
+    		/*max-width: 500px;*/
+
+    		h3 {
+    			/*margin-top: 0;*/
+    		}
+    	}
+    }
+
 	.list-group {
 		.list-group-item {
 			padding-left: $padding-task-panel - 15px;

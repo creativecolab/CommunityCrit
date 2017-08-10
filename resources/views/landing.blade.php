@@ -7,7 +7,7 @@
         <!-- <div class="jumbotron bg-no"> -->
             <div class="container pad bot">
                 <h1>CommunityCrit</h1>
-                <p>CommunityCrit is a research tool developed by the Design Lab at the University of California San Diego. The goal of CommunityCrit is to enable people to co-design the future of their communities by facilitating public contribution on urban design proposals. We have chosen the recent planning efforts around the 14th Street Promenade in the East Village neighborhood of downtown San Diego as our test case.</p>
+                <p>CommunityCrit, short for <strong>Community Critique</strong>, is a research tool developed by the Design Lab at the University of California San Diego. The goal of CommunityCrit is to enable people to co-design the future of their communities by facilitating public contribution on urban design proposals. We have chosen the recent planning efforts around the 14th Street Promenade in the East Village neighborhood of downtown San Diego as our test case.</p>
             </div>
         <!-- </div> -->
 
@@ -15,7 +15,7 @@
             <div class="container pad bot">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>Background Info On El Nudillo</h2>
+                        <h2>About the Project</h2>
                         <p>The 14th Street Promenade, which was approved by the city in 2016, will be a pedestrian-friendly “green street” extending from City College in the north to the intersection of 14th Street and National Avenue in the south. It will feature widened sidewalks, outdoor furniture, and art, in order to promote social gathering and a unique neighborhood feel. The overarching goal for the 14th Street Promenade is to help create a more sustainable, walkable downtown.</p>
                         <p>We are now engaging the public and local experts to develop the intersection of 14th Street, National Avenue, and Commercial Street, which marks the end of the 14th Street Promenade. This intersection—known as <strong>El Nudillo</strong>, or “the knuckle”—is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p>
                     </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="col-md-4 col-md-pull-8">
                     <figure style="margin-top: 22px;">
-                         <img src="{{ asset('img/Timeline.png') }}" alt="Project timeline" class="img-responsive">
+                         <img src="{{ asset('img/timeline.png') }}" alt="Project timeline" class="img-responsive" style="max-height: 450px;">
                     </figure>
                 </div>
                 
