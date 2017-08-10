@@ -111,7 +111,8 @@
                                 {!! $task->name !!}
 
                             </label> -->
-                            <textarea class="form-control" rows="3" id="submissionText" name="text" placeholder="Please enter your response here."></textarea>
+                            <!-- <textarea class="form-control" rows="3" id="submissionText" name="text" value="{{ old('text') }}" placeholder="Please enter your response here." required></textarea> -->
+                            {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your response here.", 'required' => 'required')) }}
                             @if ($errors->has('text'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('text') }}</strong>
@@ -129,8 +130,9 @@
                         <div class="row">
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label class="instruction" for="submissionText">Give your idea a name. <span class="text-muted">(required)</span></label>
-                                    <input type="text" class="form-control" name="name"></input>
+                                    <label class="instruction" for="submissionText">Give your idea a name.</label>
+                                    <!-- <input type="text" class="form-control" name="name" required></input> -->
+                                    {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => "Name your idea.", 'type' => 'text', 'required' => 'required')) }}
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('name') }}</strong>
