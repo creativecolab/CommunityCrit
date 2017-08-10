@@ -5,7 +5,7 @@
 @section('content')
     <h1>Exit Survey</h1>
 
-    <p>Thank you for contributing to the Park Link project! We will use your responses to the following questions to improve CommunityCrit.</p>
+    <p>Thank you for your contributions! We will use your responses to the following questions to improve CommunityCrit.</p>
 
     <div style="display: none;">
     	{{ $user_id= strval(Auth::id() ) }}

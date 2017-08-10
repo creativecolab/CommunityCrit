@@ -4,10 +4,20 @@
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-104110133-1', 'auto');
-  ga('send', 'pageview');
+  var myID = '';
   @if (!(Auth::guest()))
-  ga('set', 'userId', '{{ Auth::user()->id }}'); // Set the user ID using signed-in user_id.
+	myID = '{{ Auth::user()->id }}';
   @endif
+
+  ga('create', 'UA-104110133-1', 'auto', {
+  	userId: myID
+  });
+  ga('send', 'pageview');
+
+  // ga('create', 'UA-104110133-1', 'auto');
+  // ga('send', 'pageview');
+  {{--@if (!(Auth::guest()))--}}
+  	{{--// ga('set', 'userId', '{{ Auth::user()->id }}'); // Set the user ID using signed-in user_id.--}}
+  {{--@endif--}}
 
 </script>
