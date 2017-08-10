@@ -79,6 +79,16 @@ class Feedback extends Model
         return $this->belongsTo('App\Link');
     }
 
+    /**
+     * Question for this comment
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function question()
+    {
+        return $this->belongsTo('App\Question');
+    }
+
 	/**
 	 * User who made this comment
 	 *
