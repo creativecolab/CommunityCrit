@@ -15,7 +15,7 @@
             <div class="container pad bot">
                 <div class="row">
                     <div class="col-md-6">
-                        <h2>A Bit of Info about El Nudillo</h2>
+                        <h2>Background Info on El Nudillo</h2>
                         <p>The 14th Street Promenade, which was approved by the city in 2016, will be a pedestrian-friendly “green street” extending from City College in the north to the intersection of 14th Street and National Avenue in the south. It will feature widened sidewalks, outdoor furniture, and art, in order to promote social gathering and a unique neighborhood feel. The overarching goal for the 14th Street Promenade is to help create a more sustainable, walkable downtown.</p>
                         <p>We are now engaging the public and local experts to develop the intersection of 14th Street, National Avenue, and Commercial Street, which marks the end of the 14th Street Promenade. This intersection—known as <strong>El Nudillo</strong>, or “the knuckle”—is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p>
                     </div>
