@@ -3,13 +3,15 @@
 @section('title', 'My Contributions')
 
 @section('content')
-    <div class="row smaller-txt">
+    <div class="row smaller-txt" id="feedback">
         <div class="col-md-6">
             <h1>My Contributions</h1>
             <h2>Submitted Ideas <span class="badge">{{count($myIdeas)}}</span></h2>
             @if (!count($myIdeas))
                 <h4>You have not submitted any ideas yet.</h4>
-                <a href="{{ route('submit-idea') }}">Submit an Idea</a>
+                <a class="btn btn-primary" href="{{ route( 'submit-idea') }}">
+                    Submit a New Idea
+                </a>
             @endif
 
             <div class="row">
@@ -20,7 +22,7 @@
                             <div class="panel panel-default">
                                 @if ($myIdea->name)
                                     <div class="panel-heading">
-                                        <div class="panel-title">{{ $myIdea->name }}</div>
+                                        <div class="panel-title"><h4>{{ $myIdea->name }}</h4></div>
                                     </div> <!-- .panel-heading -->
                                 @endif
                                 <div class="panel-body">
@@ -38,7 +40,9 @@
             <h2>References <span class="badge">{{count($myLinks)}}</span></h2>
             @if (!count($myLinks))
                 <h4>You have not submitted any references yet.</h4>
-                <!-- <a href="{{ route('do') }}">Get Started</a> -->
+                <a class="btn btn-primary" href="{{ route( 'main-menu') }}">
+                    Do An Activity
+                </a>
             @endif
 
             <div class="row">
@@ -50,7 +54,7 @@
                                 @if ($myLink->idea)
                                     <a class="panel-link" href="{{ action( 'IdeaController@show', $myLink->idea->id) }}">
                                         <div class="panel-heading">
-                                            <div class="panel-title">Idea: {{ $myLink->idea->name }}</div>
+                                            <div class="panel-title"><h4>Idea: {{ $myLink->idea->name }}</h4></div>
                                             {{ $myLink->idea->text }}
                                         </div> <!-- .panel-heading -->
                                     </a>
@@ -71,7 +75,7 @@
                                     </li>
                                 </ul>
                                 <div class="panel-footer">
-                                    {{ $myLink->created_at }}
+                                    {!! $myLink->readableDate($myLink->created_at) !!}
                                 </div>
                             </div> <!-- .panel -->
                         <!-- </a> -->
@@ -82,7 +86,9 @@
             <h2>Improvements, Critiques, and Assessments <span class="badge">{{count($myFeedbacks)}}</span></h2>
             @if (!count($myFeedbacks))
                 <h4>You have not submitted feedback yet.</h4>
-                <a href="{{ route('do') }}">Get Started</a>
+                <a class="btn btn-primary" href="{{ route( 'main-menu') }}">
+                    Do An Activity
+                </a>
             @endif
 
             <div class="row">
@@ -94,7 +100,7 @@
                                 @if ($myFeedback->idea)
                                     <a class="panel-link" href="{{ action( 'IdeaController@show', $myFeedback->idea->id) }}">
                                         <div class="panel-heading">
-                                            <div class="panel-title">Idea: {{ $myFeedback->idea->name }}</div>
+                                            <div class="panel-title"><h4>Idea: {{ $myFeedback->idea->name }}</h4></div>
                                             {{ $myFeedback->idea->text }}
                                         </div> <!-- .panel-heading -->
                                     </a>
@@ -147,7 +153,7 @@
                             <div class="panel panel-default">
                                 @if ($idea->name)
                                     <div class="panel-heading">
-                                        <div class="panel-title">{{ $idea->name }}</div>
+                                        <div class="panel-title"><h4>{{ $idea->name }}</h4></div>
                                     </div> <!-- .panel-heading -->
                                 @endif
                                 <div class="panel-body">

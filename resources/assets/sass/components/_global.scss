@@ -132,3 +132,9 @@ figure {
 .btn-link {
   padding: 12px 18px;
 }
+
+#feedback {
+  h4 {
+    margin-top: $line-height-computed/4;
+  }
+}

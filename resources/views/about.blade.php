@@ -16,6 +16,9 @@
             <h3>Partners</h3>
             <p><a href="http://c3sandiego.org/" target="_blank">Citizens Coordinate for Century 3</a></p>
             <p><a href="https://www.facebook.com/eastvillagesouth/" target="_blank">East Village South Community Vision</a></p>
+
+            <h3>Contact Us</h3>
+            Send us an <a href='&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#109;&#109;&#117;&#110;&#105;&#116;&#121;&#99;&#114;&#105;&#116;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;'>email</a> if you have any questions or concerns.
         </div> <!-- .col -->
 
         <div class="col-md-3">
