@@ -745,12 +745,14 @@ class TaskController extends Controller
      */
     public function trackSkip(Request $request, $idea_id=0)
     {
-        $hist = updateTaskHist($request, 5);
+        $timecheck = \Session::get('time1');
+        if ( $timecheck ) {
+            $hist = updateTaskHist($request, 5);
 
-        //update session data
-        $this->incrementPtr();
-        \Session::push('responses', 0);
-
+            //update session data
+            $this->incrementPtr();
+            \Session::push('responses', 0);
+        }
         return redirect()->route('do', [$idea_id]);
     }
 
