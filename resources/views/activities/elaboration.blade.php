@@ -129,7 +129,7 @@
                         <div class="row">
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label class="instruction" for="submissionText">Give your idea a name.</label>
+                                    <label class="instruction" for="submissionText">Give your idea a name. <span class="text-muted">(required)</span></label>
                                     <input type="text" class="form-control" name="name"></input>
                                     @if ($errors->has('name'))
                                         <span class="help-block">
