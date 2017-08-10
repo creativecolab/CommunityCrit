@@ -1029,14 +1029,14 @@ class TaskController extends Controller
 
         if ($t_queue->isEmpty()) {
             //check if idea has links, questions TODO: dont hardcode numbers
-            if ($idea->links->count() > 0 && $idea->questions->count() > 0)
+            if ($idea->links->where('status',1)->count() > 0 && $idea->questions->where('status',1)->count() > 0)
                 $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
-            elseif ($idea->links->count() > 0)
+            elseif ($idea->links->where('status',1)->count() > 0)
                 $tasks = Task::where('type', '>', 50)->where('type','!=',61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
-            elseif ($idea->questions->count() > 0)
-                $tasks = Task::where('type', '>', 50)->where('type','!=',75)->where('type','!=',76)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+            elseif ($idea->questions->where('status',1)->count() > 0)
+                $tasks = Task::where('type', '>', 50)->where('type','!=',102)->where('type','!=',91)->where('type','!=',41)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             else
-                $tasks = Task::where('type', '>', 50)->where('type','!=',75)->where('type','!=',76)->where('type','!=',61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->where('type','!=',41)->where('type','!=',91)->where('type','!=',102)->where('type','!=',61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
 //            \Session::put('t_ptr', $t_ptr+1);
