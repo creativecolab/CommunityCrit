@@ -25,13 +25,13 @@
         <div class="panel panel-default collapse" id="collapseOverview">
             <div class="panel-body" id="overview">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-sm-4">
                         <figure>
                             <img src="{{ asset('img/ElNudillo1.jpg') }}" alt="project map" class="img-responsive shdw">
                             <!-- <figcaption>El Nudillo will mark the end of the 14th Street Promenade.</figcaption> -->
                         </figure>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-sm-8">
                         <div class="about">
                             <h3>About El Nudillo</h3>
                             <p>In the East Village South workshops held last year, the concept of El Nudillo was created. Spanish for joint or knuckle, this is the place where 14th Street ends at the trolley tracks on Commercial Street just at the intersection of National Avenue. This is where the familiar N-S, E-W grid pattern of downtown streets turns 45 degrees. Both literally and figuratively, El Nudillo is the joining point of downtown and the barrio.</p>

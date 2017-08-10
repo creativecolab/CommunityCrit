@@ -18,7 +18,9 @@
                 @foreach ($myIdeas as $myIdea)
                     <div class="col-md-12">
                     <!-- <div class="col-sm-6 col-lg-4"> -->
-                        <a class="panel-link" href="{{ action( 'IdeaController@show', $myIdea->id) }}">
+                        @if ($myIdea->status == 1)
+                            <a class="panel-link" href="{{ action( 'IdeaController@show', $myIdea->id) }}">
+                        @endif
                             <div class="panel panel-default">
                                 @if ($myIdea->name)
                                     <div class="panel-heading">
@@ -32,7 +34,9 @@
                                     {!! $myIdea->readableDate($myIdea->created_at) !!}
                                 </div>
                             </div> <!-- .panel -->
-                        </a>
+                        @if ($myIdea->status == 1)
+                            </a>
+                        @endif
                     </div> <!-- .col -->
                 @endforeach
             </div>
