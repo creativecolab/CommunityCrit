@@ -7,7 +7,7 @@
         <!-- <div class="jumbotron bg-no"> -->
             <div class="container pad bot">
                 <h1>CommunityCrit</h1>
-                <p>CommunityCrit is a research tool developed by the Design Lab at the University of California San Diego. The goal of CommunityCrit is to enable people to co-design the future of their communities by facilitating public contribution on urban design proposals. We have chosen the recent planning efforts around the 14th Street Promenade in the East Village neighborhood of downtown San Diego as our test case.</p>
+                <p>CommunityCrit, short for Community Critique, is a research tool developed by the Design Lab at the University of California San Diego. The goal of CommunityCrit is to enable people to co-design the future of their communities by facilitating public contribution on urban design proposals. We have chosen the recent planning efforts around the 14th Street Promenade in the East Village neighborhood of downtown San Diego as our test case.</p>
             </div>
         <!-- </div> -->
 
