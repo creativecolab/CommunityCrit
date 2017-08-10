@@ -12,13 +12,38 @@
 
     <!-- set count var -->
     <div style="display: none">
-        {{ $count = count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 4) }}
+        {{ $count = count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 3) }}
     </div>
 
     <div class="activity" id="text-link">
         {{--@if ($count >= 4)--}}
             <a type="button" class="btn btn-default" id="back" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back to Do An Activity</a>
         {{--@endif--}}
+
+        <a type="button" class="btn btn-default pull-right" data-toggle="collapse" href="#collapseOverview" aria-expanded="false" aria-controls="collapseOverview" id="overview-btn" onclick="overview_onClick()"><span id="overview-btn-instr">Show</span> El Nudillo Overview</a>
+
+        <div class="panel panel-default collapse" id="collapseOverview">
+            <div class="panel-body" id="overview">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <figure>
+                            <img src="{{ asset('img/ElNudillo1.jpg') }}" alt="project map" class="img-responsive shdw">
+                            <!-- <figcaption>El Nudillo will mark the end of the 14th Street Promenade.</figcaption> -->
+                        </figure>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="about">
+                            <h3>About El Nudillo</h3>
+                            <p>In the East Village South workshops held last year, the concept of El Nudillo was created. Spanish for joint or knuckle, this is the place where 14th Street ends at the trolley tracks on Commercial Street just at the intersection of National Avenue. This is where the familiar N-S, E-W grid pattern of downtown streets turns 45 degrees. Both literally and figuratively, El Nudillo is the joining point of downtown and the barrio.</p>
+                            <p>Folks in this workshop further noted that, with the MTS building/station and Greyhound Bus terminal at El Nudillo, it would make a great spot for a transit hub. Also, four MTS bus routes currently stop there.<p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+
         <!-- List group -->
         <ul class="list-group">
             @if ($idea->id)
@@ -29,7 +54,11 @@
             @endif
 
             <li class="list-group-item dark" id="question" style="opacity: 0;">
-                <h4>Question {{\Session::get('t_ptr')}}/5</h4>
+                @if (intval(($task->type) / 10) == 4)
+                    <h4>Submit A New Idea</h4>
+                @else
+                    <h4>Question {{\Session::get('t_ptr')}}/5</h4>
+                @endif
                 <h3>
                     @if ($task->type == 61)
                         {!! $ques->text !!}
@@ -97,11 +126,11 @@
                     @endif
 
                     <!-- submission task -->
-                    @if (intval($task->type) / 10 == 8)
+                    @if (intval($task->type) / 10 == 4)
                         <div class="row">
-                            <div class="col-sm-8 col-md-6">
+                            <div class="col-sm-6 col-md-4">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <label class="instruction" for="submissionText">Give your idea a name. <span class="text-muted">(optional)</span></label>
+                                    <label class="instruction" for="submissionText">Give your idea a name.</label>
                                     <input type="text" class="form-control" name="name"></input>
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -113,7 +142,7 @@
                         </div>
                     @endif
 
-                    <!-- linking task -->
+                    {{--<!-- linking task -->
                     @if ((intval($task->type / 10) == 7) && ($task->text2))
                         <div class="row">
                             <div class="col-md-12">
@@ -123,7 +152,7 @@
                                 </div>
                             </div> <!-- .col -->
                         </div>
-                    @endif
+                    @endif--}}
 
                     <!-- <div>
                         {{--@if ($count >= 4)--}}
@@ -139,23 +168,8 @@
                         <div class="clearfix"></div>
                     <!-- </div> -->
                     
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Return to Do An Activity</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        Thanks for your help. Are you sure you want to stop working on this idea?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">No, continue</button>
-                                        {!! Form::submit("Yes, I'm done", ['class' => 'btn btn-primary', 'name' => 'exit']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @component('activities.common.modal', ['submit' => true ])
+                        @endcomponent
                     {!! Form::close() !!}
                 </div> <!-- #response -->
             </li>

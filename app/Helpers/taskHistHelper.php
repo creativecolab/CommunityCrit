@@ -39,8 +39,9 @@ if (! function_exists('updateTaskHist')) {
         $taskHist = TaskHist::where('user_id', $user_id)
             ->where('task_id', $task_id)
             ->where('idea_id', $idea_id)
-            ->where('link_id', $link_id);
-            // ->last();
+            ->where('link_id', $link_id)
+            ->orderByDesc("created_at")
+            ->first();
 
         if ($taskHist) {
             $taskHist->update(['action' => $action]);

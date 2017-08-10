@@ -2,8 +2,8 @@
     @foreach($qualities as $key=>$quality)
         <div class="row">
             <div class="form-group{{ $errors->has($quality) ? ' has-error' : '' }}">
-                <label class="col-md-4 control-label">I am not {{$mapped_qualities[$key]}} at all</label>
-                <div class="col-md-3">
+                <label class="col-md-4 col-lg-4 control-label">I am not {{$mapped_qualities[$key]}} at all</label>
+                <div class="col-md-4 col-lg-3">
                     {{--Checkbox for each idea--}}
                     @for($i = 1; $i < 6; $i++)
                         <div class="radio-inline">
@@ -14,7 +14,7 @@
                         </div>
                     @endfor
                 </div>
-                <label class="col-md-5 control-label">I am extremely {{$mapped_qualities[$key]}}</label>
+                <label class="col-md-4 col-lg-5 control-label">I am extremely {{$mapped_qualities[$key]}}</label>
                 @if ($errors->has($quality))
                     <div class="col-md-12 help-block">
                         <strong>{{ $errors->first($quality) }}</strong>

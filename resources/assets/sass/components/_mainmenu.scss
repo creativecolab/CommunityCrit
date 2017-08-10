@@ -10,9 +10,7 @@
 		}
 	}
 
-	a {
-		&.btn {
-			margin-bottom: $line-height-computed;
-		}
+	section {
+		padding-bottom: $line-height-computed;
 	}
 }

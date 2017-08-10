@@ -12,70 +12,12 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 400;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            /*.flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }*/
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .title {
-                font-size: 40px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-            
-            .desc-text {
-                font-size: 125%;
-            }
-
-            @media screen and (min-width: 576px) {
-                .title {
-                    font-size: 70px;
-                }
-            }
-        </style>
     </head>
-    <body>
-        <div class="position-ref full-height">
-            <div class="row">
+    <body id="welcome">
+        <div class="position-ref full-height half bkg-img bkg-img-ht">
+        </div>
+        <div class="position-ref full-height half">
+            <!-- <div class="row">
                 @if (Route::has('login'))
                     <div class="top-right links">
                         @if (Auth::check())
@@ -86,24 +28,20 @@
                         @endif
                     </div>
                 @endif
-            </div>
+            </div> -->
 
-            <div class="container">
-                <div class="row" style="margin-top: 50px; margin-bottom: 20px;">
-                    <div class="col-sm-8 col-sm-offset-2">
-                        <div class="content">
-                            <div class="title">
-                                Community<span>Crit</span>
-                            </div>
-                            <div class="body desc-text">
-                                <p><b>CommunityCrit allows the public to participate in the urban design process.</b> By offering a quick and easy way to voice opinions, CommunityCrit empowers anyone to help shape the future of their community.</p><p>Currently, we are collecting feedback upon an effort to expand the 14th Street Promenade in East Village. The intersection of 14th Street, National Avenue, and Commercial Street—referred to as “El Nudillo,” or “the knuckle”—is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p><p>What do you think El Nudillo should be? We would love to hear your thoughts!</p>
+            <!-- <div class="container"> -->
+            <div id="content" class="pad">
+                <h1>CommunityCrit allows <span class="accent">the public</span> to participate in the urban design process.</h1>
+                <div class="desc-text">
+                    <p>By offering a quick and easy way to voice opinions, CommunityCrit empowers anyone to help shape the future of their community.</p>
+                    <p>Currently, we are collecting feedback upon an effort to expand the 14th Street Promenade in East Village. The intersection of 14th Street, National Avenue, and Commercial Street—referred to as “El Nudillo,” or “the knuckle”—is envisioned as a pedestrian destination, a place of social gathering, and a celebration of East Village and its surrounding neighborhoods.</p>
+                    <p><strong>What do you think El Nudillo should be?</strong> We would love to hear your thoughts!</p>
 
-                                <a type="button" class="btn btn-primary btn-lg" style="margin-top: 10px;" href="{{ route('register') }}">Get Started</a>
-                            </div>
-                        </div>
-                    </div>
+                    <a type="button" class="btn btn-primary btn-lg" style="margin-top: 10px;" href="{{ route('register') }}">Get Started</a>
                 </div>
             </div>
         </div>
+        
     </body>
 </html>
