@@ -108,10 +108,11 @@
                                 <ul class="list-group">
                                     @if ($myFeedback->task)
                                         <li class="list-group-item">
-                                            @if($myFeedback->task->id != 12)
-                                            {!! $myFeedback->task->text !!}
+                                            @if($myFeedback->task->type != 61)
+                                                {!! $myFeedback->task->text !!}
                                             @else
-                                            {!! $questions->where('id',$myFeedback->ques_id)->first()->text !!}
+                                                {!! $questions->where('id',$myFeedback->ques_id)->first()->text !!}
+                                                    {{--{!! $myFeedback->question!!}--}}
                                             @endif
                                         </li>
                                     @endif
