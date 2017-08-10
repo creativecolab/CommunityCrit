@@ -94,20 +94,20 @@ body#welcome {
 		}
 
 		#content {
-	    	position: absolute;
-	  		top: 50%;
-	  		transform: translateY(-50%);
+	    	/*position: absolute;*/
+	  		/*top: 50%;*/
+	  		/*transform: translateY(-50%);*/
 	  		color: $heading-color;
 	    }
 
 	    #content.pad {
-	  		padding: 10%;
+	  		padding: 10% 10%;
 	    }
     }
 
     @media screen and (min-width: 992px) {
     	#content.pad {
-	  		padding: 15%;
+	  		padding: 20% 15%;
 	    }
     }
 }
