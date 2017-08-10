@@ -292,14 +292,15 @@ class TaskController extends Controller
             return redirect()->route('show-task', [$task->id, $idea_id]);
         } else if ($type == 61) {
             // if a respond to a specific question task, select an idea and question
-            $ideasWQuestions = $ideas->filter(function ($item) {
-               return (count($item->questions->where('status', 1)));
-            });
-            if (!count($ideasWQuestions)) {
-                return redirect()->route('do');
-            } else {
-                $idea = $ideasWQuestions->random();
-            }
+//            $ideasWQuestions = $ideas->filter(function ($item) {
+//               return (count($item->questions->where('status', 1)));
+//            });
+//            if (!count($ideasWQuestions)) {
+//                return redirect()->route('do');
+//            } else {
+//                $idea = $ideasWQuestions->random();
+//            }
+            $idea = Idea::find($idea_id);
 //            $idea_id = $idea->id;
             $link_id = 0;
 
@@ -321,14 +322,15 @@ class TaskController extends Controller
         } else if (in_array($type, $text_link)) {
             // if a text with link task, select an idea with links and a link
             // TODO: handle when there are no links for any ideas
-            $ideasWLinks = $ideas->filter(function ($item) {
-               return (count($item->links->where('status', 1)));
-            });
-            if (!count($ideasWLinks)) {
-                return redirect()->route('do');
-            } else {
-                $idea = $ideasWLinks->random();
-            }
+//            $ideasWLinks = $ideas->filter(function ($item) {
+//               return (count($item->links->where('status', 1)));
+//            });
+//            if (!count($ideasWLinks)) {
+//                return redirect()->route('do');
+//            } else {
+//                $idea = $ideasWLinks->random();
+//            }
+            $idea = Idea::find($idea_id);
 //            $idea_id = $idea->id;
 
             $links = $idea->links->where('status', 1);
@@ -1012,8 +1014,15 @@ class TaskController extends Controller
         }
 
         if ($t_queue->isEmpty()) {
-            //check if idea has links
-            $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+            //check if idea has links, questions TODO: dont hardcode numbers
+            if ($idea->links->count() > 0 && $idea->questions->count() > 0)
+                $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+            elseif ($idea->links->count() > 0)
+                $tasks = Task::where('type', '>', 50)->where('type','!=',61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+            elseif ($idea->questions->count() > 0)
+                $tasks = Task::where('type', '>', 50)->where('type','!=',75)->where('type','!=',76)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+            else
+                $tasks = Task::where('type', '>', 50)->where('type','!=',75)->where('type','!=',76)->where('type','!=',61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
 //            \Session::put('t_ptr', $t_ptr+1);
