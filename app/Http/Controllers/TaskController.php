@@ -346,14 +346,28 @@ class TaskController extends Controller
 //        return redirect()->route('show-task', [$task->id, $idea_id, $link_id, $ques_id]);
     }
 
-    public function showSummary(  )
+    public function showSummary( )
     {
 //        if ($data == 0) {
 //            return redirect()->route('main-menu');
 //        }
+        // $tasks = \Session::get('t_ptr');
+
+        $session_idea = \Session::get('idea');
+        $idea = Idea::find($session_idea);
+        // $task = \Session::get('t_queue')[\Session::get('t_ptr')-1];
+        // $task = \Session::get('t_queue')[0];
+        // $session = \Session::all();
+
+        // print($tasks);
+        // foreach ($tasks as $key => $task) {
+            // print($task);
+        // }
+
+        $num_resp = static::NUM_TASKS-\Session::get('responses')->count();
 
         $view = 'activities.summary';
-        $data = ['num_responses' => 5-\Session::get('responses')->count()];
+        $data = ['num_responses' => $num_resp, 'idea' => $idea];
 
         return view($view, $data);
     }
@@ -748,7 +762,7 @@ class TaskController extends Controller
 
         if ($exit == 'Submit') {
             $this->validate($request, [
-                'name' => 'max:255',
+                'name' => 'required|max:255',
                 'text' => 'required',
             ]);
         }
