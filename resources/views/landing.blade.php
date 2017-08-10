@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-4 col-md-offset-2">
                         <figure>
-                            <img src="{{ asset('img/ElNudillo1.png') }}" alt="project map" class="img-responsive shdw" align="right">
+                            <img src="{{ asset('img/ElNudillo1.jpg') }}" alt="project map" class="img-responsive shdw" align="right">
                             <figcaption>El Nudillo will mark the end of the 14th Street Promenade.</figcaption>
                         </figure>
                     </div>

@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <figure>
-                            <img src="{{ asset('img/ElNudillo1.png') }}" alt="project map" class="img-responsive shdw">
+                            <img src="{{ asset('img/ElNudillo1.jpg') }}" alt="project map" class="img-responsive shdw">
                             <!-- <figcaption>El Nudillo will mark the end of the 14th Street Promenade.</figcaption> -->
                         </figure>
                     </div>
