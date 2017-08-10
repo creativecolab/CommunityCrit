@@ -1036,10 +1036,10 @@ class TaskController extends Controller
                 $tasks = Task::where('type', '>', 50)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             }
             elseif ($idea->questions->where('status',1)->count() > 0) {
-                $tasks = Task::where('type', '>', 50)->whereNotIn('id',Task::FORMAT_TEXTWLINK)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             }
             else {
-                $tasks = Task::where('type', '>', 50)->whereNotIn('id',Task::FORMAT_TEXTWLINK)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             }
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
