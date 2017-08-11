@@ -60,16 +60,22 @@ Route::get( '/privacy-policy', function () {
 // Route::post( '/home/submit', 'TaskController@newsubmit' );
 // Route::get( 'my-contributions', 'PersonalController@showMyFeedback');
 
-Route::group( ['prefix' => 'moderation', 'middleware' => 'admin'], function() {
-    Route::get( '/pending', 'ModerationController@showPending' );
-    Route::get( '/show/{status}', 'ModerationController@showByStatus' );
-    Route::get( '/update/{status}', 'ModerationController@showUpdateByStatus' );
+Route::group( ['prefix' => 'admin', 'middleware' => 'admin'], function() {
+    Route::get( '/summary/user', 'AdminController@showUserSummary' );
+    Route::get( '/idea-names', 'AdminController@showIdeaNames' );
+    Route::post('/idea-names/submit', 'AdminController@updateNames' );
+});
 
-    Route::post( '/pending/ideas/save', 'ModerationController@savePendingIdeas' );
-    Route::post( '/pending/links/save', 'ModerationController@savePendingLinks' );
-    Route::post( '/update/{status}/ideas/save', 'ModerationController@updateIdeasStatus' );
-    Route::post( '/update/{status}/links/save', 'ModerationController@updateLinksStatus' );
-    Route::post( '/update/{status}/feedbacks/save', 'ModerationController@updateFeedbacksStatus' );
+Route::group( ['prefix' => 'moderation', 'middleware' => 'admin'], function() {
+    Route::get( '/pending', 'AdminController@showPending' );
+    Route::get( '/show/{status}', 'AdminController@showByStatus' );
+    Route::get( '/update/{status}', 'AdminController@showUpdateByStatus' );
+
+    Route::post( '/pending/ideas/save', 'AdminController@savePendingIdeas' );
+    Route::post( '/pending/links/save', 'AdminController@savePendingLinks' );
+    Route::post( '/update/{status}/ideas/save', 'AdminController@updateIdeasStatus' );
+    Route::post( '/update/{status}/links/save', 'AdminController@updateLinksStatus' );
+    Route::post( '/update/{status}/feedbacks/save', 'AdminController@updateFeedbacksStatus' );
 } );
 
 Route::group( ['middleware' => 'checkUser' ], function() {
