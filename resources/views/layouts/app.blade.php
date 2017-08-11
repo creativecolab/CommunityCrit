@@ -107,6 +107,9 @@
                                     <a href="{{ action('AdminController@showUserSummary') }}">Summary</a>
                                 </li>
                                 <li>
+                                    <a href="{{action('AdminController@showIdeaNames')}}">Idea Names</a>
+                                </li>
+                                <li>
                                     <a href="{{ url(config('backpack.base.route_prefix', 'admin').'/dashboard') }}">Backpack</a>
                                 </li>
                             </ul>
