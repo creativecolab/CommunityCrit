@@ -31,6 +31,7 @@ $('#flash-overlay-modal').modal();
  */
 require('./imagelightbox.min');
 
-$( function() {
-    $( 'a' ).imageLightbox();
-});
+// $( 'a[data-imagelightbox="c"]' ).imageLightbox();
+
+
+
