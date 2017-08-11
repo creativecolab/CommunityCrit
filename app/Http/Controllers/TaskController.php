@@ -159,7 +159,10 @@ class TaskController extends Controller
                 $data['qualities'] = $qualities;
             }
 
-            createTaskHist($task->id, $idea->id, $link->id, $ques->id);
+            if ( !\Session::get('errors') ) {
+                createTaskHist($task->id, $idea->id, $link->id, $ques->id);
+                \Session::put('time1',new \Carbon\Carbon());
+            }
 
             return view($view, $data);
         } else {
