@@ -44,11 +44,11 @@
                         Continue With Activities
                     </a>
 
-                    @if ((count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 3)) >= 5)
+                    {{--@if ((count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 3)) >= 5)--}}
                         <a class="btn btn-primary" href="{{ route( 'exit') }}">
                             Go to Exit Survey
                         </a>
-                    @endif
+                    {{--@endif--}}
                 </div>
                 <div class="clearfix"></div>
             </li>
