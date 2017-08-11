@@ -6,7 +6,7 @@
 	<h1>Pending Items</h1>
 
 	<h2>Ideas</h2>
-	{!! Form::open(['action' => ['ModerationController@savePendingIdeas'], 'style' => 'display:inline']) !!}
+	{!! Form::open(['action' => ['AdminController@savePendingIdeas'], 'style' => 'display:inline']) !!}
 	{{ Form::hidden('ideaCount', count($ideas)) }}
 
 	<table class="table table-hover">
@@ -51,7 +51,7 @@
 		{!! Form::close() !!}
 
 	<h2>Links</h2>
-	{!! Form::open(['action' => ['ModerationController@savePendingLinks'], 'style' => 'display:inline']) !!}
+	{!! Form::open(['action' => ['AdminController@savePendingLinks'], 'style' => 'display:inline']) !!}
 	{{ Form::hidden('linkCount', count($links)) }}
 	<table class="table table-hover">
 		<tr>
