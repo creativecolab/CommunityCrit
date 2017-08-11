@@ -29,7 +29,9 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <figure>
-                            <img src="{{ asset('img/ElNudillo1.jpg') }}" alt="project map" class="img-responsive shdw">
+                            <a href="{{ asset('img/ElNudillo1.jpg') }}" data-imagelightbox="j">
+                                <img src="{{ asset('img/ElNudillo1.jpg') }}" alt="Overhead View of the El Nudillo Intersection" class="img-responsive shdw">
+                            </a>
                             <!-- <figcaption>El Nudillo will mark the end of the 14th Street Promenade.</figcaption> -->
                         </figure>
                     </div>

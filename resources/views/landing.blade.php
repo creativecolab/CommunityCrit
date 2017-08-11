@@ -21,7 +21,9 @@
                     </div>
                     <div class="col-md-4 col-md-offset-2">
                         <figure>
-                            <img src="{{ asset('img/ElNudillo1.jpg') }}" alt="project map" class="img-responsive shdw" align="right">
+                            <a href="{{ asset('img/ElNudillo1.jpg') }}" data-imagelightbox="j">
+                                <img src="{{ asset('img/ElNudillo1.jpg') }}" alt="Overhead View of the El Nudillo Intersection" class="img-responsive shdw" align="right">
+                            </a>
                             <figcaption>El Nudillo will mark the end of the 14th Street Promenade.</figcaption>
                         </figure>
                     </div>
@@ -36,7 +38,7 @@
             <div class="row">
                 <div class="col-md-8 col-md-push-4">
                     <h2>Here's Where You Come In</h2>
-                    <p>Right now, El Nudillo is just an intersection. We need your help to figure out what El Nudillo should be!</p> 
+                    <p>Right now, El Nudillo is just an intersection. We need your help to figure out what El Nudillo should be!</p>
                     <p>CommunityCrit allows you to suggest your own ideas and comment upon the ideas of other contributors for how El Nudillo can be transformed. Please answer as many or as few questions as you would like—you are always free to skip questions.</p>
                     <p>All input will be shared with sponsors, designers, and community members to help shape the ultimate plan. <!-- Click <a href="{{ route('do') }}">here</a> to get started. --></p>
                     <a type="button" class="btn btn-primary hidden-xs" style="margin-top: 10px;" href="{{ route('do') }}">Get Started</a>
@@ -44,7 +46,7 @@
                 </div>
                 <div class="col-md-4 col-md-pull-8">
                     <figure style="margin-top: 22px;">
-                         <img src="{{ asset('img/timeline.png') }}" alt="Project timeline" class="img-responsive" style="max-height: 450px;">
+                        <img src="{{ asset('img/timeline.png') }}" alt="Project timeline" class="img-responsive" style="max-height: 450px;">
                     </figure>
                 </div>
                 

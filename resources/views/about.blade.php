@@ -23,7 +23,9 @@
 
         <div class="col-md-3">
             <figure>
-                <img src="{{ asset('img/vector-map.png') }}" alt="project map" class="img-responsive">
+                <a href="{{ asset('img/vector-map.png') }}" data-imagelightbox="j">
+                    <img src="{{ asset('img/vector-map.png') }}" alt="A map of the Park Link project area showing the El Nudillo challenge." class="img-responsive">
+                </a>
                 <figcaption>A map of the Park Link project area showing the El Nudillo challenge. The blocks approved for 14th Street Master Plan are marked in green.</figcaption>
             </figure>
         </div> <!-- .col -->

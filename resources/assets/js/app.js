@@ -25,3 +25,13 @@ const app = new Vue({
  * Bootstrap
  */
 $('#flash-overlay-modal').modal();
+
+/**
+ * Lightbox
+ */
+require('./imagelightbox.min');
+
+// $( 'a[data-imagelightbox="c"]' ).imageLightbox();
+
+
+
