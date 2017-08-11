@@ -137,6 +137,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( '/skip/{idea_id?}', 'TaskController@trackSkip' )->name('skip');
 } );
 
+Route::post( '/ajax/timer', 'TaskController@ajaxTimer' );
 //Route::group( ['prefix' => 'devtest'], function() {
 //    Route::get( '/attach/{task}', 'TaskController@showConnect' ); // attaches idea and task
 //    Route::get( '/', 'TaskController@showIdeaSelect')->name('main-menu');
