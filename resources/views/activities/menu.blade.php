@@ -33,7 +33,7 @@
             </a>
         </section>
 
-        @if ((count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 3)) >= 5)
+        {{--@if ((count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 3)) >= 5)--}}
             <section>
                 <h2>All done?</h2>
                 <p>Please take this short survey so we can improve the experience of CommunityCrit for other community members</p>
@@ -41,6 +41,6 @@
                     Go to Exit Survey
                 </a>
             </section>
-        @endif
+        {{--@endif--}}
     </div>
 @endsection
