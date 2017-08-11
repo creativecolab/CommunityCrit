@@ -8,7 +8,7 @@ use App\Feedback;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class ModerationController extends Controller
+class AdminController extends Controller
 {
 	const STATUSES = array(
 		0 => "Pending",
@@ -34,7 +34,7 @@ class ModerationController extends Controller
      */
     public function showPending()
     {
-    	$view = 'moderation.pending';
+    	$view = 'admin.moderation.pending';
         $data = [];
         $status = 0;
 
@@ -56,7 +56,7 @@ class ModerationController extends Controller
      */
     public function showUpdateByStatus($status)
     {
-    	$view = 'moderation.update';
+    	$view = 'admin.moderation.update';
         $data = [];
 
         $data['statusKey'] = $status;
@@ -82,7 +82,7 @@ class ModerationController extends Controller
      */
     public function showByStatus($status)
     {
-    	$view = 'moderation.showByStatus';
+    	$view = 'admin.moderation.showByStatus';
         $data = [];
 
         $data['status'] = static::STATUSES[$status];
@@ -95,6 +95,19 @@ class ModerationController extends Controller
 
         $feedbacks = Feedback::all()->where('status', $status);
         $data['feedbacks'] = $feedbacks;
+
+        return view($view, $data);
+    }
+
+    /**
+     * show user summary
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showUserSummary()
+    {
+        $view = 'admin.summary';
+        $data = [];
 
         return view($view, $data);
     }

@@ -5,7 +5,7 @@
 @section('content')
 	<h1>{{ $status }} Items</h1>
 
-	{!! Form::open(['action' => ['ModerationController@updateIdeasStatus', $statusKey], 'style' => 'display:inline']) !!}
+	{!! Form::open(['action' => ['AdminController@updateIdeasStatus', $statusKey], 'style' => 'display:inline']) !!}
 	{{ Form::hidden('ideaCount', count($ideas)) }}
 	
 	<h2>
@@ -55,7 +55,7 @@
 		@endif
 		{!! Form::close() !!}
 
-	{!! Form::open(['action' => ['ModerationController@updateLinksStatus', $statusKey], 'style' => 'display:inline']) !!}
+	{!! Form::open(['action' => ['AdminController@updateLinksStatus', $statusKey], 'style' => 'display:inline']) !!}
 	{{ Form::hidden('linkCount', count($links)) }}
 
 	<h2>
@@ -99,7 +99,7 @@
 		@endif
 		{!! Form::close() !!}
 
-	{!! Form::open(['action' => ['ModerationController@updateFeedbacksStatus', $statusKey], 'style' => 'display:inline']) !!}
+	{!! Form::open(['action' => ['AdminController@updateFeedbacksStatus', $statusKey], 'style' => 'display:inline']) !!}
 	{{ Form::hidden('feedbackCount', count($feedbacks)) }}
 
 	<h2>
