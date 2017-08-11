@@ -66,3 +66,22 @@ if (! function_exists('updateTaskHist')) {
         // }
     }
 }
+
+if (! function_exists('updateTaskHistTimer')) {
+    function updateTaskHistTimer($task_id, $idea_id, $link_id, $time_typing)
+    {
+        $user_id = \Auth::id();
+        $taskHist = TaskHist::where('user_id', $user_id)
+            ->where('task_id', $task_id)
+            ->where('idea_id', $idea_id)
+            ->where('link_id', $link_id)
+//            ->where('ques_id', $ques_id)
+            ->orderByDesc('created_at')
+            ->first();
+
+        if ($taskHist) {
+            if ($time_typing > $taskHist->time_typing)
+                $taskHist->update(['time_typing' => $time_typing]);
+        }
+    }
+}

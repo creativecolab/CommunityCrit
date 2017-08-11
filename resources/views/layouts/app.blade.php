@@ -156,6 +156,57 @@
         var text = (visible) ? 'hide' : 'show';
         $('#overview-btn-instr').text(text);
     }
+
+    //focus handler
+    var Status = {};
+
+    var focusHandler = function() {
+        var name = this.name;
+        console.log("Focus", name, Status[name]);
+        if (!Status[name]) Status[name] = {
+            total: 0,
+            focus: Date.now()
+        };
+        else Status[name].focus = Date.now();
+    };
+    var blurHandler = function() {
+        var name = this.name;
+        if (Status[name]) {
+            Status[name].total += Date.now() - Status[name].focus;
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: 'POST',
+            url: '/ajax/timer',
+            @if ( !empty($task) && !empty($idea) && !empty($link) && !empty($ques))
+                data: {'_token' : "{{csrf_token()}}", 'timers' : Status, 'task' : "{{$task->id}}", 'idea' : "{{$idea->id}}", 'link' : "{{$link->id}}", 'ques' : "{{$ques->id}}" },
+            @else
+                data: {'_token' : "{{csrf_token()}}", 'timers' : Status},
+            @endif
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(data) {
+                console.log(data);
+            }
+
+        });
+    };
+
+    // You don't have to attach them this way, it's just for example
+
+    var inputs = document.getElementsByTagName('textarea');
+
+    for (var i = 0, l = inputs.length; i < l; i++) {
+        inputs[i].onfocus = focusHandler;
+        inputs[i].onblur = blurHandler;
+    }
 </script>
 </body>
 </html>

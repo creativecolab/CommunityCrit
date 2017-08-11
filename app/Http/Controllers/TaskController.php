@@ -693,17 +693,24 @@ class TaskController extends Controller
         return redirect()->back();
     }
 
-    public function newsubmit( Request $request )
+    public function ajaxTimer( Request $request )
     {
+        $idea_id = $request->get('idea');
+        $task_id = $request->get('task');
+        $link_id = $request->get('link');
+        $times = $request->get('timers');
+
+        //TODO: functionality for multiple text boxes?
+        $time = $times['text']['total'];
+
         $inputs = $request->input();
-        $idea = new Idea;
-        $idea->text = $request->get('text');
-        $idea->save();
-        $data = [
-            'success' => true,
-            'message' => 'Your AJAX processed correctly'
-        ];
-        return response()->json($data);
+        $source = new Source;
+        $source->rank = $request->get('idea');
+        $source->name = $request->get('task');
+        $source->save();
+
+        updateTaskHistTimer($task_id,$idea_id,$link_id,$time);
+
     }
 
     /**
