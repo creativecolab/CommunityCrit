@@ -798,11 +798,11 @@ class TaskController extends Controller
         }
         else {
             if ($idea->text) {
-                if ($idea->save() ) {
-                    flash("Your idea was submitted!")->success();
-                } else {
-                    flash('Unable to save your feedback. Please contact us.')->error();
-                }
+//                if ($idea->save() ) {
+//                    flash("Your idea was submitted!")->success();
+//                } else {
+//                    flash('Unable to save your feedback. Please contact us.')->error();
+//                }
 
                 $hist = updateTaskHist($request, 2);
             } else {
@@ -854,11 +854,11 @@ class TaskController extends Controller
         }
         else {
             if ($feedback->comment) {
-                if ( $feedback->save() ) {
-                    flash("Your contribution was submitted!")->success();
-                } else {
-                    flash('Unable to save your feedback. Please contact us.')->error();
-                }
+//                if ( $feedback->save() ) {
+//                    flash("Your contribution was submitted!")->success();
+//                } else {
+//                    flash('Unable to save your feedback. Please contact us.')->error();
+//                }
 
                 $hist = updateTaskHist($request, 2);
             } else {
@@ -915,11 +915,11 @@ class TaskController extends Controller
         }
         else {
             if ($link->text) {
-                if ($link->save() ) {
-                    flash("Your idea was submitted!")->success();
-                } else {
-                    flash('Unable to save your feedback. Please contact us.')->error();
-                }
+//                if ($link->save() ) {
+//                    flash("Your idea was submitted!")->success();
+//                } else {
+//                    flash('Unable to save your feedback. Please contact us.')->error();
+//                }
 
                 $hist = updateTaskHist($request, 2);
             } else {
@@ -978,13 +978,17 @@ class TaskController extends Controller
             return redirect()->route('do', [$idea_id]);
         }
         else {
-            if ( $idea->ratings()->saveMany($ratings->all()) ) {
-                flash("Ratings submitted!");
-            } else {
-                flash("Unable to save your ratings. Please contact us.")->error();
-            }
+//            if ( $idea->ratings()->saveMany($ratings->all()) ) {
+//                flash("Ratings submitted!");
+//            } else {
+//                flash("Unable to save your ratings. Please contact us.")->error();
+//            }
 
-            $hist = updateTaskHist($request, 4);
+            if ( $ratings->isEmpty() ) {
+                updateTaskHist($request, 3);
+            } else updateTaskHist($request, 2);
+
+//            $hist = updateTaskHist($request, 4);
 
             return redirect()->route('main-menu');
         }
