@@ -8,7 +8,7 @@ use App\Feedback;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
-class ModerationController extends Controller
+class AdminController extends Controller
 {
 	const STATUSES = array(
 		0 => "Pending",
@@ -34,7 +34,7 @@ class ModerationController extends Controller
      */
     public function showPending()
     {
-    	$view = 'moderation.pending';
+    	$view = 'admin.moderation.pending';
         $data = [];
         $status = 0;
 
@@ -56,7 +56,7 @@ class ModerationController extends Controller
      */
     public function showUpdateByStatus($status)
     {
-    	$view = 'moderation.update';
+    	$view = 'admin.moderation.update';
         $data = [];
 
         $data['statusKey'] = $status;
@@ -82,7 +82,7 @@ class ModerationController extends Controller
      */
     public function showByStatus($status)
     {
-    	$view = 'moderation.showByStatus';
+    	$view = 'admin.moderation.showByStatus';
         $data = [];
 
         $data['status'] = static::STATUSES[$status];
@@ -95,6 +95,31 @@ class ModerationController extends Controller
 
         $feedbacks = Feedback::all()->where('status', $status);
         $data['feedbacks'] = $feedbacks;
+
+        return view($view, $data);
+    }
+
+    /**
+     * show user summary
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showUserSummary()
+    {
+        $view = 'admin.summary';
+        $data = [];
+
+        return view($view, $data);
+    }
+
+    public function showIdeaNames()
+    {
+        $view = 'admin.ideaNames';
+        $data = [];
+
+        $ideas = Idea::all();
+
+        $data['ideas'] = $ideas;
 
         return view($view, $data);
     }
@@ -249,6 +274,28 @@ class ModerationController extends Controller
         	flash("No changes were selected.")->error();
         }
         
+
+        return redirect()->back();
+    }
+
+    public function updateNames(Request $request)
+    {
+        $inputs = $request->all();
+        $ids = Idea::all()->pluck('id');
+
+        foreach($inputs as $key=>$val) {
+            if ($ids->contains($key) && $val != null) {
+                $idea = Idea::find($key);
+                if ($idea->old_name == null) {
+                    $idea->old_name = $idea->name;
+                    $idea->name = $val;
+                }
+                else {
+                    $idea->name = $val;
+                }
+                $idea->save();
+            }
+        }
 
         return redirect()->back();
     }
