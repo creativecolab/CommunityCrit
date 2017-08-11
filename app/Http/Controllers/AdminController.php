@@ -106,11 +106,35 @@ class AdminController extends Controller
      */
     public function showUserSummary()
     {
-        $view = 'admin.summary';
+        $view = 'admin.summary.users';
         $data = [];
 
         return view($view, $data);
     }
+
+    /**
+     * show submission summary
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showSubmissionSummary()
+    {
+        $view = 'admin.summary.submission';
+        $data = [];
+
+        $ideas = Idea::all()
+            ->where('status', 1)
+            ->sortByDesc('created_at');
+
+        $links = Links::all()
+            ->where('status', 1)
+            ->sortByDesc('created_at');
+
+        $feedbacks = Feedback::all()
+            ->where('status', 1)
+            ->sortByDesc('created_at');
+
+        return view($view, $data);
 
     //------------------ post methods ------------------------
 
