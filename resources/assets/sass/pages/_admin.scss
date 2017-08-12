@@ -1,5 +1,9 @@
 .admin{
-	h1 {
- 	 	page-break-before: always;
+	table {
+ 	 	page-break-after: always;
+	}
+
+	.idea-text {
+		color: #000 !important;
 	}
 }

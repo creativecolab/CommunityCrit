@@ -136,6 +136,8 @@ class AdminController extends Controller
             ->where('status', 1)
             ->sortByDesc('created_at');
         $data['feedbacks'] = $feedbacks;
+
+        return view($view, $data);
     }
 
     public function showIdeaNames()

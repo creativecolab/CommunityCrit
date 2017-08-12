@@ -32,13 +32,25 @@
 		
 	@foreach($ideas as $idea)
 	<h3>{{ $idea->name }}</h3>
-	<p><strong>{{ $idea->text }}</strong></p>
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<tr>
 			<th>Comment</th>
 			<th>Applicable?</th>
 			<th>Does Comply?</th>
 			<th style="min-width: 250px;">Your Thoughts</th>
+		</tr>
+		<tr>
+			<th class="idea-text">
+				<strong>Submit a New Idea</strong><br>
+				{{ $idea->text }}
+			</th>
+			<td>
+				<span style="border: 1px gray solid; width: 20px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			</td>
+			<td>
+				<span style="border: 1px gray solid; width: 20px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+			</td>
+			<td></td>
 		</tr>
 		@if (count($idea->links))
 			<div style="display: none;">{{ $links = $idea->links->where('status', 1)->where('link_type', '>=' , 5) }}</div>
