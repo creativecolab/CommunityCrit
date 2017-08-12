@@ -17,6 +17,13 @@ class User extends Authenticatable
 	const CONDITION_MIN = 0;
 	const CONDITION_MAX = 5;
 
+	const TYPES = [
+        0 => 'general',
+        1 => 'seeded',
+        2 => 'team',
+        3 => 'lab',
+    ];
+
     use Notifiable, CrudTrait;
 
     /**

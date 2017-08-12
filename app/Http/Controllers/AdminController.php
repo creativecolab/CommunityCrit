@@ -111,40 +111,16 @@ class AdminController extends Controller
         $view = 'admin.summary.users';
         $data = [];
 
-        $users = User::all()->whereNotIn('id', [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);//("admin", "!=", 1);
-        $taskHists = TaskHist::all();
+        $users = User::all()->where('type', 0);//("admin", "!=", 1);
+        // $taskHists = TaskHist::where();
 
         $rows = collect();
+        $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
 
-        $ideas = $taskHists->where('task_id', 2);
-        $links = $taskHists->whereIn('task_id', [3, 4]);
-        $feedbacks = $taskHists->whereNotIn('task_id', [2, 3, 4]);
-
-        // total - #
-        $totalNum = collect();
-        $total = $taskHists;
-        $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
-        foreach ($groups as $key => $group) {
-            $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
-            foreach ($actions as $keyAct=>$action) {
-                $totalNum->put($key.'-'.$keyAct, count($group->whereIn('action', $action)));
-            }
-        }
-        $data['totalNum'] = $totalNum;
-
-        // total - %
-        $totalPer = collect();
-        $total = $taskHists;
-        $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
-        foreach ($groups as $key => $group) {
-            $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
-            foreach ($actions as $keyAct=>$action) {
-                $totalPer->put($key.'-'.$keyAct, sprintf("%.1f%%", count($group->whereIn('action', $action)) / count($group) * 100));
-
-            }
-        }
-        $data['totalPer'] = $totalPer;
-
+        // total
+        $allIdeas = collect();
+        $allLinks = collect();
+        $allFeedbacks = collect();
 
         // users
         foreach ($users as $key => $user) {
@@ -154,8 +130,11 @@ class AdminController extends Controller
             $row->put('created_at', $user->created_at);
             $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']);
             $ideas = $user->taskHist->where('task_id', 2);
+            $allIdeas = $allIdeas->merge($ideas);
             $links = $user->taskHist->whereIn('task_id', [3, 4]);
+            $allLinks = $allLinks->merge($links);
             $feedbacks = $user->taskHist->whereNotIn('task_id', [2, 3, 4]);
+            $allFeedbacks = $allFeedbacks->merge($feedbacks);
             $total = $user->taskHist;
             $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
             foreach ($groups as $key => $group) {
@@ -168,6 +147,33 @@ class AdminController extends Controller
             }
             $rows->push($row);
         }
+
+        // total
+        $allTotal = collect();
+        $allTotal = $allTotal->merge($allIdeas);
+        $allTotal = $allTotal->merge($allLinks);
+        $allTotal = $allTotal->merge($allFeedbacks);
+        $allGroups = ['ideas' => $allIdeas, 'links' => $allLinks, 'feedbacks' => $allFeedbacks, 'total' => $allTotal];
+
+        // total - #
+        $totalNum = collect();
+        foreach ($allGroups as $key => $group) {
+            foreach ($actions as $keyAct=>$action) {
+                $count = count($group->whereIn('action', $action));
+                $totalNum->put($key.'-'.$keyAct, $count);
+            }
+        }
+        $data['totalNum'] = $totalNum;
+
+        // total - %
+        $totalPer = collect();
+        foreach ($allGroups as $key => $group) {
+            foreach ($actions as $keyAct=>$action) {
+                $count = count($group->whereIn('action', $action));
+                $totalPer->put($key.'-'.$keyAct, sprintf("%.1f%%", $count / count($group) * 100));
+            }
+        }
+        $data['totalPer'] = $totalPer;
 
         $data['rows'] = $rows;
         return view($view, $data);
