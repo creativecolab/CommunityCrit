@@ -141,7 +141,7 @@ class AdminController extends Controller
         foreach ($groups as $key => $group) {
             $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
             foreach ($actions as $keyAct=>$action) {
-                $totalPer->put($key.'-'.$keyAct, sprintf("%.2f%%", count($group->whereIn('action', $action)) / count($group) * 100));
+                $totalPer->put($key.'-'.$keyAct, sprintf("%.1f%%", count($group->whereIn('action', $action)) / count($group) * 100));
 
             }
         }
@@ -162,7 +162,9 @@ class AdminController extends Controller
             foreach ($groups as $key => $group) {
                 $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
                 foreach ($actions as $keyAct=>$action) {
-                    $row->put($key.'-'.$keyAct, count($group->whereIn('action', $action)));
+                    $count = count($group->whereIn('action', $action));
+                    $count = $count ? $count : '-';
+                    $row->put($key.'-'.$keyAct, $count);
                 }
             }
             $rows->push($row);
