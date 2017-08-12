@@ -121,6 +121,16 @@ class User extends Authenticatable
 	}
 
 	/**
+	 * taskHists this user has tracked
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
+	 */
+	public function taskHist()
+	{
+		return $this->hasMany( 'App\TaskHist' );
+	}
+
+	/**
 	 * Get User's recommended tasks
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
