@@ -63,8 +63,6 @@ Route::get( '/privacy-policy', function () {
 Route::group( ['prefix' => 'admin', 'middleware' => 'admin'], function() {
     Route::get( '/summary/users', 'AdminController@showUserSummary' );
     Route::get( '/summary/submissions', 'AdminController@showSubmissionSummary' );
-    Route::get( '/idea-names', 'AdminController@showIdeaNames' );
-    Route::post('/idea-names/submit', 'AdminController@updateNames' );
 });
 
 Route::group( ['prefix' => 'moderation', 'middleware' => 'admin'], function() {

@@ -21,7 +21,6 @@ class Idea extends Node
     protected $fillable = [
         'text',
         'name',
-        'old_name',
         'user_id',
         'status',
         'moderated_at',
