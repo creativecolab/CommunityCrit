@@ -17,6 +17,13 @@ class User extends Authenticatable
 	const CONDITION_MIN = 0;
 	const CONDITION_MAX = 5;
 
+	const TYPES = [
+        0 => 'general',
+        1 => 'seeded',
+        2 => 'team',
+        3 => 'lab',
+    ];
+
     use Notifiable, CrudTrait;
 
     /**
@@ -25,7 +32,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'fname', 'lname', 'email', 'password', 'condition', 'consent'
+        'fname', 'lname', 'email', 'password', 'condition', 'consent', 'type'
     ];
 
     /**
