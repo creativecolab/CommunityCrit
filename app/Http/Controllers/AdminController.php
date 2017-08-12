@@ -138,6 +138,15 @@ class AdminController extends Controller
         $data['feedbacks'] = $feedbacks;
     }
 
+    public function showIdeaNames()
+    {
+        $view = 'admin.ideaNames';
+        $data = [];
+
+        $ideas = Idea::all();
+
+        $data['ideas'] = $ideas;
+
         return view($view, $data);
     }
 
@@ -291,6 +300,28 @@ class AdminController extends Controller
         	flash("No changes were selected.")->error();
         }
         
+
+        return redirect()->back();
+    }
+
+    public function updateNames(Request $request)
+    {
+        $inputs = $request->all();
+        $ids = Idea::all()->pluck('id');
+
+        foreach($inputs as $key=>$val) {
+            if ($ids->contains($key) && $val != null) {
+                $idea = Idea::find($key);
+                if ($idea->old_name == null) {
+                    $idea->old_name = $idea->name;
+                    $idea->name = $val;
+                }
+                else {
+                    $idea->name = $val;
+                }
+                $idea->save();
+            }
+        }
 
         return redirect()->back();
     }

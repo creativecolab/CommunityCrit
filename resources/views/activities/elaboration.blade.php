@@ -10,7 +10,7 @@
         Finding an activity for you...
     </h4> -->
 
-    {{ \Session::put('time1',new \Carbon\Carbon()) }}
+    {{--{{ \Session::put('time1',new \Carbon\Carbon()) }}--}}
 
     <!-- set count var -->
     <div style="display: none">
