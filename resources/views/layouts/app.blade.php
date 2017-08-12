@@ -104,10 +104,7 @@
 
                             <ul class="dropdown-menu" role="menu">
                                 <li>
-                                    <a href="{{ action('AdminController@showUserSummary') }}">Users Summary</a>
-                                </li>
-                                <li>
-                                    <a href="{{ action('AdminController@showSubmissionSummary') }}">Submissions Summary</a>
+                                    <a href="{{ action('AdminController@showUserSummary') }}">Summary</a>
                                 </li>
                                 <li>
                                     <a href="{{action('AdminController@showIdeaNames')}}">Idea Names</a>
