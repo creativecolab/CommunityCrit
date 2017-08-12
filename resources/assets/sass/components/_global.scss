@@ -138,3 +138,9 @@ figure {
     margin-top: $line-height-computed/4;
   }
 }
+
+@media print {
+.print-none {
+    display: none !important;
+  }
+}

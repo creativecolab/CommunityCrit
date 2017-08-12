@@ -28,7 +28,7 @@
 	</table> -->
 		
 
-	<h1>Submissions</h1>
+	<h1 class="print-none">Submissions</h1>
 		
 	@foreach($ideas as $idea)
 	<h3>{{ $idea->name }}</h3>
