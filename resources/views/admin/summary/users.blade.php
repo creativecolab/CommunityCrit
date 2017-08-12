@@ -13,7 +13,7 @@
 		<colgroup span="4"></colgroup>
 		<colgroup span="4"></colgroup>
 		<tr>
-			<th colspan="3" scope="colgroup">User</th>
+			<th colspan="4" scope="colgroup">User</th>
 			<th colspan="4" scope="colgroup">Ideas</th>
 			<th colspan="4" scope="colgroup">Links</th>
 			<th colspan="4" scope="colgroup">Feedbacks</th>
@@ -21,6 +21,7 @@
 		</tr>
 		<tr>
 			<th scope="col">ID</th>
+			<th scope="col">Initials</th>
 			<th scope="col">Date Created</th>
 			<th scope="col">Last Visit</th>
 			<th scope="col">Submitted</th>
@@ -44,6 +45,7 @@
 			<th scope="row">Total (#)</th>
 			<td></td>
 			<td></td>
+			<td></td>
 			<td>{{ $totalNum->get('ideas-submitted') }}</td>
 			<td>{{ $totalNum->get('ideas-skipped') }}</td>
 			<td>{{ $totalNum->get('ideas-exited') }}</td>
@@ -63,6 +65,7 @@
 		</tr>
 		<tr class="info">
 			<th scope="row">Total (%)</th>
+			<td></td>
 			<td></td>
 			<td></td>
 			<td>{{ $totalPer->get('ideas-submitted') }}</td>
@@ -85,6 +88,7 @@
 		@foreach($rows as $row)
 			<tr>
 				<th scope="row">{{ $row->get('user_id') }}</th>
+				<td>{{ $row->get('user_initials') }}</td>
 				<td>{{ $row->get('created_at') }}</td>
 				<td>{{ $row->get('last_visited') }}</td>
 				<td>{{ $row->get('ideas-submitted') }}</td>
