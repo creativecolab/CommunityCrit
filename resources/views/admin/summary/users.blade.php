@@ -3,7 +3,7 @@
 @section('title', 'User Summary')
 
 @section('structured-content')
-<div class="container-fluid">
+<div class="container-fluid admin">
 	<h1>User Summary</h1>
 	<table class="table table-striped table-bordered table-condensed table-hover">
 		<col>

@@ -52,6 +52,16 @@ class Idea extends Node
         return $this->hasMany( 'App\Rating' );
     }
 
+    public function linkTasks()
+    {
+        return $this->hasManyThrough('App\Task', 'App\Link', 'idea_id', 'id', 'id');
+    }
+
+    public function feedbackTasks()
+    {
+        return $this->hasManyThrough('App\Task', 'App\Feedback', 'idea_id', 'id', 'id');
+    }
+
     // public function tasks()
     // {
     //     return $this->belongsToMany( 'App\Task' );
