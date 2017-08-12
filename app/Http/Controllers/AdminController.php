@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Idea;
 use App\Link;
 use App\Feedback;
+use App\User;
+use App\TaskHist;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -109,6 +111,65 @@ class AdminController extends Controller
         $view = 'admin.summary.users';
         $data = [];
 
+        $users = User::all()->whereNotIn('id', [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);//("admin", "!=", 1);
+        $taskHists = TaskHist::all();
+
+        $rows = collect();
+
+        $ideas = $taskHists->where('task_id', 2);
+        $links = $taskHists->whereIn('task_id', [3, 4]);
+        $feedbacks = $taskHists->whereNotIn('task_id', [2, 3, 4]);
+
+        // total - #
+        $totalNum = collect();
+        $total = $taskHists;
+        $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
+        foreach ($groups as $key => $group) {
+            $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
+            foreach ($actions as $keyAct=>$action) {
+                $totalNum->put($key.'-'.$keyAct, count($group->whereIn('action', $action)));
+            }
+        }
+        $data['totalNum'] = $totalNum;
+
+        // total - %
+        $totalPer = collect();
+        $total = $taskHists;
+        $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
+        foreach ($groups as $key => $group) {
+            $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
+            foreach ($actions as $keyAct=>$action) {
+                $totalPer->put($key.'-'.$keyAct, sprintf("%.1f%%", count($group->whereIn('action', $action)) / count($group) * 100));
+
+            }
+        }
+        $data['totalPer'] = $totalPer;
+
+
+        // users
+        foreach ($users as $key => $user) {
+            $row = collect();
+            $row->put('user_id', $user->id);
+            $row->put('user_initials', $user->fname[0].$user->lname[0]);
+            $row->put('created_at', $user->created_at);
+            $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']);
+            $ideas = $user->taskHist->where('task_id', 2);
+            $links = $user->taskHist->whereIn('task_id', [3, 4]);
+            $feedbacks = $user->taskHist->whereNotIn('task_id', [2, 3, 4]);
+            $total = $user->taskHist;
+            $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
+            foreach ($groups as $key => $group) {
+                $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
+                foreach ($actions as $keyAct=>$action) {
+                    $count = count($group->whereIn('action', $action));
+                    $count = $count ? $count : '-';
+                    $row->put($key.'-'.$keyAct, $count);
+                }
+            }
+            $rows->push($row);
+        }
+
+        $data['rows'] = $rows;
         return view($view, $data);
     }
 

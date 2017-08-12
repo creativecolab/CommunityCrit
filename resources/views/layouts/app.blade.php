@@ -150,7 +150,7 @@
         @include('flash::message')
         @yield('content')
     </div>
-    <div class="footer">
+    <div class="footer print-none">
         <div class="center">
             <a href="{{ url('/privacy-policy') }}">Privacy Policy</a>
         </div>
