@@ -52,7 +52,7 @@
 			</td>
 			<td></td>
 		</tr>
-		@if (count($idea->links))
+		@if (count($idea->links->where('status', 1)))
 			<div style="display: none;">{{ $links = $idea->links->where('status', 1)->where('link_type', '>=' , 5) }}</div>
 			@foreach($links as $link)
 				<tr>
@@ -71,7 +71,7 @@
 			@endforeach
 		@endif
 
-		@if (count($idea->feedback))
+		@if (count($idea->feedback->where('status', 1)))
 			<div style="display: none;">{{ $feedbacks = $idea->feedback->where('status', 1) }}</div>
 			@foreach($feedbacks as $feedback)
 				<tr>
