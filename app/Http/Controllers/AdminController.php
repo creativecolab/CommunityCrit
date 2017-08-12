@@ -111,16 +111,17 @@ class AdminController extends Controller
         $view = 'admin.summary.users';
         $data = [];
 
-        $users = User::all();//("admin", "!=", 1);
+        $users = User::all()->whereNotIn('id', [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]);//("admin", "!=", 1);
         $taskHists = TaskHist::all();
 
         $rows = collect();
 
-        // total - #
-        $totalNum = collect();
         $ideas = $taskHists->where('task_id', 2);
         $links = $taskHists->whereIn('task_id', [3, 4]);
         $feedbacks = $taskHists->whereNotIn('task_id', [2, 3, 4]);
+
+        // total - #
+        $totalNum = collect();
         $total = $taskHists;
         $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
         foreach ($groups as $key => $group) {
@@ -133,9 +134,6 @@ class AdminController extends Controller
 
         // total - %
         $totalPer = collect();
-        $ideas = $taskHists->where('task_id', 2);
-        $links = $taskHists->whereIn('task_id', [3, 4]);
-        $feedbacks = $taskHists->whereNotIn('task_id', [2, 3, 4]);
         $total = $taskHists;
         $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
         foreach ($groups as $key => $group) {
@@ -152,6 +150,7 @@ class AdminController extends Controller
         foreach ($users as $key => $user) {
             $row = collect();
             $row->put('user_id', $user->id);
+            $row->put('user_initials', $user->fname[0].$user->lname[0]);
             $row->put('created_at', $user->created_at);
             $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']);
             $ideas = $user->taskHist->where('task_id', 2);
