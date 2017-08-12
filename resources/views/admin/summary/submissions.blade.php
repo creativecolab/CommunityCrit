@@ -53,12 +53,14 @@
 			<td></td>
 		</tr>
 		@if (count($idea->links->where('status', 1)))
-			<div style="display: none;">{{ $links = $idea->links->where('status', 1)->where('link_type', '>=' , 5) }}</div>
+			<div style="display: none;">{{ $links = $idea->links->where('status', 1)->sortBy('task_id') }}</div>
 			@foreach($links as $link)
 				<tr>
 					<td>
-						<strong>{{ $link->task->name }}</strong><br>
-						{{ $link->text }}
+						@if ($link->link_type >= 5)
+							<strong>{{ $link->task->name }}</strong><br>
+						@endif
+						{!! $link->text !!}
 					</td>
 					<td>
 						<span style="border: 1px gray solid; width: 20px; height: 20px;">&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -72,7 +74,7 @@
 		@endif
 
 		@if (count($idea->feedback->where('status', 1)))
-			<div style="display: none;">{{ $feedbacks = $idea->feedback->where('status', 1) }}</div>
+			<div style="display: none;">{{ $feedbacks = $idea->feedback->where('status', 1)->sortBy('task_id') }}</div>
 			@foreach($feedbacks as $feedback)
 				<tr>
 					<td>
