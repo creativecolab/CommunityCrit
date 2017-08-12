@@ -121,6 +121,7 @@ class AdminController extends Controller
         $allIdeas = collect();
         $allLinks = collect();
         $allFeedbacks = collect();
+        $allRatings = collect();
 
         // users
         foreach ($users as $key => $user) {
@@ -133,10 +134,12 @@ class AdminController extends Controller
             $allIdeas = $allIdeas->merge($ideas);
             $links = $user->taskHist->whereIn('task_id', [3, 4]);
             $allLinks = $allLinks->merge($links);
-            $feedbacks = $user->taskHist->whereNotIn('task_id', [2, 3, 4]);
+            $feedbacks = $user->taskHist->whereNotIn('task_id', [2, 3, 4, 11]);
             $allFeedbacks = $allFeedbacks->merge($feedbacks);
+            $ratings = $user->taskHist->where('task_id', 11);
+            $allRatings = $allRatings->merge($ratings);
             $total = $user->taskHist;
-            $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'total' => $total];
+            $groups = ['ideas' => $ideas, 'links' => $links, 'feedbacks' => $feedbacks, 'ratings' => $ratings, 'total' => $total];
             foreach ($groups as $key => $group) {
                 $actions = ['submitted' => [1], 'skipped' => [5], 'exited' => [2, 3, 4], 'bounced' => [null]];
                 foreach ($actions as $keyAct=>$action) {
@@ -153,7 +156,8 @@ class AdminController extends Controller
         $allTotal = $allTotal->merge($allIdeas);
         $allTotal = $allTotal->merge($allLinks);
         $allTotal = $allTotal->merge($allFeedbacks);
-        $allGroups = ['ideas' => $allIdeas, 'links' => $allLinks, 'feedbacks' => $allFeedbacks, 'total' => $allTotal];
+        $allTotal = $allTotal->merge($allRatings);
+        $allGroups = ['ideas' => $allIdeas, 'links' => $allLinks, 'feedbacks' => $allFeedbacks, 'ratings' => $allRatings, 'total' => $allTotal];
 
         // total - #
         $totalNum = collect();
@@ -170,7 +174,7 @@ class AdminController extends Controller
         foreach ($allGroups as $key => $group) {
             foreach ($actions as $keyAct=>$action) {
                 $count = count($group->whereIn('action', $action));
-                $totalPer->put($key.'-'.$keyAct, sprintf("%.1f%%", $count / count($group) * 100));
+                $totalPer->put($key.'-'.$keyAct, sprintf("%.1f%%", count($group) ? ($count / count($group) * 100) : 0));
             }
         }
         $data['totalPer'] = $totalPer;
