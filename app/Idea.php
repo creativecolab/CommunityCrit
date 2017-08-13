@@ -7,6 +7,8 @@ use Backpack\CRUD\CrudTrait;
 // use Hootlex\Moderation\Moderatable;
 use Illuminate\Database\Eloquent\Model;
 use Baum\Node;
+use Illuminate\Notifications\Notifiable;
+
 
 class Idea extends Node
 {
@@ -17,6 +19,7 @@ class Idea extends Node
 
     // use Moderatable;
     use CrudTrait;
+    use Notifiable;
 
     protected $fillable = [
         'text',
@@ -88,5 +91,18 @@ class Idea extends Node
     {
         $date = $date->setTimezone('America/Los_Angeles');
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
+    }
+
+    /**
+     * Route notifications for the Slack channel.
+     *
+     * @return string
+     */
+    public function routeNotificationForSlack()
+    {
+        // return env('SLACK_WEBHOOK_URL', 'default');
+        // return config('slack.webhook');
+        return 'https://hooks.slack.com/services/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';
+        // $value = config('app.timezone');
     }
 }

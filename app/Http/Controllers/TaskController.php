@@ -17,6 +17,10 @@ use Illuminate\Http\Request;
 use Intervention\Image\ImageManagerStatic as Image;
 //use Cornford\Googlmapper\Mapper;
 use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
+use App\Notifications\NewFeedback;
+use App\Notifications\NewIdea;
+use App\Notifications\NewLink;
+use Carbon\Carbon;
 
 class TaskController extends Controller
 {
@@ -797,6 +801,8 @@ class TaskController extends Controller
 
             $hist = updateTaskHist($request, 1);
 
+            $idea->notify(new NewIdea($idea));
+
             return redirect()->route('do');
         }
         else {
@@ -852,6 +858,8 @@ class TaskController extends Controller
             }
 
             $hist = updateTaskHist($request, 1);
+
+            $feedback->notify(new NewFeedback($feedback));
 
             return redirect()->route('do', [$idea]);
         }
@@ -913,6 +921,8 @@ class TaskController extends Controller
             }
 
             $hist = updateTaskHist($request, 1);
+
+            $link->notify(new NewLink($link));
 
             return redirect()->route('do', [$idea_id]);
         }
