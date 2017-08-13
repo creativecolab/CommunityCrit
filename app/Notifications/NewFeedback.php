@@ -80,7 +80,7 @@ class NewFeedback extends Notification implements ShouldQueue
             ->content('A user has submitted a new feedback.')
             ->attachment(function ($attachment) {
             // ->attachment(function ($attachment) use ($url) {
-                $attachment->title($this->fbk->task->name)
+                $attachment->title($this->fbk->task->name."\n".$this->fbk->task->text)
                     ->content($this->fbk->comment)
                     ->fields([
                                 'Idea' => $this->fbk->idea->name,
