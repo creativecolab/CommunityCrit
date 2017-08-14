@@ -188,4 +188,21 @@ class User extends Authenticatable
 			static::CONDITION_PERSONAL_MICROTASK_CLOSED,
 		]);
 	}
+
+	/**
+     * returns count of the user's total contributions, regardless of status
+     *
+     * @return str
+     */
+    public function getSubmittedAttribute()
+    {
+        return $contributions = count($this->taskHist->where('action', 1));
+
+        	// $contributions = count($this->taskHist->where('status', 1)) + 
+ //            count(auth()->user()->ideas) + 
+ //            count(auth()->user()->links) + 
+ //            intval(count(auth()->user()->ratings) / 3)
+    }
+
+	
 }

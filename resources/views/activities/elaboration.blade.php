@@ -12,15 +12,8 @@
 
     {{--{{ \Session::put('time1',new \Carbon\Carbon()) }}--}}
 
-    <!-- set count var -->
-    <div style="display: none">
-        {{ $count = count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 3) }}
-    </div>
-
     <div class="activity" id="text-link">
-        {{--@if ($count >= 4)--}}
             <a type="button" class="btn btn-default" id="back" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back to Do An Activity</a>
-        {{--@endif--}}
 
         <a type="button" class="btn btn-default" data-toggle="collapse" href="#collapseOverview" aria-expanded="false" aria-controls="collapseOverview" id="overview-btn" onclick="overview_onClick()"><span id="overview-btn-instr">Show</span> El Nudillo Overview</a>
 
@@ -169,10 +162,6 @@
                         </div>
                     @endif--}}
 
-                    <!-- <div>
-                        {{--@if ($count >= 4)--}}
-                            <a type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Back to Main Menu</a>
-                        {{--@endif--}} -->
                         <div class="pull-right" id="actions">
                             @if (intval(($task->type) / 10) != 4)
                             <a id="skip" value="Skip >" onclick="return skip_onclick();">Skip <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
@@ -189,11 +178,6 @@
                 </div> <!-- #response -->
             </li>
         </ul> <!-- list group -->
-        <!-- <div>
-            {{--@if ($count >= 4)--}}
-                <a type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Back to Main Menu</a>
-            {{--@endif--}}
-        </div> -->
     </div> <!-- .container -->
     <script>
         function skip_onclick()
