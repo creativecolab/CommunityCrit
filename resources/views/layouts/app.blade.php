@@ -18,6 +18,7 @@
     <link rel="shortcut icon" href="{{ asset('img/favicon.ico') }}">
     @include("utilities.analytics")
 
+    @yield('other_styles')
 </head>
 <body>
 <div id="app">
@@ -160,6 +161,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <!-- <script src="{{ asset('js/activities.js') }}"></script> -->
+@yield('other_scripts')
 <script>
     $( document ).ready(function() {
         // $('#waiting').hide();
