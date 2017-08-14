@@ -21,6 +21,7 @@ class MyContributionsComposer
 
     /**
      * Bind data to the view.
+     * THIS COMPOSER IS NOT USED ANYMORE.
      *
      * @param  View  $view
      * @return void
