@@ -55,9 +55,8 @@ if (! function_exists('updateTaskHist')) {
             else {
                 $diff_time = $t1->diffinSeconds($t2) + $t1->diff($t2)->f;
                 $diff_time_mil = (int)($diff_time * 1000);
+                $taskHist->update(['action' => $action, 'time_all' => $diff_time_mil]);
             }
-
-            $taskHist->update(['action' => $action, 'time_all' => $diff_time_mil]);
         }
 
         // TODO: if record is somehow deleted, create it
