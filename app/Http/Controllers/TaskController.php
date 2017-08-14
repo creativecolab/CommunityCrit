@@ -872,6 +872,53 @@ class TaskController extends Controller
         }
     }
 
+    public function submitQuestion( Request $request) //Idea $idea, int $task)
+    {
+        $exit = $request->get( 'exit' );
+
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                'text' => 'required',
+            ]);
+        }
+
+        $this->incrementPtr();
+
+        $idea = $request->get('idea');
+
+        $question = new Question;
+        $question->text = $request->get('text');
+        $question->idea_id = $idea;
+        $question->user_id = \Auth::id();
+
+        if ($exit == 'Submit') {
+            if ( $question->save() ) {
+                flash("Your contribution was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            $hist = updateTaskHist($request, 1);
+
+            return redirect()->route('do', [$idea]);
+        }
+        else {
+            if ($question->text) {
+//                if ( $feedback->save() ) {
+//                    flash("Your contribution was submitted!")->success();
+//                } else {
+//                    flash('Unable to save your feedback. Please contact us.')->error();
+//                }
+
+                $hist = updateTaskHist($request, 2);
+            } else {
+                $hist = updateTaskHist($request, 3);
+            }
+
+            return redirect()->route('main-menu');
+        }
+    }
+
     /**
      * create a new link
      *

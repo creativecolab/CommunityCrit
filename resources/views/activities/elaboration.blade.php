@@ -94,6 +94,8 @@
                         <!-- <em>Link!</em> -->
                     @elseif ($task->type == 100)
                         {!! Form::open(['action' => ['TaskController@submitRatings'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
+                    @elseif ($task->type == 62)
+                        {!! Form::open(['action' => ['TaskController@submitQuestion', $idea->id], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                     @else
                         {!! Form::open(['action' => ['TaskController@submitText', $idea->id], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                         <!-- <em>Everything else!</em> -->
@@ -120,7 +122,11 @@
 
                             </label> -->
                             <!-- <textarea class="form-control" rows="3" id="submissionText" name="text" value="{{ old('text') }}" placeholder="Please enter your response here." required></textarea> -->
-                            {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your response here.")) }}
+                            @if ($task->type != 62)
+                                {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your response here.")) }}
+                            @else
+                                {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your question here.")) }}
+                            @endif
                             @if ($errors->has('text'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('text') }}</strong>
