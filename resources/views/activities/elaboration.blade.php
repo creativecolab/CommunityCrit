@@ -87,7 +87,7 @@
                 <div id="response">
 
                     @if (intval(($task->type) / 10) == 4)
-                        {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
+                        {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline', 'id' => 'task-form', 'files' => 'true']) !!}
                         <!-- <em>Submission!</em> -->
                     @elseif (intval(($task->type) / 10) == 7)
                         {!! Form::open(['action' => ['TaskController@submitLink'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
@@ -147,6 +147,7 @@
                                     <label class="instruction" for="submissionText">Give your idea a name.</label>
                                     <!-- <input type="text" class="form-control" name="name" required></input> -->
                                     {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => "Name your idea.", 'type' => 'text')) }}
+
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -155,6 +156,24 @@
                                 </div>
                             </div> <!-- .col -->
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+
+                                    <label class="instruction" for="submissionText">(Optional) Upload an image</label>
+                                    {{--{!! Form::file('photo[]', ['multiple' => 'multiple']) !!}--}}
+                                    {!! Form::file('photo') !!}
+
+                                    @if ($errors->has('photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div> <!-- .col -->
+                        </div>
+
                     @endif
 
                     {{--<!-- linking task -->
