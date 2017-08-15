@@ -7,14 +7,15 @@
         <h1>Do An Activity</h1>
         <p>Please select an option below to begin contributing.</p>
 
-        <h2>Pick an Idea to Work On</h2>
+        <h2 style="display:inline">Pick an Idea to Work On</h2>
+        <a id="refresher"><span class="glyphicon glyphicon-refresh"></span></a>
         <p>Here are three random ideas that were submitted by community members. Select one to complete five activities related to that idea. You are always free to skip activities, and you can switch to a different idea by coming back to this page at any time.</p>
-        <div class="row">
-            @foreach ($ideas as $idea)
+        <div id="shown-ideas" class="row">
+            @foreach ($ideas as $key=>$idea)
                 <div class="col-sm-6 col-md-4">
-                    <a class="panel-link" href="{{ action( 'TaskController@showRandomTask', $idea->id) }}">
+                    <a id="idea-link-{{$key}}" class="panel-link" href="{{ action( 'TaskController@showRandomTask', $idea->id) }}">
                         <div class="panel panel-default">
-                            <div class="panel-body lg">
+                            <div id="idea-name-{{$key}}" class="panel-body lg">
                                 @if ($idea->name)
                                     {{$idea->name}}
                                 @endif

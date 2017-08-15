@@ -723,6 +723,13 @@ class TaskController extends Controller
 
     }
 
+    public function ajaxIdeas()
+    {
+        $ideas = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
+        return json_encode($ideas);
+    }
+
+
     /**
      * Get the error messages for the defined validation rules.
      *

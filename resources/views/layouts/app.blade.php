@@ -233,6 +233,36 @@
 
         });
     };
+    var refresherHandler = function() {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: 'GET',
+            url: '/ajax/ideas',
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+
+                for (var i = 0; i < data.length; i++) {
+                    var name_str = "idea-name-" + i;
+                    var link_str = "idea-link-" + i;
+                    var name = document.getElementById(name_str);
+                    var link = document.getElementById(link_str);
+                    {{--                link.href = "@{{ action( 'TaskController@showRandomTask'," + data[0].id + ") @}}";--}}
+                    link.href = "{{ action( 'TaskController@showRandomTask') }}" + "/" + data[i].id;
+                    name.innerHTML = data[i].name;
+                }
+
+            },
+            error: function(data) {
+                console.log(data)
+            }
+        });
+    };
 
     // You don't have to attach them this way, it's just for example
 
@@ -242,6 +272,9 @@
         inputs[i].onfocus = focusHandler;
         inputs[i].onblur = blurHandler;
     }
+
+    var refresher = document.getElementById('refresher');
+    refresher.onclick = refresherHandler;
 
 </script>
 </body>
