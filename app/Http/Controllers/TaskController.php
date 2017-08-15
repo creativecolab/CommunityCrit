@@ -619,7 +619,7 @@ class TaskController extends Controller
         if(!\File::exists($path)) {
             \File::makeDirectory($path, 0777, true);
         }
-        Image::make($img)->resize(300, 300)->save($path . $idea_id . '_' . $id . '_main.jpg');
+        Image::make($img)->save($path . $idea_id . '_' . $id . '_main.jpg');
 
         $path2 = public_path() . '/images/ideas/' . $idea_id . '/extra/';
         $imgs = $request->file('extra');
@@ -627,7 +627,7 @@ class TaskController extends Controller
             \File::makeDirectory($path2, 0777, true);
         }
         foreach($imgs as $key=>$ext) {
-            Image::make($ext)->resize(300, 300)->save($path2 . $idea_id . '_' . $key . '_extra.jpg');
+            Image::make($ext)->save($path2 . $idea_id . '_' . $key . '_extra.jpg');
         }
     }
 
