@@ -14,6 +14,7 @@
 
   ga('create', 'UA-104110133-1', 'auto', {
   	userId: myID,
+    dimension1: myID,
     dimension2: admin,
     dimension3: type,
     dimension4: created_at
