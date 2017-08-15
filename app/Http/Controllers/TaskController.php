@@ -620,6 +620,15 @@ class TaskController extends Controller
             \File::makeDirectory($path, 0777, true);
         }
         Image::make($img)->resize(300, 300)->save($path . $idea_id . '_' . $id . '_main.jpg');
+
+        $path2 = public_path() . '/images/ideas/' . $idea_id . '/extra/';
+        $imgs = $request->file('extra');
+        if(!\File::exists($path2)) {
+            \File::makeDirectory($path2, 0777, true);
+        }
+        foreach($imgs as $key=>$ext) {
+            Image::make($ext)->resize(300, 300)->save($path2 . $idea_id . '_' . $key . '_extra.jpg');
+        }
     }
 
     public function imageTest($id)
@@ -784,6 +793,12 @@ class TaskController extends Controller
                 $this->validate($request, [
                    'photo' => 'mimes:jpeg,jpg,png,gif|max:10000' // max 10000kb
                 ]);
+
+                if ($request->hasFile('extra')) {
+                    $this->validate($request, [
+                        'extra.*' => 'mimes:jpeg,jpg,png,gif|max:5000'
+                    ]);
+                }
             }
         }
 
