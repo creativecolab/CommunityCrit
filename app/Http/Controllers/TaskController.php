@@ -610,18 +610,25 @@ class TaskController extends Controller
         return view($view, $data);
     }
 
-    public function uploadImage( Request $request, Task $task )
+    public function uploadImage( $request, $idea_id )
     {
         $id = \Auth::id();
-        $task_id = $task->id;
 
-        $path = public_path() . '/images/activities/' . $id . '/' . $task_id . '/';
+        $path = public_path() . '/images/ideas/' . $idea_id . '/';
         $img = $request->file('photo');
         if(!\File::exists($path)) {
             \File::makeDirectory($path, 0777, true);
         }
-        Image::make($img)->resize(300, 300)->save($path . 'bar.jpg');
-        return redirect()->action('TaskController@allActivities');
+        Image::make($img)->resize(300, 300)->save($path . $idea_id . '_' . $id . '_main.jpg');
+
+        $path2 = public_path() . '/images/ideas/' . $idea_id . '/extra/';
+        $imgs = $request->file('extra');
+        if(!\File::exists($path2)) {
+            \File::makeDirectory($path2, 0777, true);
+        }
+        foreach($imgs as $key=>$ext) {
+            Image::make($ext)->resize(300, 300)->save($path2 . $idea_id . '_' . $key . '_extra.jpg');
+        }
     }
 
     public function imageTest($id)
@@ -781,6 +788,18 @@ class TaskController extends Controller
                 'name' => 'required|max:255',
                 'text' => 'required',
             ]);
+
+            if ($request->hasFile('photo')) {
+                $this->validate($request, [
+                   'photo' => 'mimes:jpeg,jpg,png,gif|max:10000' // max 10000kb
+                ]);
+
+                if ($request->hasFile('extra')) {
+                    $this->validate($request, [
+                        'extra.*' => 'mimes:jpeg,jpg,png,gif|max:5000'
+                    ]);
+                }
+            }
         }
 
         $idea = new Idea;
@@ -790,6 +809,8 @@ class TaskController extends Controller
 
         if ($exit == 'Submit') {
             if ($idea->save() ) {
+                if ($request->hasFile('photo'))
+                    $this->uploadImage($request, $idea->id);
                 flash("Your idea was submitted! You may do another activity or exit below.")->success();
             } else {
                 flash('Unable to save your feedback. Please contact us.')->error();

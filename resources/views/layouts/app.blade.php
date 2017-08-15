@@ -166,6 +166,23 @@
         var speed = 400;
         $('.activity #question').fadeTo(speed, 1);
         $('.activity #detail').delay(speed).fadeTo(speed, 1);
+
+        //for use in activities\elaboration
+        $("#photosub").change(function () {
+            var photosub = document.getElementById("photosub");
+            var extrasub = document.getElementById("extrasub");
+            var extradiv = document.getElementById("extradiv");
+            if (photosub && photosub.value) {
+                extradiv.style.display = 'block';
+                extrasub.style.display = 'inline';
+            }
+            else {
+                extradiv.style.display = 'none';
+                extrasub.value = null;
+                extrasub.style.display = 'none';
+            }
+        });
+
     });
 
     var visible = false;
@@ -225,6 +242,7 @@
         inputs[i].onfocus = focusHandler;
         inputs[i].onblur = blurHandler;
     }
+
 </script>
 </body>
 </html>

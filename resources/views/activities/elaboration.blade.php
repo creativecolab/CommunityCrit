@@ -80,7 +80,7 @@
                 <div id="response">
 
                     @if (intval(($task->type) / 10) == 4)
-                        {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
+                        {!! Form::open(['action' => ['TaskController@submitIdea'], 'style' => 'display:inline', 'id' => 'task-form', 'files' => 'true']) !!}
                         <!-- <em>Submission!</em> -->
                     @elseif (intval(($task->type) / 10) == 7)
                         {!! Form::open(['action' => ['TaskController@submitLink'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
@@ -140,6 +140,7 @@
                                     <label class="instruction" for="submissionText">Give your idea a name.</label>
                                     <!-- <input type="text" class="form-control" name="name" required></input> -->
                                     {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => "Name your idea.", 'type' => 'text')) }}
+
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('name') }}</strong>
@@ -148,6 +149,47 @@
                                 </div>
                             </div> <!-- .col -->
                         </div>
+
+                        <div class="row">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+
+                                    <label class="instruction" for="submissionText">(Optional) Upload a main image</label>
+                                    {!! Form::file('photo', ['id' => 'photosub']) !!}
+
+                                    @if ($errors->has('photo'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('photo') }}</strong>
+                                    </span>
+                                    @endif
+                                    @if ($errors->get('extra.*'))
+                                    @foreach($errors->get('extra.*') as $er)
+                                        @foreach($er as $msg)
+                                        <span class="help-block">
+                                            <strong>{{ $msg }}</strong>
+                                        </span>
+                                        @endforeach
+                                    @endforeach
+                                    @endif
+                                </div>
+                            </div> <!-- .col -->
+                        </div>
+
+                        <div class="row" id="extradiv" style="display:none">
+                            <div class="col-sm-6 col-md-4">
+                                <div class="form-group{{$errors->has('name') ? ' has-error' : ''}}">
+                                    <label class="instruction" for="submissionText">(Optional) Upload extra images</label>
+
+                                    {!! Form::file('extra[]', ['multiple' => 'multiple', 'id' => 'extrasub', 'style' => 'display:none']) !!}
+                                    @if ($errors->has('extra[]'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('extra[]') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
                     @endif
 
                     {{--<!-- linking task -->
