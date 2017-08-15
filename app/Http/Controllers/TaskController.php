@@ -612,6 +612,7 @@ class TaskController extends Controller
 
     public function uploadImage( $request, $idea_id )
     {
+        $idea = Idea::find($idea_id);
         $id = \Auth::id();
 
         $path = public_path() . '/images/ideas/' . $idea_id . '/';
@@ -621,13 +622,18 @@ class TaskController extends Controller
         }
         Image::make($img)->save($path . $idea_id . '_' . $id . '_main.jpg');
 
-        $path2 = public_path() . '/images/ideas/' . $idea_id . '/extra/';
-        $imgs = $request->file('extra');
-        if(!\File::exists($path2)) {
-            \File::makeDirectory($path2, 0777, true);
-        }
-        foreach($imgs as $key=>$ext) {
-            Image::make($ext)->save($path2 . $idea_id . '_' . $key . '_extra.jpg');
+        $idea->img_url = '/images/ideas/' . $idea_id . '/' . $idea_id . '_' . $id . '_main.jpg';
+        $idea->save();
+
+        if ($request->file('extra')) {
+            $path2 = public_path() . '/images/ideas/' . $idea_id . '/extra/';
+            $imgs = $request->file('extra');
+            if (!\File::exists($path2)) {
+                \File::makeDirectory($path2, 0777, true);
+            }
+            foreach ($imgs as $key => $ext) {
+                Image::make($ext)->save($path2 . $idea_id . '_' . $key . '_extra.jpg');
+            }
         }
     }
 
