@@ -1138,6 +1138,7 @@ class TaskController extends Controller
             else {
                 $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
             }
+            $tasks = $this->taskWeight($tasks);
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
 //            \Session::put('t_ptr', $t_ptr+1);
@@ -1153,6 +1154,19 @@ class TaskController extends Controller
 //            \Session::put('t_ptr', $t_ptr+1);
         }
         return \Session::get('t_queue')[\Session::get('t_ptr')-1];
+    }
+
+    private function taskWeight($tasks)
+    {
+//        $user_id = \Auth::id();
+//        //get all taskhists of user
+//        $th = TaskHist::where('user_id', $user_id);
+//
+//        foreach ($tasks->pluck('id') as $task_id) {
+//
+//        }
+
+        return $tasks;
     }
 
     private function incrementPtr()
