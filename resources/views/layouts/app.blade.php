@@ -259,16 +259,14 @@
                 r_ptr += 1;
                 console.log(r_ptr);
 
-                if (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var name_str = "idea-name-" + i;
-                        var link_str = "idea-link-" + i;
-                        var name = document.getElementById(name_str);
-                        var link = document.getElementById(link_str);
-                        link.href = "@{{ action( 'TaskController@showRandomTask'," + data[0].id + ") @}}";
-                        link.href = "{{ action( 'TaskController@showRandomTask') }}" + "/" + data[i].id;
-                        name.innerHTML = data[i].name;
-                    }
+                for (var i = 0; i < data.length; i++) {
+                    var name_str = "idea-name-" + i;
+                    var link_str = "idea-link-" + i;
+                    var name = document.getElementById(name_str);
+                    var link = document.getElementById(link_str);
+                    link.href = "@{{ action( 'TaskController@showRandomTask'," + data[0].id + ") @}}";
+                    link.href = "{{ action( 'TaskController@showRandomTask') }}" + "/" + data[i].id;
+                    name.innerHTML = data[i].name;
                 }
             },
             error: function(data) {
@@ -287,7 +285,8 @@
     }
 
     var refresher = document.getElementById('refresher');
-    refresher.onclick = refresherHandler;
+    if (refresher)
+        refresher.onclick = refresherHandler;
 
 </script>
 </body>

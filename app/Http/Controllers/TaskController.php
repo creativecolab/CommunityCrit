@@ -741,11 +741,7 @@ class TaskController extends Controller
     {
         $groups = \Session::get('i_queue');
         $i_ptr = $request->get('i_ptr');
-        if ($groups == null || $i_ptr === null) {
-//            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
-            return \Session::all();
-        }
-        elseif (Idea::where('status',1)->count() <= static::NUM_IDEAS) {
+        if ($groups == null || $i_ptr === null || Idea::where('status',1)->count() <= static::NUM_IDEAS) {
             $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
             return json_encode($ideas);
         }
