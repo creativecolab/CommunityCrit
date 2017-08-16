@@ -122,6 +122,7 @@ class AdminController extends Controller
         $allLinks = collect();
         $allFeedbacks = collect();
         $allRatings = collect();
+        $allComments = collect();
 
         // users
         foreach ($users as $key => $user) {
@@ -134,7 +135,7 @@ class AdminController extends Controller
             $allIdeas = $allIdeas->merge($ideas);
             $links = $user->taskHist->whereIn('task_id', [3, 4]);
             $allLinks = $allLinks->merge($links);
-            $feedbacks = $user->taskHist->whereNotIn('task_id', [2, 3, 4, 11]);
+            $feedbacks = $user->taskHist->whereNotIn('task_id', [1, 2, 3, 4, 11]);
             $allFeedbacks = $allFeedbacks->merge($feedbacks);
             $ratings = $user->taskHist->where('task_id', 11);
             $allRatings = $allRatings->merge($ratings);
@@ -148,6 +149,14 @@ class AdminController extends Controller
                     $row->put($key.'-'.$keyAct, $count);
                 }
             }
+
+            //comments
+            $comments = $user->taskHist->where('task_id', 1);
+            $allComments = $allComments->merge($comments);
+            $count = count($comments->whereIn('action', 7));
+            $count = $count ? $count : '-';
+            $row->put('comments-submitted', $count);
+
             $rows->push($row);
         }
 
@@ -167,6 +176,10 @@ class AdminController extends Controller
                 $totalNum->put($key.'-'.$keyAct, $count);
             }
         }
+        //allComments - #
+        $count = count($allComments->whereIn('action', 7));
+        $count = $count ? $count : '-';
+        $totalNum->put('comments-submitted', $count);
         $data['totalNum'] = $totalNum;
 
         // total - %

@@ -88,3 +88,21 @@ if (! function_exists('updateTaskHistTimer')) {
         }
     }
 }
+
+if (! function_exists('createCommentTaskHist')) {
+    /**
+     * create a task history record for comments
+     *
+     * @param $idea_id
+     * @param $task_id
+     */
+    function createCommentTaskHist($idea_id, $task_id)
+    {
+        $taskHist = new TaskHist;
+        $taskHist->user_id = \Auth::id();
+        $taskHist->idea_id = $idea_id;
+        $taskHist->task_id = $task_id;
+        $taskHist->action = 7;
+        $taskHist->save();
+    }
+}

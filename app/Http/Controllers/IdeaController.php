@@ -295,7 +295,7 @@ class IdeaController extends Controller
             flash('Unable to save your feedback. Please contact us.')->error();
         }
 
-        $hist = updateTaskHist($request, 1, $idea_id, $task_id);
+        $hist = createCommentTaskHist($idea_id, $task_id);
 
         return redirect()->back();
     }
