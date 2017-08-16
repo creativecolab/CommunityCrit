@@ -153,6 +153,7 @@
                             <button type="submit" class="btn btn-primary">
                                 Register
                             </button>
+                            <button type="submit" name="guest-submit" value="guest" id="guest-button" class="btn btn-link btn-xs">Continue as Guest</button>
                         </div>
                     </div>
                 </form>

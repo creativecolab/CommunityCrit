@@ -185,6 +185,11 @@
 
     });
 
+    $('#guest-button').click(function(){
+        $('[required]').removeAttr('required');
+        $('#consent').prop('required', true);
+    });
+
     var visible = false;
     function overview_onClick() {
         visible = !visible;

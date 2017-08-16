@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -84,4 +85,37 @@ class RegisterController extends Controller
 			$recService->addRecommendations( $user );
 		}
 	}
+
+    protected function ghostAcc(array $data)
+    {
+        return User::create([
+            'fname' => 'Guest',
+            'lname' => \Carbon\Carbon::now()->micro,
+            'consent' => $data['consent'] ? 1 : 0,
+        ]);
+    }
+
+    /**
+     * Handle a registration request for the application.
+     * Overrides register in RegistersUsers class
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request)
+    {
+        if ($request->get('guest-submit') == 'guest') {
+            event(new Registered($user = $this->ghostAcc($request->all())));
+        }
+        else {
+            $this->validator($request->all())->validate();
+
+            event(new Registered($user = $this->create($request->all())));
+        }
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
 }
