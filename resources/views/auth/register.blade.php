@@ -153,12 +153,18 @@
                             <button type="submit" class="btn btn-primary">
                                 Register
                             </button>
-                            <button type="submit" name="guest-submit" value="guest" id="guest-button" class="btn btn-link btn-xs">Continue as Guest</button>
+                            <button type="submit" name="guest-submit" value="guest" id="guest-button" class="btn-link">Continue as Guest</button>
                         </div>
                     </div>
                 </form>
             </li>
         </ul>
+        <div class="form-group text-center">
+            <a class="btn-link" href="{{ route('login') }}">
+                I already have an account
+            </a>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
