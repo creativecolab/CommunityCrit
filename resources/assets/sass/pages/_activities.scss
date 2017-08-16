@@ -75,6 +75,23 @@
 				p + p {
 					padding-top: $padding-base-vertical;
 				}
+
+				&.has-img {
+					#text {
+						float: none;
+						width: 100%;
+					}
+
+					#img {
+						float: none;
+						width: 100%;
+						padding-top: $padding-base-vertical;
+
+						img {
+							@extend .img-responsive; 
+						}
+					}
+				}
 			}
 
 			&:first-child {
@@ -141,6 +158,26 @@
 
 		&:last-child {
 			padding-bottom: $padding-task-panel - 25px;
+		}
+
+		&#idea {
+			&.has-img {
+				#text {
+					float: left;
+					width: 65%;
+					margin-right: 5%;
+				}
+
+				#img {
+					float: left;
+					width: 30%;
+					padding-top: 0;
+
+					img {
+						max-height: 250px;
+					}
+				}
+			}
 		}
 	}
 }

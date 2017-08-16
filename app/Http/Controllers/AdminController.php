@@ -157,7 +157,7 @@ class AdminController extends Controller
             //comments
             $comments = $user->taskHist->where('task_id', 1);
             $allComments = $allComments->merge($comments);
-            $count = count($comments->whereIn('action', 7));
+            $count = count($comments->whereIn('action', 1));
             $count = $count ? $count : '-';
             $row->put('comments-submitted', $count);
 
@@ -181,7 +181,7 @@ class AdminController extends Controller
             }
         }
         //allComments - #
-        $count = count($allComments->whereIn('action', 7));
+        $count = count($allComments->whereIn('action', 1));
         $count = $count ? $count : '-';
         $totalNum->put('comments-submitted', $count);
         $data['totalNum'] = $totalNum;
