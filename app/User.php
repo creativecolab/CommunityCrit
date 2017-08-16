@@ -54,7 +54,12 @@ class User extends Authenticatable
     ];
 
     protected function getNameAttribute() {
-    	return $this->fname . ' ' . $this->lname;
+    	$guest = 'Guest';
+    	if ($this->fname == $guest) {
+    		return $this->fname;
+    	} else {
+    		return $this->fname . ' ' . $this->lname;
+    	}
     }
 
 	/**
