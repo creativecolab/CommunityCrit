@@ -102,7 +102,7 @@ if (! function_exists('createCommentTaskHist')) {
         $taskHist->user_id = \Auth::id();
         $taskHist->idea_id = $idea_id;
         $taskHist->task_id = $task_id;
-        $taskHist->action = 7;
+        $taskHist->action = 1;
         $taskHist->save();
     }
 }
