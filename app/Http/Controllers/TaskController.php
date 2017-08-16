@@ -221,8 +221,6 @@ class TaskController extends Controller
         $view = 'activities.menu';
         $data = [];
 
-        $data['ideas'] = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
-
         \Session::forget('idea');
         \Session::forget('t_queue');
         \Session::forget('t_ptr');
@@ -230,6 +228,14 @@ class TaskController extends Controller
 
         \Session::put('t_queue', collect([]));
         \Session::put('t_ptr', 1);
+        \Session::put('i_ptr', 1);
+
+        if (Idea::where('status',1)->count() <= static::NUM_IDEAS)
+            $data['ideas'] = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
+        else {
+            $groups = $this->ideaQueue(Idea::where('status',1)->get());
+            $data['ideas'] = $this->sepIdeaQueue($groups);
+        }
 
         return view($view, $data);
     }
@@ -1181,6 +1187,8 @@ class TaskController extends Controller
     private function ideaQueue($ideas)
     {
         $part = static::NUM_IDEAS;
+        $num_ideas = $ideas->count();
+        $groups = collect([]);
 
         //count submissions per idea
         $submit_count = TaskHist::where('action',1)->whereNotNull('idea_id')->get()
@@ -1196,11 +1204,27 @@ class TaskController extends Controller
             else
                 $idea->num_count = 0;
         }
-
         $ideas = $ideas->sortBy('num_count');
 
+        //split ideas into parts
+        for ($i = $part-1; $i >= 0; $i--) {
+            $grp = $ideas->splice((int)($i*$num_ideas/$part));
+            $groups->push($grp->shuffle());
+        }
 
+        \Session::put('i_queue', $groups);
+        return $groups;
+    }
 
+    private function sepIdeaQueue($groups)
+    {
+        $ptr = \Session::pull('i_ptr');
+        $ideas = collect([]);
+        foreach ($groups as $group) {
+            $idx = $ptr % $group->count() - 1;
+            $ideas->push($group[$idx]);
+        }
+        return $ideas->shuffle();
     }
 
     private function incrementPtr()
