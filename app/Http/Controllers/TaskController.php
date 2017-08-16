@@ -223,18 +223,20 @@ class TaskController extends Controller
 
         \Session::forget('idea');
         \Session::forget('t_queue');
+        \Session::forget('i_queue');
         \Session::forget('t_ptr');
-        \Session::forget('i_ptr');
+        \Session::forget('no_iq');
 
         \Session::put('t_queue', collect([]));
         \Session::put('t_ptr', 1);
-        \Session::put('i_ptr', 1);
 
-        if (Idea::where('status',1)->count() <= static::NUM_IDEAS)
-            $data['ideas'] = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
+        if (Idea::where('status',1)->count() <= static::NUM_IDEAS) {
+            \Session::put('no_iq', true);
+            $data['ideas'] = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
+        }
         else {
             $groups = $this->ideaQueue(Idea::where('status',1)->get());
-            $data['ideas'] = $this->sepIdeaQueue($groups);
+            $data['ideas'] = $this->sepIdeaQueue($groups, 0);
         }
 
         return view($view, $data);
@@ -737,10 +739,20 @@ class TaskController extends Controller
 
     }
 
-    public function ajaxIdeas()
+    public function ajaxIdeas( Request $request )
     {
-        $ideas = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
-        return json_encode($ideas);
+        $groups = \Session::get('i_queue');
+        $i_ptr = $request->get('i_ptr');
+        if ($groups == null || $i_ptr === null) {
+//            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
+            return \Session::all();
+        }
+        else {
+            $i_ptr += 1;
+            $ideas = $this->sepIdeaQueue($groups, $i_ptr);
+//            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
+            return json_encode($ideas);
+        }
     }
 
 
@@ -1216,15 +1228,15 @@ class TaskController extends Controller
         return $groups;
     }
 
-    private function sepIdeaQueue($groups)
+    private function sepIdeaQueue($groups, $i_ptr)
     {
-        $ptr = \Session::pull('i_ptr');
         $ideas = collect([]);
         foreach ($groups as $group) {
-            $idx = $ptr % $group->count() - 1;
+            $idx = $i_ptr % $group->count();
             $ideas->push($group[$idx]);
         }
         return $ideas->shuffle();
+//        return $ideas;
     }
 
     private function incrementPtr()
