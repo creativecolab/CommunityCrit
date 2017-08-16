@@ -1,0 +1,33 @@
+#idea-list {
+	.intro {
+		margin-bottom: $line-height-computed;
+	}
+
+	.list-group-item.first {
+		border-top-right-radius: $panel-border-radius;
+  		border-top-left-radius: $panel-border-radius;
+  		border-bottom-right-radius: 0;
+  		border-bottom-left-radius: 0;
+  		margin-bottom: -1px;
+	}
+
+	.list-group-item.last {
+		border-top-right-radius: 0;
+  		border-top-left-radius: 0;
+		border-bottom-right-radius: $panel-border-radius;
+  		border-bottom-left-radius: $panel-border-radius;
+
+  		.buffer-left {
+  			margin-left: $padding-base-horizontal;
+  		}
+	}
+
+	.list-group a.panel-link:hover .list-group-item {
+	  background-color: #eee;
+	}
+
+	.btn.do {
+		padding-top: $padding-base-vertical;
+		padding-bottom: $padding-base-vertical;
+	}
+}

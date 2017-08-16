@@ -195,7 +195,7 @@ class User extends Authenticatable
 	}
 
 	/**
-     * returns count of the user's total contributions, regardless of status
+     * returns count of users' submissions
      *
      * @return str
      */
