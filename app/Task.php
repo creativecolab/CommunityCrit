@@ -19,7 +19,7 @@ class Task extends Node
     const TYPE_EVAL = [100 => 'rating', 101 => 'text', 102 => 'text_link'];
     const TYPE_IMPROVE = [90 => 'no_link', 91 => 'link'];
     const TYPE_LINK = [71 => 'design_guideline', 72 => 'project_goal', 73 => 'project_constraint', 74 => 'issue', 75 => 'example', 76 => 'story'];
-    const TYPE_SPECIFIC = [60 => 'create', 61 => 'respond', 62 => 'question'];
+    const TYPE_SPECIFIC = [61 => 'respond', 62 => 'question'];
     // types less than 50 are not included in the queue
 
     const TYPE_COMMENT = [20 => 'comment'];
@@ -28,7 +28,7 @@ class Task extends Node
     const TYPES = ['eval' => Task::TYPE_EVAL, 'link' => Task::TYPE_LINK, 'improve' => Task::TYPE_IMPROVE, 'submit' => Task::TYPE_SUBMIT, 'comment' => Task::TYPE_COMMENT];
     
     const FORMAT_RATE = [100];
-    const FORMAT_TEXT = [101, 90, 40, 71, 72, 73, 74, 75, 76, 20, 60, 61, 62];
+    const FORMAT_TEXT = [101, 90, 40, 71, 72, 73, 74, 75, 76, 20, 61, 62];
     const FORMAT_TEXTWLINK = [102, 91, 41];
     const FORMATS = ['rate' => Task::FORMAT_RATE, 'text' => Task::FORMAT_TEXT, 'text_link' => Task::FORMAT_TEXTWLINK];
     
