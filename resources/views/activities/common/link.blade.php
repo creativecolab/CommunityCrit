@@ -9,11 +9,11 @@
 		    <em>This
 		    {{ strtolower($link->type_str) }}
 			was submitted by
-		    @if ($link->user->id == 3)
-		    	 a <strong>{{ strtolower($link->user->fname) }}.</strong>
-		    @else
-		    	<strong>{{ $link->user->fname }}.</strong>
-		    @endif
+		    @if ($link->user->id == 3 || $link->user->fname == 'Guest')
+			    a <strong>{{ strtolower($link->user->fname) }}</strong>.
+			@else
+			    <strong>{{ $link->user->fname }}</strong>.
+			@endif
 		    </em><!-- 
 		     -->{{--@if ($link->text2) 
 		        <!-- <p><em>Here's what they said about how it relates,</em> "{{ $link->text2 }}".</p> -->

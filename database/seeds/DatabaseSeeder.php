@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
 		// $this->call( TasksSeeder::class );
 		// $this->call( LinksSeeder::class );
 		// $this->call( FeedbackSeeder::class );
+		// $this->call( QuestionsSeeder::class );
+		// $this->call( TasksSeeder2::class );
 
 		// new
-		$this->call( QuestionsSeeder::class );
-		$this->call( TasksSeeder2::class );
+		$this->call( TasksSeeder3::class );
 		
 		// deprecated
 		// $this->call( FacetsSeeder::class );

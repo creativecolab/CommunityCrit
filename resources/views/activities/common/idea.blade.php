@@ -6,10 +6,10 @@ Idea<!--
 <!-- <button class="btn btn-default pull-right">Switch idea</button> -->
 </h2>
 <p><em>Submitted by 
-@if ($idea->user->id == 3)
-    a <strong>{{ strtolower($idea->user->fname) }}.</strong>
+@if ($idea->user->id == 3 || $idea->user->fname == 'Guest')
+    a <strong>{{ strtolower($idea->user->fname) }}</strong>.
 @else
-    <strong>{{ $idea->user->fname }}.</strong>
+    <strong>{{ $idea->user->fname }}</strong>.
 @endif
 </em></p>
 <!-- @if ($idea->img_url) -->
