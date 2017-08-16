@@ -265,12 +265,11 @@
                         var link_str = "idea-link-" + i;
                         var name = document.getElementById(name_str);
                         var link = document.getElementById(link_str);
-                                        link.href = "@{{ action( 'TaskController@showRandomTask'," + data[0].id + ") @}}";
-                                link.href = "{{ action( 'TaskController@showRandomTask') }}" + "/" + data[i].id;
+                        link.href = "@{{ action( 'TaskController@showRandomTask'," + data[0].id + ") @}}";
+                        link.href = "{{ action( 'TaskController@showRandomTask') }}" + "/" + data[i].id;
                         name.innerHTML = data[i].name;
                     }
                 }
-
             },
             error: function(data) {
                 console.log(data);
