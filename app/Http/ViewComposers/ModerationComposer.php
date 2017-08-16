@@ -6,6 +6,7 @@ use Auth;
 use App\Idea;
 use App\Link;
 use App\Feedback;
+use App\Question;
 use Illuminate\View\View;
 
 class ModerationComposer
@@ -36,17 +37,20 @@ class ModerationComposer
             $ideas = Idea::all();
             $links = Link::all();
             $feedbacks = Feedback::all();
+            $questions = Question::all();
 
             for ($i = 0; $i < $statuses; $i++) { 
                 $counts->push(
                     count($ideas->where('status', $i)) +
                     count($links->where('status', $i)) +
-                    count($feedbacks->where('status', $i))
+                    count($feedbacks->where('status', $i)) +
+                    count($questions->where('status', $i))
                 );
             }
 
             $important = count($ideas->where('status', 0)) +
-            count($links->where('status', 0));
+            count($links->where('status', 0)) + 
+            count($questions->where('status', 0));
         } else {
             $count = null;
         }

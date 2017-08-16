@@ -7,6 +7,7 @@ use App\Link;
 use App\Feedback;
 use App\User;
 use App\TaskHist;
+use App\Question;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -73,6 +74,9 @@ class AdminController extends Controller
 
         $feedbacks = Feedback::all()->where('status', $status);
         $data['feedbacks'] = $feedbacks;
+
+        $questions = Question::all()->where('status', $status);
+        $data['questions'] = $questions;
 
         return view($view, $data);
     }
@@ -386,6 +390,36 @@ class AdminController extends Controller
         	flash("No changes were selected.")->error();
         }
         
+
+        return redirect()->back();
+    }
+
+    /**
+    * update status of questions
+    *
+    * @param Request $request
+    * @return \Illuminate\Http\RedirectResponse
+    */
+    public function updateQuestionsStatus(Request $request, $status) {
+        $questions = Question::all()->where('status', $status);
+
+        $count = 0;
+        $user_id = \Auth::id();
+        $now = Carbon::now();
+
+        foreach($questions as $question) {
+            $action = $request->get( 'question'.$question->id );
+            if ($action != null && $question->status != $action) {
+                $count += 1;
+                $question->update(['status' => $action, 'moderated_at' => $now, 'moderated_by' => $user_id]);
+            }
+        }
+
+        if ($count) {
+            flash("Moderation status updated for ". $count . " question" . ($count == 1 ? "" : "s") . "!")->success();
+        } else {
+            flash("No changes were selected.")->error();
+        }
 
         return redirect()->back();
     }

@@ -77,6 +77,7 @@ Route::group( ['prefix' => 'moderation', 'middleware' => 'admin'], function() {
     Route::post( '/update/{status}/ideas/save', 'AdminController@updateIdeasStatus' );
     Route::post( '/update/{status}/links/save', 'AdminController@updateLinksStatus' );
     Route::post( '/update/{status}/feedbacks/save', 'AdminController@updateFeedbacksStatus' );
+    Route::post( '/update/{status}/questions/save', 'AdminController@updateQuestionsStatus' );
 } );
 
 Route::group( ['middleware' => 'checkUser' ], function() {
