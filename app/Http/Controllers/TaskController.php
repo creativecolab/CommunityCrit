@@ -22,7 +22,7 @@ class TaskController extends Controller
 {
     const NUM_TASKS = 5;
     const NUM_IDEAS = 3;
-    const NUM_TH = 20;
+    const NUM_TH = 10;
 
     const TYPE_FEEDBACK = 1;
     const TYPE_LINK = 2;
