@@ -22,6 +22,7 @@ class TaskController extends Controller
 {
     const NUM_TASKS = 5;
     const NUM_IDEAS = 3;
+    const NUM_TH = 10;
 
     const TYPE_FEEDBACK = 1;
     const TYPE_LINK = 2;
@@ -1127,17 +1128,21 @@ class TaskController extends Controller
         if ($t_queue->isEmpty()) {
             //check if idea has links, questions TODO: dont hardcode numbers
             if ($idea->links->where('status', 1)->count() > 0 && $idea->questions->where('status', 1)->count() > 0) {
-                $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->get();
             }
             elseif ($idea->links->where('status', 1)->count() > 0) {
-                $tasks = Task::where('type', '>', 50)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->get();
             }
             elseif ($idea->questions->where('status',1)->count() > 0) {
-                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->whereNull('hidden')->inRandomOrder()->get();
             }
             else {
-                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->get();
             }
+            if (TaskHist::where('idea_id',$idea_id)->count() > static::NUM_TH) {
+                $tasks = $this->taskWeight($tasks);
+            }
+            else $tasks = $tasks->take(static::NUM_TASKS);
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
 //            \Session::put('t_ptr', $t_ptr+1);
@@ -1153,6 +1158,20 @@ class TaskController extends Controller
 //            \Session::put('t_ptr', $t_ptr+1);
         }
         return \Session::get('t_queue')[\Session::get('t_ptr')-1];
+    }
+
+    private function taskWeight($tasks)
+    {
+        $task_counts = TaskHist::all()->groupBy('task_id')->map(function ($item) {
+            return $item->count();
+        });
+        foreach ($tasks as $task) {
+            $task_id = $task->id;
+            $task->num_count = $task_counts[$task_id];
+        }
+        $tasks = $tasks->sortBy('num_count');
+
+        return $tasks->take(static::NUM_TASKS)->shuffle();
     }
 
     private function incrementPtr()
