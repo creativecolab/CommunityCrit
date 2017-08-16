@@ -1140,7 +1140,7 @@ class TaskController extends Controller
                 $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->get();
             }
             if (TaskHist::where('idea_id',$idea_id)->count() > static::NUM_TH) {
-                $tasks = $this->taskWeight($tasks);
+                $tasks = $this->taskWeight($tasks, $idea_id);
             }
             else $tasks = $tasks->take(static::NUM_TASKS);
             \Session::put('idea', $idea_id);
@@ -1160,9 +1160,9 @@ class TaskController extends Controller
         return \Session::get('t_queue')[\Session::get('t_ptr')-1];
     }
 
-    private function taskWeight($tasks)
+    private function taskWeight($tasks, $idea_id)
     {
-        $task_counts = TaskHist::all()->groupBy('task_id')->map(function ($item) {
+        $task_counts = TaskHist::where('idea_id',$idea_id)->get()->groupBy('task_id')->map(function ($item) {
             return $item->count();
         });
         foreach ($tasks as $task) {
