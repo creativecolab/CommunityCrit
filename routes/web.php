@@ -98,14 +98,14 @@ Route::group (['prefix' => 'ideas', 'middleware' => 'checkUser'], function () {
     Route::post( '/assess/{idea}/new', 'IdeaController@assess');
 });
 
-Route::group (['prefix' => 'links', 'middleware' => 'checkUser'], function () {
-    
-});
-
 Route::group( [ 'prefix' => 'ideas' ], function() {
     Route::get('/', 'IdeaController@index')->name( 'ideas' );
     Route::get('/{id}', 'IdeaController@show');
 } );
+
+// Route::group (['prefix' => 'links', 'middleware' => 'checkUser'], function () {
+    
+// });
 
 Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function() {
     Route::get( '/random/{idea_id?}', 'TaskController@showRandomTask')->name( 'do' );

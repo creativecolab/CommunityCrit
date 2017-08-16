@@ -78,4 +78,14 @@ class Idea extends Node
     {
         return $this->belongsTo( 'App\User' );
     }
+
+    /**
+     * taskHists this idea is attached to
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function taskHist()
+    {
+        return $this->hasMany( 'App\TaskHist' );
+    }
 }
