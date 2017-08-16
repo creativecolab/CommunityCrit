@@ -31,7 +31,7 @@
                                     {{ $myIdea->text }}
                                 </div> <!-- .panel-body -->
                                 <div class="panel-footer">
-                                    {!! $myIdea->readableDate($myIdea->created_at) !!}
+                                    {!! dateForHumans($myIdea->created_at) !!}
                                 </div>
                             </div> <!-- .panel -->
                         @if ($myIdea->status == 1)
@@ -79,7 +79,7 @@
                                     </li>
                                 </ul>
                                 <div class="panel-footer">
-                                    {!! $myLink->readableDate($myLink->created_at) !!}
+                                    {!! dateForHumans($myLink->created_at) !!}
                                 </div>
                             </div> <!-- .panel -->
                         <!-- </a> -->
@@ -134,7 +134,7 @@
                                     </li>
                                 </ul>
                                 <div class="panel-footer">
-                                    {!! $myFeedback->readableDate($myFeedback->created_at) !!}
+                                    {!! dateForHumans($myFeedback->created_at) !!}
                                 </div>
                             </div> <!-- .panel -->
                         <!-- </a> -->
@@ -165,7 +165,7 @@
                                     {{ $idea->text }}
                                 </div> <!-- .panel-body -->
                                 <div class="panel-footer">
-                                    {!! $idea->readableDate($idea->created_at) !!}
+                                    {!! dateForHumans($idea->created_at) !!}
                                 </div>
                             </div> <!-- .panel -->
                         </a>

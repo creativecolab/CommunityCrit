@@ -29,13 +29,16 @@
                     </div>
                     @if ($link->link_type >= 3)
                         <div class="panel-footer">
-                            {{ $link->user->fname }}, {{ $link->created_at }}
+                            {{ $link->user->fname }}, {{ dateForHumans($link->created_at) }}
                         </div>
                     @endif
                 </div> <!-- .panel -->
             </div> <!-- .col -->
         @endforeach
     </div> <!-- .row -->
+
+    @component('ideas.common.comment', ['idea' => $idea])
+    @endcomponent
 
     <h2>Improvements, Critiques, and Assessments <span class="badge">{{count($feedbacks)}}</span></h2>
     <div class="row">
@@ -65,7 +68,7 @@
                             </li>
                         </ul>
                         <div class="panel-footer">
-                            {{ $feedback->user->fname }}, {!! $feedback->diffForHumans($feedback->created_at) !!}
+                            {{ $feedback->user->fname }}, {!! dateForHumans($feedback->created_at) !!}
                         </div>
                     </div> <!-- .panel -->
                 <!-- </a> -->

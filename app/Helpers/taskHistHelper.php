@@ -28,7 +28,7 @@ if (! function_exists('updateTaskHist')) {
      *
      * @param  Request $request
      */
-    function updateTaskHist(Request $request, $action)
+    function updateTaskHist(Request $request, $action, $idea_id_custom = null, $task_id_custom = null)
     {
         \Session::put('time2', new \Carbon\Carbon());
 
@@ -37,6 +37,10 @@ if (! function_exists('updateTaskHist')) {
         $link_id = $request->get( 'link' );
         $ques_id = $request->get( 'ques' );
         $user_id = \Auth::id();
+
+        if ($task_id_custom) {
+            $task_id = $task_id_custom;
+        }
 
         $taskHist = TaskHist::where('user_id', $user_id)
             ->where('task_id', $task_id)
@@ -82,5 +86,23 @@ if (! function_exists('updateTaskHistTimer')) {
             if ($time_typing > $taskHist->time_typing)
                 $taskHist->update(['time_typing' => $time_typing]);
         }
+    }
+}
+
+if (! function_exists('createCommentTaskHist')) {
+    /**
+     * create a task history record for comments
+     *
+     * @param $idea_id
+     * @param $task_id
+     */
+    function createCommentTaskHist($idea_id, $task_id)
+    {
+        $taskHist = new TaskHist;
+        $taskHist->user_id = \Auth::id();
+        $taskHist->idea_id = $idea_id;
+        $taskHist->task_id = $task_id;
+        $taskHist->action = 7;
+        $taskHist->save();
     }
 }

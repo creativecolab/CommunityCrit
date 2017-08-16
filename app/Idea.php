@@ -78,15 +78,4 @@ class Idea extends Node
     {
         return $this->belongsTo( 'App\User' );
     }
-
-    public function diffForHumans($date)
-    {
-        return Carbon::parse($date)->diffForHumans();
-    }
-
-    public function readableDate($date)
-    {
-        $date = $date->setTimezone('America/Los_Angeles');
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
-    }
 }
