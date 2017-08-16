@@ -154,7 +154,7 @@
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
 
-                                    <label class="instruction" for="submissionText">(Optional) Upload a main image</label>
+                                    <label class="instruction" for="submissionText">Upload a main image <span class="text-muted">(optional)</span></label>
                                     {!! Form::file('photo', ['id' => 'photosub']) !!}
 
                                     @if ($errors->has('photo'))
@@ -178,7 +178,7 @@
                         <div class="row" id="extradiv" style="display:none">
                             <div class="col-sm-6 col-md-4">
                                 <div class="form-group{{$errors->has('name') ? ' has-error' : ''}}">
-                                    <label class="instruction" for="submissionText">(Optional) Upload extra images</label>
+                                    <label class="instruction" for="submissionText">Upload extra images <span class="text-muted">(optional)</span></label>
 
                                     {!! Form::file('extra[]', ['multiple' => 'multiple', 'id' => 'extrasub', 'style' => 'display:none']) !!}
                                     @if ($errors->has('extra[]'))
