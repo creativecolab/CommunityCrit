@@ -2,21 +2,27 @@
 
 use Carbon\Carbon;
 
-if (! function_exists('createTaskHistory')) {
+if (! function_exists('dateForHumans')) {
     /**
-     * create a task history record
+     * convert the date to difference for humans
      *
-     * @param  Request $request
+     * @param  timestamp $date
      */
-    function createTaskHist($task_id, $idea_id, $link_id, $ques_id, $action = null)
+    function dateForHumans($date)
     {
-        $taskHist = new TaskHist;
-        $taskHist->user_id = \Auth::id();
-        $taskHist->task_id = $task_id;
-        $taskHist->idea_id = $idea_id;
-        $taskHist->link_id = $link_id;
-        $taskHist->ques_id = $ques_id;
-        $taskHist->action = $action;
-        $taskHist->save();
+        return Carbon::parse($date)->diffForHumans();
+    }
+}
+
+if (! function_exists('dateSimple')) {
+    /**
+     * convert the date to simple date and time in LA timezone
+     *
+     * @param  timestamp $date
+     */
+    function dateSimple($date)
+    {
+        $date = $date->setTimezone('America/Los_Angeles');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
     }
 }

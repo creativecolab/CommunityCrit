@@ -172,17 +172,6 @@ class Feedback extends Model
         return $comment;
     }
 
-    public function diffForHumans($date)
-    {
-        return Carbon::parse($date)->diffForHumans();
-    }
-
-    public function readableDate($date)
-    {
-        $date = $date->setTimezone('America/Los_Angeles');
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
-    }
-
     // public function getUpdatedAtAttribute($date)
     // {
     //     return $this->attributes['updated_at'] = Carbon::parse($date)->diffForHumans();
