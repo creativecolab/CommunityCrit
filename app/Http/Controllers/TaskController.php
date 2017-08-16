@@ -226,6 +226,7 @@ class TaskController extends Controller
         \Session::forget('idea');
         \Session::forget('t_queue');
         \Session::forget('t_ptr');
+        \Session::forget('i_ptr');
 
         \Session::put('t_queue', collect([]));
         \Session::put('t_ptr', 1);
@@ -1167,11 +1168,39 @@ class TaskController extends Controller
         });
         foreach ($tasks as $task) {
             $task_id = $task->id;
-            $task->num_count = $task_counts[$task_id];
+            if ($task_counts->has($task_id))
+                $task->num_count = $task_counts[$task_id];
+            else
+                $task->num_count = 0;
         }
         $tasks = $tasks->sortBy('num_count');
 
         return $tasks->take(static::NUM_TASKS)->shuffle();
+    }
+
+    private function ideaQueue($ideas)
+    {
+        $part = static::NUM_IDEAS;
+
+        //count submissions per idea
+        $submit_count = TaskHist::where('action',1)->whereNotNull('idea_id')->get()
+            ->groupBy('idea_id')
+            ->map(function ($item) {
+                return $item->count();
+            });
+
+        //attach to idea
+        foreach ($ideas as $idea) {
+            if ($submit_count->has($idea->id))
+                $idea->num_count = $submit_count[$idea->id];
+            else
+                $idea->num_count = 0;
+        }
+
+        $ideas = $ideas->sortBy('num_count');
+
+
+
     }
 
     private function incrementPtr()
