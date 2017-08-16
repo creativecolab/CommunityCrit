@@ -1167,7 +1167,10 @@ class TaskController extends Controller
         });
         foreach ($tasks as $task) {
             $task_id = $task->id;
-            $task->num_count = $task_counts[$task_id];
+            if ($task_counts->has($task_id))
+                $task->num_count = $task_counts[$task_id];
+            else
+                $task->num_count = 0;
         }
         $tasks = $tasks->sortBy('num_count');
 
