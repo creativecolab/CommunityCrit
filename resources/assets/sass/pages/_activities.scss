@@ -1,6 +1,6 @@
 .activity {
 	a#back {
-		margin-bottom: $line-height-computed;
+		margin-bottom: $padding-large-vertical;
 	}
 
 	button.done {
@@ -148,33 +148,39 @@
 
 	$padding-task-panel: 65px;
 
-	.activity .list-group .list-group-item {
-		padding-left: $padding-task-panel;
-		padding-right: $padding-task-panel;
-
-		&:first-child {
-			padding-top: $padding-task-panel - 25px;
+	.activity {
+		a#back {
+			margin-bottom: $line-height-computed;
 		}
 
-		&:last-child {
-			padding-bottom: $padding-task-panel - 25px;
-		}
+		.list-group .list-group-item {
+			padding-left: $padding-task-panel;
+			padding-right: $padding-task-panel;
 
-		&#idea {
-			&.has-img {
-				#text {
-					float: left;
-					width: 65%;
-					margin-right: 5%;
-				}
+			&:first-child {
+				padding-top: $padding-task-panel - 25px;
+			}
 
-				#img {
-					float: left;
-					width: 30%;
-					padding-top: 0;
+			&:last-child {
+				padding-bottom: $padding-task-panel - 25px;
+			}
 
-					img {
-						max-height: 250px;
+			&#idea {
+				&.has-img {
+					#text {
+						float: left;
+						width: 65%;
+						margin-right: 5%;
+					}
+
+					#img {
+						float: left;
+						width: 30%;
+						padding-top: 0;
+
+						img {
+							max-height: 250px;
+						}
 					}
 				}
 			}

@@ -125,7 +125,8 @@ figure {
   box-shadow: $shadow-default;
 
   + .btn {
-    margin-left: 5px;
+    margin-top: $padding-large-vertical;
+    margin-left: 0;
   }
 }
 
@@ -136,6 +137,14 @@ figure {
 #feedback {
   h4 {
     margin-top: $line-height-computed/4;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .btn + .btn {
+    margin-top: 0;
+    margin-left: 5px;
   }
 }
 
