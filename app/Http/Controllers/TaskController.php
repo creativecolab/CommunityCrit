@@ -225,13 +225,11 @@ class TaskController extends Controller
         \Session::forget('t_queue');
         \Session::forget('i_queue');
         \Session::forget('t_ptr');
-        \Session::forget('no_iq');
 
         \Session::put('t_queue', collect([]));
         \Session::put('t_ptr', 1);
 
         if (Idea::where('status',1)->count() <= static::NUM_IDEAS) {
-            \Session::put('no_iq', true);
             $data['ideas'] = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
         }
         else {
@@ -746,6 +744,10 @@ class TaskController extends Controller
         if ($groups == null || $i_ptr === null) {
 //            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
             return \Session::all();
+        }
+        elseif (Idea::where('status',1)->count() <= static::NUM_IDEAS) {
+            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
+            return json_encode($ideas);
         }
         else {
             $i_ptr += 1;
