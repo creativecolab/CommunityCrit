@@ -37,6 +37,9 @@
         @endforeach
     </div> <!-- .row -->
 
+    @component('ideas.common.comment', ['idea' => $idea])
+    @endcomponent
+
     <h2>Improvements, Critiques, and Assessments <span class="badge">{{count($feedbacks)}}</span></h2>
     <div class="row">
         @foreach ($feedbacks as $feedback)

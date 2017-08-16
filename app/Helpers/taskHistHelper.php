@@ -28,7 +28,7 @@ if (! function_exists('updateTaskHist')) {
      *
      * @param  Request $request
      */
-    function updateTaskHist(Request $request, $action)
+    function updateTaskHist(Request $request, $action, $idea_id_custom = null, $task_id_custom = null)
     {
         \Session::put('time2', new \Carbon\Carbon());
 
@@ -37,6 +37,10 @@ if (! function_exists('updateTaskHist')) {
         $link_id = $request->get( 'link' );
         $ques_id = $request->get( 'ques' );
         $user_id = \Auth::id();
+
+        if ($task_id_custom) {
+            $task_id = $task_id_custom;
+        }
 
         $taskHist = TaskHist::where('user_id', $user_id)
             ->where('task_id', $task_id)

@@ -92,7 +92,8 @@ Route::group (['prefix' => 'ideas', 'middleware' => 'checkUser'], function () {
     // Route::get('/comment/{id}', 'IdeaController@showComment');
     Route::post( '/submit/new', 'IdeaController@submitIdea');
     Route::post( '/combine/new', 'IdeaController@combine' );
-    Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
+    // Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
+    Route::post( '/comment/{idea}/new', 'IdeaController@submitComment' );
     Route::post( '/assess/{idea}/new', 'IdeaController@assess');
 });
 

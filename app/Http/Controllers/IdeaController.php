@@ -271,6 +271,36 @@ class IdeaController extends Controller
     }
 
     /**
+     * create a new feedback (comment)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function submitComment( Request $request, $idea_id)
+    {
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        $feedback = new Feedback;
+        $feedback->user_id = \Auth::id();
+        $feedback->comment = $request->get( 'text' );
+        $feedback->idea_id = $idea_id;
+        $task_id = Task::where('type', 20)->first()->id;
+        $feedback->task_id = $task_id;
+
+        if ( $feedback->save() ) {
+            flash("Your contribution was submitted!")->success();
+        } else {
+            flash('Unable to save your feedback. Please contact us.')->error();
+        }
+
+        $hist = updateTaskHist($request, 1, $idea_id, $task_id);
+
+        return redirect()->back();
+    }
+
+    /**
      * create a new Rating, linked to an idea
      * TODO: see above on ratings
      *
