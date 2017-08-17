@@ -293,10 +293,6 @@
     if (refresher)
         refresher.onclick = refresherHandler;
 
-    var hide_me = document.getElementById('submit-button');
-    if (hide_me)
-        hide_me.onclick = hide_submit();
-
 </script>
 </body>
 </html>
