@@ -144,6 +144,7 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( '/submit/rating/new', 'TaskController@submitRatings' );
     Route::post( '/submit/link/new', 'TaskController@submitLink' );
     Route::post( '/submit/question/new', 'TaskController@submitQuestion' );
+    Route::post( '/submit/ratetext/new', 'TaskController@submitRatingAndText' );
     Route::post( '/skip/{idea_id?}', 'TaskController@trackSkip' )->name('skip');
 } );
 
