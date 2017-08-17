@@ -23,9 +23,12 @@
             @component('ideas.common.comment', ['idea' => $idea])
             @endcomponent
         </div>
+    </div>
         @foreach ($commentsByTask as $comments)
+            <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
+            <div class="grid-sizer"></div>
             @if ($comments->first()->task)
-                <div class="grid-item{{ strlen($comments->first()->task->type == 61 ? $questions->where('id',$comments->first()->ques_id)->first()->text : $comments->first()->task->name) > 100 ? ' width2' : ' width2' }}">
+                <div class="grid-item{{ strlen($comments->first()->task->type == 61 ? $questions->where('id',$comments->first()->ques_id)->first()->text : $comments->first()->task->name) > 100 ? ' ' : ' ' }}">
                     <ul class="list-group">
                         <li class="list-group-item dark">
                             @if ($comments->first()->task->type == 61)
@@ -69,8 +72,9 @@
                     </ul>
                 </div> <!-- .grid-item -->
             @endforeach
+            </div> <!-- .grid -->
         @endforeach
-    </div> <!-- .grid -->
+    
 
 </section>
 @endsection
