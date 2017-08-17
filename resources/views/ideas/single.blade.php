@@ -4,8 +4,18 @@
 
 @section('content')
 <section id="idea-detail" class="masonry">
-    <h1>{{ $idea->name }}</h1>
-    <h4>{{ $idea->text }}</h4>
+    <div id="idea" class="{{ $idea->img_url ? 'has-img' : '' }}">
+        <div id="text">
+            <h1>{{ $idea->name }}</h1>
+            <h4>{{ $idea->text }}</h4>
+        </div>
+        @if ($idea->img_url)
+            <div id="img">
+                <img src="{{ $idea->img_url }}">
+            </div>
+            <div class="clearfix"></div>
+        @endif
+    </div>
 
     <!-- <h2>Responses <span class="badge">{{count($comments)}}</span></h2> -->
     <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
@@ -28,7 +38,7 @@
                     @endif -->--}}
                     <li class="list-group-item comments">
                         @if ($comment->task->type == 61)
-                            {{ $questions->where('id',$comment->ques_id)->first()->text }}
+                            {{ $questions->where('id',$comment->ques_id)->first()->text }}<br>
                             {{-- $comment->question->text --}}
                         @else
                             {{ $comment->task->name }}<br>

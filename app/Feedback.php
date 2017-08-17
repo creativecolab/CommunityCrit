@@ -104,7 +104,7 @@ class Feedback extends Model
     // {
     //     return $this->morphTo();
     // }
-
+    
     /**
      * Determine type of feedback
      * @param $type

@@ -1,13 +1,9 @@
 #idea-detail {
 	h1 + h4 {
-		margin-bottom: $line-height-computed;
 		line-height: 1.2;
 	}
 
-	.comments {
-
-		.text {
-			font-size: 125%;
-		}
+	#idea {
+		margin-bottom: $line-height-computed * 1.5;
 	}
 }
