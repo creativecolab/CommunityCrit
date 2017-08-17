@@ -1141,11 +1141,19 @@ class TaskController extends Controller
             }
         }
 
+        $feedback = new Feedback;
+        $feedback->user_id = \Auth::id();
+        $feedback->comment = $request->get( 'text' );
+        $feedback->idea_id = $request->get( 'idea' );
+        $feedback->task_id = $request->get( 'task' );
+        $feedback->link_id = $request->get( 'link' );
+        $feedback->ques_id = $request->get( 'ques' );
+
         $idea_id = $request->get( 'idea' );
         $idea = Idea::find($idea_id);
 
         if ($exit == 'Submit') {
-            if ( $idea->ratings()->saveMany($ratings->all()) ) {
+            if ( $idea->ratings()->saveMany($ratings->all()) && $feedback->save()) {
                 flash("Ratings submitted!");
             } else {
                 flash("Unable to save your ratings. Please contact us.")->error();

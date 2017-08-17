@@ -31,6 +31,7 @@
             </div>
         </div>
     @endforeach
+    @if($task->type == 103 || $task->type == 104)
     <div class="row">
         @if ($errors->has('text'))
             <span class="help-block">
@@ -45,4 +46,5 @@
             {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your reason here.")) }}
         @endif
     </div>
+    @endif
 </div>
