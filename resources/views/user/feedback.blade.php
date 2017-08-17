@@ -13,10 +13,10 @@
         </a>
     @endif
 
-    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
-        <div class="grid-sizer"></div>
+    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
+        <div id="grid-sizer" class="col-md-3 col-sm-4"></div>
         @foreach ($ideas as $idea)
-            <div class="grid-item{{ strlen($idea->text) > 100 ? ' width2' : '' }}">
+            <div class="grid-item{{ strlen($idea->text) > 100 ? ' col-md-6 col-sm-6' : ' col-md-3 col-sm-4' }}">
                 @if ($idea->status == 1)
                     <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
                 @endif
@@ -52,10 +52,10 @@
                 <a href="{{ action( 'IdeaController@show', $comments->first()->idea->id) }}">read more</a>
             @endif
         </p>
-        <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
-            <div class="grid-sizer"></div>
+        <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
+            <div id="grid-sizer" class="col-md-3 col-sm-4"></div>
             @foreach ($comments as $comment)
-                <div class="grid-item{{ strlen($comment->comment ? $comment->comment : $comment->text) > 100 ? ' width2' : '' }}">
+                <div class="grid-item{{ strlen($comment->comment ? $comment->comment : $comment->text) > 100 ? ' col-md-6 col-sm-6' : ' col-md-3 col-sm-4' }}">
                     <ul class="list-group">
                     @if ($comment->comment)
                         <li class="list-group-item comments">
