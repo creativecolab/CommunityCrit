@@ -31,3 +31,41 @@
 		padding-bottom: $padding-base-vertical;
 	}
 }
+
+@media screen and (min-width: 768px) {
+
+	#idea-list {
+		.list-group .list-group-item#idea.has-img {
+			#text {
+				width: 70%;
+			}
+
+			#img {
+				width: 25%;
+
+				img {
+					max-height: 130px;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1200px) {
+
+	#idea-list {
+		.list-group .list-group-item#idea.has-img {
+			#text {
+				width: 80%;
+			}
+
+			#img {
+				width: 15%;
+
+				img {
+					max-height: 110px;
+				}
+			}
+		}
+	}
+}

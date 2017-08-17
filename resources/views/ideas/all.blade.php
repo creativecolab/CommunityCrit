@@ -21,11 +21,15 @@
                                 Idea
                             @endif
                         </h2>
-                        <p>{!! $idea->text !!}</p>
+                        <p>
+                            {{ substr($idea->text, 0, 200) }}
+                            @if(strlen($idea->text) > 200)[...]
+                            @endif
+                        </p>
                     </div>
                     @if ($idea->img_url)
                         <div id="img">
-                            <img class="small" src="{{ $idea->img_url }}">
+                            <img src="{{ $idea->img_url }}">
                         </div>
                         <div class="clearfix"></div>
                     @endif
