@@ -13,48 +13,33 @@
 		margin-right: -$grid-gutter-width/2;
 	}
 
-	/* fluid 5 columns */
-	.grid-sizer,
-	.grid-item {
-		/*@extend .col-lg-4;*/
-		width: 100%;
-		padding: 0 $grid-gutter-width/2;
-	}
-	/* 2 columns */
-	.grid-item--width2 {
-		/*@extend .col-lg-8;*/
-		width: 100%;
-	}
-}
+	.grid-sizer, .grid-item {
+		padding-left: ceil(($grid-gutter-width / 2));
+	    padding-right: floor(($grid-gutter-width / 2));
 
-@media screen and (min-width: 768px) {
-	.masonry {
-		$grid-gutter-width: 20px;
-
-		/* fluid 5 columns */
-		.grid-sizer,
-		.grid-item {
-			width: 50%;
-			padding: 0 $grid-gutter-width/2;
-
-			/* 2 columns */
-			&.width2 { width: 100%; }
+		@include media('<=small') {
+			width: 100%;
 		}
 	}
-}
 
-@media screen and (min-width: 992px) {
-	.masonry {
-		$grid-gutter-width: 20px;
+	// [converter] This is defined recursively in LESS, but Sass supports real loops
+	//@mixin make-grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
+	  //@for $i from (1 + 1) through $grid-columns {
+	    //$list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+	  //}
+	  //#{$list} {
+	    //position: relative;
+	    // Prevent columns from collapsing when empty
+	    //min-height: 1px;
+	    // Inner gutter via padding
+	    //padding-left:  ceil(($grid-gutter-width / 2));
+	    //padding-right: floor(($grid-gutter-width / 2));
 
-		/* fluid 5 columns */
-		.grid-sizer,
-		.grid-item {
-			width: 25%;
-			padding: 0 $grid-gutter-width/2;
+	    //@include media('<=small') {
+			//width: 100%;
+		//}
+	  //}
+	//}
 
-			/* 2 columns */
-			&.width2 { width: 50%; }
-		}
-	}
+	//@include make-grid-columns;
 }

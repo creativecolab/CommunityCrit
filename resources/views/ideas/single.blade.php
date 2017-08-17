@@ -17,33 +17,34 @@
         @endif
     </div>
 
-    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
-        <div class="grid-sizer"></div>
-        <div class="grid-item width2">
+    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
+        <div id="grid-sizer" class="col-md-3 col-sm-6"></div>
+        <div class="grid-item col-md-12 col-sm-12">
             @component('ideas.common.comment', ['idea' => $idea])
             @endcomponent
         </div>
-    </div>
         @foreach ($commentsByTask as $comments)
-            <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
-            <div class="grid-sizer"></div>
-            @if ($comments->first()->task)
-                <div class="grid-item{{ strlen($comments->first()->task->type == 61 ? $questions->where('id',$comments->first()->ques_id)->first()->text : $comments->first()->task->name) > 100 ? ' ' : ' ' }}">
+            @if ($comments->first()->task && $comments->first()->task->id != 1)
+                <!-- {{ $tsklen = strlen($comments->first()->task->type == 61 ? $questions->where('id',$comments->first()->ques_id)->first()->text : $comments->first()->task->name) }} -->
+                <div class="grid-item{{ ($tsklen > 200) ? ' col-md-12 col-sm-12' : ' col-md-12 col-sm-12' }} task">
                     <ul class="list-group">
                         <li class="list-group-item dark">
+                            <span class="name"><strong>{{ $comments->first()->task->name }}</strong></span>
+                            <span class="pull-right">
                             @if ($comments->first()->task->type == 61)
                                 {{ $questions->where('id',$comments->first()->ques_id)->first()->text }}
                                 {{-- $comments->first()->question->text --}}
                             @else
-                                <strong>{{ $comments->first()->task->name }}:</strong>
                                 {{ $comments->first()->task->text }}
                             @endif
+                            </span>
                         </li>
                     </ul>
                 </div> <!-- .grid-item -->
             @endif
             @foreach ($comments as $comment)
-                <div class="grid-item{{ strlen($comment->comment ? $comment->comment : $comment->text) > 100 ? ' width2' : '' }}">
+                <!-- {{ $commlen = strlen($comment->comment ? $comment->comment : $comment->text) }} -->
+                <div class="grid-item{{ ($commlen > 400) ? ' col-md-12 col-sm-12' : (($commlen > 100) ? ' col-md-6 col-sm-6' : ' col-md-3 col-sm-6') }}">
                     <ul class="list-group">
                     @if ($comment->comment)
                         {{--<!-- @if ($comment->link)
@@ -62,7 +63,7 @@
                         </li>
                     @else
                         <li class="list-group-item comments">
-                            {{ $comment->type_str }}<br>
+                            <!-- {{ $comment->type_str }}<br> -->
                             <span class="text">{!! $comment->text !!}</span><br>
                             <em>
                                 {{ $comment->user->fname }}, {{ dateForHumans($comment->created_at) }}
@@ -72,8 +73,8 @@
                     </ul>
                 </div> <!-- .grid-item -->
             @endforeach
-            </div> <!-- .grid -->
         @endforeach
+    </div> <!-- .grid -->
     
 
 </section>

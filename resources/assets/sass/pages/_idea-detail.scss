@@ -9,5 +9,10 @@
 		&.has-img #img {
 			margin-top: $line-height-computed;
 		}
+
+	}
+
+	.task .name {
+		font-size: 125%;
 	}
 }
