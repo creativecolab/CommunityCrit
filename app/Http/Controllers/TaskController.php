@@ -221,14 +221,21 @@ class TaskController extends Controller
         $view = 'activities.menu';
         $data = [];
 
-        $data['ideas'] = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
-
         \Session::forget('idea');
         \Session::forget('t_queue');
+        \Session::forget('i_queue');
         \Session::forget('t_ptr');
 
         \Session::put('t_queue', collect([]));
         \Session::put('t_ptr', 1);
+
+        if (Idea::where('status',1)->count() <= static::NUM_IDEAS) {
+            $data['ideas'] = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
+        }
+        else {
+            $groups = $this->ideaQueue(Idea::where('status',1)->get());
+            $data['ideas'] = $this->sepIdeaQueue($groups, 0);
+        }
 
         return view($view, $data);
     }
@@ -730,10 +737,20 @@ class TaskController extends Controller
 
     }
 
-    public function ajaxIdeas()
+    public function ajaxIdeas( Request $request )
     {
-        $ideas = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
-        return json_encode($ideas);
+        $groups = \Session::get('i_queue');
+        $i_ptr = $request->get('i_ptr');
+        if ($groups == null || $i_ptr === null || Idea::where('status',1)->count() <= static::NUM_IDEAS) {
+            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
+            return json_encode($ideas);
+        }
+        else {
+            $i_ptr += 1;
+            $ideas = $this->sepIdeaQueue($groups, $i_ptr);
+//            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
+            return json_encode($ideas);
+        }
     }
 
 
@@ -1175,6 +1192,49 @@ class TaskController extends Controller
         $tasks = $tasks->sortBy('num_count');
 
         return $tasks->take(static::NUM_TASKS)->shuffle();
+    }
+
+    private function ideaQueue($ideas)
+    {
+        $part = static::NUM_IDEAS;
+        $num_ideas = $ideas->count();
+        $groups = collect([]);
+
+        //count submissions per idea
+        $submit_count = TaskHist::where('action',1)->whereNotNull('idea_id')->get()
+            ->groupBy('idea_id')
+            ->map(function ($item) {
+                return $item->count();
+            });
+
+        //attach to idea
+        foreach ($ideas as $idea) {
+            if ($submit_count->has($idea->id))
+                $idea->num_count = $submit_count[$idea->id];
+            else
+                $idea->num_count = 0;
+        }
+        $ideas = $ideas->sortBy('num_count');
+
+        //split ideas into parts
+        for ($i = $part-1; $i >= 0; $i--) {
+            $grp = $ideas->splice((int)($i*$num_ideas/$part));
+            $groups->push($grp->shuffle());
+        }
+
+        \Session::put('i_queue', $groups);
+        return $groups;
+    }
+
+    private function sepIdeaQueue($groups, $i_ptr)
+    {
+        $ideas = collect([]);
+        foreach ($groups as $group) {
+            $idx = $i_ptr % $group->count();
+            $ideas->push($group[$idx]);
+        }
+        return $ideas->shuffle();
+//        return $ideas;
     }
 
     private function incrementPtr()

@@ -49,7 +49,7 @@
         <p>
             {{  $comments->first()->idea->text }}
             @if ($comments->first()->idea->status == 1)
-                <a href="{{ action( 'IdeaController@show', $idea->id) }}">read more</a>
+                <a href="{{ action( 'IdeaController@show', $comments->first()->idea->id) }}">read more</a>
             @endif
         </p>
         <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>

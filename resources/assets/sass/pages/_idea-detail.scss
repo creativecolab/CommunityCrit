@@ -5,5 +5,9 @@
 
 	#idea {
 		margin-bottom: $line-height-computed * 1.5;
+		
+		&.has-img #img {
+			margin-top: $line-height-computed;
+		}
 	}
 }

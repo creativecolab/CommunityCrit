@@ -191,6 +191,11 @@
         $('#consent').prop('required', true);
     });
 
+    $('#submit-button').click(function() {
+        $(this).hide();
+        $('#skip').hide();
+    });
+
     var visible = false;
     function overview_onClick() {
         visible = !visible;
@@ -239,7 +244,11 @@
 
         });
     };
+
+    var r_ptr = 0;
+
     var refresherHandler = function() {
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
@@ -247,25 +256,26 @@
         });
 
         $.ajax({
-            method: 'GET',
+            method: 'POST',
             url: '/ajax/ideas',
+            data: {'_token' : "{{csrf_token()}}", 'i_ptr' : r_ptr },
             dataType: 'json',
             success: function(data) {
                 console.log(data);
+                r_ptr += 1;
+                console.log(r_ptr);
 
                 for (var i = 0; i < data.length; i++) {
                     var name_str = "idea-name-" + i;
                     var link_str = "idea-link-" + i;
                     var name = document.getElementById(name_str);
                     var link = document.getElementById(link_str);
-                    {{--                link.href = "@{{ action( 'TaskController@showRandomTask'," + data[0].id + ") @}}";--}}
                     link.href = "{{ action( 'TaskController@showRandomTask') }}" + "/" + data[i].id;
                     name.innerHTML = data[i].name;
                 }
-
             },
             error: function(data) {
-                console.log(data)
+                console.log(data);
             }
         });
     };
@@ -280,7 +290,8 @@
     }
 
     var refresher = document.getElementById('refresher');
-    refresher.onclick = refresherHandler;
+    if (refresher)
+        refresher.onclick = refresherHandler;
 
 </script>
 </body>
