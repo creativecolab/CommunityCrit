@@ -205,7 +205,7 @@
                             <a id="skip" value="Skip >" onclick="return skip_onclick();">Skip <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></a>
                                     <!-- {!! Form::submit('Skip', ['class' => 'btn btn-default', 'name' => 'exit', 'onclick' => 'return btntest_onclick();']) !!} -->
                             @endif
-                            {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit']) !!}
+                            {!! Form::submit('Submit', ['class' => 'btn btn-success', 'name' => 'exit', 'id' => 'submit-button']) !!}
                         </div>
                         <div class="clearfix"></div>
                     <!-- </div> -->

@@ -191,6 +191,11 @@
         $('#consent').prop('required', true);
     });
 
+    $('#submit-button').click(function() {
+        $(this).hide();
+        $('#skip').hide();
+    });
+
     var visible = false;
     function overview_onClick() {
         visible = !visible;
