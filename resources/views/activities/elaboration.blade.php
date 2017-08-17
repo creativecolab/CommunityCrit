@@ -85,6 +85,8 @@
                         {!! Form::open(['action' => ['TaskController@submitRatings'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                     @elseif ($task->type == 62)
                         {!! Form::open(['action' => ['TaskController@submitQuestion', $idea->id], 'style' => 'display:inline', 'id' => 'task-form']) !!}
+                    @elseif ($task->type == 103 || $task->type == 104)
+                        {!! Form::open(['action' => ['TaskController@submitRatingAndText'], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                     @else
                         {!! Form::open(['action' => ['TaskController@submitText', $idea->id], 'style' => 'display:inline', 'id' => 'task-form']) !!}
                         <!-- <em>Everything else!</em> -->
@@ -103,7 +105,7 @@
                     @endif
                     {{ Form::hidden('task', $task->id) }}
                     
-                    @if ($task->type != 100)
+                    @if ($task->type != 100 && $task->type != 103 && $task->type != 104)
                         <div class="form-group{{ $errors->has('text') ? ' has-error' : '' }}">
                             <!-- <label class="instruction" for="submissionText">
                                 
@@ -124,7 +126,7 @@
                         </div>
                     @else
                         <label class="instruction">{!! $task->text !!}</label>
-                        @component('activities.common.rating', ['qualities' => $qualities, 'mapped_qualities' => $mapped_qualities])
+                        @component('activities.common.rating', ['qualities' => $qualities, 'mapped_qualities' => $mapped_qualities, 'task' => $task, 'word' => $wording])
                         @endcomponent
                     @endif
 

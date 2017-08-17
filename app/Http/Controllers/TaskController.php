@@ -151,8 +151,15 @@ class TaskController extends Controller
 
         if ($task && $idea && $link && $ques) {
             $data = ['idea' => $idea, 'link' => $link, 'task' => $task, 'ques' => $ques];
-            if ($task->type == 100) {
-                $qualities = collect(collect(Rating::QUALITIES)->only(5,6,7));
+            if (collect(Task::FORMAT_RATE)->contains($task->type) || collect(Task::FORMAT_RATEWTEXT)->contains($task->type)) {
+                if ($task->type == 103){
+                    $qualities = collect(collect(Rating::QUALITIES)->only(4));
+                    $data['wording'] = true;
+                }
+                else {
+                    $qualities = collect(collect(Rating::QUALITIES)->only(5, 6, 7));
+                    $data['wording'] = false;
+                }
                 $map_qualities = $qualities->map( function ($item, $key) {
                     return str_replace('-',' ',$item);
                 });
@@ -287,6 +294,7 @@ class TaskController extends Controller
         $rate = $allFormats['rate'];
         $text = $allFormats['text'];
         $text_link = $allFormats['text_link'];
+        $rate_text = $allFormats['rate_text'];
 
         $ideas = Idea::all()->where('status', 1);
 
@@ -295,7 +303,7 @@ class TaskController extends Controller
             return redirect()->route('overview');
         }
 
-        if (in_array($type, $rate)) {
+        if (in_array($type, $rate) || in_array($type, $rate_text)) {
             // if a rating task, select an idea but no link
             $idea = $ideas->random();
 //            $idea_id = $idea->id;
@@ -1063,6 +1071,74 @@ class TaskController extends Controller
             $rating->rating = $request->get( $quality );
             if ($rating->rating != null)
                 $ratings->push($rating);
+        }
+
+        $idea_id = $request->get( 'idea' );
+        $idea = Idea::find($idea_id);
+
+        if ($exit == 'Submit') {
+            if ( $idea->ratings()->saveMany($ratings->all()) ) {
+                flash("Ratings submitted!");
+            } else {
+                flash("Unable to save your ratings. Please contact us.")->error();
+            }
+
+            $hist = updateTaskHist($request, 1);
+
+            return redirect()->route('do', [$idea_id]);
+        }
+        else {
+//            if ( $idea->ratings()->saveMany($ratings->all()) ) {
+//                flash("Ratings submitted!");
+//            } else {
+//                flash("Unable to save your ratings. Please contact us.")->error();
+//            }
+
+            if ( $ratings->isEmpty() ) {
+                updateTaskHist($request, 3);
+            } else updateTaskHist($request, 2);
+
+//            $hist = updateTaskHist($request, 4);
+
+            return redirect()->route('main-menu');
+        }
+    }
+
+    public function submitRatingAndText( Request $request )
+    {
+        $exit = $request->get( 'exit' );
+
+        $qualities = collect(Rating::QUALITIES);
+
+        if ($exit == 'Submit') {
+            foreach($qualities as $quality) {
+                if ($request->has($quality)) {
+                    $this->validate($request, [
+                        $quality => 'required',
+                    ]);
+                }
+            }
+        }
+
+        if ($request->get('require-check') == 'yes') {
+            $this->validate($request, [
+                'text' => 'required',
+            ]);
+        }
+
+        //update session task queue pointer
+        $this->incrementPtr();
+
+        $ratings = collect([]);
+        foreach($qualities as $key=>$quality) {
+            if ($request->has($quality)) {
+                $rating = new Rating;
+                $rating->user_id = \Auth::id();
+                $rating->type = $key;
+                $rating->rating = $request->get($quality);
+                if ($rating->rating != null)
+                    $ratings->push($rating);
+            }
         }
 
         $idea_id = $request->get( 'idea' );
