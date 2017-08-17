@@ -31,10 +31,6 @@
                     <div class="col-sm-8">
                         <div class="about">
                             <h3>About El Nudillo</h3>
-                            @if ( !empty($task) && !empty($idea) && empty($aosifda))
-                            <p>{{$task->id}}</p>
-                            <p>{{$idea->name}}</p>
-                            @endif
                             <p>The concept of El Nudillo was created during two workshops held in East Village last year. El Nudillo—Spanish for "joint" or "knuckle"—is where 14th Street ends at the trolley tracks on Commercial Street, just at the intersection of National Avenue. This is also where the familiar north-south, east-west grid pattern of downtown streets turns 45 degrees, and where four MTS bus routes currently stop. Finally, El Nudillo marks the transition between downtown and Barrio Logan.</p>
                         </div>
                     </div>
