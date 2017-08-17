@@ -10,6 +10,7 @@ use App\Idea;
 use App\Link;
 use App\Comment;
 use App\Rating;
+use App\Question;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Validator;
@@ -80,12 +81,19 @@ class IdeaController extends Controller
             $data['idea'] = $idea;
             // $data['ratings'] = $this->avgRatings($idea);
             // $data['rating_keys'] = $data['ratings']->keys()->all();
-            $data['links'] = $idea->links
-                ->where('status', 1)
-                ->sortBy('link_type');
-            $data['feedbacks'] = $idea->feedback
-                ->whereIn('status', [0, 1])
-                ->sortByDesc('created_at');
+            // $data['links'] = $idea->links
+            //     ->where('status', 1)
+            //     ->sortBy('link_type');
+            // $data['feedbacks'] = $idea->feedback
+            //     ->whereIn('status', [0, 1])
+            //     ->sortByDesc('created_at');
+            $comments = $idea->links
+                ->where('status', 1);
+            $comments = $comments->merge($idea->feedback
+                ->whereIn('status', [0, 1]));
+            $data['comments'] = $comments->sortByDesc('created_at');
+
+            $data['questions'] = Question::all();
 
             return view($view, $data);
         } else {

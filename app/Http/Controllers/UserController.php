@@ -55,26 +55,11 @@ class UserController extends Controller
         $view = 'user.feedback';
         $data = [];
 
-        $user_id = \Auth::id();
+        $data['ideas'] = Auth()->User()->ideas->sortByDesc('created_at');
 
-        $ideas = Idea::all()
-            ->where('status', 1)
-            ->sortByDesc('created_at');
-        // $ideas = Idea::all()
-            // ->sortByDesc('created_at'); // w laravel mod
-        $data['ideas'] = $ideas;
-
-        $myIdeas = Auth()->User()->ideas
-            ->sortByDesc('created_at');
-        $data['myIdeas'] = $myIdeas;
-        
-        $myLinks = Auth()->User()->links
-            ->sortByDesc('created_at');
-        $data['myLinks'] = $myLinks;
-
-        $myFeedbacks = Auth()->User()->feedback
-            ->sortByDesc('created_at');
-        $data['myFeedbacks'] = $myFeedbacks;
+        $comments = Auth()->User()->links;
+        $comments = $comments->merge(Auth()->User()->feedback);
+        $data['commentsGroup'] = $comments->sortByDesc('created_at')->groupBy('idea_id');
 
         $data['questions'] = Question::all();
 

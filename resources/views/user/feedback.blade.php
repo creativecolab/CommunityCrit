@@ -3,176 +3,86 @@
 @section('title', 'My Contributions')
 
 @section('content')
-    <div class="row smaller-txt" id="feedback">
-        <div class="col-md-6">
-            <h1>My Contributions</h1>
-            <h2>Submitted Ideas <span class="badge">{{count($myIdeas)}}</span></h2>
-            @if (!count($myIdeas))
-                <h4>You have not submitted any ideas yet.</h4>
-                <a class="btn btn-primary" href="{{ route( 'submit-idea') }}">
-                    Submit a New Idea
-                </a>
+<div class="masonry" id="feedback">
+    <h1>My Contributions</h1>
+    <h2>My Ideas <span class="badge">{{count($ideas)}}</span></h2>
+    @if (!count($ideas))
+        <h4>You have not submitted any ideas yet.</h4>
+        <a class="btn btn-primary" href="{{ route( 'submit-idea') }}">
+            Submit a New Idea
+        </a>
+    @endif
+
+    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
+        <div class="grid-sizer"></div>
+        @foreach ($ideas as $idea)
+            <div class="grid-item{{ strlen($idea->text) > 100 ? ' width2' : '' }}">
+                @if ($idea->status == 1)
+                    <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
+                @endif
+                    <ul class="list-group">
+                        <li class="list-group-item comments">
+                            <h4>{{ $idea->name }}</h4>
+                            <span class="text">{!! $idea->text !!}</span><br>
+                            <em>
+                                {!! dateForHumans($idea->created_at) !!}
+                            </em>
+                        </li>
+                    </ul>
+                @if ($idea->status == 1)
+                    </a>
+                @endif
+            </div> <!-- .grid-item -->
+        @endforeach
+    </div> <!-- .grid -->
+
+    <h2>My Responses {{--<span class="badge">{{count($comments)}}</span></h2>--}}
+    @if (!count($commentsGroup))
+        <h4>You have not submitted an activity yet.</h4>
+        <a class="btn btn-primary" href="{{ route( 'main-menu') }}">
+            Do An Activity
+        </a>
+    @endif
+
+    @foreach ($commentsGroup as $comments)
+        <h3>{{ $comments->first()->idea->name }}</h3>
+        <p>
+            {{  $comments->first()->idea->text }}
+            @if ($comments->first()->idea->status == 1)
+                <a href="{{ action( 'IdeaController@show', $idea->id) }}">read more</a>
             @endif
-
-            <div class="row">
-                @foreach ($myIdeas as $myIdea)
-                    <div class="col-md-12">
-                    <!-- <div class="col-sm-6 col-lg-4"> -->
-                        @if ($myIdea->status == 1)
-                            <a class="panel-link" href="{{ action( 'IdeaController@show', $myIdea->id) }}">
-                        @endif
-                            <div class="panel panel-default">
-                                @if ($myIdea->name)
-                                    <div class="panel-heading">
-                                        <div class="panel-title"><h4>{{ $myIdea->name }}</h4></div>
-                                    </div> <!-- .panel-heading -->
-                                @endif
-                                <div class="panel-body">
-                                    {{ $myIdea->text }}
-                                </div> <!-- .panel-body -->
-                                <div class="panel-footer">
-                                    {!! dateForHumans($myIdea->created_at) !!}
-                                </div>
-                            </div> <!-- .panel -->
-                        @if ($myIdea->status == 1)
-                            </a>
-                        @endif
-                    </div> <!-- .col -->
-                @endforeach
-            </div>
-
-            <h2>References <span class="badge">{{count($myLinks)}}</span></h2>
-            @if (!count($myLinks))
-                <h4>You have not submitted any references yet.</h4>
-                <a class="btn btn-primary" href="{{ route( 'main-menu') }}">
-                    Do An Activity
-                </a>
-            @endif
-
-            <div class="row">
-                @foreach ($myLinks as $myLink)
-                    <div class="col-md-12">
-                    <!-- <div class="col-sm-6 col-lg-4"> -->
-                        <!-- <a class="panel-link"> -->
-                            <div class="panel panel-default">
-                                @if ($myLink->idea)
-                                    <a class="panel-link" href="{{ action( 'IdeaController@show', $myLink->idea->id) }}">
-                                        <div class="panel-heading">
-                                            <div class="panel-title"><h4>Idea: {{ $myLink->idea->name }}</h4></div>
-                                            {{ $myLink->idea->text }}
-                                        </div> <!-- .panel-heading -->
-                                    </a>
-                                @endif
-                                <ul class="list-group">
-                                    @if ($myLink->task)
-                                        <li class="list-group-item">
-                                            {!! $myLink->task->text !!}
-                                        </li>
-                                    @else
-                                        <li class="list-group-item"><strong>
-                                            @component('utilities.link_type_name', ['link_type' => $myLink->link_type])
-                                            @endcomponent
-                                        </strong></li>
-                                    @endif
-                                    <li class="list-group-item">
-                                        {!! $myLink->text !!}
-                                    </li>
-                                </ul>
-                                <div class="panel-footer">
-                                    {!! dateForHumans($myLink->created_at) !!}
-                                </div>
-                            </div> <!-- .panel -->
-                        <!-- </a> -->
-                    </div> <!-- .col -->
-                @endforeach
-            </div>
-
-            <h2>Improvements, Critiques, and Assessments <span class="badge">{{count($myFeedbacks)}}</span></h2>
-            @if (!count($myFeedbacks))
-                <h4>You have not submitted feedback yet.</h4>
-                <a class="btn btn-primary" href="{{ route( 'main-menu') }}">
-                    Do An Activity
-                </a>
-            @endif
-
-            <div class="row">
-                @foreach ($myFeedbacks as $myFeedback)
-                    <div class="col-md-12">
-                    <!-- <div class="col-sm-6 col-lg-4"> -->
-                        <!-- <a class="panel-link" href="{{ action( 'IdeaController@show', $myFeedback->id) }}"> -->
-                            <div class="panel panel-default">
-                                @if ($myFeedback->idea)
-                                    <a class="panel-link" href="{{ action( 'IdeaController@show', $myFeedback->idea->id) }}">
-                                        <div class="panel-heading">
-                                            <div class="panel-title"><h4>Idea: {{ $myFeedback->idea->name }}</h4></div>
-                                            {{ $myFeedback->idea->text }}
-                                        </div> <!-- .panel-heading -->
-                                    </a>
-                                @endif
-                                <ul class="list-group">
-                                    @if ($myFeedback->task)
-                                        <li class="list-group-item">
-                                            @if($myFeedback->task->type != 61)
-                                                {!! $myFeedback->task->text !!}
-                                            @else
-                                                {!! $questions->where('id',$myFeedback->ques_id)->first()->text !!}
-                                                    {{--{!! $myFeedback->question!!}--}}
-                                            @endif
-                                        </li>
-                                    @endif
-                                    @if ($myFeedback->link)
-                                        <li class="list-group-item">
-                                            <strong>Reference: 
-                                                @component('utilities.link_type_name', ['link_type' => $myFeedback->link->link_type])
-                                                @endcomponent
-                                            </strong><br>
-                                            {!! $myFeedback->link->text !!}
-                                        </li>
-                                    @endif
-                                    <li class="list-group-item">
-                                        {!! $myFeedback->comment !!}
-                                    </li>
-                                </ul>
-                                <div class="panel-footer">
-                                    {!! dateForHumans($myFeedback->created_at) !!}
-                                </div>
-                            </div> <!-- .panel -->
-                        <!-- </a> -->
-                    </div> <!-- .col -->
-                @endforeach
-            </div>
-        </div>
-
-        <div class="col-md-6">
-            <h1>All Ideas <span class="badge">{{count($ideas)}}</span></h1>
-            @if (!count($ideas))
-                <h4>No ideas have been submitted yet.</h4>
-                <a href="{{ route('submit-idea') }}">Submit an Idea</a>
-            @endif
-
-            <div class="row">
-                @foreach ($ideas as $idea)
-                    <div class="col-md-12">
-                    <!-- <div class="col-sm-6 col-lg-4"> -->
-                        <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
-                            <div class="panel panel-default">
-                                @if ($idea->name)
-                                    <div class="panel-heading">
-                                        <div class="panel-title"><h4>{{ $idea->name }}</h4></div>
-                                    </div> <!-- .panel-heading -->
-                                @endif
-                                <div class="panel-body">
-                                    {{ $idea->text }}
-                                </div> <!-- .panel-body -->
-                                <div class="panel-footer">
-                                    {!! dateForHumans($idea->created_at) !!}
-                                </div>
-                            </div> <!-- .panel -->
-                        </a>
-                    </div> <!-- .col -->
-                @endforeach
-            </div>
-        </div>
-    </div> <!-- .row -->
-
+        </p>
+        <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
+            <div class="grid-sizer"></div>
+            @foreach ($comments as $comment)
+                <div class="grid-item{{ strlen($comment->comment ? $comment->comment : $comment->text) > 100 ? ' width2' : '' }}">
+                    <ul class="list-group">
+                    @if ($comment->comment)
+                        <li class="list-group-item comments">
+                            @if ($comment->task->type == 61)
+                                {{ $questions->where('id',$comment->ques_id)->first()->text }}<br>
+                                {{-- $comment->question->text --}}
+                            @else
+                                {{ $comment->task->name }}<br>
+                            @endif
+                            <span class="text">{!! $comment->comment !!}</span><br>
+                            <em>
+                                {{ $comment->user->fname }}, {!! dateForHumans($comment->created_at) !!}
+                            </em>
+                        </li>
+                    @else
+                        <li class="list-group-item comments">
+                            {{ $comment->type_str }}<br>
+                            <span class="text">{!! $comment->text !!}</span><br>
+                            <em>
+                                {{ $comment->user->fname }}, {{ dateForHumans($comment->created_at) }}
+                            </em>
+                        </li>
+                    @endif
+                    </ul>
+                </div> <!-- .grid-item -->
+            @endforeach
+        </div> <!-- .grid -->
+    @endforeach
+</div>
 @endsection

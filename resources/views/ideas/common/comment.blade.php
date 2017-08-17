@@ -8,7 +8,7 @@
         <div id="response">
             {!! Form::open(['action' => ['IdeaController@submitComment', $idea->id]]) !!}
             <div class="form-group">
-                {{ Form::textarea('text', '', ['class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your response here."]) }}
+                {{ Form::textarea('text', '', ['class' => 'form-control', 'id' => 'submissionText', 'rows' => '4', 'placeholder' => "Please enter your response here."]) }}
             </div>
             <div class="form-group">
                 {!! Form::submit('Submit', ['class' => 'btn btn-success pull-right']) !!}

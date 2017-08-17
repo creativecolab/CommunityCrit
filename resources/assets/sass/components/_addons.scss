@@ -15,6 +15,14 @@ a.panel-link .panel-heading:hover {
   background-color: #eee;
 }
 
+a.panel-link:hover .list-group-item {
+    background-color: #eee;
+}
+
+.list-group a.panel-link:hover .list-group-item {
+    background-color: #eee;
+}
+
 .idea-img {
 	float: none;
 	max-width: 100%;
