@@ -57,7 +57,7 @@ class IdeaController extends Controller
         $data = [];
 
         // $ideas = Idea::all(); // w/ laravel-mod
-        $ideas = Idea::all()->where('status', 1);
+        $ideas = Idea::all()->where('status', 1)->shuffle();
         $data['ideas'] = $ideas;
 
         return view($view, $data);
@@ -91,7 +91,7 @@ class IdeaController extends Controller
                 ->where('status', 1);
             $comments = $comments->merge($idea->feedback
                 ->whereIn('status', [0, 1]));
-            $data['comments'] = $comments->sortByDesc('created_at');
+            $data['commentsByTask'] = $comments->sortByDesc('created_at')->groupBy('task_id')->sortBy('task_id');
 
             $data['questions'] = Question::all();
 
