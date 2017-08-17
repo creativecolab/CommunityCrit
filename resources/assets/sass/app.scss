@@ -9,6 +9,7 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 // Web
+@import "libraries/include-media";
 @import "components/global";
 @import "components/addons";
 @import "components/lightbox";

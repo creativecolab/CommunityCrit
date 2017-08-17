@@ -88,4 +88,27 @@ class Idea extends Node
     {
         return $this->hasMany( 'App\TaskHist' );
     }
+
+    /**
+     * returns all showable contributions made about this idea
+     *
+     * @return int
+     */
+    public function getContributionsAttribute()
+    {
+        $links = $this->links->where('status', 1);
+        $feedbacks = $this->feedback->whereIn('status', [0,1]);
+        $questions = $this->questions->where('status', 1);
+        return $links->merge($feedbacks)->merge($questions)->whereNotIn('user_id', [1, 2, 3]);
+    }
+
+    /**
+     * returns all showable contributions made about this idea
+     *
+     * @return int
+     */
+    public function getContributionsCountAttribute()
+    {
+        return count($this->contributions);
+    }
 }

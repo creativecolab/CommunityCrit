@@ -33,14 +33,39 @@
 	#idea-list {
 		.list-group .list-group-item#idea.has-img {
 			#text {
-				width: 70%;
+				width: 60%;
+				float: left;
 			}
 
 			#img {
-				width: 25%;
+				width: 35%;
+				float: left;
 
 				img {
-					max-height: 130px;
+					max-height: 190px;
+					float: right;
+				}
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 992px) {
+
+	#idea-list {
+		.list-group .list-group-item#idea.has-img {
+			#text {
+				width: 100%;
+				float: none;
+			}
+
+			#img {
+				width: 100%;
+				float: none;
+
+				img {
+					float: none;
+					max-height: none;
 				}
 			}
 		}
@@ -52,14 +77,17 @@
 	#idea-list {
 		.list-group .list-group-item#idea.has-img {
 			#text {
-				width: 80%;
+				width: 55%;
+				float: left;
 			}
 
 			#img {
-				width: 15%;
+				width: 40%;
+				float: left;
 
 				img {
-					max-height: 110px;
+					max-height: 190px;
+					float: right;
 				}
 			}
 		}

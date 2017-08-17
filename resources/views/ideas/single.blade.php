@@ -17,50 +17,65 @@
         @endif
     </div>
 
-    <!-- <h2>Responses <span class="badge">{{count($comments)}}</span></h2> -->
-    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
-        <div class="grid-sizer"></div>
-        <div class="grid-item width2">
+    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
+        <div id="grid-sizer" class="col-md-3 col-sm-6"></div>
+        <div class="grid-item col-md-12 col-sm-12">
             @component('ideas.common.comment', ['idea' => $idea])
             @endcomponent
         </div>
-        @foreach ($comments as $comment)
-            <div class="grid-item{{ strlen($comment->comment ? $comment->comment : $comment->text) > 100 ? ' width2' : '' }}">
-                <ul class="list-group">
-                @if ($comment->comment)
-                    {{--<!-- @if ($comment->link)
-                        <li class="list-group-item">
-                            <strong>
-                                Submission: {{ $comment->link->type_str}}
-                            </strong><br>
-                            {!! $comment->link->text !!}
+        @foreach ($commentsByTask as $comments)
+            @if ($comments->first()->task && $comments->first()->task->id != 1)
+                <!-- {{ $tsklen = strlen($comments->first()->task->type == 61 ? $questions->where('id',$comments->first()->ques_id)->first()->text : $comments->first()->task->name) }} -->
+                <div class="grid-item{{ ($tsklen > 200) ? ' col-md-12 col-sm-12' : ' col-md-12 col-sm-12' }} task">
+                    <ul class="list-group">
+                        <li class="list-group-item dark">
+                            <span class="name"><strong>{{ $comments->first()->task->name }}</strong></span>
+                            <span class="pull-right">
+                            @if ($comments->first()->task->type == 61)
+                                {{ $questions->where('id',$comments->first()->ques_id)->first()->text }}
+                                {{-- $comments->first()->question->text --}}
+                            @else
+                                {{ $comments->first()->task->text }}
+                            @endif
+                            </span>
                         </li>
-                    @endif -->--}}
-                    <li class="list-group-item comments">
-                        @if ($comment->task->type == 61)
-                            {{ $questions->where('id',$comment->ques_id)->first()->text }}<br>
-                            {{-- $comment->question->text --}}
-                        @else
-                            {{ $comment->task->name }}<br>
-                        @endif
-                        <span class="text">{!! $comment->comment !!}</span><br>
-                        <em>
-                            {{ $comment->user->fname }}, {!! dateForHumans($comment->created_at) !!}
-                        </em>
-                    </li>
-                @else
-                    <li class="list-group-item comments">
-                        {{ $comment->type_str }}<br>
-                        <span class="text">{!! $comment->text !!}</span><br>
-                        <em>
-                            {{ $comment->user->fname }}, {{ dateForHumans($comment->created_at) }}
-                        </em>
-                    </li>
-                @endif
-                </ul>
-            </div> <!-- .grid-item -->
+                    </ul>
+                </div> <!-- .grid-item -->
+            @endif
+            @foreach ($comments as $comment)
+                <!-- {{ $commlen = strlen($comment->comment ? $comment->comment : $comment->text) }} -->
+                <div class="grid-item{{ ($commlen > 400) ? ' col-md-12 col-sm-12' : (($commlen > 100) ? ' col-md-6 col-sm-6' : ' col-md-3 col-sm-6') }}">
+                    <ul class="list-group">
+                    @if ($comment->comment)
+                        {{--<!-- @if ($comment->link)
+                            <li class="list-group-item">
+                                <strong>
+                                    Submission: {{ $comment->link->type_str}}
+                                </strong><br>
+                                {!! $comment->link->text !!}
+                            </li>
+                        @endif -->--}}
+                        <li class="list-group-item comments">
+                            <span class="text">{!! $comment->comment !!}</span><br>
+                            <em>
+                                {{ $comment->user->fname }}, {!! dateForHumans($comment->created_at) !!}
+                            </em>
+                        </li>
+                    @else
+                        <li class="list-group-item comments">
+                            <!-- {{ $comment->type_str }}<br> -->
+                            <span class="text">{!! $comment->text !!}</span><br>
+                            <em>
+                                {{ $comment->user->fname }}, {{ dateForHumans($comment->created_at) }}
+                            </em>
+                        </li>
+                    @endif
+                    </ul>
+                </div> <!-- .grid-item -->
+            @endforeach
         @endforeach
     </div> <!-- .grid -->
+    
 
 </section>
 @endsection
