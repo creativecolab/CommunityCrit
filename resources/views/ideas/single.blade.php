@@ -3,68 +3,51 @@
 @section('title', 'Idea #' . $idea->id)
 
 @section('content')
-<section id="idea-detail">
+<section id="idea-detail" class="masonry">
     <h1>{{ $idea->name }}</h1>
     <h4>{{ $idea->text }}</h4>
 
-    @component('ideas.common.comment', ['idea' => $idea])
-    @endcomponent
-
-    <h2>Improvements, Critiques, and Assessments <span class="badge">{{count($feedbacks)}}</span></h2>
+    <!-- <h2>Responses <span class="badge">{{count($comments)}}</span></h2> -->
     <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
         <div class="grid-sizer"></div>
-        @foreach ($feedbacks as $feedback)
-            <div class="grid-item{{ strlen($feedback->comment) > 100 ? ' width2' : '' }}">
-            <!-- <div class="grid-item{{ strlen($feedback->link ? $feedback->link->text : '' . $feedback->comment) > 200 ? ' width2' : '' }}"> -->
-                    <div class="panel panel-default">
-                        <ul class="list-group">
-                            <!-- @if ($feedback->task) -->
-                                <!-- <li class="list-group-item"> -->
-                                    <!-- <strong>{{$feedback->task->name}}</strong></br> -->
-                                    <!-- {{--!! $feedback->task->text !!--}} -->
-                                <!-- </li> -->
-                            <!-- @endif -->
-                            <!-- @if ($feedback->link)
-                                <li class="list-group-item">
-                                    <strong>Reference: 
-                                        @component('utilities.link_type_name', ['link_type' => $feedback->link->link_type])
-                                        @endcomponent
-                                    </strong><br>
-                                    {!! $feedback->link->text !!}
-                                </li>
-                            @endif -->
-                            <li class="list-group-item comments">
-                                <span class="text">{!! $feedback->comment !!}</span><br>
-                                <em>
-                                    {{ $feedback->user->fname }}, {!! dateForHumans($feedback->created_at) !!}
-                                </em>
-                            </li>
-                        </ul>
-                    </div> <!-- .panel -->
-            </div> <!-- .grid-item -->
-        @endforeach
-    </div> <!-- .grid -->
-
-    <h2>References <span class="badge">{{count($links)}}</span></h2>
-    @if (!count($links))
-        <p>There are no references at this time, but you can <a>add one</a>.</p>
-    @endif
-
-    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": ".grid-sizer", "percentPosition": "true"}'>
-        <div class="grid-sizer"></div>
-        @foreach ($links as $link)
-            <div class="grid-item{{ strlen($link->text) > 200 ? ' width2' : '' }}">
-                    <div class="panel panel-default">
-                        <ul class="list-group">
-                            <li class="list-group-item comments">
-                                {{ $link->type_str }}<br>
-                                <span class="text">{!! $link->text !!}</span><br>
-                                <em>
-                                    {{ $link->user->fname }}, {{ dateForHumans($link->created_at) }}
-                                </em>
-                            </li>
-                        </ul>
-                    </div> <!-- .panel -->
+        <div class="grid-item width2">
+            @component('ideas.common.comment', ['idea' => $idea])
+            @endcomponent
+        </div>
+        @foreach ($comments as $comment)
+            <div class="grid-item{{ strlen($comment->comment ? $comment->comment : $comment->text) > 100 ? ' width2' : '' }}">
+                <ul class="list-group">
+                @if ($comment->comment)
+                    {{--<!-- @if ($comment->link)
+                        <li class="list-group-item">
+                            <strong>
+                                Submission: {{ $comment->link->type_str}}
+                            </strong><br>
+                            {!! $comment->link->text !!}
+                        </li>
+                    @endif -->--}}
+                    <li class="list-group-item comments">
+                        @if ($comment->task->type == 61)
+                            {{ $questions->where('id',$comment->ques_id)->first()->text }}
+                            {{-- $comment->question->text --}}
+                        @else
+                            {{ $comment->task->name }}<br>
+                        @endif
+                        <span class="text">{!! $comment->comment !!}</span><br>
+                        <em>
+                            {{ $comment->user->fname }}, {!! dateForHumans($comment->created_at) !!}
+                        </em>
+                    </li>
+                @else
+                    <li class="list-group-item comments">
+                        {{ $comment->type_str }}<br>
+                        <span class="text">{!! $comment->text !!}</span><br>
+                        <em>
+                            {{ $comment->user->fname }}, {{ dateForHumans($comment->created_at) }}
+                        </em>
+                    </li>
+                @endif
+                </ul>
             </div> <!-- .grid-item -->
         @endforeach
     </div> <!-- .grid -->

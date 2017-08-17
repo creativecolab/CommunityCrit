@@ -45,6 +45,7 @@ class Feedback extends Model
         'type',
         'idea_id',
         'link_id',
+        'ques_id',
         'status',
         'moderated_at',
         'moderated_by'];
