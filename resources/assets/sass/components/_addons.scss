@@ -3,6 +3,11 @@ a.panel-link {
   color: inherit;
 }
 
+a.panel-link .list-group {
+  box-shadow: $shadow-default;
+  border-radius: 4px;
+}
+
 a.panel-link .panel:hover .panel-body {
   background-color: #eee;
 }
