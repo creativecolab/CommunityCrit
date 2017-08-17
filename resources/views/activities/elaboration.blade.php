@@ -240,10 +240,5 @@
             //     });
             // }
         }
-
-        function hide_submit()
-        {
-            $(this).attr('disabled','disabled');
-        }
     </script>
 @endsection
