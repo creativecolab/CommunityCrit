@@ -191,6 +191,11 @@
         $('#consent').prop('required', true);
     });
 
+    $('#submit-button').click(function() {
+        $(this).hide();
+        $('#skip').hide();
+    });
+
     var visible = false;
     function overview_onClick() {
         visible = !visible;
@@ -287,6 +292,10 @@
     var refresher = document.getElementById('refresher');
     if (refresher)
         refresher.onclick = refresherHandler;
+
+    var hide_me = document.getElementById('submit-button');
+    if (hide_me)
+        hide_me.onclick = hide_submit();
 
 </script>
 </body>
