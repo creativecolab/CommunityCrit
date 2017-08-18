@@ -58,7 +58,7 @@
                         {{--<li><a href="{{ route('submit-idea') }}">Submit an Idea</a></li>--}}
                     @endif
                     {{--<li><a href="{{ url('overview') }}">Overview</a></li>--}}
-                    <li><a href="{{ route('ideas') }}">View Submissions</a></li>
+                    <li><a href="{{ route('ideas') }}">View All Contributions</a></li>
                     <li><a href="{{ url('/about') }}">About</a></li>
                 </ul>
 
@@ -192,8 +192,16 @@
     });
 
     $('#submit-button').click(function() {
-        $(this).hide();
-        $('#skip').hide();
+//        $(this).hide();
+//        $('#skip').hide();
+        $('#skip').attr('onclick','');
+        if ($(this).hasClass('submitted')) {
+            event.preventDefault();
+        }
+        else {
+//            $(this).find(':submit').html('<i class="fa fa-spinner fa-spin"></i>');
+            $(this).addClass('submitted');
+        }
     });
 
     var visible = false;
@@ -293,6 +301,68 @@
     if (refresher)
         refresher.onclick = refresherHandler;
 
+    //pages
+    var listElement = $('#pageStuff');
+    var perPage = 3;
+    var numItems = listElement.children().length;
+    var numPages = Math.ceil(numItems/perPage);
+
+    $('.pagination').data("curr",0);
+
+    var curr = 0;
+    while(numPages > curr){
+        if (curr == 0) {
+            $('<li class="active"><a class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pagination');
+        }
+        else {
+            $('<li><a class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pagination');
+        }
+        curr++;
+    }
+
+    $('.pagination .page_link:first').addClass('active');
+
+    listElement.children().css('display', 'none');
+    listElement.children().slice(0, perPage).css('display', 'block');
+
+    $('.pagination li a').click(function(){
+        var clickedPage = $(this).html().valueOf() - 1;
+
+        var nodes = document.getElementById("listStuff").getElementsByTagName("li");
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].setAttribute("class", "");
+        }
+
+        var node = document.getElementById("listStuff").getElementsByTagName("li")[clickedPage];
+        node.setAttribute("class", "active");
+
+        goTo(clickedPage,perPage);
+    });
+
+    function previous(){
+        var goToPage = parseInt($('.pagination').data("curr")) - 1;
+        if($('.active').prev('.page_link').length==true){
+            goTo(goToPage);
+        }
+    }
+
+    function next(){
+        goToPage = parseInt($('.pagination').data("curr")) + 1;
+        if($('.active_page').next('.page_link').length==true){
+            goTo(goToPage);
+        }
+    }
+
+    function goTo(page){
+        var startAt = page * perPage,
+                endOn = startAt + perPage;
+
+        listElement.children().css('display','none').slice(startAt, endOn).css('display','block');
+        $('.pagination').attr("curr",page);
+    }
+
 </script>
+
+@yield('custom-script')
 </body>
 </html>
