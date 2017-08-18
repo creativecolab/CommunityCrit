@@ -66,6 +66,7 @@
                 </a>
             </section>
         {{--@endif--}}
+        @if(!$comp_ideas->isEmpty())
         <h3>Ideas You Have Worked On</h3>
         <div class="row">
                 @foreach ($comp_ideas as $key=>$idea)
@@ -82,5 +83,6 @@
                     </div> <!-- .col -->
                 @endforeach
         </div>
+        @endif
     </div>
 @endsection
