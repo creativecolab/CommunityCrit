@@ -260,6 +260,11 @@ class TaskController extends Controller
                 $data['ideas'] = $data['ideas']->forget($key);
             }
         }
+
+        if ($data['ideas']->isEmpty()) {
+            $data['ideas'] = $data['comp_ideas'];
+        }
+
         return view($view, $data);
     }
 
