@@ -385,7 +385,14 @@ class TaskController extends Controller
             // print($task);
         // }
 
-        $num_resp = static::NUM_TASKS-\Session::get('responses')->count();
+        $responses = \Session::get('responses');
+
+        if ($responses) {
+            $num_resp = static::NUM_TASKS - $responses->count();
+        } else {
+            return redirect()->route('do');
+        }
+        
 
         $view = 'activities.summary';
         $data = ['num_responses' => $num_resp, 'idea' => $idea];
