@@ -885,7 +885,7 @@ class TaskController extends Controller
 
             $hist = updateTaskHist($request, 1);
 
-            return redirect()->route('do');
+            return redirect()->route('my-contributions');
         }
         else {
             if ($idea->text) {
