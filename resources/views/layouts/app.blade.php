@@ -299,25 +299,25 @@
     var numItems = listElement.children().length;
     var numPages = Math.ceil(numItems/perPage);
 
-    $('.pager').data("curr",0);
+    $('.pagination').data("curr",0);
 
     var curr = 0;
     while(numPages > curr){
         if (curr == 0) {
-            $('<li class="active"><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pager');
+            $('<li class="active"><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pagination');
         }
         else {
-            $('<li><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pager');
+            $('<li><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pagination');
         }
         curr++;
     }
 
-    $('.pager .page_link:first').addClass('active');
+    $('.pagination .page_link:first').addClass('active');
 
     listElement.children().css('display', 'none');
     listElement.children().slice(0, perPage).css('display', 'block');
 
-    $('.pager li a').click(function(){
+    $('.pagination li a').click(function(){
         var clickedPage = $(this).html().valueOf() - 1;
 
         var nodes = document.getElementById("listStuff").getElementsByTagName("li");
@@ -332,14 +332,14 @@
     });
 
     function previous(){
-        var goToPage = parseInt($('.pager').data("curr")) - 1;
+        var goToPage = parseInt($('.pagination').data("curr")) - 1;
         if($('.active').prev('.page_link').length==true){
             goTo(goToPage);
         }
     }
 
     function next(){
-        goToPage = parseInt($('.pager').data("curr")) + 1;
+        goToPage = parseInt($('.pagination').data("curr")) + 1;
         if($('.active_page').next('.page_link').length==true){
             goTo(goToPage);
         }
@@ -350,7 +350,7 @@
                 endOn = startAt + perPage;
 
         listElement.children().css('display','none').slice(startAt, endOn).css('display','block');
-        $('.pager').attr("curr",page);
+        $('.pagination').attr("curr",page);
     }
 
 </script>

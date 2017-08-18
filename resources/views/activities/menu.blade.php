@@ -27,12 +27,11 @@
             @endforeach
             </div>
         </div>
-        <div class="row">
-            <div id="listStuff" class="pagination">
-                <ul class="pager pagination"></ul>
-            </div>
+
+        <div id="listStuff" class="">
+            <ul class="pagination"></ul>
         </div>
-        
+
         <section>
             <h2>Have an idea?</h2>
             <p>Add your own idea for the future of El Nudillo.</p>
