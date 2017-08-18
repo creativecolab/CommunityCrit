@@ -58,7 +58,7 @@
                         {{--<li><a href="{{ route('submit-idea') }}">Submit an Idea</a></li>--}}
                     @endif
                     {{--<li><a href="{{ url('overview') }}">Overview</a></li>--}}
-                    <li><a href="{{ route('ideas') }}">View Submissions</a></li>
+                    <li><a href="{{ route('ideas') }}">View All Contributions</a></li>
                     <li><a href="{{ url('/about') }}">About</a></li>
                 </ul>
 
