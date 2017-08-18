@@ -16,7 +16,7 @@
     <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
         <div id="grid-sizer" class="col-md-3 col-sm-4"></div>
         @foreach ($ideas as $idea)
-            <div class="grid-item{{ strlen($idea->text) > 100 ? ' col-md-6 col-sm-6' : ' col-md-3 col-sm-4' }}">
+            <div class="grid-item{{ strlen($idea->text) > 100 ? ' col-md-6 col-sm-8' : ' col-md-3 col-sm-4' }}">
                 {{--@if ($idea->status == 1)--}}
                     <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
                 {{--@endif--}}

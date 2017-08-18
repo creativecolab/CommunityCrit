@@ -294,5 +294,7 @@
         refresher.onclick = refresherHandler;
 
 </script>
+
+@yield('custom-script')
 </body>
 </html>

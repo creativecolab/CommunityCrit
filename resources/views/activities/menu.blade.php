@@ -37,11 +37,23 @@
         {{--@if ((count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 3)) >= 5)--}}
             <section>
                 <h2>All done?</h2>
-                <p>Please take this short survey so we can improve the experience of CommunityCrit for other community members</p>
-                <a class="btn btn-primary" href="{{ route( 'exit') }}">
-                    Go to Exit Survey
-                </a>
+                <p>Please take this short survey so we can improve the experience of CommunityCrit for other community members. You will receive a $5 Amazon gift card after you complete the survey for the first time.</p>
+                @if (auth()->user()->submitted < 1)
+                    <a class="btn btn-primary disabled" data-toggle="tooltip" data-placement="bottom" title="You must complete one activity before taking the exit survey.">Go to Exit Survey</a>
+                @else
+                    <a class="btn btn-primary" href="{{ route('exit') }}">Go to Exit Survey</a>
+                @endif
             </section>
         {{--@endif--}}
     </div>
+@endsection
+
+@section('custom-script')
+@if (auth()->user()->submitted < 1)
+    <script>
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+@endif
 @endsection
