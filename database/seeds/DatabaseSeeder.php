@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
 		// $this->call( TasksSeeder2::class );
 
 		// new
-		$this->call( TasksSeeder3::class );
+		// $this->call( TasksSeeder3::class );
+		$this->call( TasksSeeder4::class );
 		
 		// deprecated
 		// $this->call( FacetsSeeder::class );
