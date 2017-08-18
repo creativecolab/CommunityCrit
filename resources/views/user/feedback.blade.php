@@ -17,21 +17,26 @@
         <div id="grid-sizer" class="col-md-3 col-sm-4"></div>
         @foreach ($ideas as $idea)
             <div class="grid-item{{ strlen($idea->text) > 100 ? ' col-md-6 col-sm-6' : ' col-md-3 col-sm-4' }}">
-                @if ($idea->status == 1)
+                {{--@if ($idea->status == 1)--}}
                     <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
-                @endif
+                {{--@endif--}}
                     <ul class="list-group">
                         <li class="list-group-item comments">
                             <h4>{{ $idea->name }}</h4>
                             <span class="text">{!! $idea->text !!}</span><br>
+                            @if ($idea->img_url)
+                                <div id="img">
+                                    <img src="{{ $idea->img_url }}" class="img-responsive">
+                                </div>
+                            @endif
                             <em>
                                 {!! dateForHumans($idea->created_at) !!}
                             </em>
                         </li>
                     </ul>
-                @if ($idea->status == 1)
+                {{--@if ($idea->status == 1)--}}
                     </a>
-                @endif
+                {{--@endif--}}
             </div> <!-- .grid-item -->
         @endforeach
     </div> <!-- .grid -->

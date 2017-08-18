@@ -72,9 +72,13 @@ class IdeaController extends Controller
     public function show($id)
     {
         // $idea = Idea::all()->find($id); // w/ laravel-mod
-        $idea = Idea::all()->where('status', 1)->find($id);
+        $idea = Idea::find($id);
+        $user_id = null;
+        if (!auth()->guest()) {
+            $user_id = auth()->user()->id;
+        }
 
-        if ($idea) {
+        if ($idea->user_id == $user_id || $idea->status == 1) {
             $view = 'ideas.single';
             $data = [];
 

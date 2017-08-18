@@ -136,7 +136,7 @@
                                 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                     <label class="instruction" for="submissionText">Give your idea a name.</label>
                                     <!-- <input type="text" class="form-control" name="name" required></input> -->
-                                    {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => "Name your idea.", 'type' => 'text')) }}
+                                    {{ Form::text('name', '', array('class' => 'form-control', 'placeholder' => "Name your idea.", 'type' => 'text', 'maxlength' => 140 )) }}
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
