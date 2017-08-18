@@ -304,10 +304,10 @@
     var curr = 0;
     while(numPages > curr){
         if (curr == 0) {
-            $('<li class="active"><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pagination');
+            $('<li class="active"><a href="" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pagination');
         }
         else {
-            $('<li><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pagination');
+            $('<li><a href="" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pagination');
         }
         curr++;
     }

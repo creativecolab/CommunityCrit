@@ -245,6 +245,21 @@ class TaskController extends Controller
             $data['ideas'] = $this->sepIdeaQueueAll($groups);
         }
 
+        $comp_ideas = collect([]);
+        $comp_ids = TaskHist::where('user_id',\Auth::id())->pluck('idea_id')->unique();
+        foreach ($comp_ids as $id) {
+            if ($id) {
+                $comp_ideas->push(Idea::find($id));
+            }
+        }
+
+        $data['comp_ideas'] = $comp_ideas;
+
+        foreach($data['ideas'] as $key=>$item) {
+            if ($comp_ideas->pluck('id')->contains($item->id)) {
+                $data['ideas'] = $data['ideas']->forget($key);
+            }
+        }
         return view($view, $data);
     }
 
