@@ -44,7 +44,7 @@
                             <span class="glyphicon glyphicon-comment buffer-left" aria-hidden="true"></span> {{ count($idea->contributions) }}
                         </div>
                         <a href="{{ action( 'TaskController@showRandomTask', $idea->id) }}" class="btn btn-primary do">
-                            Do An Activity
+                            Do An Activity For This Idea
                         </a>
                         <div class="clearfix"></div>
                     </li>

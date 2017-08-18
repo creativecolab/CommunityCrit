@@ -4,8 +4,19 @@
 
 @section('content')
 <div class="masonry" id="feedback">
-    <h1>My Contributions</h1>
-    <h2>My Ideas <span class="badge">{{count($ideas)}}</span></h2>
+    <h1>
+        <span>My Contributions</span>
+        <a class="btn btn-primary do" href="{{ route( 'main-menu') }}">
+            Do More Activies
+        </a>
+    </h1>
+    <h2>
+        My Ideas
+        <span class="badge">{{count($ideas)}}</span>
+        <a class="btn btn-primary do" href="{{ route( 'submit-idea') }}">
+            Submit a New Idea
+        </a>
+    </h2>
     @if (!count($ideas))
         <h4>You have not submitted any ideas yet.</h4>
         <a class="btn btn-primary" href="{{ route( 'submit-idea') }}">
@@ -14,9 +25,9 @@
     @endif
 
     <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
-        <div id="grid-sizer" class="col-md-3 col-sm-4"></div>
+        <div id="grid-sizer" class="col-md-4 col-sm-6"></div>
         @foreach ($ideas as $idea)
-            <div class="grid-item{{ strlen($idea->text) > 100 ? ' col-md-6 col-sm-8' : ' col-md-3 col-sm-4' }}">
+            <div class="grid-item col-md-4 col-sm-6">
                 {{--@if ($idea->status == 1)--}}
                     <a class="panel-link" href="{{ action( 'IdeaController@show', $idea->id) }}">
                 {{--@endif--}}
@@ -41,7 +52,10 @@
         @endforeach
     </div> <!-- .grid -->
 
-    <h2>My Responses</h2>{{--<span class="badge">{{count($comments)}}</span></h2>--}}
+    <h2>
+        My Activities
+        <span class="badge">{{ auth()->user()->submitted - count($ideas) }}</span>
+    </h2>{{--<span class="badge">{{count($comments)}}</span></h2>--}}
     @if (!count($commentsGroup))
         <h4>You have not submitted an activity yet.</h4>
         <a class="btn btn-primary" href="{{ route( 'main-menu') }}">
@@ -50,13 +64,17 @@
     @endif
 
     @foreach ($commentsGroup as $comments)
-        <h3>{{ $comments->first()->idea->name }}</h3>
-        <p>
-            {{  $comments->first()->idea->text }}
-            @if ($comments->first()->idea->status == 1)
-                <a href="{{ action( 'IdeaController@show', $comments->first()->idea->id) }}">read more</a>
-            @endif
-        </p>
+        @if ($comments->first()->idea->status == 1)
+        <h3>
+            <span>{{ $comments->first()->idea->name }}</span>
+            <a href="{{ action( 'IdeaController@show', $comments->first()->idea->id) }}" class="btn btn-primary do">
+                View Idea
+            </a>
+            <a href="{{ action( 'TaskController@showRandomTask', $comments->first()->idea->id) }}" class="btn btn-primary do">
+                Do An Activity For This Idea
+            </a>
+        </h3>
+        <p>{{ $comments->first()->idea->text }}</p>
         <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
             <div id="grid-sizer" class="col-md-3 col-sm-4"></div>
             @foreach ($comments as $comment)
@@ -88,6 +106,7 @@
                 </div> <!-- .grid-item -->
             @endforeach
         </div> <!-- .grid -->
+        @endif
     @endforeach
 </div>
 @endsection

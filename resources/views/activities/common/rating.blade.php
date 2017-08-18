@@ -1,4 +1,4 @@
-<div style="margin-bottom: 10px;">
+<div style="margin-bottom: 10px;" id="rating">
     @foreach($qualities as $key=>$quality)
         <div class="row">
             <div class="form-group{{ $errors->has($quality) ? ' has-error' : '' }}">
@@ -33,18 +33,20 @@
     @endforeach
     @if($task->type == 103 || $task->type == 104)
     <div class="row">
-        @if ($errors->has('text'))
-            <span class="help-block">
-                <strong>{{ $errors->first('text') }}</strong>
-            </span>
-        @endif
-        @if($qualities->count() > 1)
-            <label>Explain your thoughts.</label>
-            {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your reason here.")) }}
-        @else
-            {{ Form::hidden('require-check', 'yes') }}
-            {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your reason here.")) }}
-        @endif
+        <div class="col-md-12">
+            @if ($errors->has('text'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('text') }}</strong>
+                </span>
+            @endif
+            @if($qualities->count() > 1)
+                <label>Explain your thoughts.</label>
+                {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your reason here.")) }}
+            @else
+                {{ Form::hidden('require-check', 'yes') }}
+                {{ Form::textarea('text', '', array('class' => 'form-control', 'id' => 'submissionText', 'rows' => '3', 'placeholder' => "Please enter your reason here.")) }}
+            @endif
+        </div>
     </div>
     @endif
 </div>
