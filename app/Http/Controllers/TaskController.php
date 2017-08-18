@@ -1248,6 +1248,10 @@ class TaskController extends Controller
         if ($t_queue == null) {
             $t_queue = collect([]);
         }
+        if ($t_ptr == null) {
+            $t_ptr = 1;
+            \Session::put('t_ptr', 1);
+        }
 
         if ($session_idea != null && $idea_id != $session_idea) {
             $t_queue = collect([]);
@@ -1286,7 +1290,7 @@ class TaskController extends Controller
             \Session::put('t_queue', $t_queue);
 //            \Session::put('t_ptr', $t_ptr+1);
         }
-        return \Session::get('t_queue')[\Session::get('t_ptr')-1];
+        return \Session::get('t_queue')[$t_ptr-1];
     }
 
     private function taskWeight($tasks, $idea_id)

@@ -58,7 +58,7 @@
 				@foreach($links as $link)
 					<tr>
 						<td>
-							@if ($link->link_type >= 5)
+							@if ($link->link_type >= 5 && $link->task)
 								<strong>{{ $link->task->name }}</strong><br>
 							@endif
 							{!! $link->text !!}
