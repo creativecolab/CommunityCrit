@@ -241,7 +241,28 @@ class TaskController extends Controller
         }
         else {
             $groups = $this->ideaQueue(Idea::where('status',1)->get());
-            $data['ideas'] = $this->sepIdeaQueue($groups, 0);
+//            $data['ideas'] = $this->sepIdeaQueue($groups, 0);
+            $data['ideas'] = $this->sepIdeaQueueAll($groups);
+        }
+
+        $comp_ideas = collect([]);
+        $comp_ids = TaskHist::where('user_id',\Auth::id())->pluck('idea_id')->unique();
+        foreach ($comp_ids as $id) {
+            if ($id) {
+                $comp_ideas->push(Idea::find($id));
+            }
+        }
+
+        $data['comp_ideas'] = $comp_ideas;
+
+        foreach($data['ideas'] as $key=>$item) {
+            if ($comp_ideas->pluck('id')->contains($item->id)) {
+                $data['ideas'] = $data['ideas']->forget($key);
+            }
+        }
+
+        if ($data['ideas']->isEmpty()) {
+            $data['ideas'] = $data['comp_ideas'];
         }
 
         return view($view, $data);
@@ -1310,7 +1331,8 @@ class TaskController extends Controller
         //split ideas into parts
         for ($i = $part-1; $i >= 0; $i--) {
             $grp = $ideas->splice((int)($i*$num_ideas/$part));
-            $groups->push($grp->shuffle());
+//            $groups->push($grp->shuffle());
+            $groups->push($grp);
         }
 
         \Session::put('i_queue', $groups);
@@ -1326,6 +1348,20 @@ class TaskController extends Controller
         }
         return $ideas->shuffle();
 //        return $ideas;
+    }
+
+    private function sepIdeaQueueAll($groups)
+    {
+        $ideas = collect([]);
+        $pages = (int)ceil(Idea::where('status',1)->get()->count()/static::NUM_IDEAS);
+        for ($i = 0; $i < $pages; $i++) {
+            foreach ($groups as $group) {
+                if ($group->has($i)) {
+                    $ideas->push($group[$i]);
+                }
+            }
+        }
+        return $ideas;
     }
 
     private function incrementPtr()

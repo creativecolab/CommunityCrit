@@ -8,9 +8,11 @@
         <p>Please select an option below to begin contributing.</p>
 
         <h2 style="display:inline">Pick an Idea to Work On</h2>
-        <a id="refresher"><span class="glyphicon glyphicon-refresh"></span></a>
+        {{--<a id="refresher"><span class="glyphicon glyphicon-refresh"></span></a>--}}
+        @if(!$ideas->isEmpty())
         <p>Here are three random ideas that were submitted by community members. Select one to complete five activities related to that idea. You are always free to skip activities, and you can switch to a different idea by coming back to this page at any time.</p>
         <div id="shown-ideas" class="row">
+            <div id="pageStuff">
             @foreach ($ideas as $key=>$idea)
                 <div class="col-sm-6 col-md-4">
                     <a id="idea-link-{{$key}}" class="panel-link" href="{{ action( 'TaskController@showRandomTask', $idea->id) }}">
@@ -24,8 +26,29 @@
                     </a>
                 </div> <!-- .col -->
             @endforeach
+            </div>
         </div>
-        
+
+        <div id="listStuff" class="">
+            <ul class="pagination"></ul>
+        </div>
+        @endif
+        <div>
+            {{--@foreach ($comp_ideas as $key=>$idea)--}}
+                {{--<div class="col-sm-6 col-md-4">--}}
+                    {{--<a id="idea-link-{{$key}}" class="panel-link" href="{{ action( 'TaskController@showRandomTask', $idea->id) }}">--}}
+                        {{--<div class="panel panel-default">--}}
+                            {{--<div id="idea-name-{{$key}}" class="panel-body lg">--}}
+                                {{--@if ($idea->name)--}}
+                                    {{--{{$idea->name}}--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
+                        {{--</div> <!-- .panel -->--}}
+                    {{--</a>--}}
+                {{--</div> <!-- .col -->--}}
+            {{--@endforeach--}}
+        </div>
+
         <section>
             <h2>Have an idea?</h2>
             <p>Add your own idea for the future of El Nudillo.</p>
@@ -45,6 +68,24 @@
                 @endif
             </section>
         {{--@endif--}}
+        @if(!$comp_ideas->isEmpty())
+        <h3>Ideas You Have Worked On</h3>
+        <div class="row">
+                @foreach ($comp_ideas as $key=>$idea)
+                    <div class="col-sm-6 col-md-4">
+                        <a id="idea-link-{{$key}}" class="panel-link" href="{{ action( 'TaskController@showRandomTask', $idea->id) }}">
+                            <div class="panel panel-default">
+                                <div id="idea-name-{{$key}}" class="panel-body lg">
+                                    @if ($idea->name)
+                                        {{$idea->name}} <span class="glyphicon glyphicon-ok pull-right" style="color:green"></span>
+                                    @endif
+                                </div>
+                            </div> <!-- .panel -->
+                        </a>
+                    </div> <!-- .col -->
+                @endforeach
+        </div>
+        @endif
     </div>
 @endsection
 
