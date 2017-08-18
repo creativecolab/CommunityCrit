@@ -41,7 +41,7 @@
         @endforeach
     </div> <!-- .grid -->
 
-    <h2>My Responses</h2>{{--<span class="badge">{{count($comments)}}</span></h2>--}}
+    <h2>My Activities</h2>{{--<span class="badge">{{count($comments)}}</span></h2>--}}
     @if (!count($commentsGroup))
         <h4>You have not submitted an activity yet.</h4>
         <a class="btn btn-primary" href="{{ route( 'main-menu') }}">
