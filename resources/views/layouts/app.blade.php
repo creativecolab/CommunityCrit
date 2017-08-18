@@ -293,6 +293,66 @@
     if (refresher)
         refresher.onclick = refresherHandler;
 
+    //pages
+    var listElement = $('#pageStuff');
+    var perPage = 3;
+    var numItems = listElement.children().length;
+    var numPages = Math.ceil(numItems/perPage);
+
+    $('.pager').data("curr",0);
+
+    var curr = 0;
+    while(numPages > curr){
+        if (curr == 0) {
+            $('<li class="active"><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pager');
+        }
+        else {
+            $('<li><a href="#" class="page_link">' + (curr + 1) + '</a></li>').appendTo('.pager');
+        }
+        curr++;
+    }
+
+    $('.pager .page_link:first').addClass('active');
+
+    listElement.children().css('display', 'none');
+    listElement.children().slice(0, perPage).css('display', 'block');
+
+    $('.pager li a').click(function(){
+        var clickedPage = $(this).html().valueOf() - 1;
+
+        var nodes = document.getElementById("listStuff").getElementsByTagName("li");
+        for (var i = 0; i < nodes.length; i++) {
+            nodes[i].setAttribute("class", "");
+        }
+
+        var node = document.getElementById("listStuff").getElementsByTagName("li")[clickedPage];
+        node.setAttribute("class", "active");
+
+        goTo(clickedPage,perPage);
+    });
+
+    function previous(){
+        var goToPage = parseInt($('.pager').data("curr")) - 1;
+        if($('.active').prev('.page_link').length==true){
+            goTo(goToPage);
+        }
+    }
+
+    function next(){
+        goToPage = parseInt($('.pager').data("curr")) + 1;
+        if($('.active_page').next('.page_link').length==true){
+            goTo(goToPage);
+        }
+    }
+
+    function goTo(page){
+        var startAt = page * perPage,
+                endOn = startAt + perPage;
+
+        listElement.children().css('display','none').slice(startAt, endOn).css('display','block');
+        $('.pager').attr("curr",page);
+    }
+
 </script>
 </body>
 </html>

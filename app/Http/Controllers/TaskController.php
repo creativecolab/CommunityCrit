@@ -241,7 +241,8 @@ class TaskController extends Controller
         }
         else {
             $groups = $this->ideaQueue(Idea::where('status',1)->get());
-            $data['ideas'] = $this->sepIdeaQueue($groups, 0);
+//            $data['ideas'] = $this->sepIdeaQueue($groups, 0);
+            $data['ideas'] = $this->sepIdeaQueueAll($groups);
         }
 
         return view($view, $data);
@@ -1303,7 +1304,8 @@ class TaskController extends Controller
         //split ideas into parts
         for ($i = $part-1; $i >= 0; $i--) {
             $grp = $ideas->splice((int)($i*$num_ideas/$part));
-            $groups->push($grp->shuffle());
+//            $groups->push($grp->shuffle());
+            $groups->push($grp);
         }
 
         \Session::put('i_queue', $groups);
@@ -1319,6 +1321,20 @@ class TaskController extends Controller
         }
         return $ideas->shuffle();
 //        return $ideas;
+    }
+
+    private function sepIdeaQueueAll($groups)
+    {
+        $ideas = collect([]);
+        $pages = (int)ceil(Idea::where('status',1)->get()->count()/static::NUM_IDEAS);
+        for ($i = 0; $i < $pages; $i++) {
+            foreach ($groups as $group) {
+                if ($group->has($i)) {
+                    $ideas->push($group[$i]);
+                }
+            }
+        }
+        return $ideas;
     }
 
     private function incrementPtr()
