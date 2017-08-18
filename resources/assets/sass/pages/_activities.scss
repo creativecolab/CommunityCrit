@@ -104,6 +104,10 @@
 			}
 		}
 
+		#rating .row:last-child {
+			margin-top: $padding-large-vertical;
+		}
+
 		#actions {
 		padding-top: $padding-large-vertical;
 

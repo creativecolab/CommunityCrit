@@ -49,6 +49,15 @@ a.btn-link.disabled {
   margin-bottom: 15px;
 }*/
 
+.btn.do {
+  padding-top: $padding-base-vertical;
+  padding-bottom: $padding-base-vertical;
+}
+
+span + a.btn.do {
+  margin-left: $padding-base-horizontal;
+}
+
 @media screen and (min-width: 992px) {
   .rwd-break {
     display: none;

@@ -4,11 +4,11 @@
 
 <blockquote>
     {!! $link->text !!}
-	@if ($link->link_type >= 3)
-    	<footer>
-		    <em>This
-		    {{ strtolower($link->type_str) }}
-			was submitted by
+	<footer>
+	    <em>This
+	    {{ strtolower($link->type_str) }}
+		was submitted by
+		@if ($link->link_type >= 3)
 		    @if ($link->user->id == 3 || $link->user->fname == 'Guest')
 			    a <strong>{{ strtolower($link->user->fname) }}</strong>.
 			@else
@@ -23,6 +23,8 @@
 		    @endif--}}
 		{{--@else
 		    <p><em>Here's a reference related to this idea.</em></p>--}}
-		</footer>
-	@endif
+		@else
+			a <strong>project organizer</strong>.
+		@endif
+	</footer>
 </blockquote>

@@ -162,7 +162,7 @@ figure {
 
   .btn + .btn {
     margin-top: 0;
-    margin-left: 5px;
+    margin-left: $padding-base-horizontal;
   }
 
   #idea.has-img {
