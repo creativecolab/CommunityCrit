@@ -56,6 +56,14 @@ class IdeaController extends Controller
         $view = 'ideas.all';
         $data = [];
 
+        \Session::forget('idea');
+        \Session::forget('t_queue');
+        \Session::forget('i_queue');
+        \Session::forget('t_ptr');
+
+        \Session::put('t_queue', collect([]));
+        \Session::put('t_ptr', 1);
+
         // $ideas = Idea::all(); // w/ laravel-mod
         $ideas = Idea::all()->where('status', 1)->sortByDesc('contributions_count');
         $data['ideas'] = $ideas;
