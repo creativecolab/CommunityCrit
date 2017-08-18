@@ -35,6 +35,11 @@ Auth::routes();
 //Route::get( '/overview', function () {
 //    return view( 'overview' );
 //} );
+
+Route::get( '/get-started', function () {
+    return view( 'get-started' );
+} );
+
 Route::get( '/overview', function () {
     return view( 'landing' );
 } )->name('overview');
