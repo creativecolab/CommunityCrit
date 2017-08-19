@@ -6,14 +6,14 @@
 
   var myID = '', admin = 0, type = 0, created_at = '';
   @if (!(Auth::guest()))
-	myID = '{{ Auth::user()->id }}';
+  myID = '{{ Auth::user()->id }}';
   admin = {{ Auth::user()->admin }};
   type = {{ Auth::user()->type }};
   created_at = '{{ Auth::user()->created_at }}';
   @endif
 
   ga('create', 'UA-104110133-1', 'auto', {
-  	userId: myID,
+    userId: myID,
     dimension1: myID,
     dimension2: admin,
     dimension3: type,
@@ -24,7 +24,7 @@
   // ga('create', 'UA-104110133-1', 'auto');
   // ga('send', 'pageview');
   {{--@if (!(Auth::guest()))--}}
-  	{{--// ga('set', 'userId', '{{ Auth::user()->id }}'); // Set the user ID using signed-in user_id.--}}
+    {{--// ga('set', 'userId', '{{ Auth::user()->id }}'); // Set the user ID using signed-in user_id.--}}
   {{--@endif--}}
 
 </script>
