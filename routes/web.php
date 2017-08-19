@@ -77,6 +77,7 @@ Route::group( ['prefix' => 'moderation', 'middleware' => 'admin'], function() {
     Route::post( '/update/{status}/ideas/save', 'AdminController@updateIdeasStatus' );
     Route::post( '/update/{status}/links/save', 'AdminController@updateLinksStatus' );
     Route::post( '/update/{status}/feedbacks/save', 'AdminController@updateFeedbacksStatus' );
+    Route::post( '/update/{status}/questions/save', 'AdminController@updateQuestionsStatus' );
 } );
 
 Route::group( ['middleware' => 'checkUser' ], function() {
@@ -92,18 +93,19 @@ Route::group (['prefix' => 'ideas', 'middleware' => 'checkUser'], function () {
     // Route::get('/comment/{id}', 'IdeaController@showComment');
     Route::post( '/submit/new', 'IdeaController@submitIdea');
     Route::post( '/combine/new', 'IdeaController@combine' );
-    Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
+    // Route::post( '/comment/{idea}/new', 'IdeaController@comment' );
+    Route::post( '/comment/{idea}/new', 'IdeaController@submitComment' );
     Route::post( '/assess/{idea}/new', 'IdeaController@assess');
-});
-
-Route::group (['prefix' => 'links', 'middleware' => 'checkUser'], function () {
-    
 });
 
 Route::group( [ 'prefix' => 'ideas' ], function() {
     Route::get('/', 'IdeaController@index')->name( 'ideas' );
     Route::get('/{id}', 'IdeaController@show');
 } );
+
+// Route::group (['prefix' => 'links', 'middleware' => 'checkUser'], function () {
+    
+// });
 
 Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function() {
     Route::get( '/random/{idea_id?}', 'TaskController@showRandomTask')->name( 'do' );
@@ -141,10 +143,13 @@ Route::group( ['prefix' => 'activities', 'middleware' => 'checkUser' ], function
     Route::post( '/submit/idea/new', 'TaskController@submitIdea' );
     Route::post( '/submit/rating/new', 'TaskController@submitRatings' );
     Route::post( '/submit/link/new', 'TaskController@submitLink' );
+    Route::post( '/submit/question/new', 'TaskController@submitQuestion' );
+    Route::post( '/submit/ratetext/new', 'TaskController@submitRatingAndText' );
     Route::post( '/skip/{idea_id?}', 'TaskController@trackSkip' )->name('skip');
 } );
 
 Route::post( '/ajax/timer', 'TaskController@ajaxTimer' );
+Route::post( '/ajax/ideas', 'TaskController@ajaxIdeas' );
 //Route::group( ['prefix' => 'devtest'], function() {
 //    Route::get( '/attach/{task}', 'TaskController@showConnect' ); // attaches idea and task
 //    Route::get( '/', 'TaskController@showIdeaSelect')->name('main-menu');

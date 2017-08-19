@@ -22,6 +22,7 @@ class TaskController extends Controller
 {
     const NUM_TASKS = 5;
     const NUM_IDEAS = 3;
+    const NUM_TH = 10;
 
     const TYPE_FEEDBACK = 1;
     const TYPE_LINK = 2;
@@ -150,8 +151,15 @@ class TaskController extends Controller
 
         if ($task && $idea && $link && $ques) {
             $data = ['idea' => $idea, 'link' => $link, 'task' => $task, 'ques' => $ques];
-            if ($task->type == 100) {
-                $qualities = collect(collect(Rating::QUALITIES)->only(5,6,7));
+            if (collect(Task::FORMAT_RATE)->contains($task->type) || collect(Task::FORMAT_RATEWTEXT)->contains($task->type)) {
+                if ($task->type == 103){
+                    $qualities = collect(collect(Rating::QUALITIES)->only(4));
+                    $data['wording'] = true;
+                }
+                else {
+                    $qualities = collect(collect(Rating::QUALITIES)->only(5, 6, 7));
+                    $data['wording'] = false;
+                }
                 $map_qualities = $qualities->map( function ($item, $key) {
                     return str_replace('-',' ',$item);
                 });
@@ -220,14 +228,42 @@ class TaskController extends Controller
         $view = 'activities.menu';
         $data = [];
 
-        $data['ideas'] = Idea::where('status',1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
-
         \Session::forget('idea');
         \Session::forget('t_queue');
+        \Session::forget('i_queue');
         \Session::forget('t_ptr');
 
         \Session::put('t_queue', collect([]));
         \Session::put('t_ptr', 1);
+
+        if (Idea::where('status',1)->count() <= static::NUM_IDEAS) {
+            $data['ideas'] = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
+        }
+        else {
+            $groups = $this->ideaQueue(Idea::where('status',1)->get());
+//            $data['ideas'] = $this->sepIdeaQueue($groups, 0);
+            $data['ideas'] = $this->sepIdeaQueueAll($groups);
+        }
+
+        $comp_ideas = collect([]);
+        $comp_ids = TaskHist::where('user_id',\Auth::id())->pluck('idea_id')->unique();
+        foreach ($comp_ids as $id) {
+            if ($id) {
+                $comp_ideas->push(Idea::find($id));
+            }
+        }
+
+        $data['comp_ideas'] = $comp_ideas;
+
+        foreach($data['ideas'] as $key=>$item) {
+            if ($comp_ideas->pluck('id')->contains($item->id)) {
+                $data['ideas'] = $data['ideas']->forget($key);
+            }
+        }
+
+        if ($data['ideas']->isEmpty()) {
+            $data['ideas'] = $data['comp_ideas'];
+        }
 
         return view($view, $data);
     }
@@ -279,6 +315,7 @@ class TaskController extends Controller
         $rate = $allFormats['rate'];
         $text = $allFormats['text'];
         $text_link = $allFormats['text_link'];
+        $rate_text = $allFormats['rate_text'];
 
         $ideas = Idea::all()->where('status', 1);
 
@@ -287,7 +324,7 @@ class TaskController extends Controller
             return redirect()->route('overview');
         }
 
-        if (in_array($type, $rate)) {
+        if (in_array($type, $rate) || in_array($type, $rate_text)) {
             // if a rating task, select an idea but no link
             $idea = $ideas->random();
 //            $idea_id = $idea->id;
@@ -369,7 +406,14 @@ class TaskController extends Controller
             // print($task);
         // }
 
-        $num_resp = static::NUM_TASKS-\Session::get('responses')->count();
+        $responses = \Session::get('responses');
+
+        if ($responses) {
+            $num_resp = static::NUM_TASKS - $responses->count();
+        } else {
+            return redirect()->route('do');
+        }
+        
 
         $view = 'activities.summary';
         $data = ['num_responses' => $num_resp, 'idea' => $idea];
@@ -610,18 +654,31 @@ class TaskController extends Controller
         return view($view, $data);
     }
 
-    public function uploadImage( Request $request, Task $task )
+    public function uploadImage( $request, $idea_id )
     {
+        $idea = Idea::find($idea_id);
         $id = \Auth::id();
-        $task_id = $task->id;
 
-        $path = public_path() . '/images/activities/' . $id . '/' . $task_id . '/';
+        $path = public_path() . '/images/ideas/' . $idea_id . '/';
         $img = $request->file('photo');
         if(!\File::exists($path)) {
             \File::makeDirectory($path, 0777, true);
         }
-        Image::make($img)->resize(300, 300)->save($path . 'bar.jpg');
-        return redirect()->action('TaskController@allActivities');
+        Image::make($img)->save($path . $idea_id . '_' . $id . '_main.jpg');
+
+        $idea->img_url = '/images/ideas/' . $idea_id . '/' . $idea_id . '_' . $id . '_main.jpg';
+        $idea->save();
+
+        if ($request->file('extra')) {
+            $path2 = public_path() . '/images/ideas/' . $idea_id . '/extra/';
+            $imgs = $request->file('extra');
+            if (!\File::exists($path2)) {
+                \File::makeDirectory($path2, 0777, true);
+            }
+            foreach ($imgs as $key => $ext) {
+                Image::make($ext)->save($path2 . $idea_id . '_' . $key . '_extra.jpg');
+            }
+        }
     }
 
     public function imageTest($id)
@@ -716,6 +773,23 @@ class TaskController extends Controller
 
     }
 
+    public function ajaxIdeas( Request $request )
+    {
+        $groups = \Session::get('i_queue');
+        $i_ptr = $request->get('i_ptr');
+        if ($groups == null || $i_ptr === null || Idea::where('status',1)->count() <= static::NUM_IDEAS) {
+            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
+            return json_encode($ideas);
+        }
+        else {
+            $i_ptr += 1;
+            $ideas = $this->sepIdeaQueue($groups, $i_ptr);
+//            $ideas = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get()->values();
+            return json_encode($ideas);
+        }
+    }
+
+
     /**
      * Get the error messages for the defined validation rules.
      *
@@ -778,9 +852,21 @@ class TaskController extends Controller
 
         if ($exit == 'Submit') {
             $this->validate($request, [
-                'name' => 'required|max:255',
+                'name' => 'required|max:140',
                 'text' => 'required',
             ]);
+
+            if ($request->hasFile('photo')) {
+                $this->validate($request, [
+                   'photo' => 'mimes:jpeg,jpg,png,gif|max:10000' // max 10000kb
+                ]);
+
+                if ($request->hasFile('extra')) {
+                    $this->validate($request, [
+                        'extra.*' => 'mimes:jpeg,jpg,png,gif|max:5000'
+                    ]);
+                }
+            }
         }
 
         $idea = new Idea;
@@ -790,6 +876,8 @@ class TaskController extends Controller
 
         if ($exit == 'Submit') {
             if ($idea->save() ) {
+                if ($request->hasFile('photo'))
+                    $this->uploadImage($request, $idea->id);
                 flash("Your idea was submitted! You may do another activity or exit below.")->success();
             } else {
                 flash('Unable to save your feedback. Please contact us.')->error();
@@ -797,7 +885,7 @@ class TaskController extends Controller
 
             $hist = updateTaskHist($request, 1);
 
-            return redirect()->route('do');
+            return redirect()->route('my-contributions');
         }
         else {
             if ($idea->text) {
@@ -857,6 +945,53 @@ class TaskController extends Controller
         }
         else {
             if ($feedback->comment) {
+//                if ( $feedback->save() ) {
+//                    flash("Your contribution was submitted!")->success();
+//                } else {
+//                    flash('Unable to save your feedback. Please contact us.')->error();
+//                }
+
+                $hist = updateTaskHist($request, 2);
+            } else {
+                $hist = updateTaskHist($request, 3);
+            }
+
+            return redirect()->route('main-menu');
+        }
+    }
+
+    public function submitQuestion( Request $request) //Idea $idea, int $task)
+    {
+        $exit = $request->get( 'exit' );
+
+        if ($exit == 'Submit') {
+            $this->validate($request, [
+                'text' => 'required',
+            ]);
+        }
+
+        $this->incrementPtr();
+
+        $idea = $request->get('idea');
+
+        $question = new Question;
+        $question->text = $request->get('text');
+        $question->idea_id = $idea;
+        $question->user_id = \Auth::id();
+
+        if ($exit == 'Submit') {
+            if ( $question->save() ) {
+                flash("Your contribution was submitted! You may do another activity or exit below.")->success();
+            } else {
+                flash('Unable to save your feedback. Please contact us.')->error();
+            }
+
+            $hist = updateTaskHist($request, 1);
+
+            return redirect()->route('do', [$idea]);
+        }
+        else {
+            if ($question->text) {
 //                if ( $feedback->save() ) {
 //                    flash("Your contribution was submitted!")->success();
 //                } else {
@@ -997,6 +1132,82 @@ class TaskController extends Controller
         }
     }
 
+    public function submitRatingAndText( Request $request )
+    {
+        $exit = $request->get( 'exit' );
+
+        $qualities = collect(Rating::QUALITIES);
+
+        if ($exit == 'Submit') {
+            foreach($qualities as $quality) {
+                if ($request->has($quality)) {
+                    $this->validate($request, [
+                        $quality => 'required',
+                    ]);
+                }
+            }
+        }
+
+        if ($request->get('require-check') == 'yes') {
+            $this->validate($request, [
+                'text' => 'required',
+            ]);
+        }
+
+        //update session task queue pointer
+        $this->incrementPtr();
+
+        $ratings = collect([]);
+        foreach($qualities as $key=>$quality) {
+            if ($request->has($quality)) {
+                $rating = new Rating;
+                $rating->user_id = \Auth::id();
+                $rating->type = $key;
+                $rating->rating = $request->get($quality);
+                if ($rating->rating != null)
+                    $ratings->push($rating);
+            }
+        }
+
+        $feedback = new Feedback;
+        $feedback->user_id = \Auth::id();
+        $feedback->comment = $request->get( 'text' );
+        $feedback->idea_id = $request->get( 'idea' );
+        $feedback->task_id = $request->get( 'task' );
+        $feedback->link_id = $request->get( 'link' );
+        $feedback->ques_id = $request->get( 'ques' );
+
+        $idea_id = $request->get( 'idea' );
+        $idea = Idea::find($idea_id);
+
+        if ($exit == 'Submit') {
+            if ( $idea->ratings()->saveMany($ratings->all()) && $feedback->save()) {
+                flash("Ratings submitted!");
+            } else {
+                flash("Unable to save your ratings. Please contact us.")->error();
+            }
+
+            $hist = updateTaskHist($request, 1);
+
+            return redirect()->route('do', [$idea_id]);
+        }
+        else {
+//            if ( $idea->ratings()->saveMany($ratings->all()) ) {
+//                flash("Ratings submitted!");
+//            } else {
+//                flash("Unable to save your ratings. Please contact us.")->error();
+//            }
+
+            if ( $ratings->isEmpty() ) {
+                updateTaskHist($request, 3);
+            } else updateTaskHist($request, 2);
+
+//            $hist = updateTaskHist($request, 4);
+
+            return redirect()->route('main-menu');
+        }
+    }
+
     // /**
     //  * create task_history and redirect to correct submit function
     //  *
@@ -1037,6 +1248,10 @@ class TaskController extends Controller
         if ($t_queue == null) {
             $t_queue = collect([]);
         }
+        if ($t_ptr == null) {
+            $t_ptr = 1;
+            \Session::put('t_ptr', 1);
+        }
 
         if ($session_idea != null && $idea_id != $session_idea) {
             $t_queue = collect([]);
@@ -1046,17 +1261,21 @@ class TaskController extends Controller
         if ($t_queue->isEmpty()) {
             //check if idea has links, questions TODO: dont hardcode numbers
             if ($idea->links->where('status', 1)->count() > 0 && $idea->questions->where('status', 1)->count() > 0) {
-                $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->whereNull('hidden')->inRandomOrder()->get();
             }
             elseif ($idea->links->where('status', 1)->count() > 0) {
-                $tasks = Task::where('type', '>', 50)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->get();
             }
             elseif ($idea->questions->where('status',1)->count() > 0) {
-                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->whereNull('hidden')->inRandomOrder()->get();
             }
             else {
-                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->take(static::NUM_TASKS)->get();
+                $tasks = Task::where('type', '>', 50)->whereNotIn('type',Task::FORMAT_TEXTWLINK)->where('type', '!=', 61)->whereNull('hidden')->inRandomOrder()->get();
             }
+            if (TaskHist::where('idea_id',$idea_id)->count() > static::NUM_TH) {
+                $tasks = $this->taskWeight($tasks, $idea_id);
+            }
+            else $tasks = $tasks->take(static::NUM_TASKS);
             \Session::put('idea', $idea_id);
             \Session::put('t_queue', $tasks);
 //            \Session::put('t_ptr', $t_ptr+1);
@@ -1071,7 +1290,82 @@ class TaskController extends Controller
             \Session::put('t_queue', $t_queue);
 //            \Session::put('t_ptr', $t_ptr+1);
         }
-        return \Session::get('t_queue')[\Session::get('t_ptr')-1];
+        return \Session::get('t_queue')[$t_ptr-1];
+    }
+
+    private function taskWeight($tasks, $idea_id)
+    {
+        $task_counts = TaskHist::where('idea_id',$idea_id)->get()->groupBy('task_id')->map(function ($item) {
+            return $item->count();
+        });
+        foreach ($tasks as $task) {
+            $task_id = $task->id;
+            if ($task_counts->has($task_id))
+                $task->num_count = $task_counts[$task_id];
+            else
+                $task->num_count = 0;
+        }
+        $tasks = $tasks->sortBy('num_count');
+
+        return $tasks->take(static::NUM_TASKS)->shuffle();
+    }
+
+    private function ideaQueue($ideas)
+    {
+        $part = static::NUM_IDEAS;
+        $num_ideas = $ideas->count();
+        $groups = collect([]);
+
+        //count submissions per idea
+        $submit_count = TaskHist::where('action',1)->whereNotNull('idea_id')->get()
+            ->groupBy('idea_id')
+            ->map(function ($item) {
+                return $item->count();
+            });
+
+        //attach to idea
+        foreach ($ideas as $idea) {
+            if ($submit_count->has($idea->id))
+                $idea->num_count = $submit_count[$idea->id];
+            else
+                $idea->num_count = 0;
+        }
+        $ideas = $ideas->sortBy('num_count');
+
+        //split ideas into parts
+        for ($i = $part-1; $i >= 0; $i--) {
+            $grp = $ideas->splice((int)($i*$num_ideas/$part));
+//            $groups->push($grp->shuffle());
+            $groups->push($grp);
+        }
+
+        \Session::put('i_queue', $groups);
+        return $groups;
+    }
+
+    private function sepIdeaQueue($groups, $i_ptr)
+    {
+        $ideas = collect([]);
+        foreach ($groups as $group) {
+            $idx = $i_ptr % $group->count();
+            $ideas->push($group[$idx]);
+        }
+        return $ideas->shuffle();
+//        return $ideas;
+    }
+
+    private function sepIdeaQueueAll($groups)
+    {
+        $ideas = collect([]);
+        $pages = (int)ceil(Idea::where('status',1)->get()->count()/static::NUM_IDEAS);
+        for ($i = 0; $i < $pages; $i++) {
+            foreach ($groups as $group) {
+                if ($group->has($i)) {
+                    $ideas->push($group[$i]);
+                }
+            }
+        }
+        return $ideas;
     }
 
     private function incrementPtr()

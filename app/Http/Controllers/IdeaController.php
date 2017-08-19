@@ -10,6 +10,7 @@ use App\Idea;
 use App\Link;
 use App\Comment;
 use App\Rating;
+use App\Question;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Validator;
@@ -55,8 +56,16 @@ class IdeaController extends Controller
         $view = 'ideas.all';
         $data = [];
 
+        \Session::forget('idea');
+        \Session::forget('t_queue');
+        \Session::forget('i_queue');
+        \Session::forget('t_ptr');
+
+        \Session::put('t_queue', collect([]));
+        \Session::put('t_ptr', 1);
+
         // $ideas = Idea::all(); // w/ laravel-mod
-        $ideas = Idea::all()->where('status', 1);
+        $ideas = Idea::all()->where('status', 1)->sortByDesc('contributions_count');
         $data['ideas'] = $ideas;
 
         return view($view, $data);
@@ -71,21 +80,32 @@ class IdeaController extends Controller
     public function show($id)
     {
         // $idea = Idea::all()->find($id); // w/ laravel-mod
-        $idea = Idea::all()->where('status', 1)->find($id);
+        $idea = Idea::find($id);
+        $user_id = null;
+        if (!auth()->guest()) {
+            $user_id = auth()->user()->id;
+        }
 
-        if ($idea) {
+        if ($idea->user_id == $user_id || $idea->status == 1) {
             $view = 'ideas.single';
             $data = [];
 
             $data['idea'] = $idea;
             // $data['ratings'] = $this->avgRatings($idea);
             // $data['rating_keys'] = $data['ratings']->keys()->all();
-            $data['links'] = $idea->links
-                ->where('status', 1)
-                ->sortBy('link_type');
-            $data['feedbacks'] = $idea->feedback
-                ->whereIn('status', [0, 1])
-                ->sortByDesc('created_at');
+            // $data['links'] = $idea->links
+            //     ->where('status', 1)
+            //     ->sortBy('link_type');
+            // $data['feedbacks'] = $idea->feedback
+            //     ->whereIn('status', [0, 1])
+            //     ->sortByDesc('created_at');
+            $comments = $idea->links
+                ->where('status', 1);
+            $comments = $comments->merge($idea->feedback
+                ->whereIn('status', [0, 1]));
+            $data['commentsByTask'] = $comments->sortByDesc('created_at')->sortBy('task_id')->groupBy('task_id')->sortBy('task_id');
+
+            $data['questions'] = Question::all();
 
             return view($view, $data);
         } else {
@@ -266,6 +286,36 @@ class IdeaController extends Controller
         } else {
             flash("Unable to save your comment. Please contact us.")->error();
         }
+
+        return redirect()->back();
+    }
+
+    /**
+     * create a new feedback (comment)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function submitComment( Request $request, $idea_id)
+    {
+        $this->validate($request, [
+            'text' => 'required',
+        ]);
+
+        $feedback = new Feedback;
+        $feedback->user_id = \Auth::id();
+        $feedback->comment = $request->get( 'text' );
+        $feedback->idea_id = $idea_id;
+        $task_id = Task::where('type', 20)->first()->id;
+        $feedback->task_id = $task_id;
+
+        if ( $feedback->save() ) {
+            flash("Your contribution was submitted!")->success();
+        } else {
+            flash('Unable to save your feedback. Please contact us.')->error();
+        }
+
+        $hist = createCommentTaskHist($idea_id, $task_id);
 
         return redirect()->back();
     }

@@ -1,6 +1,6 @@
 .activity {
 	a#back {
-		margin-bottom: $line-height-computed;
+		margin-bottom: $padding-large-vertical;
 	}
 
 	button.done {
@@ -104,6 +104,10 @@
 			}
 		}
 
+		#rating .row:last-child {
+			margin-top: $padding-large-vertical;
+		}
+
 		#actions {
 		padding-top: $padding-large-vertical;
 
@@ -131,16 +135,22 @@
 
 	$padding-task-panel: 65px;
 
-	.activity .list-group .list-group-item {
-		padding-left: $padding-task-panel;
-		padding-right: $padding-task-panel;
-
-		&:first-child {
-			padding-top: $padding-task-panel - 25px;
+	.activity {
+		a#back {
+			margin-bottom: $line-height-computed;
 		}
 
-		&:last-child {
-			padding-bottom: $padding-task-panel - 25px;
+		.list-group .list-group-item {
+			padding-left: $padding-task-panel;
+			padding-right: $padding-task-panel;
+
+			&:first-child {
+				padding-top: $padding-task-panel - 25px;
+			}
+
+			&:last-child {
+				padding-bottom: $padding-task-panel - 25px;
+			}
 		}
 	}
 }

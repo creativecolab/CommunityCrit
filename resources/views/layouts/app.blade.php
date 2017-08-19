@@ -58,6 +58,7 @@
                         {{--<li><a href="{{ route('submit-idea') }}">Submit an Idea</a></li>--}}
                     @endif
                     {{--<li><a href="{{ url('overview') }}">Overview</a></li>--}}
+                    <li><a href="{{ route('ideas') }}">View All Contributions</a></li>
                     <li><a href="{{ url('/about') }}">About</a></li>
                 </ul>
 
@@ -68,7 +69,7 @@
                         <li><a href="{{ route('login') }}">Login</a></li>
                         <li><a href="{{ route('register') }}">Register</a></li>
                     @else
-                        <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">{{ $myFeedbackCount }}</span></a></li>
+                        <li><a href="{{ url('/my-contributions') }}">My Contributions <span class="badge">{{ auth()->user()->submitted }}</span></a></li>
 {{--                        <li><a href="{{ action('TaskController@index') }}">Tasks</a></li>--}}
                         @if (Auth::user()->admin)
                             <li class="dropdown">
@@ -166,6 +167,41 @@
         var speed = 400;
         $('.activity #question').fadeTo(speed, 1);
         $('.activity #detail').delay(speed).fadeTo(speed, 1);
+
+        //for use in activities\elaboration
+        $("#photosub").change(function () {
+            var photosub = document.getElementById("photosub");
+            var extrasub = document.getElementById("extrasub");
+            var extradiv = document.getElementById("extradiv");
+            if (photosub && photosub.value) {
+                extradiv.style.display = 'block';
+                extrasub.style.display = 'inline';
+            }
+            else {
+                extradiv.style.display = 'none';
+                extrasub.value = null;
+                extrasub.style.display = 'none';
+            }
+        });
+
+    });
+
+    $('#guest-button').click(function(){
+        $('[required]').removeAttr('required');
+        $('#consent').prop('required', true);
+    });
+
+    $('#submit-button').click(function() {
+//        $(this).hide();
+//        $('#skip').hide();
+        $('#skip').attr('onclick','');
+        if ($(this).hasClass('submitted')) {
+            event.preventDefault();
+        }
+        else {
+//            $(this).find(':submit').html('<i class="fa fa-spinner fa-spin"></i>');
+            $(this).addClass('submitted');
+        }
     });
 
     var visible = false;
@@ -217,6 +253,41 @@
         });
     };
 
+    var r_ptr = 0;
+
+    var refresherHandler = function() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: 'POST',
+            url: '/ajax/ideas',
+            data: {'_token' : "{{csrf_token()}}", 'i_ptr' : r_ptr },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+                r_ptr += 1;
+                console.log(r_ptr);
+
+                for (var i = 0; i < data.length; i++) {
+                    var name_str = "idea-name-" + i;
+                    var link_str = "idea-link-" + i;
+                    var name = document.getElementById(name_str);
+                    var link = document.getElementById(link_str);
+                    link.href = "{{ action( 'TaskController@showRandomTask') }}" + "/" + data[i].id;
+                    name.innerHTML = data[i].name;
+                }
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        });
+    };
+
     // You don't have to attach them this way, it's just for example
 
     var inputs = document.getElementsByTagName('textarea');
@@ -225,6 +296,9 @@
         inputs[i].onfocus = focusHandler;
         inputs[i].onblur = blurHandler;
     }
+
 </script>
+
+@yield('custom-script')
 </body>
 </html>

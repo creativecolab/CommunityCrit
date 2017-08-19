@@ -79,14 +79,36 @@ class Idea extends Node
         return $this->belongsTo( 'App\User' );
     }
 
-    public function diffForHumans($date)
+    /**
+     * taskHists this idea is attached to
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function taskHist()
     {
-        return Carbon::parse($date)->diffForHumans();
+        return $this->hasMany( 'App\TaskHist' );
     }
 
-    public function readableDate($date)
+    /**
+     * returns all showable contributions made about this idea
+     *
+     * @return int
+     */
+    public function getContributionsAttribute()
     {
-        $date = $date->setTimezone('America/Los_Angeles');
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F jS, Y, g:i a');
+        $links = $this->links->where('status', 1);
+        $feedbacks = $this->feedback->whereIn('status', [0,1]);
+        $questions = $this->questions->where('status', 1);
+        return $links->merge($feedbacks)->merge($questions)->whereNotIn('user_id', [1, 2, 3]);
+    }
+
+    /**
+     * returns all showable contributions made about this idea
+     *
+     * @return int
+     */
+    public function getContributionsCountAttribute()
+    {
+        return count($this->contributions);
     }
 }

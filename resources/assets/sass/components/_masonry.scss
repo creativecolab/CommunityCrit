@@ -1,0 +1,45 @@
+.masonry {
+	.comments {
+
+		.text {
+			font-size: 125%;
+		}
+	}
+
+	$grid-gutter-width: 20px;
+
+	.row {
+		margin-left: -$grid-gutter-width/2;
+		margin-right: -$grid-gutter-width/2;
+	}
+
+	.grid-sizer, .grid-item {
+		padding-left: ceil(($grid-gutter-width / 2));
+	    padding-right: floor(($grid-gutter-width / 2));
+
+		@include media('<=small') {
+			width: 100%;
+		}
+	}
+
+	// [converter] This is defined recursively in LESS, but Sass supports real loops
+	//@mixin make-grid-columns($i: 1, $list: ".col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}") {
+	  //@for $i from (1 + 1) through $grid-columns {
+	    //$list: "#{$list}, .col-xs-#{$i}, .col-sm-#{$i}, .col-md-#{$i}, .col-lg-#{$i}";
+	  //}
+	  //#{$list} {
+	    //position: relative;
+	    // Prevent columns from collapsing when empty
+	    //min-height: 1px;
+	    // Inner gutter via padding
+	    //padding-left:  ceil(($grid-gutter-width / 2));
+	    //padding-right: floor(($grid-gutter-width / 2));
+
+	    //@include media('<=small') {
+			//width: 100%;
+		//}
+	  //}
+	//}
+
+	//@include make-grid-columns;
+}

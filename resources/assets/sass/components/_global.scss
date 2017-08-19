@@ -99,6 +99,24 @@ h1, h2, h3, h4 {
   }
 }
 
+#idea.has-img {
+  #text {
+    float: none;
+    width: 100%;
+  }
+
+  #img {
+    float: none;
+    width: 100%;
+    padding-top: $padding-base-vertical;
+
+    img {
+      @extend .img-responsive;
+      float: none;
+    }
+  }
+}
+
 figure {
   img {
     margin-bottom: 20px;
@@ -125,7 +143,8 @@ figure {
   box-shadow: $shadow-default;
 
   + .btn {
-    margin-left: 5px;
+    margin-top: $padding-large-vertical;
+    margin-left: 0;
   }
 }
 
@@ -136,6 +155,33 @@ figure {
 #feedback {
   h4 {
     margin-top: $line-height-computed/4;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  .btn + .btn {
+    margin-top: 0;
+    margin-left: $padding-base-horizontal;
+  }
+
+  #idea.has-img {
+    #text {
+      float: left;
+      width: 65%;
+      margin-right: 5%;
+    }
+
+    #img {
+      float: left;
+      width: 30%;
+      padding-top: 0;
+
+      img {
+        max-height: 250px;
+        float: right;
+      }
+    }
   }
 }
 

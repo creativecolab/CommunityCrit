@@ -54,7 +54,12 @@ class User extends Authenticatable
     ];
 
     protected function getNameAttribute() {
-    	return $this->fname . ' ' . $this->lname;
+    	$guest = 'Guest';
+    	if ($this->fname == $guest) {
+    		return $this->fname;
+    	} else {
+    		return $this->fname . ' ' . $this->lname;
+    	}
     }
 
 	/**
@@ -188,4 +193,21 @@ class User extends Authenticatable
 			static::CONDITION_PERSONAL_MICROTASK_CLOSED,
 		]);
 	}
+
+	/**
+     * returns count of users' submissions
+     *
+     * @return str
+     */
+    public function getSubmittedAttribute()
+    {
+        return $contributions = count($this->taskHist->where('action', 1));
+
+        	// $contributions = count($this->taskHist->where('status', 1)) + 
+ //            count(auth()->user()->ideas) + 
+ //            count(auth()->user()->links) + 
+ //            intval(count(auth()->user()->ratings) / 3)
+    }
+
+	
 }

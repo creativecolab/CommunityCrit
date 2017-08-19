@@ -14,6 +14,7 @@ class TaskHist extends Model
         4 => 'go to exit - unknown',
         5 => 'skip',
         6 => 'switched ideas',
+        7 => 'submit - only option'
     ];
 
     use CrudTrait;

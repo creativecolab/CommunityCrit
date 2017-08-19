@@ -13,4 +13,13 @@
 	section {
 		padding-bottom: $line-height-computed;
 	}
+
+	#refresher {
+		cursor: pointer;
+	}
+
+	a.btn.disabled,
+	a.btn-link.disabled {
+	  pointer-events: auto;
+	}
 }

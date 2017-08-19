@@ -1,21 +1,28 @@
 a.panel-link {
   text-decoration: none;
-}
-
-a.panel-link {
   color: inherit;
-}
 
-a.panel-link .panel:hover .panel-body {
-  background-color: #eee;
-}
+  .list-group,
+  .list-group-item {
+    box-shadow: $shadow-default;
+    border-radius: 4px;
+  }
 
-a.panel-link .panel:hover.panel-default .panel-heading {
-  background-color: #eee;
-}
+  .panel:hover .panel-body {
+    background-color: #eee;
+  }
 
-a.panel-link .panel-heading:hover {
-  background-color: #eee;
+  .panel:hover.panel-default .panel-heading {
+    background-color: #eee;
+  }
+
+  .panel-heading:hover {
+    background-color: #eee;
+  }
+
+    &:hover .list-group-item {
+      background-color: #eee;
+  }
 }
 
 .idea-img {
@@ -32,10 +39,24 @@ a.panel-link .panel-heading:hover {
   font-size: 87.5%;
 }
 
+a.btn.disabled,
+a.btn-link.disabled {
+  // cursor: not-allowed;
+}
+
 /*.footer {
   margin-top: 15px;
   margin-bottom: 15px;
 }*/
+
+.btn.do {
+  padding-top: $padding-base-vertical;
+  padding-bottom: $padding-base-vertical;
+}
+
+span + a.btn.do {
+  margin-left: $padding-base-horizontal;
+}
 
 @media screen and (min-width: 992px) {
   .rwd-break {

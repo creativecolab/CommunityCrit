@@ -33,5 +33,7 @@ require('./imagelightbox.min');
 
 // $( 'a[data-imagelightbox="c"]' ).imageLightbox();
 
-
-
+/**
+ * Masonry
+ */
+require('./masonry.pkgd.min');
