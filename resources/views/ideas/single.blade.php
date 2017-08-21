@@ -50,6 +50,7 @@
                 </div> <!-- .grid-item -->
             @endif
             @foreach ($comments as $comment)
+                @if($comment != null)
                 <!-- {{ $commlen = strlen($comment->comment ? $comment->comment : $comment->text) }} -->
                 <div class="grid-item{{ ($commlen > 400) ? ' col-md-12 col-sm-12' : (($commlen > 100) ? ' col-md-6 col-sm-6' : ' col-md-3 col-sm-6') }}">
                     <ul class="list-group">
@@ -79,6 +80,7 @@
                     @endif
                     </ul>
                 </div> <!-- .grid-item -->
+                @endif
             @endforeach
         @endforeach
     </div> <!-- .grid -->
