@@ -4,12 +4,15 @@
 
 @section('content')
 <div class="masonry" id="feedback">
+    {{--<div class="row">--}}
     <h1>
         <span>My Contributions</span>
         <a class="btn btn-primary do" href="{{ route( 'main-menu') }}">
-            Do More Activies
+            Do More Activities
         </a>
     </h1>
+    <br>
+    {{--</div>--}}
     <h2>
         My Ideas
         <span class="badge">{{count($ideas)}}</span>

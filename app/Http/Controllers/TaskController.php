@@ -246,7 +246,7 @@ class TaskController extends Controller
         }
 
         $comp_ideas = collect([]);
-        $comp_ids = TaskHist::where('user_id',\Auth::id())->pluck('idea_id')->unique();
+        $comp_ids = TaskHist::where('user_id',\Auth::id())->where('action','!=',null)->where('action','!=',5)->pluck('idea_id')->unique();
         foreach ($comp_ids as $id) {
             if ($id) {
                 $comp_ideas->push(Idea::find($id));

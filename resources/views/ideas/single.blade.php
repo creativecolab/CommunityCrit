@@ -7,7 +7,7 @@
     <div id="idea" class="{{ $idea->img_url ? 'has-img' : '' }}">
         <div id="text">
             <h1>{{ $idea->name }}</h1>
-            <h4>{{ $idea->text }}</h4>
+            <p>{{ $idea->text }}</p>
         </div>
         @if ($idea->img_url)
             <div id="img">
