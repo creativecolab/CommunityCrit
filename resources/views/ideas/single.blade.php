@@ -15,6 +15,13 @@
             </div>
             <div class="clearfix"></div>
         @endif
+        <p><em>Submitted by
+            @if ($idea->user->id == 3 || $idea->user->fname == 'Guest')
+                a <strong>{{ strtolower($idea->user->fname) }}</strong>.
+            @else
+                <strong>{{ $idea->user->fname }}</strong>.
+            @endif
+        </em></p>
     </div>
 
     <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
