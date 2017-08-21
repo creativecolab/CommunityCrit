@@ -9,9 +9,9 @@
         <div class="row">
             <div class="form-group{{ $errors->has($quality) ? ' has-error' : '' }}">
                 @if ($word)
-                    <label id="labeltop" class="col-md-4 col-lg-4 control-label">1: It is not {{$mapped_qualities[$key]}} at all</label>
+                    <label id="labeltop" class="col-md-4 col-lg-4 control-label">It is not {{$mapped_qualities[$key]}} at all</label>
                 @else
-                    <label id="labeltop" class="col-md-4 col-lg-4 control-label">1: I am not {{$mapped_qualities[$key]}} at all</label>
+                    <label id="labeltop" class="col-md-4 col-lg-4 control-label">I am not {{$mapped_qualities[$key]}} at all</label>
                 @endif
                 <div class="col-md-4 col-lg-3">
                     {{--Checkbox for each idea--}}
@@ -25,9 +25,9 @@
                     @endfor
                 </div>
                 @if ($word)
-                    <label id="labelbot" class="col-md-4 col-lg-5 control-label">5: It is extremely {{$mapped_qualities[$key]}}</label>
+                    <label id="labelbot" class="col-md-4 col-lg-5 control-label">It is extremely {{$mapped_qualities[$key]}}</label>
                 @else
-                    <label id="labelbot" class="col-md-4 col-lg-5 control-label">5: I am extremely {{$mapped_qualities[$key]}}</label>
+                    <label id="labelbot" class="col-md-4 col-lg-5 control-label">I am extremely {{$mapped_qualities[$key]}}</label>
                 @endif
                 @if ($errors->has($quality))
                     <div class="col-md-12 help-block">
