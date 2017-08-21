@@ -1,11 +1,17 @@
+<div id="users-device-size">
+    <div id="xs" class="visible-xs"></div>
+    <div id="sm" class="visible-sm"></div>
+    <div id="md" class="visible-md"></div>
+    <div id="lg" class="visible-lg"></div>
+</div>
 <div style="margin-bottom: 10px;" id="rating">
     @foreach($qualities as $key=>$quality)
         <div class="row">
             <div class="form-group{{ $errors->has($quality) ? ' has-error' : '' }}">
                 @if ($word)
-                    <label class="col-md-4 col-lg-4 control-label">It is not {{$mapped_qualities[$key]}} at all</label>
+                    <label id="labeltop" class="col-md-4 col-lg-4 control-label">1: It is not {{$mapped_qualities[$key]}} at all</label>
                 @else
-                    <label class="col-md-4 col-lg-4 control-label">I am not {{$mapped_qualities[$key]}} at all</label>
+                    <label id="labeltop" class="col-md-4 col-lg-4 control-label">1: I am not {{$mapped_qualities[$key]}} at all</label>
                 @endif
                 <div class="col-md-4 col-lg-3">
                     {{--Checkbox for each idea--}}
@@ -13,15 +19,15 @@
                         <div class="radio-inline">
                             <label>
                                 {!! Form::radio($quality, $i) !!}
-                                {{$i}}
+                                <div id="radio-{{$i}}">{{$i}}</div>
                             </label>
                         </div>
                     @endfor
                 </div>
                 @if ($word)
-                    <label class="col-md-4 col-lg-5 control-label">It is extremely {{$mapped_qualities[$key]}}</label>
+                    <label id="labelbot" class="col-md-4 col-lg-5 control-label">5: It is extremely {{$mapped_qualities[$key]}}</label>
                 @else
-                    <label class="col-md-4 col-lg-5 control-label">I am extremely {{$mapped_qualities[$key]}}</label>
+                    <label id="labelbot" class="col-md-4 col-lg-5 control-label">5: I am extremely {{$mapped_qualities[$key]}}</label>
                 @endif
                 @if ($errors->has($quality))
                     <div class="col-md-12 help-block">
