@@ -44,9 +44,14 @@
                     </a>
 
                     {{--@if ((count(auth()->user()->feedback) + count(auth()->user()->ideas) + count(auth()->user()->links) + intval(count(auth()->user()->ratings) / 3)) >= 5)--}}
-                        <a class="btn btn-primary" href="{{ route( 'exit') }}">
-                            Go to Exit Survey
-                        </a>
+                        {{--<a class="btn btn-primary" href="{{ route( 'exit') }}">--}}
+                            {{--Go to Exit Survey--}}
+                        {{--</a>--}}
+                    @if (auth()->user()->submitted < 1)
+                        <a class="btn btn-primary disabled" data-toggle="tooltip" data-placement="bottom" title="You must complete one activity before taking the exit survey.">Go to Exit Survey</a>
+                    @else
+                        <a class="btn btn-primary" href="{{ route('exit') }}">Go to Exit Survey</a>
+                    @endif
                     {{--@endif--}}
                 </div>
                 <div class="clearfix"></div>
@@ -54,4 +59,14 @@
         </ul>
     </div>
 
+@endsection
+
+@section('custom-script')
+    <script>
+    @if (auth()->user()->submitted < 1)
+        $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+        });
+    @endif
+    </script>
 @endsection

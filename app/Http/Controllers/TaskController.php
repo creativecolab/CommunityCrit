@@ -1148,7 +1148,7 @@ class TaskController extends Controller
             }
         }
 
-        if ($request->get('require-check') == 'yes') {
+        if ($request->get('require-check') == 'yes' && $exit == 'Submit') {
             $this->validate($request, [
                 'text' => 'required',
             ]);

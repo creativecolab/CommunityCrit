@@ -107,7 +107,7 @@
     @if (auth()->user()->submitted < 1)
         $(function () {
           $('[data-toggle="tooltip"]').tooltip()
-        })
+        });
     @endif
 
     var refresher = document.getElementById('refresher');

@@ -218,28 +218,68 @@
             </li>
         </ul> <!-- list group -->
     </div> <!-- .container -->
+@endsection
+
+@section('custom-script')
     <script>
         function skip_onclick()
         {
             $("#task-form").attr("action", "{{ action('TaskController@trackSkip', $idea->id) }}").submit();
-
-            // console.log("test");
-
-            // var speed = 400;
-
-            // if ($('.activity #idea').length > 0) {
-            //     $('#task-panel').fadeTo(speed, 0);
-            //     $('.activity #idea').delay(speed).fadeTo(speed, 0, function() {
-            //         $('#waiting').show();
-            //         // window.location.assign("{{ route('do') }}");
-            //     });
-            // }
-            // else {
-            //     $('#task-panel').fadeTo(speed, 0, function() {
-            //         $('#waiting').show();
-            //         // window.location.assign("{{ route('do') }}");
-            //     });
-            // }
         }
+
+        function getBootstrapDeviceSize() {
+            return $('#users-device-size').find('div:visible').first().attr('id');
+        }
+
+        @if($task->type == 103)
+        var device_size = getBootstrapDeviceSize();
+        console.log(device_size);
+
+        if (device_size == 'sm' || device_size == 'xs') {
+            var radios = document.getElementsByClassName('radio-inline');
+            for (var i = 0, l = radios.length; i < l; i++) {
+                radios[0].setAttribute('class', "radio");
+                $('#radio-1').html('1 - Not impactful at all');
+                $('#radio-2').html('2 - Slightly impactful');
+                $('#radio-3').html('3 - Moderately impactful');
+                $('#radio-4').html('4 - Very impactful');
+                $('#radio-5').html('5 - Extremely impactful');
+            }
+        }
+        else {
+            var inlines = document.getElementsByClassName('radio');
+            for (var i2 = 0, l2 = inlines.length; i2 < l2; i2++) {
+                inlines[0].setAttribute('class', "radio-inline");
+            }
+        }
+
+        $(window).resize(function () {
+            var device_size = getBootstrapDeviceSize();
+            console.log(device_size);
+
+            if (device_size == 'sm' || device_size == 'xs') {
+                var radios = document.getElementsByClassName('radio-inline');
+                for (var i = 0, l = radios.length; i < l; i++) {
+                    radios[0].setAttribute('class', "radio");
+                    $('#radio-1').html('1 - Not impactful at all');
+                    $('#radio-2').html('2 - Slightly impactful');
+                    $('#radio-3').html('3 - Moderately impactful');
+                    $('#radio-4').html('4 - Very impactful');
+                    $('#radio-5').html('5 - Extremely impactful');
+                }
+            }
+            else {
+                var inlines = document.getElementsByClassName('radio');
+                for (var i2 = 0, l2 = inlines.length; i2 < l2; i2++) {
+                    inlines[0].setAttribute('class', "radio-inline");
+                    $('#radio-1').html('1');
+                    $('#radio-2').html('2');
+                    $('#radio-3').html('3');
+                    $('#radio-4').html('4');
+                    $('#radio-5').html('5');
+                }
+            }
+        });
+        @endif
     </script>
 @endsection
