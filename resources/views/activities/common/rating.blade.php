@@ -39,9 +39,9 @@
     @endforeach
     @if($task->type == 103 || $task->type == 104)
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 form-group{{ $errors->has('text') ? ' has-error' : '' }}">
             @if ($errors->has('text'))
-                <span class="help-block">
+                <span class="col-md-12 help-block">
                     <strong>{{ $errors->first('text') }}</strong>
                 </span>
             @endif
