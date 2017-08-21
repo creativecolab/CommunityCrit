@@ -102,7 +102,7 @@ class IdeaController extends Controller
             $comments = $idea->links
                 ->where('status', 1);
             $comments = $comments->merge($idea->feedback
-                ->whereIn('status', [0, 1])->get()->whereNotNull('comment'));
+                ->whereNotNull('comment')->whereIn('status', [0, 1]));
             $data['commentsByTask'] = $comments->sortByDesc('created_at')->sortBy('task_id')->groupBy('task_id')->sortBy('task_id');
 
             $data['questions'] = Question::all();
