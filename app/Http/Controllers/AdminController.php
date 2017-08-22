@@ -202,6 +202,15 @@ class AdminController extends Controller
         $data['totalPer'] = $totalPer;
 
         $data['rows'] = $rows;
+
+        //count new users created today
+        $todayCount = 0;
+        foreach (User::get() as $usr) {
+            if ($usr->created_at->tz('America/Los_Angeles')->isToday())
+                $todayCount += 1;
+        }
+        $data['today_count'] = $todayCount;
+
         return view($view, $data);
     }
 
