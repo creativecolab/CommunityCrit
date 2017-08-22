@@ -133,8 +133,13 @@ class AdminController extends Controller
             $row = collect();
             $row->put('user_id', $user->id);
             $row->put('user_initials', $user->fname[0].$user->lname[0]);
-            $row->put('created_at', $user->created_at);
-            $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']);
+            $row->put('created_at', $user->created_at->tz('America/Los_Angeles'));
+            if ($user->taskHist->sortByDesc('updated_at')->first()['updated_at']){
+                $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']->tz('America/Los_Angeles'));
+            }
+            else {
+                $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']);
+            }
             $ideas = $user->taskHist->where('task_id', 2);
             $allIdeas = $allIdeas->merge($ideas);
             $links = $user->taskHist->whereIn('task_id', [3, 4]);

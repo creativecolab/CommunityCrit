@@ -27,8 +27,8 @@
 			<tr>
 				<th scope="col">ID</th>
 				<th scope="col">Initials</th>
-				<th scope="col">Date Created</th>
-				<th scope="col">Last Visit</th>
+				<th scope="col">Date Created (PST)</th>
+				<th scope="col">Last Visit (PST)</th>
 				<th scope="col">Submitted</th>
 				<th scope="col">Skipped</th>
 				<th scope="col">Exited</th>
