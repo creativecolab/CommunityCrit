@@ -763,11 +763,11 @@ class TaskController extends Controller
         //TODO: functionality for multiple text boxes?
         $time = $times['text']['total'];
 
-        $inputs = $request->input();
-        $source = new Source;
-        $source->rank = $request->get('idea');
-        $source->name = $request->get('task');
-        $source->save();
+//        $inputs = $request->input();
+//        $source = new Source;
+//        $source->rank = $request->get('idea');
+//        $source->name = $request->get('task');
+//        $source->save();
 
         updateTaskHistTimer($task_id,$idea_id,$link_id,$time);
 
