@@ -26,6 +26,8 @@ class AdminController extends Controller
 	    3 => "Postpone",
 	);
 
+    const version_user = 55;
+
     //------------ private functions -----------------
 
     //---------------- show functions ----------------
@@ -115,7 +117,7 @@ class AdminController extends Controller
         $view = 'admin.summary.users';
         $data = [];
 
-        $users = User::all()->where('type', 0);//("admin", "!=", 1);
+        $users = User::all()->where('type', 0)->where('id','>',static::version_user);//("admin", "!=", 1);
         // $taskHists = TaskHist::where();
 
         $rows = collect();
