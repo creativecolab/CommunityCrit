@@ -6,7 +6,7 @@
 <div id="idea-list" class="masonry">
     <h1>Ideas</h1>
     <p class="intro">
-        Take a look at the contributions your fellow community members have made.
+        Click on an idea to look at the contributions your fellow community members have made.
     </p>
 
     <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
