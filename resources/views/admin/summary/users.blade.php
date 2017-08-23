@@ -8,7 +8,8 @@
 	<h2>{{$today_count}} new users created today.</h2>
 	<p style="display:inline">Filter: </p> <a href="{{action('AdminController@showUserSummary', 1)}}">Daily</a>,
     <a href="{{action('AdminController@showUserSummary', 2)}}">View all</a>,
-    <a href="{{action('AdminController@showUserSummary', 0)}}">After lab test</a>
+    <a href="{{action('AdminController@showUserSummary', 0)}}">v2 Users</a>,
+    <a href="{{action('AdminController@showUserSummary', 3)}}">v1 Users</a>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
 			<col>

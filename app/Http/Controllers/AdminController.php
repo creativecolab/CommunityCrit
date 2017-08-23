@@ -118,16 +118,19 @@ class AdminController extends Controller
         $data = [];
 
         switch ($daily) {
-            case 0: //after lab test
+            case 0: //v2 users
                 $users = User::all()->where('type', 0)->where('id','>',static::version_user);
                 break;
-            case 1: //only by day
+            case 1: //only by today
                 $users = User::all()->where('type', 0)->filter(function ($usr,$key) {
                     return $usr->created_at->tz('America/Los_Angeles')->isToday();
                 });
                 break;
             case 2: //view all
                 $users = User::all()->where('type', 0);
+                break;
+            case 3: //v1 users
+                $users = User::all()->where('type', 4);
                 break;
             default:
                 $users = User::all()->where('type', 0)->where('id','>',static::version_user);
