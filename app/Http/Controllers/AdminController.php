@@ -119,10 +119,10 @@ class AdminController extends Controller
 
         switch ($daily) {
             case 0: //v2 users
-                $users = User::all()->where('type', 0)->where('id','>',static::version_user);
+                $users = User::all()->where('id','>',static::version_user);
                 break;
             case 1: //only by today
-                $users = User::all()->where('type', 0)->filter(function ($usr,$key) {
+                $users = User::all()->filter(function ($usr,$key) {
                     return $usr->created_at->tz('America/Los_Angeles')->isToday();
                 });
                 break;
