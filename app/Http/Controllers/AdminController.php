@@ -112,12 +112,27 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showUserSummary()
+    public function showUserSummary( $daily=0 )
     {
         $view = 'admin.summary.users';
         $data = [];
 
-        $users = User::all()->where('type', 0)->where('id','>',static::version_user);//("admin", "!=", 1);
+        switch ($daily) {
+            case 0: //after lab test
+                $users = User::all()->where('type', 0)->where('id','>',static::version_user);
+                break;
+            case 1: //only by day
+                $users = User::all()->where('type', 0)->filter(function ($usr,$key) {
+                    return $usr->created_at->tz('America/Los_Angeles')->isToday();
+                });
+                break;
+            case 2: //view all
+                $users = User::all()->where('type', 0);
+                break;
+            default:
+                $users = User::all()->where('type', 0)->where('id','>',static::version_user);
+        }
+//        $users = User::all()->where('type', 0)->where('id','>',static::version_user);//("admin", "!=", 1);
         // $taskHists = TaskHist::where();
 
         $rows = collect();
@@ -140,7 +155,8 @@ class AdminController extends Controller
                 $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']->tz('America/Los_Angeles'));
             }
             else {
-                $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']);
+                $row->put('last_visited', 'None');
+//                $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']);
             }
             $ideas = $user->taskHist->where('task_id', 2);
             $allIdeas = $allIdeas->merge($ideas);

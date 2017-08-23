@@ -6,6 +6,9 @@
 <div class="container-fluid admin">
 	<h1>User Summary</h1>
 	<h2>{{$today_count}} new users created today.</h2>
+	<p style="display:inline">Filter: </p> <a href="{{action('AdminController@showUserSummary', 1)}}">Daily</a>,
+    <a href="{{action('AdminController@showUserSummary', 2)}}">View all</a>,
+    <a href="{{action('AdminController@showUserSummary', 0)}}">After lab test</a>
 	<div class="table-responsive">
 		<table class="table table-striped table-bordered table-condensed table-hover">
 			<col>
@@ -30,27 +33,27 @@
 				<th scope="col">Initials</th>
 				<th scope="col">Date Created (PST)</th>
 				<th scope="col">Last Visit (PST)</th>
-				<th scope="col">Submitted</th>
-				<th scope="col">Skipped</th>
-				<th scope="col">Exited</th>
-				<th scope="col">Bounced</th>
-				<th scope="col">Submitted</th>
-				<th scope="col">Skipped</th>
-				<th scope="col">Exited</th>
-				<th scope="col">Bounced</th>
-				<th scope="col">Submitted</th>
-				<th scope="col">Skipped</th>
-				<th scope="col">Exited</th>
-				<th scope="col">Bounced</th>
-				<th scope="col">Submitted</th>
-				<th scope="col">Skipped</th>
-				<th scope="col">Exited</th>
-				<th scope="col">Bounced</th>
-				<th scope="col">Submitted</th>
-				<th scope="col">Skipped</th>
-				<th scope="col">Exited</th>
-				<th scope="col">Bounced</th>
-				<th scope="col">Submitted</th>
+				<th scope="col">Submit</th>
+				<th scope="col">Skip</th>
+				<th scope="col">Exit</th>
+				<th scope="col">N/A</th>
+				<th scope="col">Submit</th>
+				<th scope="col">Skip</th>
+				<th scope="col">Exit</th>
+				<th scope="col">N/A</th>
+				<th scope="col">Submit</th>
+				<th scope="col">Skip</th>
+				<th scope="col">Exit</th>
+				<th scope="col">N/A</th>
+				<th scope="col">Submit</th>
+				<th scope="col">Skip</th>
+				<th scope="col">Exit</th>
+				<th scope="col">N/A</th>
+				<th scope="col">Submit</th>
+				<th scope="col">Skip</th>
+				<th scope="col">Exit</th>
+				<th scope="col">N/A</th>
+				<th scope="col">Submit</th>
 			</tr>
 			<tr class="info">
 				<th scope="row">Total (#)</th>
