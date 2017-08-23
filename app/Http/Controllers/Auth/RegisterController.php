@@ -73,7 +73,8 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'consent' => $data['consent'] ? 1 : 0,
-	        'condition' => rand(User::CONDITION_MIN, User::CONDITION_MAX), // TODO: Move condition to after survey
+//	        'condition' => rand(User::CONDITION_MIN, User::CONDITION_MAX), // TODO: Move condition to after survey
+            'condition' => 0,
         ]);
     }
 
@@ -92,6 +93,7 @@ class RegisterController extends Controller
             'fname' => 'Guest',
             'lname' => \Carbon\Carbon::now()->micro,
             'consent' => $data['consent'] ? 1 : 0,
+            'condition' => 0,
         ]);
     }
 
