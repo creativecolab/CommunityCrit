@@ -127,7 +127,7 @@ class AdminController extends Controller
                 });
                 break;
             case 2: //view all
-                $users = User::all()->where('type', 0);
+                $users = User::all()->whereIn('type', [0,4,5]);
                 break;
             case 3: //v1 users
                 $users = User::all()->where('type', 4);
