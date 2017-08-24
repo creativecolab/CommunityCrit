@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        @include("utilities.analytics")
     </head>
     <body id="welcome">
         <div class="position-ref full-height half bkg-img bkg-img-ht">
