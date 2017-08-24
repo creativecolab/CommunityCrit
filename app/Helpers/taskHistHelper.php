@@ -60,6 +60,9 @@ if (! function_exists('updateTaskHist')) {
                 $diff_time = $t1->diffinSeconds($t2) + $t1->diff($t2)->f;
                 $diff_time_mil = (int)($diff_time * 1000);
                 $taskHist->update(['action' => $action, 'time_all' => $diff_time_mil]);
+                if ($taskHist->time_typing == null) {
+                    $taskHist->update(['time_typing' => 0]);
+                }
             }
         }
 
