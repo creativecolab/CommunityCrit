@@ -107,6 +107,8 @@ class IdeaController extends Controller
 
             $data['questions'] = Question::all();
 
+            $data['extra_images'] = $this->getExtraImages($id);
+
             return view($view, $data);
         } else {
             abort(404);
@@ -348,6 +350,22 @@ class IdeaController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    private function getExtraImages($idea_id)
+    {
+        $path = public_path() . '/images/ideas/' . $idea_id . '/extra';
+        if (!\File::exists($path)) {
+            return collect();
+        }
+        $files = collect(\File::allFiles($path))->map(function ($item, $key) {
+            return $item->getRelativePathName();
+        });
+        $file_names = collect();
+        foreach($files as $file) {
+            $file_names->push('/images/ideas/' . $idea_id . '/extra/' . $file);
+        }
+        return $file_names;
     }
 
 //     /**
