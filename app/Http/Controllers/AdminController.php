@@ -75,7 +75,7 @@ class AdminController extends Controller
         $links = Link::all()->where('status', $status);
         $data['links'] = $links;
 
-        $feedbacks = Feedback::all()->where('status', $status);
+        $feedbacks = Feedback::all()->where('status', $status)->values();
         $data['feedbacks'] = $feedbacks;
 
         $questions = Question::all()->where('status', $status);
@@ -94,7 +94,7 @@ class AdminController extends Controller
                 $fb_task->push($txt);
             }
         }
-        $data['fb_task'] = $fb_task;
+        $data['fb_task'] = $fb_task->values();
 
         return view($view, $data);
     }
