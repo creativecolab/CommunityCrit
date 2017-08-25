@@ -11,7 +11,7 @@
         </div>
         @if ($idea->img_url)
             <div id="img">
-                <img src="{{ $idea->img_url }}">
+                <a href="{{ $idea->img_url }}" data-imagelightbox="j"><img src="{{ $idea->img_url }}"></a>
             </div>
             <div class="clearfix"></div>
         @endif
@@ -25,7 +25,7 @@
         @if(!$extra_images->isEmpty())
         <ul style="display:none">
             @foreach($extra_images as $image)
-            <li><a href="{{$image}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>
+            <li><a href="{{$image}}" data-imagelightbox="h"><img src="{{$image}}"></a></li>
             @endforeach
             {{--<li><a href="{{'/img/vector-map.png'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
             {{--<li><a href="{{'/img/ElNudillo1.jpg'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
