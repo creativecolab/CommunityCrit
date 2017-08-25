@@ -124,7 +124,7 @@ class AdminController extends Controller
             case 1: //only by today
                 $users = User::all()->filter(function ($usr,$key) {
                     return $usr->created_at->tz('America/Los_Angeles')->isToday();
-                });
+                })->whereNotIn('type', [2,3]);
                 break;
             case 2: //view all
                 $users = User::all()->whereIn('type', [0,4,5]);
