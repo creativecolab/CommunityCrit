@@ -7,6 +7,7 @@ use App\Link;
 use App\Feedback;
 use App\User;
 use App\TaskHist;
+use App\Task;
 use App\Question;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -80,6 +81,21 @@ class AdminController extends Controller
         $questions = Question::all()->where('status', $status);
         $data['questions'] = $questions;
 
+        $fb_task = collect();
+        foreach($feedbacks as $feedback) {
+            if (Task::find($feedback->task_id)->type == 61) {
+                $fb_task->push(Question::find($feedback->ques_id)->text);
+            }
+            else {
+                $txt = Task::find($feedback->task_id)->text;
+                if (collect(Task::FORMAT_TEXTWLINK)->contains(Task::find($feedback->task_id)->type)) {
+                    $txt .= " -- <br>" . Link::find($feedback->link_id)->text;
+                }
+                $fb_task->push($txt);
+            }
+        }
+        $data['fb_task'] = $fb_task;
+
         return view($view, $data);
     }
 
@@ -124,7 +140,7 @@ class AdminController extends Controller
             case 1: //only by today
                 $users = User::all()->filter(function ($usr,$key) {
                     return $usr->created_at->tz('America/Los_Angeles')->isToday();
-                });
+                })->whereNotIn('type', [2,3]);
                 break;
             case 2: //view all
                 $users = User::all()->whereIn('type', [0,4,5]);
