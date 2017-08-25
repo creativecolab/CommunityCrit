@@ -82,6 +82,7 @@ class AdminController extends Controller
         $data['questions'] = $questions;
 
         $fb_task = collect();
+        $fb_idea = collect();
         foreach($feedbacks as $feedback) {
             if (Task::find($feedback->task_id)->type == 61) {
                 $fb_task->push(Question::find($feedback->ques_id)->text);
@@ -93,8 +94,10 @@ class AdminController extends Controller
                 }
                 $fb_task->push($txt);
             }
+            $fb_idea->push(Idea::find($feedback->idea_id)->name);
         }
         $data['fb_task'] = $fb_task->values();
+        $data['fb_idea'] = $fb_idea->values();
 
         return view($view, $data);
     }

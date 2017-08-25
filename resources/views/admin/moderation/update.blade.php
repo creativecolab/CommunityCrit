@@ -156,6 +156,7 @@
 	
 	<table class="table table-hover">
 		<tr>
+            <th>Idea</th>
 			<th>Task</th>
 		    <th>Comment</th> 
 		    <th>Change Status</th>
@@ -163,6 +164,7 @@
 		@if (count($feedbacks))
 			@foreach($feedbacks as $key=>$feedback)
 				<tr>
+                    <td>{!! $fb_idea[$key] !!}</td>
 					<td>{!! $fb_task[$key] !!}</td>
 				    <td>{!! $feedback->comment !!}</td>
 				    <td style="padding-left: 15px;">
