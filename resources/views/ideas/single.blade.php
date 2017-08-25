@@ -22,6 +22,17 @@
                 <strong>{{ $idea->user->fname }}</strong>.
             @endif
         </em></p>
+        @if(!$extra_images->isEmpty())
+        <ul style="display:none">
+            @foreach($extra_images as $image)
+            <li><a href="{{$image}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>
+            @endforeach
+            {{--<li><a href="{{'/img/vector-map.png'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
+            {{--<li><a href="{{'/img/ElNudillo1.jpg'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
+            {{--<li><a href="{{'/img/timeline.png'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
+        </ul>
+        <button class="trigger_lightbox">View additional images</button>
+        @endif
     </div>
 
     <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
