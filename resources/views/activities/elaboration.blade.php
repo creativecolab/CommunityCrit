@@ -44,7 +44,7 @@
         <ul class="list-group">
             @if ($idea->id)
                 <li class="list-group-item{{ $idea->img_url ? ' has-img' : '' }}" id="idea">
-                    @component('activities.common.idea', ['idea' => $idea, 'link' => $link])
+                    @component('activities.common.idea', ['idea' => $idea, 'link' => $link, 'extra_images' => $extra_images])
                     @endcomponent
                 </li>
             @endif

@@ -31,7 +31,7 @@
             {{--<li><a href="{{'/img/ElNudillo1.jpg'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
             {{--<li><a href="{{'/img/timeline.png'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
         </ul>
-        <button class="trigger_lightbox">View submitted images</button>
+        <button class="trigger_lightbox">View additional images</button>
         @endif
     </div>
 

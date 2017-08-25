@@ -172,6 +172,8 @@ class TaskController extends Controller
                 \Session::put('time1',new \Carbon\Carbon());
             }
 
+            $data['extra_images'] = $this->getExtraImages($idea->id);
+
             return view($view, $data);
         } else {
             abort(404);
@@ -1393,6 +1395,22 @@ class TaskController extends Controller
         \Session::forget('idea');
         \Session::forget('t_queue');
         \Session::forget('t_ptr');
+    }
+
+    private function getExtraImages($idea_id)
+    {
+        $path = public_path() . '/images/ideas/' . $idea_id . '/extra';
+        if (!\File::exists($path)) {
+            return collect();
+        }
+        $files = collect(\File::allFiles($path))->map(function ($item, $key) {
+            return $item->getRelativePathName();
+        });
+        $file_names = collect();
+        foreach($files as $file) {
+            $file_names->push('/images/ideas/' . $idea_id . '/extra/' . $file);
+        }
+        return $file_names;
     }
 
     /**
