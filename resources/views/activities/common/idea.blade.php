@@ -27,7 +27,7 @@
 </div>
 @if ($idea->img_url)
     <div id="img">
-        <a href="{{ $idea->img_url }}" data-imagelightbox="j"><img src="{{ $idea->img_url }}"></a>
+        <a href="{{ $idea->img_url }}" data-imagelightbox="a"><img src="{{ $idea->img_url }}"></a>
     </div>
     <div class="clearfix"></div>
 @endif
