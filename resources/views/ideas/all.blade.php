@@ -41,7 +41,7 @@
                     <li class="list-group-item last">
                         <div class="pull-right">
                             <span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ count($idea->contributions->groupBy('user_id')) }}
-                            <span class="glyphicon glyphicon-comment buffer-left" aria-hidden="true"></span> {{ count($idea->contributions) }}
+                            <span class="glyphicon glyphicon-comment buffer-left" aria-hidden="true"></span> {{ count($idea->contributions)-$idea->num_questions }}
                         </div>
                         <a href="{{ action( 'TaskController@showRandomTask', $idea->id) }}" class="btn btn-primary do">
                             Do An Activity For This Idea

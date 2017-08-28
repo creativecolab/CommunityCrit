@@ -96,10 +96,25 @@ class Idea extends Node
      */
     public function getContributionsAttribute()
     {
-        $links = $this->links->where('status', 1);
-        $feedbacks = $this->feedback->whereIn('status', [0,1]);
-        $questions = $this->questions->where('status', 1);
-        return $links->merge($feedbacks)->merge($questions)->whereNotIn('user_id', [1, 2, 3]);
+        $links = $this->links->where('status', 1)->values();
+        $feedbacks = $this->feedback->whereIn('status', [0,1])->values();
+        $questions = $this->questions->where('status', 1)->values();
+        $col = collect();
+
+        foreach ($links as $link) {
+            $col->push($link);
+        }
+
+        foreach ($feedbacks as $fb) {
+            $col->push($fb);
+        }
+
+        foreach ($questions as $q) {
+            $col->push($q);
+        }
+
+        return $col;
+//        return $links->merge($feedbacks)->merge($questions)->whereNotIn('user_id', [1, 2]);
     }
 
     /**

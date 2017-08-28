@@ -66,6 +66,11 @@ class IdeaController extends Controller
 
         // $ideas = Idea::all(); // w/ laravel-mod
         $ideas = Idea::all()->where('status', 1)->sortByDesc('contributions_count');
+
+        foreach ($ideas as $idea) {
+            $idea->num_questions = count($idea->questions->where('status', 1));
+        }
+
         $data['ideas'] = $ideas;
 
         return view($view, $data);
@@ -101,8 +106,13 @@ class IdeaController extends Controller
             //     ->sortByDesc('created_at');
             $comments = $idea->links
                 ->where('status', 1);
-            $comments = $comments->merge($idea->feedback
-                ->whereIn('status', [0, 1])->where('comment','!=',null));
+//            $comments = $comments->merge($idea->feedback
+//                ->whereIn('status', [0, 1])->where('comment','!=',null));
+
+            foreach ($idea->feedback->whereIn('status', [0, 1])->where('comment','!=',null) as $item) {
+                $comments->push($item);
+            }
+
             $data['commentsByTask'] = $comments->sortByDesc('created_at')->sortBy('task_id')->groupBy('task_id')->sortBy('task_id');
 
             $data['questions'] = Question::all();
