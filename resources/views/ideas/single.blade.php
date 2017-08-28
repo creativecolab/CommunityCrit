@@ -15,7 +15,9 @@
                 <strong>{{ $idea->user->fname }}</strong>.
             @endif
             </em></p>
+            @if(!$extra_images->isEmpty())
             <button class="btn btn-default btn-sm trigger_lightbox">View additional images</button>
+            @endif
         </div>
         @if ($idea->img_url)
             <div id="img">
