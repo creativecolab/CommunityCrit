@@ -184,6 +184,14 @@
             }
         });
 
+        $('#masondiv').imagesLoaded( function(){
+            $container.masonry({
+                itemSelector : '.grid-item',
+                columnWidth: '#grid-sizer',
+                percentPosition: "true"
+            });
+        });
+
     });
 
     $('#guest-button').click(function(){

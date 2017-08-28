@@ -9,7 +9,7 @@
         Click on an idea to look at the contributions your fellow community members have made.
     </p>
 
-    <div class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
+    <div id="masondiv" class="grid row" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": "#grid-sizer", "percentPosition": "true"}'>
         <div id="grid-sizer" class="col-md-6 col-sm-12"></div>
         @foreach ($ideas as $idea)
             <div class="grid-item col-md-6 col-sm-12">
