@@ -8,6 +8,14 @@
         <div id="text">
             <h1>{{ $idea->name }}</h1>
             <p>{{ $idea->text }}</p>
+            <p><em>Submitted by
+            @if ($idea->user->id == 3 || $idea->user->fname == 'Guest')
+                a <strong>{{ strtolower($idea->user->fname) }}</strong>.
+            @else
+                <strong>{{ $idea->user->fname }}</strong>.
+            @endif
+            </em></p>
+            <button class="btn btn-default btn-sm trigger_lightbox">View additional images</button>
         </div>
         @if ($idea->img_url)
             <div id="img">
@@ -15,13 +23,6 @@
             </div>
             <div class="clearfix"></div>
         @endif
-        <p><em>Submitted by
-            @if ($idea->user->id == 3 || $idea->user->fname == 'Guest')
-                a <strong>{{ strtolower($idea->user->fname) }}</strong>.
-            @else
-                <strong>{{ $idea->user->fname }}</strong>.
-            @endif
-        </em></p>
         @if(!$extra_images->isEmpty())
         <ul style="display:none">
             @foreach($extra_images as $image)
@@ -31,7 +32,6 @@
             {{--<li><a href="{{'/img/ElNudillo1.jpg'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
             {{--<li><a href="{{'/img/timeline.png'}}" data-imagelightbox="h"><img src="{{'/img/favicon.ico'}}"></a></li>--}}
         </ul>
-        <button class="trigger_lightbox">View additional images</button>
         @endif
     </div>
 

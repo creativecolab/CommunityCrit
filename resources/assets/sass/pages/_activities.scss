@@ -75,6 +75,10 @@
 				p + p {
 					padding-top: $padding-base-vertical;
 				}
+
+				button {
+					margin-top: $padding-base-vertical;
+				}
 			}
 
 			&:first-child {
