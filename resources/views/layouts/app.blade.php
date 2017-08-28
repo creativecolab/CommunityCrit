@@ -184,15 +184,16 @@
             }
         });
 
-        $('#masondiv').imagesLoaded( function(){
-            $container.masonry({
-                itemSelector : '.grid-item',
-                columnWidth: '#grid-sizer',
-                percentPosition: "true"
-            });
-        });
-
     });
+
+    window.onload = function() {
+        console.log('nice');
+        $('#masondiv').masonry({
+            itemSelector : '.grid-item',
+            columnWidth: '#grid-sizer',
+            percentPosition: "true"
+        });
+    };
 
     $('#guest-button').click(function(){
         $('[required]').removeAttr('required');
