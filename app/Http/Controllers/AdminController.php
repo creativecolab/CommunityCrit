@@ -167,6 +167,8 @@ class AdminController extends Controller
         $allRatings = collect();
         $allComments = collect();
 
+        $data['activity_count'] = 0;
+
         // users
         foreach ($users as $key => $user) {
             $row = collect();
@@ -175,6 +177,7 @@ class AdminController extends Controller
             $row->put('created_at', $user->created_at->tz('America/Los_Angeles'));
             if ($user->taskHist->sortByDesc('updated_at')->first()['updated_at']){
                 $row->put('last_visited', $user->taskHist->sortByDesc('updated_at')->first()['updated_at']->tz('America/Los_Angeles'));
+                $data['activity_count'] += 1;
             }
             else {
                 $row->put('last_visited', 'None');

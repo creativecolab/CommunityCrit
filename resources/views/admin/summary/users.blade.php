@@ -59,8 +59,8 @@
 			<tr class="info">
 				<th scope="row">Total (#)</th>
 				<td></td>
-				<td></td>
-				<td></td>
+				<td>{{ count($rows) }} users</td>
+				<td>{{ $activity_count }} active</td>
 				<td>{{ $totalNum->get('ideas-submitted') }}</td>
 				<td>{{ $totalNum->get('ideas-skipped') }}</td>
 				<td>{{ $totalNum->get('ideas-exited') }}</td>
