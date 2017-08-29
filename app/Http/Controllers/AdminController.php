@@ -171,6 +171,7 @@ class AdminController extends Controller
         $allComments = collect();
 
         $data['activity_count'] = 0;
+        $data['submit_count'] = 0;
 
         // users
         foreach ($users as $key => $user) {
@@ -202,6 +203,9 @@ class AdminController extends Controller
                     $count = count($group->whereIn('action', $action));
                     $count = $count ? $count : '-';
                     $row->put($key.'-'.$keyAct, $count);
+                    if ($key == 'total' && $keyAct == 'submitted' && $count != 0) {
+                        $data['submit_count'] += 1;
+                    }
                 }
             }
 

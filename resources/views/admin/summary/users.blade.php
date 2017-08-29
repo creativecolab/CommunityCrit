@@ -71,7 +71,7 @@
 				<th scope="row">Total (#)</th>
 				<td></td>
 				<td>{{ count($rows) }} users</td>
-				<td>{{ $activity_count }} active</td>
+				<td>{{ $activity_count }} active / {{ $submit_count  }} contributors</td>
                 @if(!$condense)
 				<td>{{ $totalNum->get('ideas-submitted') }}</td>
 				<td>{{ $totalNum->get('ideas-skipped') }}</td>
