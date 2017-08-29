@@ -131,10 +131,13 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showUserSummary( $daily=0 )
+    public function showUserSummary( $daily=0, $condense=false )
     {
         $view = 'admin.summary.users';
         $data = [];
+
+        $data['daily'] = $daily;
+        $data['condense'] = $condense;
 
         switch ($daily) {
             case 0: //v2 users
