@@ -89,7 +89,7 @@
                 </div>
                 <div class="col-md-6">
                     <h2>All done?</h2>
-                    <p>Please take this short survey so we can improve the experience of CommunityCrit for other community members. You will receive a $5 Amazon gift card after you complete the survey for the first time.</p>
+                    <p>Please take this short survey so we can improve the experience of CommunityCrit for other community members.</p>
                     @if (auth()->user()->submitted < 1)
                         <a class="btn btn-primary disabled" data-toggle="tooltip" data-placement="bottom" title="You must complete one activity before taking the exit survey.">Go to Exit Survey</a>
                     @else
