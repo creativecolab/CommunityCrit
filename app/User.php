@@ -203,8 +203,9 @@ class User extends Authenticatable
      */
     public function getSubmittedAttribute()
     {
-        return $contributions = count($this->taskHist->where('action', 1));
-
+        $idea_2 = Idea::where('phase',1)->pluck('id');
+        return $contributions = $this->taskHist->where('action', 1)->whereNotIn('idea_id',$idea_2)->where('phase','!=',1)->count();
+//        return $ccntributions = 0;
         	// $contributions = count($this->taskHist->where('status', 1)) + 
  //            count(auth()->user()->ideas) + 
  //            count(auth()->user()->links) + 

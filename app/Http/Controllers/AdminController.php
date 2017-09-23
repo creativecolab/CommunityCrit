@@ -131,10 +131,13 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function showUserSummary( $daily=0 )
+    public function showUserSummary( $daily=0, $condense=false )
     {
         $view = 'admin.summary.users';
         $data = [];
+
+        $data['daily'] = $daily;
+        $data['condense'] = $condense;
 
         switch ($daily) {
             case 0: //v2 users
@@ -168,6 +171,7 @@ class AdminController extends Controller
         $allComments = collect();
 
         $data['activity_count'] = 0;
+        $data['submit_count'] = 0;
 
         // users
         foreach ($users as $key => $user) {
@@ -199,6 +203,9 @@ class AdminController extends Controller
                     $count = count($group->whereIn('action', $action));
                     $count = $count ? $count : '-';
                     $row->put($key.'-'.$keyAct, $count);
+                    if ($key == 'total' && $keyAct == 'submitted' && $count != 0) {
+                        $data['submit_count'] += 1;
+                    }
                 }
             }
 
@@ -276,6 +283,54 @@ class AdminController extends Controller
             ->where('status', 1)
             ->sortByDesc('created_at');
         $data['links'] = $links;
+
+        $feedbacks = Feedback::all()
+            ->where('status', 1)
+            ->sortByDesc('created_at');
+        $data['feedbacks'] = $feedbacks;
+
+        return view($view, $data);
+    }
+
+    public function showTasksSummary()
+    {
+        $view = 'admin.summary.tasks';
+        $data = [];
+
+        $ideas = Idea::all()
+            ->where('status', 1)
+            ->sortByDesc('created_at');
+        foreach($ideas as $idea) {
+            $idea->fname = User::find($idea->user_id)->fname;
+        }
+        $data['ideas'] = $ideas->values();
+
+        $i_taskHist = collect();
+        foreach($ideas as $idea) {
+            $th = TaskHist::where('user_id',$idea->user_id)->where('task_id',2)->where('action',1)->get();
+            $lowest = null;
+            $lowest_time = PHP_INT_MAX;
+            $idea_time = $idea->created_at;
+            foreach ($th as $item) {
+                $th_time = $item->updated_at;
+                if ($th_time->diffInSeconds($idea_time) < $lowest_time) {
+                    $lowest_time = $th_time->diffInSeconds($idea_time);
+                    $lowest = $item;
+                }
+            }
+            $i_taskHist->push($lowest);
+        }
+        $data['i_taskHist'] = $i_taskHist;
+
+        $links = Link::all()
+            ->where('status', 1)
+            ->sortByDesc('created_at');
+        $data['links'] = $links;
+
+        $l_taskHist = collect();
+        foreach($links as $link) {
+
+        }
 
         $feedbacks = Feedback::all()
             ->where('status', 1)

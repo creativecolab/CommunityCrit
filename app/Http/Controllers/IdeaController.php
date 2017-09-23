@@ -65,7 +65,7 @@ class IdeaController extends Controller
         \Session::put('t_ptr', 1);
 
         // $ideas = Idea::all(); // w/ laravel-mod
-        $ideas = Idea::all()->where('status', 1)->sortByDesc('contributions_count');
+        $ideas = Idea::all()->where('phase',2)->where('status', 1)->sortByDesc('contributions_count');
 
         foreach ($ideas as $idea) {
             $idea->num_questions = count($idea->questions->where('status', 1));
