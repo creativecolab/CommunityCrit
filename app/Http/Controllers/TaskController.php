@@ -28,6 +28,8 @@ class TaskController extends Controller
     const TYPE_LINK = 2;
     const TYPE_RATING = 3;
 
+    const PHASE = 2;
+
     //--------------------- SHOW METHODS ------------------------------
 
     /**
@@ -238,11 +240,16 @@ class TaskController extends Controller
         \Session::put('t_queue', collect([]));
         \Session::put('t_ptr', 1);
 
-        if (Idea::where('status',1)->count() <= static::NUM_IDEAS) {
-            $data['ideas'] = Idea::where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
+        $ideas = Idea::where('phase',2);
+
+        if ($ideas->where('status',1)->count() <= static::NUM_IDEAS) {
+//            abort(404);
+            $data['ideas'] = $ideas->where('status', 1)->inRandomOrder()->take(static::NUM_IDEAS)->get();
+//            $data['ideas'] = collect([$ideas->get()->last()]);
         }
         else {
-            $groups = $this->ideaQueue(Idea::where('status',1)->get());
+//            abort(404);
+            $groups = $this->ideaQueue($ideas->where('status',1)->get());
 //            $data['ideas'] = $this->sepIdeaQueue($groups, 0);
             $data['ideas'] = $this->sepIdeaQueueAll($groups);
         }
@@ -251,7 +258,9 @@ class TaskController extends Controller
         $comp_ids = TaskHist::where('user_id',\Auth::id())->where('action','!=',null)->where('action','!=',5)->pluck('idea_id')->unique();
         foreach ($comp_ids as $id) {
             if ($id) {
-                $comp_ideas->push(Idea::find($id));
+                $idea = Idea::find($id);
+                if ($idea->phsae == static::PHASE)
+                    $comp_ideas->push(Idea::find($id));
             }
         }
 
@@ -266,6 +275,11 @@ class TaskController extends Controller
         if ($data['ideas']->isEmpty()) {
             $data['ideas'] = $data['comp_ideas'];
         }
+
+//        if ($ideas->get()->isEmpty()) {
+//            $data['ideas'] = collect();
+//            $data['comp_ideas'] = collect();
+//        }
 
         return view($view, $data);
     }

@@ -25,7 +25,8 @@ class Idea extends Node
         'user_id',
         'status',
         'moderated_at',
-        'moderated_by'
+        'moderated_by',
+        'phase',
     ];
 
     public function links()

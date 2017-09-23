@@ -55,13 +55,30 @@ class UserController extends Controller
         $view = 'user.feedback';
         $data = [];
 
-        $data['ideas'] = Auth()->User()->ideas->sortByDesc('created_at');
+        $data['ideas'] = Auth()->User()->ideas->where('phase','!=',1)->sortByDesc('created_at');
 
         $comments = Auth()->User()->links;
         $comments = $comments->merge(Auth()->User()->feedback);
-        $data['commentsGroup'] = $comments->sortByDesc('created_at')->groupBy('idea_id');
 
-        $data['questions'] = Question::all();
+        //remove phase 1
+        $comments_phase2 = collect();
+        foreach ($comments as $comment) {
+            $idea = Idea::find($comment->idea_id);
+            if ($idea->phase != 1) {
+                $comments_phase2->push($comment);
+            }
+        }
+
+        $data['commentsGroup'] = $comments_phase2->sortByDesc('created_at')->groupBy('idea_id');
+
+        $questions = collect();
+        foreach (Question::all() as $question) {
+            $idea = Idea::find($question->idea_id);
+            if ($idea->phase != 1) {
+                $questions->push($question);
+            }
+        }
+        $data['questions'] = $questions;
 
         return view($view, $data);
     }
